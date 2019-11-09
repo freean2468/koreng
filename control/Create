@@ -1,0 +1,5 @@
+<form action="/create_process" method="post">
+  <p><input type="text" name="title" placeholder="title"></p>
+  <p><textarea name="description" id="desc" cols="50" rows="20"></textarea></p>
+  <p><input type="submit" name="submit"></p>
+</form>
