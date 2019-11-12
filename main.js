@@ -4,7 +4,8 @@ var url = require('url');
 var qs = require('querystring');
 var template = require('./lib/template.js');
 var security = require('./lib/security.js');
-var bookAlchemist = require('./data/The Alchemist.js');
+var DataLoader = require('./lib/dataLoader.js');
+var dataLoaderInst = new DataLoader();
 
 var app = http.createServer(function(request, response) {
   var _url = request.url;
@@ -44,12 +45,6 @@ var app = http.createServer(function(request, response) {
 
 app.listen(3000);
 
-function loadDatabase(index) {
-  index.add(0, bookAlchemist);
-  index.add(1, 'santiago');
-  console.log(index.search('santiago', 20));
-};
-
 function onSearch(request, response) {
   if (request.method === 'POST') {
     var body = '';
@@ -63,10 +58,8 @@ function onSearch(request, response) {
 
     request.on('end', function() {
       var post = qs.parse(body);
-      var search = security.sanitizeHtml(post.search);
-      var index = bookAlchemist.search(search);
-
-      console.log(bookAlchemist.slice(index-200, index+200));
+      var searchTarget = security.sanitizeHtml(post.search);
+      dataLoaderInst.searchData(searchTarget);
 
       response.writeHead(302, {
         Location: `/search`
