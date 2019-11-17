@@ -1,13 +1,13 @@
-var http = require('http');
-var fs = require('fs');
-var url = require('url');
-var qs = require('querystring');
-var template = require('./lib/template.js');
-var security = require('./lib/security.js');
-var DataLoader = require('./lib/dataLoader.js');
-var dataLoaderInst = new DataLoader();
+const http = require('http');
+const fs = require('fs');
+const url = require('url');
+const qs = require('querystring');
+const template = require('./lib/template.js');
+const security = require('./lib/security.js');
+const DataLoader = require('./lib/dataLoader.js');
+const dataLoaderInst = new DataLoader();
 
-var app = http.createServer(function(request, response) {
+const app = http.createServer(function(request, response) {
   var _url = request.url;
   var queryData = url.parse(_url, true).query;
   var pathname = url.parse(_url, true).pathname;
@@ -17,23 +17,18 @@ var app = http.createServer(function(request, response) {
     response.writeHead(200);
 
     if (title === undefined) {
-      response.end(template.HTML('koreng', 'Hello, world'));
-    } else {
-      title = security.sanitizeHtml(title);
-
-      fs.readFile('data/' + title, 'utf8', (err, description) => {
-        response.end(template.HTML(title, description));
-      });
+      response.end(template.HTML('Hello, world'));
     }
-  } else if (pathname === '/search') {
+    // Should response to css file request
+  } else if (pathname === '/style.css') {
     title = security.sanitizeHtml(title);
-
-    response.end(template.HTML('Search',
-      `<form action="search_process" method="post">
-        <p><textarea name="search" id="desc" cols="150" rows="20"></textarea></p>
-        <p><input type="submit" name="submit"></p>
-      </form>
-      `));
+    response.writeHead(200, {
+      'Content-type': 'text/css'
+    });
+    response.write(fs.readFileSync('./lib/style.css', {
+      encoding: 'utf8'
+    }));
+    response.end('');
   } else if (pathname === '/search_process') {
     onSearch(request, response);
   } else {
@@ -57,14 +52,62 @@ function onSearch(request, response) {
     });
 
     request.on('end', function() {
-      var post = qs.parse(body);
-      var searchTarget = security.sanitizeHtml(post.search);
-      dataLoaderInst.searchData(searchTarget);
+      const post = qs.parse(body);
+      const searchTarget = security.sanitizeHtml(post.search);
 
-      response.writeHead(302, {
-        Location: `/search`
-      });
-      response.end();
+      // nothing to search
+      if (searchTarget === undefined || searchTarget.length === 0 || searchTarget.replace(/\s/g, '') === '') {
+        response.writeHead(200);
+        response.end(template.HTML('you want to type some expressions above.'));
+      // something to search
+      } else {
+        const result = dataLoaderInst.searchData(searchTarget);
+        const resultTotalCount = result.resultTotalCount;
+
+        if (result.resultTotalCount === 0) {
+          response.writeHead(200);
+          response.end(template.HTML('no results'));
+        } else {
+          response.writeHead(200);
+          response.end(template.HTML(resultHandling(searchTarget, result)));
+        }
+      }
     });
   }
 };
+
+//temp
+function resultHandling(searchTarget, result) {
+  const resTotalCount = result.resultTotalCount;
+  const resList = result.resObjList;
+  const searchTargetStyle = `<b style="text-decoration: underline wavy #ff5500">${searchTarget}</b>'`;
+
+  // insert HTML dynamic code
+  var temp = `${searchTargetStyle} total result(s) : ${resTotalCount} of ${resList.length} contents <br><br>`;
+  var blockCount = 0;
+
+  for (var item in resList) {
+    //div header
+    temp += `<div class="resBlockHeader" id="${blockCount}">`;
+    //span Header
+    temp += `<span>
+            Title : ${resList[item].title}, Category : ${resList[item].category},
+            Language : ${resList[item].language}, result(s) : ${resList[item].resList.length}
+            </span>`;
+    temp += `<span class="minimizeButton" id="minimizeButton_${blockCount}">-</span>`;
+    //div Body
+    temp += `<div class="resBlockBody" id="resBlockBody_${blockCount}"><ol>`;
+    for (var _item in resList[item].resList) {
+      var sentence = resList[item].resList[_item];
+      var regex = new RegExp(searchTarget, "g")
+      sentence = sentence.replace(regex, searchTargetStyle);
+
+      temp += `<li>${sentence} </li><br>`;
+    }
+    //div close
+    temp += `</ol></div></div><br>`;
+    ++blockCount;
+  }
+
+  return temp;
+}
