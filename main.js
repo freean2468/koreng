@@ -20,12 +20,13 @@ const app = http.createServer(function(request, response) {
       response.end(template.HTML('Hello, world'));
     }
     // Should response to css file request
-  } else if (pathname === '/style.css') {
-    title = security.sanitizeHtml(title);
+  } else if (pathname.split(".")[1] === 'css') {
+    console.log(pathname);
+    //title = security.sanitizeHtml(title);
     response.writeHead(200, {
       'Content-type': 'text/css'
     });
-    response.write(fs.readFileSync('./lib/style.css', {
+    response.write(fs.readFileSync(`./style${pathname}`, {
       encoding: 'utf8'
     }));
     response.end('');
@@ -80,7 +81,8 @@ function onSearch(request, response) {
 function resultHandling(searchTarget, result) {
   const resTotalCount = result.resultTotalCount;
   const resList = result.resObjList;
-  const searchTargetStyle = `<b style="text-decoration: underline wavy #ff5500">${searchTarget}</b>'`;
+  const searchTargetStyle = `<b style="-webkit-text-decoration: underline double #ff2200;
+                            text-decoration: underline wavy #ff5500">${searchTarget}</b>`;
 
   // insert HTML dynamic code
   var temp = `${searchTargetStyle} total result(s) : ${resTotalCount} of ${resList.length} contents <br><br>`;
@@ -91,8 +93,8 @@ function resultHandling(searchTarget, result) {
     temp += `<div class="resBlockHeader" id="${blockCount}">`;
     //span Header
     temp += `<span>
-            Title : ${resList[item].title}, Category : ${resList[item].category},
-            Language : ${resList[item].language}, result(s) : ${resList[item].resList.length}
+            < ${resList[item].title} >, ${resList[item].category},
+            ${resList[item].language}, result(s) : ${resList[item].resList.length}
             </span>`;
     temp += `<span class="minimizeButton" id="minimizeButton_${blockCount}">-</span>`;
     //div Body

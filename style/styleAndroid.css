@@ -1,6 +1,11 @@
 body {
-  margin: 0;
+  margin: 0 auto;
   background: #000000;
+}
+
+#bg {
+  margin: 0 auto;
+  padding: 0 auto;
 }
 
 div.resBlockHeader {
@@ -17,6 +22,7 @@ div.resBlockHeader {
   right: 30px;
   word-wrap: break-word;
   cursor: pointer;
+  margin: 0 auto;
 }
 
 div.resBlockBody {
@@ -33,6 +39,7 @@ div.resBlockBody {
   width: auto;
   right: 30px;
   word-wrap: break-word;
+  margin: 0 auto;
 }
 
 span.minimizeButton {
@@ -44,12 +51,13 @@ span.minimizeButton {
   height: 100%;
   left: 0%;
   right: 100%;
+  margin: 0 auto;
 }
 
 #title {
   position: absolute;
   height: 35px;
-  left: 30px;
+  left: 20%;
   top: 40px;
   font-family: Roboto;
   font-style: normal;
@@ -61,14 +69,16 @@ span.minimizeButton {
   letter-spacing: -0.015em;
   color: #FFFFFF;
   cursor: pointer;
+  margin: 0 auto;
 }
 
 #goGroup {
   position: absolute;
   width: 560px;
   height: 40px;
-  left: 60px;
+  left: 20%;
   top: 97px;
+  margin: 0 auto;
 }
 
 #searchBox {
@@ -78,6 +88,7 @@ span.minimizeButton {
   left: 0%;
   top: 0%;
   background-color: #FFFFFF;
+  margin: 0 auto;
 }
 
 #goBox {
@@ -90,14 +101,15 @@ span.minimizeButton {
   background-color: #000000;
   border: 1px solid #FFFFFF;
   box-sizing: border-box;
+  margin: 0 auto;
 }
 
 #goButton {
   position: absolute;
   width: 10%;
   height: 100%;
-  left: 90%;
-  top: 0%;
+  left: 87%;
+  top: -5%;
   font-family: Montserrat;
   font-style: normal;
   font-weight: normal;
@@ -114,14 +126,15 @@ span.minimizeButton {
   overflow: hidden;
   color: #FFFFFF;
   outline: none;
+  margin: 0 auto;
 }
 
 #searchText {
   position: absolute;
-  width: 90%;
+  width: 88%;
   height: 100%;
-  left: 0%;
-  top: 0%;
+  left: -2%;
+  top: -6%;
   font-family: Montserrat;
   font-style: normal;
   font-weight: normal;
@@ -134,6 +147,7 @@ span.minimizeButton {
   border: none;
   overflow: hidden;
   outline: none;
+  margin: 0 auto;
 }
 
 #resultBox {
@@ -143,6 +157,7 @@ span.minimizeButton {
   left: 30px;
   right: 30px;
   top: 150px;
+  margin: 0 auto;
   /* background: #FFFFFF;
-  border: 1px solid #278342; */
+    border: 1px solid #278342; */
 }
