@@ -6,15 +6,20 @@ import os
 filePathBase= "/Users/hoon-ilsong/Documents"
 savePathBase= "/Users/hoon-ilsong/project/koreng/data"
 
+metaData= "{"
+
 def mkdirOnSavePath(path):
     if not os.path.isdir(path):
         os.mkdir(path)
 
-def convertDocxToText(filePath, savePath, category):
+def convertDocxToText(filePath, savePath, category, depth):
     for d in os.listdir(filePath):
         if os.path.isdir(filePath + "/" + d):
             mkdirOnSavePath(savePath + "/" + d)
-            convertDocxToText(filePath + "/" + d, savePath + "/" + d, category)
+            if depth ==0:
+                global metaData
+                metaData+='"' + d + '",'
+            convertDocxToText(filePath + "/" + d, savePath + "/" + d, category, depth+1)
         else:
             fileExtension=d.split(".")[-1]
             if fileExtension =="docx":
@@ -39,12 +44,23 @@ def convertDocxToText(filePath, savePath, category):
 }''')
                         )
 
-category = "book"
-
-convertDocxToText(filePathBase + "/" + category, savePathBase + "/" + category, category)
-
-category = "drama"
+category= "book"
+metaData+= '"' + category + '":['
 
 mkdirOnSavePath(savePathBase + "/" + category)
+convertDocxToText(filePathBase + "/" + category, savePathBase + "/" + category, category, 0)
 
-convertDocxToText(filePathBase + "/" + category, savePathBase + "/" + category, category)
+metaData+= '],'
+category= "drama"
+metaData+= '"' + category + '":['
+
+mkdirOnSavePath(savePathBase + "/" + category)
+convertDocxToText(filePathBase + "/" + category, savePathBase + "/" + category, category, 0)
+
+metaData+= ']'
+metaData+="}"
+
+metaData=metaData.replace(",]","]")
+
+with io.open(savePathBase + "/../metaData.json","w", encoding="utf-8") as metaDataFile:
+    metaDataFile.write(unicode(metaData))

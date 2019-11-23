@@ -17,11 +17,10 @@ const app = http.createServer(function(request, response) {
     response.writeHead(200);
 
     if (title === undefined) {
-      response.end(template.HTML('Hello, world'));
+      response.end(template.mainHTML('Hello, world'));
     }
     // Should response to css file request
   } else if (pathname.split(".")[1] === 'css') {
-    console.log(pathname);
     //title = security.sanitizeHtml(title);
     response.writeHead(200, {
       'Content-type': 'text/css'
@@ -30,8 +29,11 @@ const app = http.createServer(function(request, response) {
       encoding: 'utf8'
     }));
     response.end('');
-  } else if (pathname === '/search_process') {
-    onSearch(request, response);
+  } else if (pathname === '/search_process' || pathname === '/filter_process') {
+    onSearchWithFilter(request, response);
+  } else if (pathname === '/filter') {
+    response.writeHead(200);
+    response.end(template.resultHandlingForFilter(dataLoaderInst.metaData));
   } else {
     response.writeHead(404);
     response.end('Not found');
@@ -41,7 +43,7 @@ const app = http.createServer(function(request, response) {
 
 app.listen(3000);
 
-function onSearch(request, response) {
+function onSearchWithFilter(request, response) {
   if (request.method === 'POST') {
     var body = '';
 
@@ -52,64 +54,35 @@ function onSearch(request, response) {
         request.connection.destroy();
     });
 
+    function arrayRemove(arr, value) {
+      return arr.filter(function(ele) {
+        return ele != value;
+      });
+    }
+
     request.on('end', function() {
       const post = qs.parse(body);
       const searchTarget = security.sanitizeHtml(post.search);
+      const filterCategory = arrayRemove(security.sanitizeHtml(post.filterCategory).replace(/';;'/g, ';').split(';'), '');
+      const filterContents = arrayRemove(security.sanitizeHtml(post.filterContents).replace(/';;'/g, ';').split(';'), '');
 
       // nothing to search
       if (searchTarget === undefined || searchTarget.length === 0 || searchTarget.replace(/\s/g, '') === '') {
         response.writeHead(200);
-        response.end(template.HTML('you want to type some expressions above.'));
-      // something to search
+        response.end(template.mainHTML('you want to type some expressions above.'));
+        // something to search
       } else {
-        const result = dataLoaderInst.searchData(searchTarget);
+        const result = dataLoaderInst.searchData(searchTarget, filterCategory, filterContents);
         const resultTotalCount = result.resultTotalCount;
 
         if (result.resultTotalCount === 0) {
           response.writeHead(200);
-          response.end(template.HTML('no results'));
+          response.end(template.resultHandlingForMain(searchTarget, result));
         } else {
           response.writeHead(200);
-          response.end(template.HTML(resultHandling(searchTarget, result)));
+          response.end(template.resultHandlingForMain(searchTarget, result));
         }
       }
     });
   }
-};
-
-//temp
-function resultHandling(searchTarget, result) {
-  const resTotalCount = result.resultTotalCount;
-  const resList = result.resObjList;
-  const searchTargetStyle = `<b style="-webkit-text-decoration: underline double #ff2200;
-                            text-decoration: underline wavy #ff5500">${searchTarget}</b>`;
-
-  // insert HTML dynamic code
-  var temp = `${searchTargetStyle} total result(s) : ${resTotalCount} of ${resList.length} contents <br><br>`;
-  var blockCount = 0;
-
-  for (var item in resList) {
-    //div header
-    temp += `<div class="resBlockHeader" id="${blockCount}">`;
-    //span Header
-    temp += `<span>
-            < ${resList[item].title} >, ${resList[item].category},
-            ${resList[item].language}, result(s) : ${resList[item].resList.length}
-            </span>`;
-    temp += `<span class="minimizeButton" id="minimizeButton_${blockCount}">-</span>`;
-    //div Body
-    temp += `<div class="resBlockBody" id="resBlockBody_${blockCount}"><ol>`;
-    for (var _item in resList[item].resList) {
-      var sentence = resList[item].resList[_item];
-      var regex = new RegExp(searchTarget, "g")
-      sentence = sentence.replace(regex, searchTargetStyle);
-
-      temp += `<li>${sentence} </li><br>`;
-    }
-    //div close
-    temp += `</ol></div></div><br>`;
-    ++blockCount;
-  }
-
-  return temp;
 }
