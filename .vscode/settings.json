@@ -1,4 +1,8 @@
 {
-    "appService.defaultWebAppToDeploy": "",
-    "appService.deploySubpath": ""
+    "appService.defaultWebAppToDeploy": "/subscriptions/5ab3a129-13be-4cb9-836e-d4dddaab76c5/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/agjac",
+    "appService.deploySubpath": "",
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ]
 }
