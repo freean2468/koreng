@@ -41,7 +41,7 @@ const app = http.createServer(function(request, response) {
 
 });
 
-app.listen(80);
+app.listen();
 
 function onSearchWithFilter(request, response) {
   if (request.method === 'POST') {
