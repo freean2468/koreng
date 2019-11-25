@@ -41,17 +41,7 @@ const app = http.createServer(function(request, response) {
 
 });
 
-
-try {
-  console.log("entering try block");
-  app.listen();
-  console.log("leaving try block");
-}
-catch (e) {
-  console.log("entering catch block");
-  console.log(e);
-  console.log("leaving catch block");
-}
+app.listen(80);
 
 function onSearchWithFilter(request, response) {
   if (request.method === 'POST') {

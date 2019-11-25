@@ -1,20 +1,21 @@
 {
-  "name": "web1_html_internet",
+  "name": "agjac",
   "version": "1.0.0",
   "description": "",
-  "main": "main.js",
+  "main": "app.js",
   "directories": {
     "lib": "lib"
   },
   "scripts": {
+    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/web-n/web1_html_internet.git"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "sensebecommon",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/web-n/web1_html_internet/issues"
   },
