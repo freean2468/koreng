@@ -17,11 +17,11 @@ const app = http.createServer(function(request, response) {
     response.writeHead(200);
 
     if (title === undefined) {
-      response.end(template.mainHTML('Hello, world'));
+      response.end(template.mainHTML('활용이 궁금한 영어를 여러분이 즐긴 컨텐츠에서 검색해보세요'));
     }
     // Should response to css file request
   } else if (pathname.split(".")[1] === 'css') {
-    //title = security.sanitizeHtml(title);
+    pathname = security.sanitizeHtml(pathname);
     response.writeHead(200, {
       'Content-type': 'text/css'
     });
@@ -84,5 +84,9 @@ function onSearchWithFilter(request, response) {
         }
       }
     });
+  // sth unexpected
+  } else {
+    response.writeHead(200);
+    response.end(template.mainHTML('Hello, world'));
   }
 }
