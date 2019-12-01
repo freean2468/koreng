@@ -1,92 +1,65 @@
-const http = require('http');
-const fs = require('fs');
-const url = require('url');
-const qs = require('querystring');
-const template = require('./lib/template.js');
-const security = require('./lib/security.js');
-const DataLoader = require('./lib/dataLoader.js');
-const dataLoaderInst = new DataLoader();
+// expres
+const express = require('express')
+const app = express()
 
-const app = http.createServer(function(request, response) {
-  var _url = request.url;
-  var queryData = url.parse(_url, true).query;
-  var pathname = url.parse(_url, true).pathname;
-  var title = queryData.id;
+// third-party
+const compression = require('compression')
+const bodyParser = require('body-parser')
+const helmet = require('helmet')
 
-  if (pathname === '/') {
-    response.writeHead(200);
+// built-in
+const fs = require('fs')
 
-    if (title === undefined) {
-      response.end(template.mainHTML('활용이 궁금한 영어를 여러분이 즐긴 컨텐츠에서 검색해보세요'));
-    }
-    // Should response to css file request
-  } else if (pathname.split(".")[1] === 'css') {
-    pathname = security.sanitizeHtml(pathname);
-    response.writeHead(200, {
-      'Content-type': 'text/css'
-    });
-    response.write(fs.readFileSync(`./style${pathname}`, {
-      encoding: 'utf8'
-    }));
-    response.end('');
-  } else if (pathname === '/search_process' || pathname === '/filter_process') {
-    onSearchWithFilter(request, response);
-  } else if (pathname === '/filter') {
-    response.writeHead(200);
-    response.end(template.resultHandlingForFilter(dataLoaderInst.metaData));
-  } else {
-    response.writeHead(404);
-    response.end('Not found');
-  }
+// custom
+const template = require('./lib/template.js')
+const DataLoader = require('./lib/dataLoader.js')
+const dataLoaderInst = new DataLoader()
 
+// middlewares
+app.use(express.static('public'))
+app.use(helmet())
+app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+  extended: true
+}))
+app.use(compression())
+ 
+app.get('/', (req, res) => res.send(template.mainHTML('활용이 궁금한 영어를 여러분이 즐긴 컨텐츠에서 검색해보세요')))
+
+app.post('/search_process', (req, res) => res.send(onSearchWithFilter(req, res)))
+app.post('/filter_process', (req, res) => res.send(onSearchWithFilter(req, res)))
+
+app.get('/filter', (req, res) => res.send(template.resultHandlingForFilter(dataLoaderInst.metaData)))
+
+app.use(function(req, res, next) {
+  res.status(404).send(template.mainHTML('활용이 궁금한 영어를 여러분이 즐긴 컨텐츠에서 검색해보세요'));
+});
+ 
+app.use(function (err, req, res, next) {
+  console.error(err.stack)
+  res.status(500).send('Something broke!')
 });
 
-app.listen(80);
+app.listen(3000, () => console.log('agjac on port 3000!'))
 
-function onSearchWithFilter(request, response) {
-  if (request.method === 'POST') {
-    var body = '';
-
-    request.on('data', function(data) {
-      body += data;
-
-      if (body.length > 1e6)
-        request.connection.destroy();
+function onSearchWithFilter(req, res) {
+  function arrayRemove(arr, value) {
+    return arr.filter(function(ele) {
+      return ele != value;
     });
+  }
+  
+  const searchTarget = req.body.search
+  const filterCategory = arrayRemove(req.body.filterCategory.replace(/';;'/g, ';').split(';'), '')
+  const filterContents = arrayRemove(req.body.filterContents.replace(/';;'/g, ';').split(';'), '')
 
-    function arrayRemove(arr, value) {
-      return arr.filter(function(ele) {
-        return ele != value;
-      });
-    }
-
-    request.on('end', function() {
-      const post = qs.parse(body);
-      const searchTarget = security.sanitizeHtml(post.search);
-      const filterCategory = arrayRemove(security.sanitizeHtml(post.filterCategory).replace(/';;'/g, ';').split(';'), '');
-      const filterContents = arrayRemove(security.sanitizeHtml(post.filterContents).replace(/';;'/g, ';').split(';'), '');
-
-      // nothing to search
-      if (searchTarget === undefined || searchTarget.length === 0 || searchTarget.replace(/\s/g, '') === '') {
-        response.writeHead(200);
-        response.end(template.mainHTML('you want to type some expressions above.'));
-        // something to search
-      } else {
-        const result = dataLoaderInst.searchData(searchTarget, filterCategory, filterContents);
-        const resultTotalCount = result.resultTotalCount;
-
-        if (result.resultTotalCount === 0) {
-          response.writeHead(200);
-          response.end(template.resultHandlingForMain(searchTarget, result));
-        } else {
-          response.writeHead(200);
-          response.end(template.resultHandlingForMain(searchTarget, result));
-        }
-      }
-    });
-  // sth unexpected
+  // nothing to search
+  if (searchTarget === undefined || searchTarget.length === 0 || searchTarget.replace(/\s/g, '') === '') {
+    res.send(template.mainHTML('you want to type some expressions above.'));
+  // something to search
   } else {
-    response.writeHead(200);
-    response.end(template.mainHTML('Hello, world'));
+    const result = dataLoaderInst.searchData(searchTarget, filterCategory, filterContents);
+    // const resultTotalCount = result.resultTotalCount;
+
+    res.end(template.resultHandlingForMain(searchTarget, result));
   }
 }
