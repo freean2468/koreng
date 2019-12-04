@@ -7,8 +7,8 @@
   },
   "main": "app.js",
   "scripts": {
-    "build": "pm2 install",
-    "start": "pm2 start app.js --watch --no-daemon --ignore-watch='data/*'",
+    "build": "",
+    "start": "node app.js",
     "test": ""
   },
   "dependencies": {
