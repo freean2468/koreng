@@ -15,6 +15,9 @@ const template = require('./lib/template.js')
 const DataLoader = require('./lib/dataLoader.js')
 const dataLoaderInst = new DataLoader()
 
+// heroku
+const PORT = process.env.PORT || 5000
+
 // middlewares
 app.use(express.static('public'))
 app.use(helmet())
@@ -39,7 +42,7 @@ app.use(function (err, req, res, next) {
   res.status(500).send('Something broke!')
 });
 
-app.listen(3000, () => console.log('agjac on port 3000!'))
+app.listen(PORT, () => console.log(`agjac on port ${PORT}!`))
 
 function onSearchWithFilter(req, res) {
   function arrayRemove(arr, value) {
