@@ -57,12 +57,12 @@ function onSearchWithFilter(req, res) {
 
   // nothing to search
   if (searchTarget === undefined || searchTarget.length === 0 || searchTarget.replace(/\s/g, '') === '') {
-    res.send(template.mainHTML('you want to type some expressions above.'));
+    return template.mainHTML('you want to type some expressions above.');
   // something to search
   } else {
     const result = dataLoaderInst.searchData(searchTarget, filterCategory, filterContents);
     // const resultTotalCount = result.resultTotalCount;
 
-    res.end(template.resultHandlingForMain(searchTarget, result));
+    return template.resultHandlingForMain(searchTarget, result);
   }
 }
