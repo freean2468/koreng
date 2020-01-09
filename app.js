@@ -11,9 +11,11 @@ const helmet = require('helmet')
 const fs = require('fs')
 
 // custom
-const template = require('./lib/template.js')
-const DataLoader = require('./lib/dataLoader.js')
-const dataLoaderInst = new DataLoader()
+const HTMLLoader = require('./feature/HTMLLoader.js')
+const HTMLLoaderInst = new HTMLLoader()
+const dataLoader = require('./feature/dataLoader.js')
+const dataLoaderInst = new dataLoader()
+
 
 // heroku
 const PORT = process.env.PORT || 5000
@@ -26,15 +28,26 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 }))
 app.use(compression())
  
-app.get('/', (req, res) => res.send(template.mainHTML('활용이 궁금한 영어를 여러분이 즐긴 컨텐츠에서 검색해보세요')))
+// Home
+app.get('/', (req, res) => HTMLLoaderInst.assembleHTML(res, 'home'))
 
-app.post('/search_process', (req, res) => res.send(onSearchWithFilter(req, res)))
-app.post('/filter_process', (req, res) => res.send(onSearchWithFilter(req, res)))
+app.get('/wordmap', (req, res) => HTMLLoaderInst.assembleHTML(res, 'wordmap'))
 
-app.get('/filter', (req, res) => res.send(template.resultHandlingForFilter(dataLoaderInst.metaData)))
+app.get('/toddler', (req, res) => HTMLLoaderInst.assembleHTML(res, 'toddler'))
+
+app.get('/game', (req, res) => HTMLLoaderInst.assembleHTML(res, 'game'))
+app.get('/zelda_mm', (req, res) => HTMLLoaderInst.assembleHTML(res, 'zelda_mm'))
+app.get('/zelda_oot', (req, res) => HTMLLoaderInst.assembleHTML(res, 'zelda_oot'))
+
+// Search & Filter
+app.get('/search', (req, res) => onSearch(req, res))
+
+// app.post('/filter_process', (req, res) => res.send(onSearchWithFilter(req, res)))
+// app.get('/filter', (req, res) => res.send(HTMLLoaderInst.resultHandlingForFilter(dataLoaderInst.metaData)))
 
 app.use(function(req, res, next) {
-  res.status(404).send(template.mainHTML('활용이 궁금한 영어를 여러분이 즐긴 컨텐츠에서 검색해보세요'));
+  res.status(404)
+  HTMLLoaderInst.assembleHTML(res, 'home')
 });
  
 app.use(function (err, req, res, next) {
@@ -44,25 +57,31 @@ app.use(function (err, req, res, next) {
 
 app.listen(PORT, () => console.log(`agjac on port ${PORT}!`))
 
-function onSearchWithFilter(req, res) {
+//
+// functions
+//
+function onSearch(req, res) {
   function arrayRemove(arr, value) {
     return arr.filter(function(ele) {
       return ele != value;
     });
   }
   
-  const searchTarget = req.body.search
-  const filterCategory = arrayRemove(req.body.filterCategory.replace(/';;'/g, ';').split(';'), '')
-  const filterContents = arrayRemove(req.body.filterContents.replace(/';;'/g, ';').split(';'), '')
+  const searchTarget = req.query.target
+
+  // const filterCategory = arrayRemove(req.query.filterCategory.replace(/';;'/g, ';').split(';'), '')
+  // const filterContents = arrayRemove(req.query.filterContents.replace(/';;'/g, ';').split(';'), '')
 
   // nothing to search
   if (searchTarget === undefined || searchTarget.length === 0 || searchTarget.replace(/\s/g, '') === '') {
-    return template.mainHTML('you want to type some expressions above.');
+    return HTMLLoaderInst.assembleHTML(res, 'home');
   // something to search
   } else {
-    const result = dataLoaderInst.searchData(searchTarget, filterCategory, filterContents);
+    // const result = dataLoaderInst.searchData(searchTarget, filterCategory, filterContents);
+    const result = dataLoaderInst.searchData(searchTarget, '', '');
+
     // const resultTotalCount = result.resultTotalCount;
 
-    return template.resultHandlingForMain(searchTarget, result);
+    return HTMLLoaderInst.assembleSearchResultHTML(res, searchTarget, result, dataLoaderInst.metaData);
   }
 }

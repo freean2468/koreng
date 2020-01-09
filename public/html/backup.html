@@ -1,0 +1,95 @@
+<!doctype html>
+            <html>
+            <head>
+              <title>Agjac</title>
+              <meta charset="utf-8">
+              <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+              <script src="https://cdn.jsdelivr.net/npm/js-cookie@beta/dist/js.cookie.min.js"></script>
+
+              <script type="text/javascript">
+                // client side
+                var userAgent = window.navigator.userAgent,
+                    platform = window.navigator.platform,
+                    macosPlatforms = ['Macintosh', 'MacIntel', 'MacPPC', 'Mac68K'],
+                    windowsPlatforms = ['Win32', 'Win64', 'Windows', 'WinCE'],
+                    iosPlatforms = ['iPhone', 'iPad', 'iPod'];
+
+                if (macosPlatforms.indexOf(platform) !== -1) {
+                  const iPad = (userAgent.match(/(iPad)/) /* iOS pre 13 */ ||
+                              (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1) /* iPad OS 13 */);
+                  if (iPad) {
+                    document.write('<link rel="stylesheet" type="text/css" href="style/styleiOS.css" />');
+                  } else {
+                    document.write('<link rel="stylesheet" type="text/css" href="style/styleMacOS.css" />');
+                  }
+                } else if (iosPlatforms.indexOf(platform) !== -1) {
+                  document.write('<link rel="stylesheet" type="text/css" href="style/styleiOS.css" />');
+                } else if (windowsPlatforms.indexOf(platform) !== -1) {
+                  document.write('<link rel="stylesheet" type="text/css" href="style/styleWindows.css" />');
+                } else if (/Android/.test(userAgent)) {
+                  document.write('<link rel="stylesheet" type="text/css" href="style/styleAndroid.css" />');
+                } else if (!os && /Linux/.test(platform)) {
+                  document.write('<link rel="stylesheet" type="text/css" href="style/styleLinux.css" />');
+                }
+
+                $(function() {
+                  $("#title").click(function() {
+                    window.location.href = '/';
+                  });
+
+                  $(".resBlockHeader").click(function() {
+                    var id = $(this).attr("id");
+                    $("#resBlockBody_" + id).slideToggle("slow");
+
+                    var text = $("#minimizeButton_" + id).text();
+                    if (text === '+')
+                      $("#minimizeButton_" + id).text('-');
+                    else
+                      $("#minimizeButton_" + id).text('+');
+                  });
+
+                  $("#filterButton").click(function() {
+                    window.location.href = '/filter';
+                  });
+
+                  $(document).on('keypress', function(event) {
+                    if (event.which == 13) {
+                      onSearchWithFilter();
+                      $("#searchForm").submit();
+                    }
+                  });
+                });
+
+                function onSearchWithFilter () {
+                  let category = Cookies.get('category'),
+                      contents = Cookies.get('contents');
+
+                  Cookies.set('search', document.getElementById("searchText").value);
+
+                  if(!category) category = '';
+                  if(!contents) contents = '';
+
+                  document.getElementById("filterCategoryInput").value = category;
+                  document.getElementById("filterContentsInput").value = contents;
+                }
+              </script>
+            </head>
+            <body>
+              <div>
+                <div id="title">영어검색은 Agjac</div>
+
+                <div id="goGroup">
+                  <div id="searchBox"></div>
+                  <div id="goBox"></div>
+
+                  <form action="search" method="get" id="searchForm" onsubmit="onSearchWithFilter()">
+                    <textarea type="hidden" name="target" id="searchText" autofocus="autofocus"></textarea>
+                    <textarea style="display: none;" name="filterCategory" id="filterCategoryInput"></textarea>
+                    <textarea style="display: none;" name="filterContents" id="filterContentsInput"></textarea>
+                    <input type="submit" id="goButton" value="go" />
+                  </form>
+                </div>
+                <div id="resultBox" style="color:#FFFFFF; font-size:22px">${description}</div>
+              </div>
+            </body>
+            </html>
