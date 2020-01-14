@@ -5,142 +5,18 @@ function HTMLLoader() {
   this.fs = require('fs')
   this.pt = require('path')
 
-  this.address = "http://localhost:5000"
-  this.metadataD1 = []
-  this.metadataD2 = []
+  // find a page and send
+  this.assembleHTML = function(res, dir, page) {
+    console.log('requested page : ' + page)
+    console.log('page path : ' + dir+'/'+page.replace(page.split('_')[0]+'_','')+'.html')
 
-  this.readData = function(dir, depth=0) {
-    const items = this.fs.readdirSync(dir)
-
-    for (let i = 0; i < items.length; ++i) {
-      const item = items[i]
-      const itemPath = this.pt.join(dir, item)
-      const stats = this.fs.statSync(itemPath)
-
-      if (stats.isDirectory()) {
-        this.readData(itemPath, depth+1)
-      } else if(itemPath.split(".")[1] === 'json') {
-        var json = JSON.parse(this.fs.readFileSync(itemPath))
-        json['path'] = dir
-        if (depth === 1)
-          this.metadataD1.push(json)
-        else
-          this.metadataD2.push(json)
-      }
-    }
-  }
-
-  this.findHTMLMetadata = function(page) {
-    for (let i = 0; i < this.metadataD1.length; ++i) {
-      if (page === this.metadataD1[i]['HTML']) return this.metadataD1[i]
-    }
-    
-    for (let i = 0; i < this.metadataD2.length; ++i) {
-      if (page === this.metadataD2[i]['HTML']) return this.metadataD2[i]
-    }
-
-    return false
-  }
-
-  this.assembleHTML = function(res, page) {
-    var HTML=``;
-    var json = this.findHTMLMetadata(page);
-
-    if (json !== false) {
-      //
-      // head
-      //
-      HTML += `
-      <!doctype html>
-      <html>
-          <head>
-              <title>${json['title']}</title>
-              <meta charset="utf-8">
-              <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-              <script src="https://cdn.jsdelivr.net/npm/js-cookie@beta/dist/js.cookie.min.js"></script>
-              <script src="./js/general.js"></script>`
-
-      HTML += `</head>`
-
-      if(json['sidebar']==="no") HTML += `<body id="index" class="no_sidebar">`
-      else HTML += `<body id="index">`
-
-      HTML += `<div id="whole_wrapper">
-          <div class="head">
-              <header>
-                  <hgroup>`
-
-      HTML += `<p class="title"><a href="${this.address}">삼시세끼 아그작 영어</a></p>
-      <p class="subtitle"><small>영어를 영어로 이해하는 그 순간</small></p>`
-
-      HTML += `<nav id="search_group">
-      <div class="sgroup">
-          <form class="search" action="/search" style="overflow:visible" data-submitfalse="q" method="GET" role="search">
-              <div class="item_input">
-                  <div class="input_border">
-                      <input class="search_input" name="target" maxlength="2048" type="text" aria-autocomplete="both" aria-haspopup="false" autocapitalize="off" autocomplete="off" autocorrect="off" role="combobox" spellcheck="false" title="검색" value="" placeholder="ex)take" aria-label="검색">
-                  </div>
-              </div>
-              <div class="item_btn">
-                  <input class="search_btn" value="Agjak 검색" aria-label="Agjak 검색" name="btnK" type="submit">
-              </div>
-          </form>
-      </div>
-  </nav> <!-- search_group -->`
-
-      HTML += `                        <nav id="main_menu">
-      <div class="wrapper">
-          <ul class="sub_nav">`
-
-      
-      // depth 0 : main menu
-      for (let i = 0; i < this.metadataD1.length; ++i) {
-        let mainItem = this.metadataD1[i]
-
-        HTML += `<li>
-        <!--<li class="selected">-->
-        <div class="label public">
-            <a class="pagelink" href="${this.address}/${mainItem['HTML']}">${mainItem['menu']}</a>
-        </div>`
-
-        HTML += `<div class="sub_nav depth_1" style="left: -51px; position: absolute; width: 199px; display: none;" loaded="true">
-        <ul class="sub_nav">`
-        // depth 1 : main menu - sub menu
-        for (let j = 0; j < this.metadataD2.length; ++j) {
-          let subItem = this.metadataD2[j];
-          if(mainItem['path'].split('/')[2] === subItem['path'].split('/')[2]) {
-            HTML += `<li>
-                        <div class="label public">
-                            <a class="courselink" href="${this.address}/${subItem['HTML']}">${subItem['menu']}</a>
-                        </div>
-                    </li>`
-          }
-        }
-
-        HTML += `
-        </ul>
-    </div>
-  </li>`
-      }
-
-      HTML += `</ul>
-      </div>
-  </nav>
-  </hgroup> <!-- hgroup -->
-  </header>
-  </div> <!-- head -->`
-
-      //
-      // body
-      //
-      this.fs.readFile(`./${json['path']}/${json['HTML']}.html`, 'utf8', function(err, body){
-        res.send(HTML + body)
-      })
-    }
+    this.fs.readFile(dir+'/'+page.replace(page.split('_')[0]+'_','')+'.html', 'utf8', function(err, html){
+      res.send(html)
+    })
   }
 
   //
-  //  main
+  //  search
   //
   this.assembleSearchResultHTML = function(res, searchTarget, result, metaData) {
     var HTML=``;
@@ -155,6 +31,7 @@ function HTMLLoader() {
             <meta charset="utf-8">
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/js-cookie@beta/dist/js.cookie.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.9.4/cytoscape.min.js"></script>
             <script src="./js/general.js"></script>
             <script src="./js/search.js"></script>`
 
@@ -504,9 +381,4 @@ function HTMLLoader() {
             </html>
             `;
   }
-
-  //
-  // initializing
-  //
-  this.readData('./public/html')
 }

@@ -267,6 +267,9 @@ button,input,textarea{font-family:NanumGothic,sans-serif}
 #whole_wrapper div#body div#cols div.wrapper div.entry_area article div.in_category .in_topic table th a:hover,
 #whole_wrapper div#body div#cols div.entry_area article div.in_category .in_topic table td a:hover{color:#fff;text-decoration:underline}
 
+/* body - cols - wrapper - entry_area - article - content - cy */
+#whole_wrapper div#body div#cols div.wrapper div.entry_area article div#content div#cy{min-height:400px;padding:40px 35px}
+
 /* body - cols - wrapper - entry_area - result_list */
 #whole_wrapper div#body div#cols div.wrapper div.entry_area div.result_list {min-height:400px;padding:20px 10px;}
 #whole_wrapper div#body div#cols div.wrapper div.entry_area div.result_list div.result_summary{padding-left:1em}

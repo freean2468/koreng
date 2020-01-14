@@ -1,0 +1,9 @@
+{
+    "nodes": [
+        { "data": { "id": "kind", "name": "kind", "href": "http://localhost:5000/sub_kind" } },
+        { "data": { "id": "benevolent", "name": "benevolent", "href": "http://localhost:5000/side_benevolent" } }
+    ],
+    "edges": [
+        { "data": { "source": "kind", "target": "benevolent" } }
+    ]
+}
