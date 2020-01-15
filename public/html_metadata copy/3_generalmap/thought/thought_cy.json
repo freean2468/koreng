@@ -1,0 +1,11 @@
+{
+    "nodes": [
+        { "data": { "id": "thought", "name": "thought", "href": "http://localhost:5000/sub_thought" } },
+        { "data": { "id": "opinion", "name": "opinion", "href": "http://localhost:5000/side_opinion" } },
+        { "data": { "id": "have an axe to grind", "name": "have an axe to grind", "href": "http://localhost:5000/side_have an axe to grind" } }
+    ],
+    "edges": [
+        { "data": { "source": "thought", "target": "opinion" } },
+        { "data": { "source": "opinion", "target": "have an axe to grind" } }
+    ]
+}

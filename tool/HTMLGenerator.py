@@ -89,6 +89,59 @@ def jsonToHTML(jsonPath, HTMLPath):
                     print("from : "+jsonFile)
                     with io.open(jsonFile,"r", encoding="utf-8") as jsonOpen:
                         jsonData = json.load(jsonOpen)
+
+                        startIndex = 0
+                        endIndex = jsonFile.find('/html_metadata')
+                        root="".join((jsonFile[:startIndex],'',jsonFile[endIndex:]))
+                        # print("".join(("root : ",root)))
+                        
+                        # parent
+                        parent = jsonFile.split('/')[-3]
+                        # print('parent : ' + parent)
+                        # pos
+                        pos = ''
+                        if d.split(".")[0] == 'search' and parent == 'public':
+                            pos = 'search'
+                        elif len(root.split('/')) == 3:
+                            pos = 'home'
+                        elif len(root.split('/')) == 4:
+                            pos = 'main'
+                        elif len(root.split('/')) == 5:
+                            pos = 'sub'
+                        elif len(root.split('/')) == 6:
+                            pos = 'side'
+
+                        # print('pos : ' + pos)
+                        
+                        # parent's sub_title, sub_h2
+                        sub_title = jsonData['sub_title']
+                        sub_h2 = jsonData['sub_h2']
+                        if jsonData['category'] == 'cy' and pos == 'side':
+                            startIndex = 0
+                            endIndex = jsonFile.rfind('/'+parent+'/')
+                            parentPath = "".join((jsonFile[:endIndex], '/', parent, '/', parent, '.json'))
+
+                            with io.open(parentPath,"r", encoding="utf-8") as parentOpen:
+                                parentData = json.load(parentOpen)
+                                sub_title = parentData["sub_title"]
+                                sub_h2 = parentData["sub_h2"]
+
+                        # print("".join(("sub_title : ",sub_title,' sub_h2 : ', sub_h2)))
+
+                        # article_title
+                        article_title = ''
+                        if jsonData['category'] == 'cy' and (pos == 'side' or pos == 'sub'):
+                            _name = d.split(".")[0]
+                            article_title = "".join((_name[0].upper(),_name[1:]))
+
+                        # print("".join(("article_title : ",article_title)))
+
+                        jsonData['pos'] = pos
+                        jsonData['parent'] = parent
+                        jsonData['sub_title'] = sub_title
+                        jsonData['sub_h2'] = sub_h2
+                        jsonData['article_title'] = article_title
+
                         with io.open(HTMLFile,"w", encoding="utf-8") as textFile:
                             html = '''
 <!doctype html>
@@ -101,6 +154,11 @@ def jsonToHTML(jsonPath, HTMLPath):
                             if jsonData["category"] == "cy":
                                 html += '''
         <script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.9.4/cytoscape.min.js"></script>'''
+
+                            if jsonData["category"] == "search":
+                                html += '''
+        <script src="./js/search.js"></script>'''
+
                             html +='''
         <script src="./js/general.js"></script>
     </head>'''
@@ -171,6 +229,11 @@ def jsonToHTML(jsonPath, HTMLPath):
         <div id="body">
             <div id="cols">
                 <div class="wrapper">'''
+                            # search
+                            if jsonData["category"] == 'search':
+                                textFile.write(html)
+                                print("--->" + HTMLFile)
+                                continue
 
                             # side menu                            
                             if jsonData["pos"] == 'sub' or jsonData["pos"] == 'side':
@@ -231,6 +294,23 @@ def jsonToHTML(jsonPath, HTMLPath):
                             </hgroup>
 
                             <div id="content" class="entry-content">'''
+
+                            # insert cy                            
+                            if jsonData["category"] == 'cy':
+                                cy = 'sub_'
+
+                                if jsonData["pos"] == 'sub':
+                                    cy += d.split(".")[0]
+                                else:
+                                    cy += jsonData["parent"]
+
+                                cy += '_cy'
+                            
+                                html +='''                      
+<div class="movie">
+    <iframe frameborder="0" height="600" scrolling="no" src="http://localhost:5000/''' + cy + '''" width="100%"></iframe>
+    <input style="position: absolute; margin-left: 5px; width: 1.5rem; opacity: 0.5;" class="split" type="image" src="/public/image/right_up_arrow.png" value="split" title="새창으로 열기" onmouseover="this.style.opacity='1'" onmouseleave="this.style.opacity='0.5'" onclick="window.open('http://localhost:5000/'''+cy+'''')">
+</div>'''
                             
                             with io.open(articleFile,"r", encoding="utf-8") as articleOpen:
                                 html += articleOpen.read()
@@ -248,7 +328,11 @@ def jsonToHTML(jsonPath, HTMLPath):
 
                             textFile.write(html)
                             print("--->" + HTMLFile)
-                    
+
+# 
+# 
+# 
+
 def applyHTMLToApp(dir):
     with io.open(dir + '/app.js',"w", encoding="utf-8") as appOpen:
         data = '''
@@ -282,26 +366,40 @@ def applyHTMLToApp(dir):
         app.use(compression())
         
         // Home
-        app.get('/', (req, res) => HTMLLoaderInst.assembleHTML(res, 'public/html','home'))'''
+        app.get('/', (req, res) => HTMLLoaderInst.assembleHTML(res, 'public/html','home'))
+        
+        // Search
+        app.get('/search', (req, res) => onSearch(req, res))
+
+        // Main'''
 
         for main in mainMenus:
             data += '''
-        app.get("/'''+main.name+'''", (req, res) => HTMLLoaderInst.assembleHTML(res, "'''+URLSourcePathBase+'/'+main.path+'", "'+main.name+'"))'
+        app.get("/" + encodeURIComponent("'''+main.name+'''"), (req, res) => HTMLLoaderInst.assembleHTML(res, "'''+URLSourcePathBase+'/'+main.path+'", "'+main.name+'"))'
 
+        data +='''
+        
+        // Sub'''
+        
         for sub in subMenus:
             data += '''
-        app.get("/'''+sub.name+'''", (req, res) => HTMLLoaderInst.assembleHTML(res, "'''+URLSourcePathBase+'/'+sub.path+'", "'+sub.name+'"))'
+        app.get("/" + encodeURIComponent("'''+sub.name+'''"), (req, res) => HTMLLoaderInst.assembleHTML(res, "'''+URLSourcePathBase+'/'+sub.path+'", "'+sub.name+'"))'
             if sub.category == 'cy':
                 data += '''
-        app.get("/'''+sub.name+'''_cy", (req, res) => HTMLLoaderInst.assembleHTML(res, "'''+URLSourcePathBase+'/'+sub.path+'", "'+sub.name+'_cy"))'
+        app.get("/" + encodeURIComponent("'''+sub.name+'''_cy"), (req, res) => HTMLLoaderInst.assembleHTML(res, "'''+URLSourcePathBase+'/'+sub.path+'", "'+sub.name+'_cy"))'
+
+        data +='''
+        
+        // Side'''
 
         for side in sideMenus:
             data += '''
-        app.get("/'''+side.name+'''", (req, res) => HTMLLoaderInst.assembleHTML(res, "'''+URLSourcePathBase+'/'+side.path+'", "'+side.name+'"))'
+        app.get("/" + encodeURIComponent("'''+side.name+'''"), (req, res) => HTMLLoaderInst.assembleHTML(res, "'''+URLSourcePathBase+'/'+side.path+'", "'+side.name+'"))'
 
         data += '''
-        // Search
-        app.get('/search', (req, res) => onSearch(req, res))
+        
+        // image
+        app.get("/public/image/right_up_arrow.png", (req, res) => res.sendFile("/public/image/right_up_arrow.png", { root : __dirname}))
 
         // app.post('/filter_process', (req, res) => res.send(onSearchWithFilter(req, res)))
         // app.get('/filter', (req, res) => res.send(HTMLLoaderInst.resultHandlingForFilter(dataLoaderInst.metaData)))
@@ -309,7 +407,7 @@ def applyHTMLToApp(dir):
         app.use(function(req, res, next) {
             res.status(404)
             HTMLLoaderInst.assembleHTML(res, 'public/html', 'home')
-            console.log("something wrong!")
+            console.log("something wrong! req.url : " + req.url)
         });
         
         app.use(function (err, req, res, next) {
@@ -350,6 +448,10 @@ def applyHTMLToApp(dir):
 
         appOpen.write(data)
         print(dir + '/app.js')
+
+# 
+# 
+# 
 
 def jsonToCyHTML(jsonPath, HTMLPath):
     for d in os.listdir(jsonPath):
@@ -392,7 +494,7 @@ def jsonToCyHTML(jsonPath, HTMLPath):
         }
     </style>
     </head>
-    <body style="margin:0;width:100vw;height:100vh">
+    <body style="margin:0;width:100vw;height:100vh;background:#000;">
         <div id="cy"></div>
         <!-- Load application code at the end to ensure DOM is loaded -->
         <script text="javascript">
@@ -426,10 +528,13 @@ def jsonToCyHTML(jsonPath, HTMLPath):
                     {
                         selector: 'node',
                         style: {
+                            'width':10,
+                            'height':10,
                             'content': 'data(name)',
                             'text-valign': 'center',
-                            'text-outline-width': 1,
+                            'text-outline-width': 0.5,
                             'color': 'white',
+                            'font-size': 8,
                             'text-outline-color': '#000',
                             'background-color': '#000'
                         }
@@ -543,7 +648,9 @@ def jsonToCyHTML(jsonPath, HTMLPath):
             
             parent = parent.replace('/sub_', '')
             parent = parent.replace('/side_', '')
-            parent = parent.replace(/-/g, ' ')
+            parent = parent.replace('_cy', '')
+            parent = decodeURI(parent)
+            // console.log(parent)
 
             cy.nodes().forEach(function(node){
                 if(node.id() === parent){

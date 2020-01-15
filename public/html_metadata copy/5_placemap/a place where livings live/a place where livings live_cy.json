@@ -1,0 +1,13 @@
+{
+    "nodes": [
+        { "data": { "id": "a place where livings live", "name": "a place where livings live", "href": "http://localhost:5000/sub_a place where livings live" } },
+        { "data": { "id": "town", "name": "town", "href": "http://localhost:5000/side_town" } },
+        { "data": { "id": "city", "name": "city", "href": "http://localhost:5000/side_city" } },
+        { "data": { "id": "borough", "name": "borough", "href": "http://localhost:5000/side_borough" } }
+    ],
+    "edges": [
+        { "data": { "source": "a place where livings live", "target": "town" } },
+        { "data": { "source": "town", "target": "city" } },
+        { "data": { "source": "town", "target": "borough" } }
+    ]
+}

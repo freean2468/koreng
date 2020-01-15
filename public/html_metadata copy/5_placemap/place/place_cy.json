@@ -1,0 +1,9 @@
+{
+    "nodes": [
+        { "data": { "id": "place", "name": "place", "href": "http://localhost:5000/sub_place" } },
+        { "data": { "id": "squalor", "name": "squalor", "href": "http://localhost:5000/side_squalor" } }
+    ],
+    "edges": [
+        { "data": { "source": "place", "target": "squalor" } }
+    ]
+}

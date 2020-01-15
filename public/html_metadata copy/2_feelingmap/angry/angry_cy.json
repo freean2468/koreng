@@ -1,0 +1,8 @@
+{
+    "nodes": [
+        { "data": { "id": "angry", "name": "angry", "href": "http://localhost:5000/sub_angry" } }
+    ],
+    "edges": [
+         
+    ]
+}

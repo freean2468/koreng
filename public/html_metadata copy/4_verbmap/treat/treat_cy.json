@@ -1,0 +1,9 @@
+{
+    "nodes": [
+        { "data": { "id": "treat", "name": "treat", "href": "http://localhost:5000/sub_treat" } },
+        { "data": { "id": "trifle with", "name": "trifle with", "href": "http://localhost:5000/trifle with" } }
+    ],
+    "edges": [
+        { "data": { "source": "treat", "target": "trifle with" } }
+    ]
+}

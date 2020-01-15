@@ -1,0 +1,9 @@
+{
+    "nodes": [
+        { "data": { "id": "sorry", "name": "sorry", "href": "http://localhost:5000/sub_sorry" } },
+        { "data": { "id": "atone", "name": "atone", "href": "http://localhost:5000/side_atone" } }
+    ],
+    "edges": [
+        { "data": { "source": "sorry", "target": "atone" } }
+    ]
+}

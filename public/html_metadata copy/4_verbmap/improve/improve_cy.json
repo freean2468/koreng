@@ -1,0 +1,9 @@
+{
+    "nodes": [
+        { "data": { "id": "improve", "name": "improve", "href": "http://localhost:5000/sub_improve" } },
+        { "data": { "id": "spruce up", "name": "spruce up", "href": "http://localhost:5000/spruce up" } }
+    ],
+    "edges": [
+        { "data": { "source": "improve", "target": "spruce up" } }
+    ]
+}

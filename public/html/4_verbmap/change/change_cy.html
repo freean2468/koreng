@@ -22,7 +22,7 @@
         }
     </style>
     </head>
-    <body style="margin:0;width:100vw;height:100vh">
+    <body style="margin:0;width:100vw;height:100vh;background:#000;">
         <div id="cy"></div>
         <!-- Load application code at the end to ensure DOM is loaded -->
         <script text="javascript">
@@ -43,10 +43,13 @@
                     {
                         selector: 'node',
                         style: {
+                            'width':10,
+                            'height':10,
                             'content': 'data(name)',
                             'text-valign': 'center',
-                            'text-outline-width': 1,
+                            'text-outline-width': 0.5,
                             'color': 'white',
+                            'font-size': 8,
                             'text-outline-color': '#000',
                             'background-color': '#000'
                         }
@@ -160,7 +163,9 @@
             
             parent = parent.replace('/sub_', '')
             parent = parent.replace('/side_', '')
-            parent = parent.replace(/-/g, ' ')
+            parent = parent.replace('_cy', '')
+            parent = decodeURI(parent)
+            // console.log(parent)
 
             cy.nodes().forEach(function(node){
                 if(node.id() === parent){

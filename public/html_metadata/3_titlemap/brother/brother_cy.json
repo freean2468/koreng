@@ -1,9 +1,0 @@
-{
-    "nodes": [
-        { "data": { "id": "brother", "name": "brother", "href": "http://localhost:5000/sub_brother" } },
-        { "data": { "id": "brethren", "name": "brethren", "href": "http://localhost:5000/side_brethren" } }
-    ],
-    "edges": [
-        { "data": { "source": "brother", "target": "brethren" } }
-    ]
-}

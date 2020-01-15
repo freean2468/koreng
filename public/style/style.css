@@ -324,6 +324,10 @@ form#diff_dialog div.body div.wrapper a:visited a:active{color:#09f}
 body.cke_editable a:hover,
 article div#content a:hover,
 form#diff_dialog div.body div.wrapper a:hover{color:#06f;text-decoration:underline}
+
+/*  */
+/* contents's tag */
+/*  */
 body.cke_editable h2,
 article div#content h2,
 form#diff_dialog div.body div.wrapper h2,
@@ -339,24 +343,26 @@ form#diff_dialog div.body div.wrapper h5,
 body.cke_editable h6,
 article div#content h6,
 form#diff_dialog div.body div.wrapper h6{margin:1em 0 .5em 0}
+
+article div#content h1{border-top:1px solid yellow;font-size:2em;font-weight:bold;color:#fff}
 body.cke_editable h2,
 article div#content h2,
 form#diff_dialog div.body div.wrapper h2{border-bottom:1px dotted #fff;font-size:1.6em;font-weight:bold;color:#fff;padding-bottom:.2em}
 body.cke_editable h3,
 article div#content h3,
-form#diff_dialog div.body div.wrapper h3{font-size:1.6em;font-weight:bold;color:#fff}
+form#diff_dialog div.body div.wrapper h3{font-size:1.6em;color:#fff}
 body.cke_editable h4,
 article div#content h4,
 form#diff_dialog div.body div.wrapper h4{font-size:1.4em;font-weight:bold;color:#fff}
 body.cke_editable h5,
 article div#content h5,
-form#diff_dialog div.body div.wrapper h5{font-size:1.2em;font-weight:bold;color:#fff}
+form#diff_dialog div.body div.wrapper h5{font-size:1.2em;font-weight:bold;color:#fff;border-bottom:1px dotted #fff;padding-bottom:.2em}
 body.cke_editable h6,
 article div#content h6,
 form#diff_dialog div.body div.wrapper h6{font-size:1.1em;font-weight:bold;color:#fff}
 body.cke_editable p,
 article div#content p,
-form#diff_dialog div.body div.wrapper p{margin:1em 0}
+form#diff_dialog div.body div.wrapper p{font-size:1.1em;margin:1em 0}
 body.cke_editable ol,
 article div#content ol,
 form#diff_dialog div.body div.wrapper ol{list-style-type:decimal;margin:0 0 0 3em}
@@ -467,9 +473,11 @@ form#diff_dialog div.body div.wrapper .diff-html-added{background-color:#cfc}
 body.cke_editable .diff-html-removed,
 article div#content .diff-html-removed,
 form#diff_dialog div.body div.wrapper .diff-html-removed{background-color:#fcc}
+
 body.cke_editable div.movie,
 article div#content div.movie,
-form#diff_dialog div.body div.wrapper div.movie{margin:20px 0;background-image:url("../../img/desktop/bg_movie.gif");background-position:center center;background-repeat:no-repeat;text-align:center;line-height:11px}
+form#diff_dialog div.body div.wrapper div.movie{margin:20px 0;background-position:center center;background-repeat:no-repeat;text-align:center;line-height:11px}
+
 body.cke_editable div.movie iframe,
 article div#content div.movie iframe,
 form#diff_dialog div.body div.wrapper div.movie iframe{-moz-box-shadow:inset 0 0 10px #666;-webkit-box-shadow:0 0 10px #666;-o-box-shadow:inset 0 0 10px #666;box-shadow:0 0 10px #666}

@@ -1,0 +1,15 @@
+{
+    "nodes": [
+        { "data": { "id": "title", "name": "title", "href": "http://localhost:5000/sub_title" } },
+        { "data": { "id": "brother", "name": "brother", "href": "http://localhost:5000/side_brother" } },
+        { "data": { "id": "brethren", "name": "brethren", "href": "http://localhost:5000/side_brethren" } },
+        { "data": { "id": "leader", "name": "leader", "href": "http://localhost:5000/side_leader" } },
+        { "data": { "id": "messiah", "name": "messiah", "href": "http://localhost:5000/side_messiah" } }
+    ],
+    "edges": [
+        { "data": { "source": "title", "target": "brother" } },
+        { "data": { "source": "brother", "target": "brethren" } },
+        { "data": { "source": "title", "target": "leader" } },
+        { "data": { "source": "leader", "target": "messiah" } }
+    ]
+}
