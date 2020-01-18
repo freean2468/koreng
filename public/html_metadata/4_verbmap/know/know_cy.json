@@ -1,0 +1,15 @@
+{
+    "nodes": [
+        { "data": { "id": "know", "name": "know", "href": "http://localhost:5000/sub_know" } },
+        { "data": { "id": "understand", "name": "understand", "href": "http://localhost:5000/sub_understand" } },
+        { "data": { "id": "information", "name": "information", "href": "http://localhost:5000/information" } },
+        { "data": { "id": "fact", "name": "fact", "href": "http://localhost:5000/side_fact" } },
+        { "data": { "id": "tell", "name": "tell", "href": "http://localhost:5000/side_tell" } }
+    ],
+    "edges": [
+        { "data": { "source": "know", "target": "understand" } },
+        { "data": { "source": "know", "target": "fact" } },
+        { "data": { "source": "know", "target": "information" } },
+        { "data": { "source": "know", "target": "tell" } }
+    ]
+}

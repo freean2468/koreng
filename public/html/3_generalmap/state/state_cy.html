@@ -1,0 +1,191 @@
+
+<!DOCTYPE html>
+    <html>
+    <head>
+    <meta charset=utf-8 />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, minimal-ui">
+    <title>state_cy - Agjak
+    </title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.9.4/cytoscape.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <style>
+        body { 
+            font: 14px helvetica neue, helvetica, arial, sans-serif;
+            margin: 0
+        }
+    
+        #cy {
+            height: 100%;
+            width: 100%;
+            display: block;
+            position: relative;
+        }
+    </style>
+    </head>
+    <body style="margin:0;width:100vw;height:100vh;background:#000;">
+        <div id="cy"></div>
+        <!-- Load application code at the end to ensure DOM is loaded -->
+        <script text="javascript">
+            var cy = cytoscape({
+                container: document.getElementById('cy'),
+                elements: {
+                    nodes: [
+                        { data : { id: "state", name: "state", href: "http://localhost:5000/sub_state" } },
+                        { data : { id: "condition", name: "condition", href: "http://localhost:5000/side_condition" } },
+                        { data : { id: "cardiac arrest", name: "cardiac arrest", href: "http://localhost:5000/side_cardiac arrest" } }
+                    ],
+                    edges: [
+                        { data : { source: "state", target: "condition" } },
+                        { data : { source: "condition", target: "cardiac arrest" } }
+                    ]
+                },
+                style: [
+                    {
+                        selector: 'node',
+                        style: {
+                            'width':10,
+                            'height':10,
+                            'content': 'data(name)',
+                            'text-valign': 'center',
+                            'text-outline-width': 0.5,
+                            'color': 'white',
+                            'font-size': 8,
+                            'text-outline-color': '#000',
+                            'background-color': '#000',
+                            'border-width':0
+                        }
+                    },
+                    {
+                        selector: 'edge',
+                        style: {
+                            'width': 1,
+                            'curve-style': 'straight',
+                            'line-color': '#888',
+                            'target-arrow-color': '#888',
+                            'target-arrow-shape': 'vee',
+                            'target-arrow-fill': 'hollow',
+                            'arrow-scale': 0.5
+                        }
+                    }
+                ],
+                layout: {
+                    name: 'cose',
+
+                    // Called on 'layoutready'
+                    ready: function(){},
+
+                    // Called on 'layoutstop'
+                    stop: function(){},
+
+                    // Whether to animate while running the layout
+                    // true : Animate continuously as the layout is running
+                    // false : Just show the end result
+                    // 'end' : Animate with the end result, from the initial positions to the end positions
+                    animate: true,
+
+                    // Easing of the animation for animate:'end'
+                    animationEasing: undefined,
+
+                    // The duration of the animation for animate:'end'
+                    animationDuration: undefined,
+
+                    // A function that determines whether the node should be animated
+                    // All nodes animated by default on animate enabled
+                    // Non-animated nodes are positioned immediately when the layout starts
+                    animateFilter: function ( node, i ){ return true; },
+
+
+                    // The layout animates only after this many milliseconds for animate:true
+                    // (prevents flashing on fast runs)
+                    animationThreshold: 250,
+
+                    // Number of iterations between consecutive screen positions update
+                    refresh: 20,
+
+                    // Whether to fit the network view after when done
+                    fit: true,
+
+                    // Padding on fit
+                    padding: 30,
+
+                    // Constrain layout bounds; { x1, y1, x2, y2 } or { x1, y1, w, h }
+                    boundingBox: undefined,
+
+                    // Excludes the label when calculating node bounding boxes for the layout algorithm
+                    nodeDimensionsIncludeLabels: false,
+
+                    // Randomize the initial positions of the nodes (true) or use existing positions (false)
+                    randomize: false,
+
+                    // Extra spacing between components in non-compound graphs
+                    componentSpacing: 40,
+
+                    // Node repulsion (non overlapping) multiplier
+                    nodeRepulsion: function( node ){ return 2048; },
+
+                    // Node repulsion (overlapping) multiplier
+                    nodeOverlap: 4,
+
+                    // Ideal edge (non nested) length
+                    idealEdgeLength: function( edge ){ return 12; },
+
+                    // Divisor to compute edge forces
+                    edgeElasticity: function( edge ){ return 32; },
+
+                    // Nesting factor (multiplier) to compute ideal edge length for nested edges
+                    nestingFactor: 1.2,
+
+                    // Gravity force (constant)
+                    gravity: 1,
+
+                    // Maximum number of iterations to perform
+                    numIter: 1000,
+
+                    // Initial temperature (maximum node displacement)
+                    initialTemp: 1000,
+
+                    // Cooling factor (how the temperature is reduced between consecutive iterations
+                    coolingFactor: 0.99,
+
+                    // Lower temperature threshold (below this point the layout will end)
+                    minTemp: 1.0
+                }
+            });
+
+            cy.on('tap', 'node', function(){
+                try { // your browser may block popups
+                    window.open( this.data('href') );
+                } catch(e){ // fall back on url change
+                    window.location.href = this.data('href');
+                }
+            })
+
+            // set focus on the node of the page
+            var parent = window.parent ? window.parent.location.pathname : "state"
+            
+            parent = parent.replace('/sub_', '')
+            parent = parent.replace('/side_', '')
+            parent = parent.replace('_cy', '')
+            parent = decodeURI(parent)
+            // console.log(parent)
+
+            cy.nodes().forEach(function(node){
+                if(node.id() === parent){
+                    node.style('background-color', '#fbfb11')
+                    node.style('width', 20)
+                    node.style('height', 20)
+                }
+            })
+
+            cy.edges().forEach(function(edge){
+                if(edge.source().id() === parent) {
+                    edge.style('width', '2.5')
+                    edge.style('line-color', '#fbfb11')
+                    edge.style('target-arrow-color', '#fdfd11')
+                    edge.style('target-arrow-fill', 'filled')
+                    edge.style('arrow-scale', 1.5)
+                }
+            })
+        </script>
+    </body>
+</html>

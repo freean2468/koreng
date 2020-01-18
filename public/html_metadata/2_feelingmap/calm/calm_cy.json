@@ -1,0 +1,9 @@
+{
+    "nodes": [
+        { "data": { "id": "calm", "name": "calm", "href": "http://localhost:5000/sub_calm" } },
+        { "data": { "id": "poised", "name": "poised", "href": "http://localhost:5000/side_poised" } }
+    ],
+    "edges": [
+        { "data": { "source": "calm", "target": "poised" } }
+    ]
+}

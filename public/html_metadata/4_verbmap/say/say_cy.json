@@ -1,0 +1,19 @@
+{
+    "nodes": [
+        { "data": { "id": "statement", "name": "statement", "href": "http://localhost:5000/sub_statement" } },
+        { "data": { "id": "say", "name": "say", "href": "http://localhost:5000/sub_say" } },
+        { "data": { "id": "disavow", "name": "disavow", "href": "http://localhost:5000/disavow" } },
+        { "data": { "id": "decree", "name": "decree", "href": "http://localhost:5000/side_decree" } },
+        { "data": { "id": "tell", "name": "tell", "href": "http://localhost:5000/side_tell" } },
+        { "data": { "id": "know", "name": "know", "href": "http://localhost:5000/sub_know" } },
+        { "data": { "id": "break it to sb", "name": "break it to sb", "href": "http://localhost:5000/side_break it to sb" } }
+    ],
+    "edges": [
+        { "data": { "source": "say", "target": "statement" } },
+        { "data": { "source": "statement", "target": "decree" } },
+        { "data": { "source": "say", "target": "disavow" } },
+        { "data": { "source": "say", "target": "tell" } },
+        { "data": { "source": "tell", "target": "break it to sb" } },
+        { "data": { "source": "know", "target": "tell" } }
+    ]
+}

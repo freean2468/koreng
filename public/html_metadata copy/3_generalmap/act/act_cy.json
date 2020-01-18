@@ -1,0 +1,9 @@
+{
+    "nodes": [
+        { "data": { "id": "act", "name": "act", "href": "http://localhost:5000/sub_act" } },
+        { "data": { "id": "subjugation", "name": "subjugation", "href": "http://localhost:5000/side_subjugation" } }
+    ],
+    "edges": [
+        { "data": { "source": "act", "target": "subjugation" } }
+    ]
+}

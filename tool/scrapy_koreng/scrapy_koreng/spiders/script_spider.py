@@ -25,7 +25,7 @@ class ScriptSpider(scrapy.Spider):
         document.add_heading(subtitle, 0)
 
         res = [i for i in range(len(title)) if title.startswith(' ', i)]
-        title = title[0:res[-2]];
+        title = title[0:res[-2]]
 
         body = response.css("div.scrolling-script-container::text").getall()
 

@@ -1,0 +1,15 @@
+{
+    "nodes": [
+        { "data": { "id": "object", "name": "object", "href": "http://localhost:5000/sub_object" } },
+        { "data": { "id": "thing", "name": "thing", "href": "http://localhost:5000/side_thing" } },
+        { "data": { "id": "furniture", "name": "furniture", "href": "http://localhost:5000/side_furniture" } },
+        { "data": { "id": "bed", "name": "bed", "href": "http://localhost:5000/side_bed" } },
+        { "data": { "id": "crib", "name": "crib", "href": "http://localhost:5000/side_crib" } }
+    ],
+    "edges": [
+        { "data": { "source": "object", "target": "thing" } },
+        { "data": { "source": "thing", "target": "furniture" } },
+        { "data": { "source": "furniture", "target": "bed" } },
+        { "data": { "source": "bed", "target": "crib" } }
+    ]
+}

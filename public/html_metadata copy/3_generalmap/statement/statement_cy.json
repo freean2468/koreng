@@ -1,0 +1,9 @@
+{
+    "nodes": [
+        { "data": { "id": "statement", "name": "statement", "href": "http://localhost:5000/sub_statement" } },
+        { "data": { "id": "decree", "name": "decree", "href": "http://localhost:5000/side_decree" } }
+    ],
+    "edges": [
+        { "data": { "source": "statement", "target": "decree" } }
+    ]
+}

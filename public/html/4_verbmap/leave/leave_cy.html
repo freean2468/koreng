@@ -51,7 +51,8 @@
                             'color': 'white',
                             'font-size': 8,
                             'text-outline-color': '#000',
-                            'background-color': '#000'
+                            'background-color': '#000',
+                            'border-width':0
                         }
                     },
                     {
@@ -59,10 +60,11 @@
                         style: {
                             'width': 1,
                             'curve-style': 'straight',
-                            'line-color': '#aaa',
-                            'target-arrow-color': '#ccc',
+                            'line-color': '#888',
+                            'target-arrow-color': '#888',
                             'target-arrow-shape': 'vee',
-                            'target-arrow-fill': 'hollow'
+                            'target-arrow-fill': 'hollow',
+                            'arrow-scale': 0.5
                         }
                     }
                 ],
@@ -125,7 +127,7 @@
                     nodeOverlap: 4,
 
                     // Ideal edge (non nested) length
-                    idealEdgeLength: function( edge ){ return 32; },
+                    idealEdgeLength: function( edge ){ return 12; },
 
                     // Divisor to compute edge forces
                     edgeElasticity: function( edge ){ return 32; },
@@ -170,15 +172,18 @@
             cy.nodes().forEach(function(node){
                 if(node.id() === parent){
                     node.style('background-color', '#fbfb11')
+                    node.style('width', 20)
+                    node.style('height', 20)
                 }
             })
 
             cy.edges().forEach(function(edge){
                 if(edge.source().id() === parent) {
-                    edge.style('width', '2')
+                    edge.style('width', '2.5')
                     edge.style('line-color', '#fbfb11')
                     edge.style('target-arrow-color', '#fdfd11')
                     edge.style('target-arrow-fill', 'filled')
+                    edge.style('arrow-scale', 1.5)
                 }
             })
         </script>

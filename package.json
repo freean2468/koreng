@@ -16,7 +16,9 @@
     "compression": "^1.7.4",
     "cytoscape": "^3.12.1",
     "express": "^4.17.1",
-    "helmet": "^3.21.2"
+    "helmet": "^3.21.2",
+    "lowdb": "^1.0.0",
+    "mongodb": "^3.5.0"
   },
   "repository": {
     "type": "git",

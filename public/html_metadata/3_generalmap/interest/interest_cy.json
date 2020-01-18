@@ -1,0 +1,11 @@
+{
+    "nodes": [
+        { "data": { "id": "interest", "name": "interest", "href": "http://localhost:5000/sub_interest" } },
+        { "data": { "id": "enthusiasm", "name": "enthusiasm", "href": "http://localhost:5000/side_enthusiasm" } },
+        { "data": { "id": "zeal", "name": "zeal", "href": "http://localhost:5000/side_zeal" } }
+    ],
+    "edges": [
+        { "data": { "source": "interest", "target": "enthusiasm" } },
+        { "data": { "source": "enthusiasm", "target": "zeal" } }
+    ]
+}

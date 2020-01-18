@@ -1,0 +1,11 @@
+{
+    "nodes": [
+        { "data": { "id": "feel", "name": "feel", "href": "http://localhost:5000/sub_feel" } },
+        { "data": { "id": "mood", "name": "mood", "href": "http://localhost:5000/side_mood" } },
+        { "data": { "id": "vibe", "name": "vibe", "href": "http://localhost:5000/side_vibe" } }
+    ],
+    "edges": [
+        { "data": { "source": "feel", "target": "mood" } },
+        { "data": { "source": "mood", "target": "vibe" } }
+    ]
+}

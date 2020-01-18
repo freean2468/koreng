@@ -1,0 +1,11 @@
+{
+    "nodes": [
+        { "data": { "id": "state", "name": "state", "href": "http://localhost:5000/sub_state" } },
+        { "data": { "id": "condition", "name": "condition", "href": "http://localhost:5000/side_condition" } },
+        { "data": { "id": "cardiac arrest", "name": "cardiac arrest", "href": "http://localhost:5000/side_cardiac arrest" } }
+    ],
+    "edges": [
+        { "data": { "source": "state", "target": "condition" } },
+        { "data": { "source": "condition", "target": "cardiac arrest" } }
+    ]
+}

@@ -1,0 +1,14 @@
+{
+    "nodes": [
+        { "data": { "id": "discover", "name": "discover", "href": "http://localhost:5000/sub_discover" } },
+        { "data": { "id": "find", "name": "find", "href": "http://localhost:5000/sub_find" } },
+        { "data": { "id": "hide", "name": "hide", "href": "http://localhost:5000/hide" } },
+        { "data": { "id": "lie low", "name": "lie low", "href": "http://localhost:5000/side_lie low" } }
+    ],
+    "edges": [
+        { "data": { "source": "discover", "target": "find" } },
+        { "data": { "source": "hide", "target": "lie low" } },
+        { "data": { "source": "find", "target": "hide" } },
+        { "data": { "source": "hide", "target": "find" } }
+    ]
+}

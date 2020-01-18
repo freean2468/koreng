@@ -18,8 +18,6 @@ class Menu(object):
 
 URL = 'http://localhost:5000'
 
-pageNumber= 0
-
 
 jsonPathBase= "/Users/hoon-ilsong/project/koreng/public/html_metadata"
 HTMLPathBase= "/Users/hoon-ilsong/project/koreng/public/html"
@@ -29,6 +27,8 @@ URLSourcePathBase= "public/html"
 mainMenus=[]
 subMenus=[]
 sideMenus=[]
+
+OVERWRITE =True
 
 def setMenu(path):
     lst = sorted(os.listdir(path))
@@ -50,6 +50,8 @@ def setMenu(path):
                                     # print('side : '+jsonFile)
                                     with io.open(jsonFile,"r", encoding="utf-8") as jsonOpen:
                                         jsonData = json.load(jsonOpen)
+                                        if jsonData['menu_title'] == '':
+                                            jsonData['menu_title'] = d.split(".")[0]
                                         sideMenus.append(Menu("sub_"+sidePath.split("/")[-2],"side_"+d.split(".")[0], jsonData["menu_title"], jsonFile.split("/")[-4]+'/'+jsonFile.split("/")[-3]+'/'+jsonFile.split("/")[-2], jsonData["category"]))
                         else:
                             fileExtension=d.split(".")[-1]
@@ -59,6 +61,8 @@ def setMenu(path):
                                 # print('sub : '+jsonFile)
                                 with io.open(jsonFile,"r", encoding="utf-8") as jsonOpen:
                                     jsonData = json.load(jsonOpen)
+                                    # if jsonData['category'] == 'cy':
+                                    #     jsonData['menu_title'] = "".join((d.split(".")[0],' - ',jsonData['menu_title']))
                                     subMenus.append(Menu("main_"+subPath.split("/")[-2],"sub_"+d.split(".")[0], jsonData["menu_title"], jsonFile.split("/")[-3]+'/'+jsonFile.split("/")[-2], jsonData["category"]))
                 else:
                     fileExtension=d.split(".")[-1]
@@ -85,7 +89,7 @@ def jsonToHTML(jsonPath, HTMLPath):
                 jsonFile = jsonPath + "/" + d
                 articleFile = jsonPath + "/" + d.split(".")[0] + ".html"
                 HTMLFile = HTMLPath + "/" + d.split(".")[0] + ".html"
-                if 1:# if not os.path.isfile(HTMLFile):
+                if not os.path.isfile(HTMLFile) or OVERWRITE:
                     print("from : "+jsonFile)
                     with io.open(jsonFile,"r", encoding="utf-8") as jsonOpen:
                         jsonData = json.load(jsonOpen)
@@ -99,7 +103,7 @@ def jsonToHTML(jsonPath, HTMLPath):
                         parent = jsonFile.split('/')[-3]
                         # print('parent : ' + parent)
                         # pos
-                        pos = ''
+                        pos = jsonData['pos']
                         if d.split(".")[0] == 'search' and parent == 'public':
                             pos = 'search'
                         elif len(root.split('/')) == 3:
@@ -114,6 +118,7 @@ def jsonToHTML(jsonPath, HTMLPath):
                         # print('pos : ' + pos)
                         
                         # parent's sub_title, sub_h2
+                        title = jsonData['title']
                         sub_title = jsonData['sub_title']
                         sub_h2 = jsonData['sub_h2']
                         if jsonData['category'] == 'cy' and pos == 'side':
@@ -123,24 +128,34 @@ def jsonToHTML(jsonPath, HTMLPath):
 
                             with io.open(parentPath,"r", encoding="utf-8") as parentOpen:
                                 parentData = json.load(parentOpen)
+                                title = parentData["title"]
                                 sub_title = parentData["sub_title"]
                                 sub_h2 = parentData["sub_h2"]
 
                         # print("".join(("sub_title : ",sub_title,' sub_h2 : ', sub_h2)))
 
                         # article_title
-                        article_title = ''
+                        article_title = jsonData['article_title']
                         if jsonData['category'] == 'cy' and (pos == 'side' or pos == 'sub'):
                             _name = d.split(".")[0]
                             article_title = "".join((_name[0].upper(),_name[1:]))
 
                         # print("".join(("article_title : ",article_title)))
 
+                        if jsonData['title'] == '':
+                            jsonData['title'] = "".join((d.split(".")[0]," - ",title))
+                        elif jsonData['category'] == 'cy' and pos == 'sub':
+                            jsonData['title'] = "".join((d.split(".")[0]," - ",jsonData['title']))
+                        # if jsonData['menu_title'] == '':
+                        #     jsonData['menu_title'] = d.split(".")[0]
+                        if jsonData['article_title'] == '':
+                            jsonData['article_title'] = article_title
+
                         jsonData['pos'] = pos
                         jsonData['parent'] = parent
                         jsonData['sub_title'] = sub_title
                         jsonData['sub_h2'] = sub_h2
-                        jsonData['article_title'] = article_title
+
 
                         with io.open(HTMLFile,"w", encoding="utf-8") as textFile:
                             html = '''
@@ -174,61 +189,62 @@ def jsonToHTML(jsonPath, HTMLPath):
             <div class="head">
                 <header>
                     <hgroup>
-                    <p class="title"><a href="'''+URL+'''">삼시세끼 아그작 영어</a></p>
-                    <p class="subtitle"><small>영어를 영어로 이해하는 그 순간</small></p>
-                    <nav id="search_group">
-                        <div class="sgroup">
-                            <form class="search" action="/search" style="overflow:visible" data-submitfalse="q" method="GET" role="search">
-                                <div class="item_input">
-                                    <div class="input_border">
-                                        <input class="search_input" name="target" maxlength="2048" type="text" aria-autocomplete="both" aria-haspopup="false" autocapitalize="off" autocomplete="off" autocorrect="off" role="combobox" spellcheck="false" title="검색" value="" placeholder="ex)take" aria-label="검색">
+                        <p class="title"><a href="'''+URL+'''">삼시세끼 아그작 영어</a></p>
+                        <p class="subtitle"><small>영어를 영어로 이해하는 그 순간</small></p>
+                        <nav id="search_group">
+                            <div class="sgroup">
+                                <form class="search" action="/search" style="overflow:visible" data-submitfalse="q" method="GET" role="search">
+                                    <div class="item_input">
+                                        <div class="input_border">
+                                            <input class="search_input" name="target" maxlength="2048" type="text" aria-autocomplete="both" aria-haspopup="false" autocapitalize="off" autocomplete="off" autocorrect="off" role="combobox" spellcheck="false" title="검색" value="" placeholder="ex)take" aria-label="검색">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="item_btn">
-                                    <input class="search_btn" value="Agjak 검색" aria-label="Agjak 검색" name="btnK" type="submit">
-                                </div>
-                            </form>
-                        </div>
-                    </nav> <!-- search_group -->
-                    <nav id="main_menu">
-                        <div class="wrapper">
-                            <ul class="sub_nav">'''
+                                    <div class="item_btn">
+                                        <input class="search_btn" value="Agjak 검색" aria-label="Agjak 검색" name="btnK" type="submit">
+                                    </div>
+                                </form>
+                            </div>
+                        </nav> <!-- search_group -->
+                        <nav id="main_menu">
+                            <div class="wrapper">
+                                <ul class="sub_nav">'''
 
                             for main in mainMenus:
-                                html += '''<li>
-                                    <!--<li class="selected">-->
-                                    <div class="label public">
-                                        <a class="pagelink" href="'''+URL+'/'+main.name+'">'+main.menu_title+'''</a>
-                                    </div>
-                                    <div class="sub_nav depth_1" style="left: -51px; position: absolute; width: 199px; display: none;" loaded="true">
-                                        <ul class="sub_nav">'''
+                                html += '''
+                                    <li>
+                                        <!--<li class="selected">-->
+                                        <div class="label public">
+                                            <a class="pagelink" href="'''+URL+'/'+main.name+'">'+main.menu_title+'''</a>
+                                        </div>
+                                        <div class="sub_nav depth_1" style="left: -51px; position: absolute; width: 199px; display: none;" loaded="true">
+                                            <ul class="sub_nav">'''
 
                                 for sub in subMenus:
                                     # print('sub.parent : ' + sub.parent + ', main.name : ' + main.name)
                                     if sub.parent.split('_')[-1] == main.name.split('_')[-1]:
                                         html += '''
-                                            <li>
-                                                <div class="label public">
-                                                    <a class="courselink" href="'''+URL+'/'+sub.name+'">'+sub.menu_title+'''
-                                                    </a>
-                                                </div>
-                                            </li>'''
+                                                <li>
+                                                    <div class="label public">
+                                                        <a class="courselink" href="'''+URL+'/'+sub.name+'">'+sub.menu_title+'''
+                                                        </a>
+                                                    </div>
+                                                </li>'''
                                 html += '''
-                                        </ul>
-                                    </div>
-                                </li>'''
+                                            </ul>
+                                        </div>
+                                    </li>'''
 
                             html += '''
-                            </ul>
-                        </div>
-                    </nav>
-                </hgroup> <!-- hgroup -->
-            </header>
-        </div> <!-- head -->
+                                </ul>
+                            </div>
+                        </nav>
+                    </hgroup> <!-- hgroup -->
+                </header>
+            </div> <!-- head -->
 
-        <div id="body">
-            <div id="cols">
-                <div class="wrapper">'''
+            <div id="body">
+                <div id="cols">
+                    <div class="wrapper">'''
                             # search
                             if jsonData["category"] == 'search':
                                 textFile.write(html)
@@ -246,16 +262,16 @@ def jsonToHTML(jsonPath, HTMLPath):
                                             break
 
                                 html += '''
-                    <aside>
-                        <div id="list_index" class="index">
-                            <div class="cover selected">
-                                <h2 style="text-align: center"><a href="'''+URL+'/'+subHref+'">'+jsonData["sub_title"]+'''</a>
+                        <aside>
+                            <div id="list_index" class="index">
+                                <div class="cover selected">
+                                    <h2 style="text-align: center"><a href="'''+URL+'/'+subHref+'">'+jsonData["sub_title"]+'''</a>
+                                    </h2>
+                                </div>
+                                <h2>'''+jsonData["sub_h2"]+'''
                                 </h2>
-                            </div>
-                            <h2>'''+jsonData["sub_h2"]+'''
-                            </h2>
-                            <nav class="sub_nav">
-                                <ol id="list_tree" class="no_draggable ui-sortable ui-sortable-disabled">'''
+                                <nav class="sub_nav">
+                                    <ol id="list_tree" class="no_draggable ui-sortable ui-sortable-disabled">'''
 
                                 sub = ''
 
@@ -267,33 +283,33 @@ def jsonToHTML(jsonPath, HTMLPath):
                                 for side in sideMenus:
                                     if sub == side.parent:
                                         html += '''
-                                    <li>
-                                        <div class="label public">
-                                            <a class="courselink" href="'''+URL+'/'+side.name+'">'+side.menu_title+'''
-                                            </a>
-                                        </div>
-                                    </li>'''
+                                        <li>
+                                            <div class="label public">
+                                                <a class="courselink" href="'''+URL+'/'+side.name+'">'+side.menu_title+'''
+                                                </a>
+                                            </div>
+                                        </li>'''
 
                                 html += '''
-                                </ol>
-                            </nav>
-                        </div>
-                    </aside>'''
+                                    </ol>
+                                </nav>
+                            </div>
+                        </aside>'''
 
                             now = time.gmtime(time.time())
                             html += '''
-                    <div class="entry_area">
-                        <article class="hentry">
-                            <hgroup>
-                                <h1 class="entry-title">'''+jsonData["article_title"]+'''
-                                </h1>
-                                <div class="props">
-                                    <time datetime="" pubdate="">'''+str(now.tm_year)+'년 '+str(now.tm_mon)+'월 '+str(now.tm_mday)+'일 '+str(now.tm_hour)+':'+str(now.tm_min)+':'+str(now.tm_sec)+'''
-                                    </time>
-                                </div>
-                            </hgroup>
+                        <div class="entry_area">
+                            <article class="hentry">
+                                <hgroup>
+                                    <h1 class="entry-title">'''+jsonData["article_title"]+'''
+                                    </h1>
+                                    <div class="props">
+                                        <time datetime="" pubdate="">'''+str(now.tm_year)+'년 '+str(now.tm_mon)+'월 '+str(now.tm_mday)+'일 '+str(now.tm_hour)+':'+str(now.tm_min)+':'+str(now.tm_sec)+'''
+                                        </time>
+                                    </div>
+                                </hgroup>
 
-                            <div id="content" class="entry-content">'''
+                                <div id="content" class="entry-content">'''
 
                             # insert cy                            
                             if jsonData["category"] == 'cy':
@@ -307,23 +323,23 @@ def jsonToHTML(jsonPath, HTMLPath):
                                 cy += '_cy'
                             
                                 html +='''                      
-<div class="movie">
-    <iframe frameborder="0" height="600" scrolling="no" src="http://localhost:5000/''' + cy + '''" width="100%"></iframe>
-    <input style="position: absolute; margin-left: 5px; width: 1.5rem; opacity: 0.5;" class="split" type="image" src="/public/image/right_up_arrow.png" value="split" title="새창으로 열기" onmouseover="this.style.opacity='1'" onmouseleave="this.style.opacity='0.5'" onclick="window.open('http://localhost:5000/'''+cy+'''')">
-</div>'''
+    <div class="movie">
+        <iframe frameborder="0" height="600" scrolling="no" src="http://localhost:5000/''' + cy + '''" width="100%"></iframe>
+        <input style="position: absolute; margin-left: 5px; width: 1.5rem; opacity: 0.5;" class="split" type="image" src="/public/image/right_up_arrow.png" value="split" title="새창으로 열기" onmouseover="this.style.opacity='1'" onmouseleave="this.style.opacity='0.5'" onclick="window.open('http://localhost:5000/'''+cy+'''')">
+    </div>'''
                             
                             with io.open(articleFile,"r", encoding="utf-8") as articleOpen:
                                 html += articleOpen.read()
 
                             html += '''
-                            </div>
-                        </article>
+                                </div>
+                            </article>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div> <!-- body -->
-    </div> <!-- whole_wrapper -->
-</body>
+            </div> <!-- body -->
+        </div> <!-- whole_wrapper -->
+    </body>
 </html>'''
 
                             textFile.write(html)
@@ -462,7 +478,7 @@ def jsonToCyHTML(jsonPath, HTMLPath):
             if fileExtension =="cy.json":
                 jsonFile = jsonPath + "/" + d
                 HTMLFile = HTMLPath + "/" + d.split(".")[0] + ".html"
-                if 1:# if not os.path.isfile(HTMLFile):
+                if not os.path.isfile(HTMLFile) or OVERWRITE:
                     print("from : "+jsonFile)
                     with io.open(jsonFile,"r", encoding="utf-8") as jsonOpen:
                         jsonData = json.load(jsonOpen)
@@ -536,7 +552,8 @@ def jsonToCyHTML(jsonPath, HTMLPath):
                             'color': 'white',
                             'font-size': 8,
                             'text-outline-color': '#000',
-                            'background-color': '#000'
+                            'background-color': '#000',
+                            'border-width':0
                         }
                     },
                     {
@@ -544,10 +561,11 @@ def jsonToCyHTML(jsonPath, HTMLPath):
                         style: {
                             'width': 1,
                             'curve-style': 'straight',
-                            'line-color': '#aaa',
-                            'target-arrow-color': '#ccc',
+                            'line-color': '#888',
+                            'target-arrow-color': '#888',
                             'target-arrow-shape': 'vee',
-                            'target-arrow-fill': 'hollow'
+                            'target-arrow-fill': 'hollow',
+                            'arrow-scale': 0.5
                         }
                     }
                 ],
@@ -610,7 +628,7 @@ def jsonToCyHTML(jsonPath, HTMLPath):
                     nodeOverlap: 4,
 
                     // Ideal edge (non nested) length
-                    idealEdgeLength: function( edge ){ return 32; },
+                    idealEdgeLength: function( edge ){ return 12; },
 
                     // Divisor to compute edge forces
                     edgeElasticity: function( edge ){ return 32; },
@@ -655,15 +673,18 @@ def jsonToCyHTML(jsonPath, HTMLPath):
             cy.nodes().forEach(function(node){
                 if(node.id() === parent){
                     node.style('background-color', '#fbfb11')
+                    node.style('width', 20)
+                    node.style('height', 20)
                 }
             })
 
             cy.edges().forEach(function(edge){
                 if(edge.source().id() === parent) {
-                    edge.style('width', '2')
+                    edge.style('width', '2.5')
                     edge.style('line-color', '#fbfb11')
                     edge.style('target-arrow-color', '#fdfd11')
                     edge.style('target-arrow-fill', 'filled')
+                    edge.style('arrow-scale', 1.5)
                 }
             })
         </script>
@@ -676,6 +697,7 @@ def jsonToCyHTML(jsonPath, HTMLPath):
 
 mkdirOnPath(HTMLPathBase)
 
+# load json contents onto memory 
 setMenu(jsonPathBase)
 
 jsonToHTML(jsonPathBase, HTMLPathBase)
