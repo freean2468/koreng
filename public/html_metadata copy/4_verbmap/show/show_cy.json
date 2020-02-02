@@ -4,12 +4,16 @@
         { "data": { "id": "express", "name": "express", "href": "http://localhost:5000/side_express" } },
         { "data": { "id": "praise", "name": "praise", "href": "http://localhost:5000/side_praise" } },
         { "data": { "id": "fawn", "name": "fawn", "href": "http://localhost:5000/side_fawn" } },
-        { "data": { "id": "fawn over", "name": "fawn over", "href": "http://localhost:5000/side_fawn over" } }
+        { "data": { "id": "fawn over", "name": "fawn over", "href": "http://localhost:5000/side_fawn over" } },
+        { "data": { "id": "respect", "name": "respect", "href": "http://localhost:5000/side_respect" } },
+        { "data": { "id": "kowtow", "name": "kowtow", "href": "http://localhost:5000/side_kowtow" } }
     ],
     "edges": [
         { "data": { "source": "show", "target": "express" } },
         { "data": { "source": "express", "target": "praise" } },
         { "data": { "source": "praise", "target": "fawn" } },
-        { "data": { "source": "fawn", "target": "fawn over" } }
+        { "data": { "source": "fawn", "target": "fawn over" } },
+        { "data": { "source": "show", "target": "respect" } },
+        { "data": { "source": "respect", "target": "kowtow" } }
     ]
 }

@@ -1,52 +1,121 @@
 import scrapy
 import re
-from docx import Document
+import json
+import io
+import StringIO
+from collections import OrderedDict
+import datetime
+
+xlFile = "sample.xlsx"
 
 class ScriptSpider(scrapy.Spider):
     name = "scripts"
-    #'https://www.springfieldspringfield.co.uk/'
     start_urls = [
-        'https://www.springfieldspringfield.co.uk/view_episode_scripts.php?tv-show=spartacus-gods-of-the-arena&episode=s01e01'
+        "https://dictionary.cambridge.org/dictionary/english/preceptor"
     ]
 
     def __init__(self):
         self.path = '/Users/hoon-ilsong/Documents/crawler products/'
 
+        with open('en_list.txt', 'r') as f:
+            en_list = f.read()
+            en_list = en_list.splitlines()
+            
+            # idx = 0
+            # for en in en_list:
+            #     idx = idx+1
+            #     en = en.replace(' ', '+')
+            #     self.start_urls.append("https://dictionary.cambridge.org/dictionary/english/"+en)
+            #     if(idx > 0):
+            #         break
+
     def parse(self, response):
-        page = response.url.split("/")[-2]
-        document = Document()
+        print('response : ' + response.url)
+        print('title : ' + response.xpath("//span[@class='hw dhw']/text()").get())
+        print(response.xpath("//span[@class='pos dpos']/text()").get())
+        print(response.xpath("//span[@class='pos dpos']/text()").get())
 
-        # u'The Vampire Diaries s04e15 Episode Script            '
-        h = response.css("div.main-content-left h1::text").get()
-        title = re.sub("[']", '', h).strip()
-        # title = title.replace('u', '', 1)
+        # try:
+        #     if "/summary/" in response.url: 
 
-        subtitle = response.css("div.main-content-left h3::text").get()
-        document.add_heading(subtitle, 0)
+        #         outstanding = response.xpath("//td/text()")[2].get()
+        #         # print(outstanding)
 
-        res = [i for i in range(len(title)) if title.startswith(' ', i)]
-        title = title[0:res[-2]]
+        #         Y = response.xpath("//span/text()")[59].get()
+        #         # print(Y)
 
-        body = response.css("div.scrolling-script-container::text").getall()
+        #         code = response.xpath("//span/text()")[5].get()
+        #         # print(code)
 
-        document.add_paragraph(body)
-        document.save(self.path+title+'.docx')
+        #         price = response.xpath("//li/text()")[7].get()
+        #         # print(price)
 
-        self.log('<------------------------------ Saved file %s ----------------------------->' % title)
+        #         ANI = response.xpath("//td/text()")[34].get() + "000000"
+        #         # print(ANI)
 
-        next_page = ''
+        #         QNI = response.xpath("//td/text()")[37].get() + "000000"
+        #         # print(QNI)
 
-        i = 0
-        PorN = response.css("div.episode_script a::text").getall()
-        while(i < len(PorN)):
-            _temp = PorN[i]
-            _temp = re.sub("[']", '', _temp)
-            self.log(_temp)
-            if _temp == 'Next Episode':
-                next_page = response.css("div.episode_script a::attr(href)").getall()[i]
-                break
-            i=i+1
+        #         # for node in response.xpath("//span/text()"):
+        #         #     print(node)
 
-        if next_page is not None:
-            next_page = response.urljoin(next_page)
-            yield scrapy.Request(next_page, callback=self.parse)
+        #         # for node in response.xpath("//td/text()"):
+        #         #     print(node)
+
+        #         # for idx, row in enumerate(self.sheet.rows):
+        #         #     # print(row[0].value)
+        #         #     if row[0].value == code:
+        #         #         # print("I'm in!")
+                        
+        #         #         row[1].value = price
+        #         #         row[2].value = outstanding
+        #         #         row[3].value = ANI
+        #         #         row[4].value = Y
+        #         #         row[5].value = QNI
+        #         #         return
+
+        #         # Rows can also be appended
+        #         self.sheet.append([code, price,	outstanding, ANI, Y, QNI, "=D3/$C$3",	"=F3/$C$3",	"=$B$3/G3",	"=$B$3/H3",	"Total Assets",	"Total liabilities",	"=(K3-L3)/C3",	"=B3/M3",	"Total Equity",	"=F3/O3*100",	"=D3/O3*100",	"=B3/S3",	"=($O3+$O3*($Q3-$C$1)/$C$1)/$C3", 	"=($O3+$O3*($Q3+T$2-$C$1)/$C$1)/$C3", 	"=($O3+$O3*($Q3+U$2-$C$1)/$C$1)/$C3", 	"=($O3+$O3*($Q3+V$2-$C$1)/$C$1)/$C3"])
+
+        #         next_page = response.urljoin(response.url.replace('/summary/', '/financials/'))
+        #         yield scrapy.Request(next_page, callback=self.parse)
+                
+
+        #     else:
+        #         code = response.xpath("//span/text()")[5].get()
+        #         # print('code : ' + code)
+
+        #         # for node in response.xpath("//td/text()"):
+        #         #     print(node)
+                
+        #         asset = ""
+        #         liability = ""
+        #         equity = ""
+
+        #         for row in response.xpath('//table[@class="tableColtype typeScroll tableReports"]/tbody/tr'):
+        #             asset = row.xpath('//tr[@class="totalAsset"]/td[2]//text()').extract_first() + "000000"
+        #             liability = row.xpath('//tr[@class="totalAsset"][2]/td[2]//text()').extract_first() + "000000"
+        #             equity = row.xpath('//tr[@class="totalAsset"][3]/td[2]//text()').extract_first() + "000000"
+        #             break
+
+        #         # for node in response.xpath("//span/text()"):
+        #         #     print(node)
+
+        #         # for node in response.xpath("//td/text()"):
+        #         #     print(node)
+
+        #         for idx, row in enumerate(self.sheet.rows):
+        #             # print(row[0].value)
+        #             if row[0].value == code:
+        #                 # print("I'm in!")
+                        
+        #                 row[10].value = asset
+        #                 row[11].value = liability
+        #                 row[14].value = equity
+        #                 self.wb.save(xlFile)
+        #                 print("code : "+code+", saved!")
+        #                 return
+
+        # except Exception as ex:
+        #     print('ex : ' + ex + ', No code : ' + response.url)
+        #     print('No code : ' + response.url)

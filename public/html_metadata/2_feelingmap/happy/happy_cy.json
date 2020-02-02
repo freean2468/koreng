@@ -1,9 +1,0 @@
-{
-    "nodes": [
-        { "data": { "id": "happy", "name": "happy", "href": "http://localhost:5000/sub_happy" } },
-        { "data": { "id": "happy as clams", "name": "happy as clams", "href": "http://localhost:5000/side_happy as clams" } }
-    ],
-    "edges": [
-        { "data": { "source": "happy", "target": "happy as clams" } }
-    ]
-}

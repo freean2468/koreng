@@ -268,7 +268,7 @@ button,input,textarea{font-family:NanumGothic,sans-serif}
 #whole_wrapper div#body div#cols div.entry_area article div.in_category .in_topic table td a:hover{color:#fff;text-decoration:underline}
 
 /* body - cols - wrapper - entry_area - article - content - cy */
-#whole_wrapper div#body div#cols div.wrapper div.entry_area article div#content div#cy{min-height:400px;padding:0}
+#whole_wrapper div#body div#cols div.wrapper div.entry_area article div#content div#cy{min-height:800px;padding:0}
 
 /* body - cols - wrapper - entry_area - result_list */
 #whole_wrapper div#body div#cols div.wrapper div.entry_area div.result_list {min-height:400px;padding:20px 10px;}
@@ -350,19 +350,21 @@ article div#content h2,
 form#diff_dialog div.body div.wrapper h2{border-bottom:1px dotted #fff;font-size:1.6em;font-weight:bold;color:#fff;padding-bottom:.2em}
 body.cke_editable h3,
 article div#content h3,
-form#diff_dialog div.body div.wrapper h3{border-top:1px solid yellow;font-size:1.6em;color:#fff}
+form#diff_dialog div.body div.wrapper h3{font-size:1.2em;font-weight:bold;color:#fff;border-bottom:1px dotted #fff;padding-bottom:.2em}
 body.cke_editable h4,
 article div#content h4,
-form#diff_dialog div.body div.wrapper h4{font-size:1.4em;font-weight:bold;color:#fff}
+form#diff_dialog div.body div.wrapper h4{font-size:1.0em;font-weight:500;color:#cfc;font-style: italic}
 body.cke_editable h5,
 article div#content h5,
-form#diff_dialog div.body div.wrapper h5{font-size:1.2em;font-weight:bold;color:#fff;border-bottom:1px dotted #fff;padding-bottom:.2em}
+form#diff_dialog div.body div.wrapper h5{font-size:0.9em;color:#fff}
 body.cke_editable h6,
 article div#content h6,
-form#diff_dialog div.body div.wrapper h6{font-size:1.1em;font-weight:bold;color:#fff}
+form#diff_dialog div.body div.wrapper h6{font-size:0.9em;font-weight:500;color:#cfc;font-style: italic}
 body.cke_editable p,
 article div#content p,
 form#diff_dialog div.body div.wrapper p{font-size:1.1em;margin:1em 0}
+article div#content span{margin-left:40px!important}
+
 body.cke_editable ol,
 article div#content ol,
 form#diff_dialog div.body div.wrapper ol{list-style-type:decimal;margin:0 0 0 3em}

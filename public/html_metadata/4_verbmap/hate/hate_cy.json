@@ -1,9 +1,0 @@
-{
-    "nodes": [
-        { "data": { "id": "hate", "name": "hate", "href": "http://localhost:5000/sub_hate" } },
-        { "data": { "id": "abhor", "name": "abhor", "href": "http://localhost:5000/side_abhor" } }
-    ],
-    "edges": [
-        { "data": { "source": "hate", "target": "abhor" } }
-    ]
-}

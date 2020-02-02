@@ -6,6 +6,8 @@
         <meta charset="utf-8">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/js-cookie@beta/dist/js.cookie.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.9.4/cytoscape.min.js"></script>
+        <script src="./js/search.js"></script>
         <script src="./js/general.js"></script>
     </head>
     <body id="index" class="no_sidebar">
@@ -45,217 +47,13 @@
                                     <li>
                                         <!--<li class="selected">-->
                                         <div class="label public">
-                                            <a class="pagelink" href="http://localhost:5000/main_feelingmap">감정표현길</a>
+                                            <a class="pagelink" href="http://localhost:5000/main_placemap">표현</a>
                                         </div>
                                         <div class="sub_nav depth_1" style="left: -51px; position: absolute; width: 199px; display: none;" loaded="true">
                                             <ul class="sub_nav">
                                                 <li>
                                                     <div class="label public">
-                                                        <a class="courselink" href="http://localhost:5000/sub_happy">행복
-                                                        </a>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="label public">
-                                                        <a class="courselink" href="http://localhost:5000/sub_kind">친절
-                                                        </a>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="label public">
-                                                        <a class="courselink" href="http://localhost:5000/sub_calm">침착
-                                                        </a>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="label public">
-                                                        <a class="courselink" href="http://localhost:5000/sub_angry">분노, 화, 짜증
-                                                        </a>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="label public">
-                                                        <a class="courselink" href="http://localhost:5000/sub_sorry">미안
-                                                        </a>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <!--<li class="selected">-->
-                                        <div class="label public">
-                                            <a class="pagelink" href="http://localhost:5000/main_generalmap">일반표현길</a>
-                                        </div>
-                                        <div class="sub_nav depth_1" style="left: -51px; position: absolute; width: 199px; display: none;" loaded="true">
-                                            <ul class="sub_nav">
-                                                <li>
-                                                    <div class="label public">
-                                                        <a class="courselink" href="http://localhost:5000/sub_interest">흥미
-                                                        </a>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="label public">
-                                                        <a class="courselink" href="http://localhost:5000/sub_change">(A->B)변화
-                                                        </a>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="label public">
-                                                        <a class="courselink" href="http://localhost:5000/sub_title">(무언가를 부를 때)호칭, 별칭
-                                                        </a>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="label public">
-                                                        <a class="courselink" href="http://localhost:5000/sub_substance">물질
-                                                        </a>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="label public">
-                                                        <a class="courselink" href="http://localhost:5000/sub_straight">직접,직진(<->간접,돌아가는)
-                                                        </a>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="label public">
-                                                        <a class="courselink" href="http://localhost:5000/sub_act">행동
-                                                        </a>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="label public">
-                                                        <a class="courselink" href="http://localhost:5000/sub_state">상태
-                                                        </a>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="label public">
-                                                        <a class="courselink" href="http://localhost:5000/sub_time">시간 관련
-                                                        </a>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="label public">
-                                                        <a class="courselink" href="http://localhost:5000/sub_possibility">가능성
-                                                        </a>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="label public">
-                                                        <a class="courselink" href="http://localhost:5000/sub_object">물건
-                                                        </a>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="label public">
-                                                        <a class="courselink" href="http://localhost:5000/sub_better">나아지는
-                                                        </a>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="label public">
-                                                        <a class="courselink" href="http://localhost:5000/sub_ability">능력
-                                                        </a>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="label public">
-                                                        <a class="courselink" href="http://localhost:5000/sub_thought">생각
-                                                        </a>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <!--<li class="selected">-->
-                                        <div class="label public">
-                                            <a class="pagelink" href="http://localhost:5000/main_verbmap">~다표현길</a>
-                                        </div>
-                                        <div class="sub_nav depth_1" style="left: -51px; position: absolute; width: 199px; display: none;" loaded="true">
-                                            <ul class="sub_nav">
-                                                <li>
-                                                    <div class="label public">
-                                                        <a class="courselink" href="http://localhost:5000/sub_discover">알아내다,찾아내다,발견하다
-                                                        </a>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="label public">
-                                                        <a class="courselink" href="http://localhost:5000/sub_say">말하다
-                                                        </a>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="label public">
-                                                        <a class="courselink" href="http://localhost:5000/sub_follow">따르다
-                                                        </a>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="label public">
-                                                        <a class="courselink" href="http://localhost:5000/sub_show">보여주다
-                                                        </a>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="label public">
-                                                        <a class="courselink" href="http://localhost:5000/sub_treat">(누군가를 어떻게) 대하다
-                                                        </a>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="label public">
-                                                        <a class="courselink" href="http://localhost:5000/sub_to be">~되다
-                                                        </a>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="label public">
-                                                        <a class="courselink" href="http://localhost:5000/sub_feel">느끼다
-                                                        </a>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="label public">
-                                                        <a class="courselink" href="http://localhost:5000/sub_know">알다
-                                                        </a>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="label public">
-                                                        <a class="courselink" href="http://localhost:5000/sub_hate">싫어하다
-                                                        </a>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="label public">
-                                                        <a class="courselink" href="http://localhost:5000/sub_leave">떠나다 (가버려, 저리 가, 꺼져)
-                                                        </a>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <!--<li class="selected">-->
-                                        <div class="label public">
-                                            <a class="pagelink" href="http://localhost:5000/main_placemap">장소표현길</a>
-                                        </div>
-                                        <div class="sub_nav depth_1" style="left: -51px; position: absolute; width: 199px; display: none;" loaded="true">
-                                            <ul class="sub_nav">
-                                                <li>
-                                                    <div class="label public">
-                                                        <a class="courselink" href="http://localhost:5000/sub_a place where livings live">사는 곳
-                                                        </a>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="label public">
-                                                        <a class="courselink" href="http://localhost:5000/sub_place">장소
+                                                        <a class="courselink" href="http://localhost:5000/sub_place">test
                                                         </a>
                                                     </div>
                                                 </li>
@@ -300,7 +98,7 @@
                                     <h1 class="entry-title">첫걸음
                                     </h1>
                                     <div class="props">
-                                        <time datetime="" pubdate="">2020년 1월 16일 7:31:3
+                                        <time datetime="" pubdate="">2020년 2월 1일 11:14:28
                                         </time>
                                     </div>
                                 </hgroup>

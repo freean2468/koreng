@@ -3,11 +3,21 @@
         { "data": { "id": "a place where livings live", "name": "a place where livings live", "href": "http://localhost:5000/sub_a place where livings live" } },
         { "data": { "id": "town", "name": "town", "href": "http://localhost:5000/side_town" } },
         { "data": { "id": "city", "name": "city", "href": "http://localhost:5000/side_city" } },
-        { "data": { "id": "borough", "name": "borough", "href": "http://localhost:5000/side_borough" } }
+        { "data": { "id": "borough", "name": "borough", "href": "http://localhost:5000/side_borough" } },
+        { "data": { "id": "home", "name": "home", "href": "http://localhost:5000/side_home" } },
+        { "data": { "id": "hovel", "name": "hovel", "href": "http://localhost:5000/side_hovel" } },
+        { "data": { "id": "house", "name": "house", "href": "http://localhost:5000/side_house" } },
+        { "data": { "id": "pad", "name": "pad", "href": "http://localhost:5000/side_pad" } },
+        { "data": { "id": "building", "name": "building", "href": "http://localhost:5000/side_building" } }
     ],
     "edges": [
         { "data": { "source": "a place where livings live", "target": "town" } },
         { "data": { "source": "town", "target": "city" } },
-        { "data": { "source": "town", "target": "borough" } }
+        { "data": { "source": "town", "target": "borough" } },
+        { "data": { "source": "a place where livings live", "target": "home" } },
+        { "data": { "source": "home", "target": "hovel" } },
+        { "data": { "source": "a place where livings live", "target": "building" } },
+        { "data": { "source": "building", "target": "house" } },
+        { "data": { "source": "house", "target": "pad" } }
     ]
 }

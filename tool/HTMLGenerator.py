@@ -23,12 +23,23 @@ jsonPathBase= "/Users/hoon-ilsong/project/koreng/public/html_metadata"
 HTMLPathBase= "/Users/hoon-ilsong/project/koreng/public/html"
 appPathBase= "/Users/hoon-ilsong/project/koreng"
 URLSourcePathBase= "public/html"
+imagePathBase= "/Users/hoon-ilsong/project/koreng/public/image"
 
 mainMenus=[]
 subMenus=[]
 sideMenus=[]
 
+images=[]
+
 OVERWRITE =True
+
+def setImage(path):
+    lst = sorted(os.listdir(path))
+    for d in lst:
+        fileExtension=d.split(".")[-1]
+        if fileExtension == "png" or fileExtension == "jpg":
+            print(d)
+            images.append(d)
 
 def setMenu(path):
     lst = sorted(os.listdir(path))
@@ -44,7 +55,7 @@ def setMenu(path):
                             sidePath = subPath + "/" + d
                             for d in os.listdir(sidePath):
                                 fileExtension=d.split(".")[-1]
-                                if fileExtension =="json" and d.split("_")[-1] != "cy.json":
+                                if fileExtension =="json":
                                     # side menu json
                                     jsonFile = sidePath + "/" + d 
                                     # print('side : '+jsonFile)
@@ -55,18 +66,16 @@ def setMenu(path):
                                         sideMenus.append(Menu("sub_"+sidePath.split("/")[-2],"side_"+d.split(".")[0], jsonData["menu_title"], jsonFile.split("/")[-4]+'/'+jsonFile.split("/")[-3]+'/'+jsonFile.split("/")[-2], jsonData["category"]))
                         else:
                             fileExtension=d.split(".")[-1]
-                            if fileExtension =="json" and d.split("_")[-1] != "cy.json":
+                            if fileExtension =="json":
                                 # sub menu json
                                 jsonFile = subPath + "/" + d 
                                 # print('sub : '+jsonFile)
                                 with io.open(jsonFile,"r", encoding="utf-8") as jsonOpen:
                                     jsonData = json.load(jsonOpen)
-                                    # if jsonData['category'] == 'cy':
-                                    #     jsonData['menu_title'] = "".join((d.split(".")[0],' - ',jsonData['menu_title']))
                                     subMenus.append(Menu("main_"+subPath.split("/")[-2],"sub_"+d.split(".")[0], jsonData["menu_title"], jsonFile.split("/")[-3]+'/'+jsonFile.split("/")[-2], jsonData["category"]))
                 else:
                     fileExtension=d.split(".")[-1]
-                    if fileExtension =="json" and d.split("_")[-1] != "cy.json":
+                    if fileExtension =="json":
                         # main menu json
                         jsonFile = mainPath + "/" + d 
                         # print('main : '+jsonFile)
@@ -78,14 +87,14 @@ def mkdirOnPath(path):
     if not os.path.isdir(path):
         os.mkdir(path)
 
-def jsonToHTML(jsonPath, HTMLPath):
+def jsonToHTMLHeader(jsonPath, HTMLPath):
     for d in os.listdir(jsonPath):
         if os.path.isdir(jsonPath + "/" + d):
             mkdirOnPath(HTMLPath + "/" + d)
-            jsonToHTML(jsonPath + "/" + d, HTMLPath + "/" + d)
+            jsonToHTMLHeader(jsonPath + "/" + d, HTMLPath + "/" + d)
         else:
             fileExtension=d.split(".")[-1]
-            if fileExtension =="json" and d.split("_")[-1] != "cy.json":
+            if fileExtension =="json":
                 jsonFile = jsonPath + "/" + d
                 articleFile = jsonPath + "/" + d.split(".")[0] + ".html"
                 HTMLFile = HTMLPath + "/" + d.split(".")[0] + ".html"
@@ -121,7 +130,7 @@ def jsonToHTML(jsonPath, HTMLPath):
                         title = jsonData['title']
                         sub_title = jsonData['sub_title']
                         sub_h2 = jsonData['sub_h2']
-                        if jsonData['category'] == 'cy' and pos == 'side':
+                        if pos == 'side':
                             startIndex = 0
                             endIndex = jsonFile.rfind('/'+parent+'/')
                             parentPath = "".join((jsonFile[:endIndex], '/', parent, '/', parent, '.json'))
@@ -136,7 +145,7 @@ def jsonToHTML(jsonPath, HTMLPath):
 
                         # article_title
                         article_title = jsonData['article_title']
-                        if jsonData['category'] == 'cy' and (pos == 'side' or pos == 'sub'):
+                        if (pos == 'side' or pos == 'sub'):
                             _name = d.split(".")[0]
                             article_title = "".join((_name[0].upper(),_name[1:]))
 
@@ -144,7 +153,7 @@ def jsonToHTML(jsonPath, HTMLPath):
 
                         if jsonData['title'] == '':
                             jsonData['title'] = "".join((d.split(".")[0]," - ",title))
-                        elif jsonData['category'] == 'cy' and pos == 'sub':
+                        elif pos == 'sub':
                             jsonData['title'] = "".join((d.split(".")[0]," - ",jsonData['title']))
                         # if jsonData['menu_title'] == '':
                         #     jsonData['menu_title'] = d.split(".")[0]
@@ -165,16 +174,9 @@ def jsonToHTML(jsonPath, HTMLPath):
         <title>'''+jsonData['title']+'''</title>
         <meta charset="utf-8">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/js-cookie@beta/dist/js.cookie.min.js"></script>'''
-                            if jsonData["category"] == "cy":
-                                html += '''
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.9.4/cytoscape.min.js"></script>'''
-
-                            if jsonData["category"] == "search":
-                                html += '''
-        <script src="./js/search.js"></script>'''
-
-                            html +='''
+        <script src="https://cdn.jsdelivr.net/npm/js-cookie@beta/dist/js.cookie.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.9.4/cytoscape.min.js"></script>
+        <script src="./js/search.js"></script>
         <script src="./js/general.js"></script>
     </head>'''
                             if jsonData["pos"] == "home" or jsonData["pos"] == "main":
@@ -310,23 +312,6 @@ def jsonToHTML(jsonPath, HTMLPath):
                                 </hgroup>
 
                                 <div id="content" class="entry-content">'''
-
-                            # insert cy                            
-                            if jsonData["category"] == 'cy':
-                                cy = 'sub_'
-
-                                if jsonData["pos"] == 'sub':
-                                    cy += d.split(".")[0]
-                                else:
-                                    cy += jsonData["parent"]
-
-                                cy += '_cy'
-                            
-                                html +='''                      
-    <div class="movie">
-        <iframe frameborder="0" height="600" scrolling="no" src="http://localhost:5000/''' + cy + '''" width="100%"></iframe>
-        <input style="position: absolute; margin-left: 5px; width: 1.5rem; opacity: 0.5;" class="split" type="image" src="/public/image/right_up_arrow.png" value="split" title="새창으로 열기" onmouseover="this.style.opacity='1'" onmouseleave="this.style.opacity='0.5'" onclick="window.open('http://localhost:5000/'''+cy+'''')">
-    </div>'''
                             
                             with io.open(articleFile,"r", encoding="utf-8") as articleOpen:
                                 html += articleOpen.read()
@@ -352,115 +337,145 @@ def jsonToHTML(jsonPath, HTMLPath):
 def applyHTMLToApp(dir):
     with io.open(dir + '/app.js',"w", encoding="utf-8") as appOpen:
         data = '''
-        // expres
-        const express = require('express')
-        const app = express()
+// expres
+const express = require('express')
+const app = express()
 
-        // third-party
-        const compression = require('compression')
-        const bodyParser = require('body-parser')
-        const helmet = require('helmet')
+// third-party
+const compression = require('compression')
+const bodyParser = require('body-parser')
+const helmet = require('helmet')
 
-        // built-in
-        const fs = require('fs')
+// built-in
+const fs = require('fs')
 
-        // custom
-        const HTMLLoader = require('./feature/HTMLLoader.js')
-        const HTMLLoaderInst = new HTMLLoader()
-        const dataLoader = require('./feature/dataLoader.js')
-        const dataLoaderInst = new dataLoader()
+// custom
+const HTMLLoader = require('./feature/HTMLLoader.js')
+const HTMLLoaderInst = new HTMLLoader()
+const dataLoader = require('./feature/dataLoader.js')
+const dataLoaderInst = new dataLoader()
+const mongoClient = require('./feature/mongoClient.js')
+const mongoClientInst = new mongoClient()
 
-        // heroku
-        const PORT = process.env.PORT || 5000
+// heroku
+const PORT = process.env.PORT || 5000
 
-        // middlewares
-        app.use(express.static('public'))
-        app.use(helmet())
-        app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
-            extended: true
-        }))
-        app.use(compression())
-        
-        // Home
-        app.get('/', (req, res) => HTMLLoaderInst.assembleHTML(res, 'public/html','home'))
-        
-        // Search
-        app.get('/search', (req, res) => onSearch(req, res))
+// middlewares
+app.use(express.static('public'))
+app.use(helmet())
+app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+    extended: true
+}))
+app.use(compression())
 
-        // Main'''
+// Home
+app.get('/', (req, res) => HTMLLoaderInst.assembleHTML(res, 'public/html','home'))
+
+// Search
+app.get('/search', (req, res) => onSearch(req, res))
+
+// Main'''
 
         for main in mainMenus:
             data += '''
-        app.get("/" + encodeURIComponent("'''+main.name+'''"), (req, res) => HTMLLoaderInst.assembleHTML(res, "'''+URLSourcePathBase+'/'+main.path+'", "'+main.name+'"))'
+app.get("/" + encodeURIComponent("'''+main.name+'''"), (req, res) => HTMLLoaderInst.assembleHTML(res, "'''+URLSourcePathBase+'/'+main.path+'", "'+main.name+'"))'
 
         data +='''
-        
-        // Sub'''
-        
+
+// Sub'''
+
         for sub in subMenus:
             data += '''
-        app.get("/" + encodeURIComponent("'''+sub.name+'''"), (req, res) => HTMLLoaderInst.assembleHTML(res, "'''+URLSourcePathBase+'/'+sub.path+'", "'+sub.name+'"))'
-            if sub.category == 'cy':
-                data += '''
-        app.get("/" + encodeURIComponent("'''+sub.name+'''_cy"), (req, res) => HTMLLoaderInst.assembleHTML(res, "'''+URLSourcePathBase+'/'+sub.path+'", "'+sub.name+'_cy"))'
+app.get("/" + encodeURIComponent("'''+sub.name+'''"), (req, res) => HTMLLoaderInst.assembleHTML(res, "'''+URLSourcePathBase+'/'+sub.path+'", "'+sub.name+'"))'
 
         data +='''
-        
-        // Side'''
+
+// Side'''
 
         for side in sideMenus:
             data += '''
-        app.get("/" + encodeURIComponent("'''+side.name+'''"), (req, res) => HTMLLoaderInst.assembleHTML(res, "'''+URLSourcePathBase+'/'+side.path+'", "'+side.name+'"))'
+app.get("/" + encodeURIComponent("'''+side.name+'''"), (req, res) => HTMLLoaderInst.assembleHTML(res, "'''+URLSourcePathBase+'/'+side.path+'", "'+side.name+'"))'
 
         data += '''
-        
-        // image
-        app.get("/public/image/right_up_arrow.png", (req, res) => res.sendFile("/public/image/right_up_arrow.png", { root : __dirname}))
 
-        // app.post('/filter_process', (req, res) => res.send(onSearchWithFilter(req, res)))
-        // app.get('/filter', (req, res) => res.send(HTMLLoaderInst.resultHandlingForFilter(dataLoaderInst.metaData)))
+// image'''
+        for image in images:
+            data += '''
+app.get("/'''+image+'''", (req, res) => res.sendFile("/public/image/'''+image+'''", { root : __dirname}))'''
 
-        app.use(function(req, res, next) {
-            res.status(404)
-            HTMLLoaderInst.assembleHTML(res, 'public/html', 'home')
-            console.log("something wrong! req.url : " + req.url)
+        data += '''
+
+// app.post('/filter_process', (req, res) => res.send(onSearchWithFilter(req, res)))
+// app.get('/filter', (req, res) => res.send(HTMLLoaderInst.resultHandlingForFilter(dataLoaderInst.metaData)))
+
+app.use(function(req, res, next) {
+    res.status(404)
+    HTMLLoaderInst.assembleHTML(res, 'public/html', 'home')
+    console.log("something wrong! req.url : " + req.url)
+});
+
+app.use(function (err, req, res, next) {
+    console.error(err.stack)
+    res.status(500).send('Something broke!')
+});
+
+try {
+    app.listen(PORT, () => console.log(`agjac on port ${PORT}!`))
+} catch (e) {
+    console.error(e)
+} finally {
+    mongoClientInst.close()
+}
+
+//
+// functions
+//
+async function onSearch(req, res) {
+    function arrayRemove(arr, value) {
+        return arr.filter(function(ele) {
+        return ele != value;
         });
-        
-        app.use(function (err, req, res, next) {
-            console.error(err.stack)
-            res.status(500).send('Something broke!')
-        });
+    }
+    
+    const searchTarget = req.query.target
 
-        app.listen(PORT, () => console.log(`agjac on port ${PORT}!`))
+    // let [foo, bar] = await Promise.all([getFoor(), getBar()]);
+    // mongoRes = mongoClientInst.findOneListingById(searchTarget)
+    //             .then(function(v){
+    //                     console.log('success!', v)
+    //                 },
+    //                 function(v){
+    //                     console.log('failure', v)
+    //                 }
+    //             )
+    // console.log('mongoRes : ',mongoRes)
 
-        //
-        // functions
-        //
-        function onSearch(req, res) {
-            function arrayRemove(arr, value) {
-                return arr.filter(function(ele) {
-                return ele != value;
-                });
-            }
-            
-            const searchTarget = req.query.target
+    let mongoRes = await mongoClientInst.findOneListingById(searchTarget)
+    
+    if (mongoRes) {
+        searchRes = dataLoaderInst.searchData(searchTarget, '', '');
 
-            // const filterCategory = arrayRemove(req.query.filterCategory.replace(/';;'/g, ';').split(';'), '')
-            // const filterContents = arrayRemove(req.query.filterContents.replace(/';;'/g, ';').split(';'), '')
+        return HTMLLoaderInst.assembleSearchResultHTML(res, searchTarget, mongoRes, searchRes, dataLoaderInst.metaData);
 
-            // nothing to search
-            if (searchTarget === undefined || searchTarget.length === 0 || searchTarget.replace(/\s/g, '') === '') {
-                return HTMLLoaderInst.assembleHTML(res, 'public/html', 'home');
-            // something to search
-            } else {
-                // const result = dataLoaderInst.searchData(searchTarget, filterCategory, filterContents);
-                const result = dataLoaderInst.searchData(searchTarget, '', '');
+    } else {
+        return HTMLLoaderInst.assembleHTML(res, 'public/html', 'home');
+    }
+    // const filterCategory = arrayRemove(req.query.filterCategory.replace(/';;'/g, ';').split(';'), '')
+    // const filterContents = arrayRemove(req.query.filterContents.replace(/';;'/g, ';').split(';'), '')
 
-                // const resultTotalCount = result.resultTotalCount;
+    // nothing to search
+    // if (searchTarget === undefined || searchTarget.length === 0 || searchTarget.replace(/\s/g, '') === '') {
+    //     return HTMLLoaderInst.assembleHTML(res, 'public/html', 'home');
+    // // something to search
+    // } else {
+    //     // const result = dataLoaderInst.searchData(searchTarget, filterCategory, filterContents);
+        // result = dataLoaderInst.searchData(searchTarget, '', '');
 
-                return HTMLLoaderInst.assembleSearchResultHTML(res, searchTarget, result, dataLoaderInst.metaData);
-            }
-        }'''
+        // // const resultTotalCount = result.resultTotalCount;
+
+        // return HTMLLoaderInst.assembleSearchResultHTML(res, searchTarget, result, dataLoaderInst.metaData);
+    // }
+}'''
 
         appOpen.write(data)
         print(dir + '/app.js')
@@ -469,239 +484,13 @@ def applyHTMLToApp(dir):
 # 
 # 
 
-def jsonToCyHTML(jsonPath, HTMLPath):
-    for d in os.listdir(jsonPath):
-        if os.path.isdir(jsonPath + "/" + d):
-            jsonToCyHTML(jsonPath + "/" + d, HTMLPath + "/" + d)
-        else:
-            fileExtension=d.split("_")[-1]
-            if fileExtension =="cy.json":
-                jsonFile = jsonPath + "/" + d
-                HTMLFile = HTMLPath + "/" + d.split(".")[0] + ".html"
-                if not os.path.isfile(HTMLFile) or OVERWRITE:
-                    print("from : "+jsonFile)
-                    with io.open(jsonFile,"r", encoding="utf-8") as jsonOpen:
-                        jsonData = json.load(jsonOpen)
-
-                        with io.open(HTMLFile,"w", encoding="utf-8") as textFile:
-                            # "/Users/hoon-ilsong/project/koreng/public/html_metadata/4_verbmap/change/change_cy.json"
-                            urlBasePath = jsonFile.replace('/Users/hoon-ilsong/project/koreng/public/html_metadata/', URLSourcePathBase+'/')
-                            html = '''
-<!DOCTYPE html>
-    <html>
-    <head>
-    <meta charset=utf-8 />
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, minimal-ui">
-    <title>'''+d.split(".")[0]+' - Agjak'+'''
-    </title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.9.4/cytoscape.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <style>
-        body { 
-            font: 14px helvetica neue, helvetica, arial, sans-serif;
-            margin: 0
-        }
-    
-        #cy {
-            height: 100%;
-            width: 100%;
-            display: block;
-            position: relative;
-        }
-    </style>
-    </head>
-    <body style="margin:0;width:100vw;height:100vh;background:#000;">
-        <div id="cy"></div>
-        <!-- Load application code at the end to ensure DOM is loaded -->
-        <script text="javascript">
-            var cy = cytoscape({
-                container: document.getElementById('cy'),
-                elements: {
-                    nodes: ['''
-                            for node in jsonData["nodes"]:
-                                data = node["data"]
-                                html += '''
-                        { data : { id: "''' + data["id"] + '", name: "' + data["name"] + '", href: "' + data["href"] + '" } }'
-                                if node != jsonData["nodes"][-1]:
-                                    html += ','
-                            
-                            html += '''
-                    ],
-                    edges: ['''
-                            for edge in jsonData["edges"]:
-                                data = edge["data"]
-                                html += '''
-                        { data : { source: "''' + data["source"] + '", target: "' + data["target"] + '" } }'
-                                if edge != jsonData["edges"][-1]:
-                                    html += ','
-                            
-                            html += '''
-                    ]
-                },'''
-
-                            html +='''
-                style: [
-                    {
-                        selector: 'node',
-                        style: {
-                            'width':10,
-                            'height':10,
-                            'content': 'data(name)',
-                            'text-valign': 'center',
-                            'text-outline-width': 0.5,
-                            'color': 'white',
-                            'font-size': 8,
-                            'text-outline-color': '#000',
-                            'background-color': '#000',
-                            'border-width':0
-                        }
-                    },
-                    {
-                        selector: 'edge',
-                        style: {
-                            'width': 1,
-                            'curve-style': 'straight',
-                            'line-color': '#888',
-                            'target-arrow-color': '#888',
-                            'target-arrow-shape': 'vee',
-                            'target-arrow-fill': 'hollow',
-                            'arrow-scale': 0.5
-                        }
-                    }
-                ],
-                layout: {
-                    name: 'cose',
-
-                    // Called on 'layoutready'
-                    ready: function(){},
-
-                    // Called on 'layoutstop'
-                    stop: function(){},
-
-                    // Whether to animate while running the layout
-                    // true : Animate continuously as the layout is running
-                    // false : Just show the end result
-                    // 'end' : Animate with the end result, from the initial positions to the end positions
-                    animate: true,
-
-                    // Easing of the animation for animate:'end'
-                    animationEasing: undefined,
-
-                    // The duration of the animation for animate:'end'
-                    animationDuration: undefined,
-
-                    // A function that determines whether the node should be animated
-                    // All nodes animated by default on animate enabled
-                    // Non-animated nodes are positioned immediately when the layout starts
-                    animateFilter: function ( node, i ){ return true; },
-
-
-                    // The layout animates only after this many milliseconds for animate:true
-                    // (prevents flashing on fast runs)
-                    animationThreshold: 250,
-
-                    // Number of iterations between consecutive screen positions update
-                    refresh: 20,
-
-                    // Whether to fit the network view after when done
-                    fit: true,
-
-                    // Padding on fit
-                    padding: 30,
-
-                    // Constrain layout bounds; { x1, y1, x2, y2 } or { x1, y1, w, h }
-                    boundingBox: undefined,
-
-                    // Excludes the label when calculating node bounding boxes for the layout algorithm
-                    nodeDimensionsIncludeLabels: false,
-
-                    // Randomize the initial positions of the nodes (true) or use existing positions (false)
-                    randomize: false,
-
-                    // Extra spacing between components in non-compound graphs
-                    componentSpacing: 40,
-
-                    // Node repulsion (non overlapping) multiplier
-                    nodeRepulsion: function( node ){ return 2048; },
-
-                    // Node repulsion (overlapping) multiplier
-                    nodeOverlap: 4,
-
-                    // Ideal edge (non nested) length
-                    idealEdgeLength: function( edge ){ return 12; },
-
-                    // Divisor to compute edge forces
-                    edgeElasticity: function( edge ){ return 32; },
-
-                    // Nesting factor (multiplier) to compute ideal edge length for nested edges
-                    nestingFactor: 1.2,
-
-                    // Gravity force (constant)
-                    gravity: 1,
-
-                    // Maximum number of iterations to perform
-                    numIter: 1000,
-
-                    // Initial temperature (maximum node displacement)
-                    initialTemp: 1000,
-
-                    // Cooling factor (how the temperature is reduced between consecutive iterations
-                    coolingFactor: 0.99,
-
-                    // Lower temperature threshold (below this point the layout will end)
-                    minTemp: 1.0
-                }
-            });
-
-            cy.on('tap', 'node', function(){
-                try { // your browser may block popups
-                    window.open( this.data('href') );
-                } catch(e){ // fall back on url change
-                    window.location.href = this.data('href');
-                }
-            })
-
-            // set focus on the node of the page
-            var parent = window.parent ? window.parent.location.pathname : "'''+d.split(".")[0].split('_')[0]+'''"
-            
-            parent = parent.replace('/sub_', '')
-            parent = parent.replace('/side_', '')
-            parent = parent.replace('_cy', '')
-            parent = decodeURI(parent)
-            // console.log(parent)
-
-            cy.nodes().forEach(function(node){
-                if(node.id() === parent){
-                    node.style('background-color', '#fbfb11')
-                    node.style('width', 20)
-                    node.style('height', 20)
-                }
-            })
-
-            cy.edges().forEach(function(edge){
-                if(edge.source().id() === parent) {
-                    edge.style('width', '2.5')
-                    edge.style('line-color', '#fbfb11')
-                    edge.style('target-arrow-color', '#fdfd11')
-                    edge.style('target-arrow-fill', 'filled')
-                    edge.style('arrow-scale', 1.5)
-                }
-            })
-        </script>
-    </body>
-</html>'''
-                                
-                            textFile.write(html)
-                            print("--->" + HTMLFile)
-
-
 mkdirOnPath(HTMLPathBase)
+
+setImage(imagePathBase)
 
 # load json contents onto memory 
 setMenu(jsonPathBase)
 
-jsonToHTML(jsonPathBase, HTMLPathBase)
-
-jsonToCyHTML(jsonPathBase, HTMLPathBase)
+jsonToHTMLHeader(jsonPathBase, HTMLPathBase)
 
 applyHTMLToApp(appPathBase)

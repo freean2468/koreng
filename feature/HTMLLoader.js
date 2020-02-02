@@ -21,6 +21,7 @@ function HTMLLoader() {
   this.assembleSearchResultHTML = function(res, searchTarget, mongoRes, searchRes, metaData) {
     this.fs.readFile('public/html/search.html', 'utf8', function(err, head){
       var HTML=head;
+      var speech = []
 
       /* Generate Cy Data */
       var CyScript= `
@@ -29,96 +30,56 @@ function HTMLLoader() {
                 container: document.getElementById('cy'),
                 elements: {
                     nodes: [
-                      { data : { id: "${mongoRes['_wordset']}", name: "${mongoRes['_wordset']}" } }`
-      var comeFrom = []
-      var synonym = []
-      var antonym = []
-
+                      { data : { id: "${mongoRes['_wordset']}", label : "${mongoRes['_wordset']}", name : "${mongoRes['_wordset']}" } }`
       mongoRes["_data"].forEach(function (_data) {
+        __speech = _data["__speech"]
+        if ("" !== __speech){
+          CyScript += `
+                      ,{ data : { id: '_${__speech}', name: '${__speech}' } }`
+          speech.push(__speech)
+        }
+          
+        __usageNumber = 0
         _data["__usage"].forEach(function (__usage) {
+          __usageNumber++
+          CyScript += `
+                      ,{ data : { id: "${__speech}_${__usageNumber}", name: "${__usageNumber}.", parent: "_${__speech}"} }`
           __usage["___comeFrom"].forEach(function(___comeFrom){
-            if ("" === ___comeFrom) return
-                
-            let flag = false
-
-            for (let i = 0; i < comeFrom.length; ++i) {
-              if (comeFrom[i] === ___comeFrom){
-                flag = true
-                break
-              }
-            }
-            if (flag === false)
-              comeFrom.push(___comeFrom)
-          })
-          __usage["___synonym"].forEach(function(___synonym){
-            if ("" === ___synonym) return
-
-            let flag = false
-
-            for (let i = 0; i < synonym.length; ++i) {
-              
-
-              if (synonym[i] === ___synonym){
-                flag = true
-                break
-              }
-            }
-            if (flag === false) {
-              synonym.push(___synonym)
-            }
-          })
-          __usage["___antonym"].forEach(function(___antonym){
-            if ("" === ___antonym) return
-
-            let flag = false
-
-            for (let i = 0; i < antonym.length; ++i) {
-              if (antonym[i] === ___antonym){
-                flag = true
-                break
-              }
-            }
-            if (flag === false) {
-              antonym.push(___antonym)
-            }
-          })
-
-          comeFrom.forEach(function (_comeFrom) {
-            CyScript += `
-                      ,{data : { id: "${_comeFrom}", name: "${_comeFrom}" } }`  
-          })
-          synonym.forEach(function (_synonym) {
-            CyScript += `
-                      ,{data : { id: "${_synonym}", name: "${_synonym}" } }`  
-          })
-          antonym.forEach(function (_antonym) {
-            CyScript += `
-                      ,{data : { id: "${_antonym}", name: "${_antonym}" } }`  
+            if ("" !== ___comeFrom)
+              CyScript += `
+                      ,{ data : { id: "${__speech}_${__usageNumber}_${___comeFrom}", name: "${___comeFrom}", parent: "${__speech}_${__usageNumber}"} }`
           })
           
+          if (__usage["___synonym"][0] !== "")
+            CyScript += `
+                      ,{ data : { id: "${__speech}_${__usageNumber}_synonym", name: "synonym", parent: "${__speech}_${__usageNumber}"} }`
+          __usage["___synonym"].forEach(function(___synonym){
+            if ("" !== ___synonym) {
+              CyScript += `
+                      ,{ data : { id: "${__speech}_${__usageNumber}_${___synonym}", name: "${___synonym}", parent: "${__speech}_${__usageNumber}_synonym"} }`
+            }
+          })
+
+          if (__usage["___antonym"][0] !== "")
+            CyScript += `
+                      ,{ data : { id: "${__speech}_${__usageNumber}_not", name: "not", parent: "${__speech}_${__usageNumber}"} }`
+          __usage["___antonym"].forEach(function(___antonym){
+            if ("" !== ___antonym)
+              CyScript += `
+                      ,{ data : { id: "${__speech}_${__usageNumber}_${___antonym}", name: "${___antonym}", parent: "${__speech}_${__usageNumber}_not"} }`
+          })
         })
       })
+          
       CyScript += `
                     ],
                     edges: [`
-      comeFrom.forEach(function (_comeFrom, idx, array) {
-        CyScript += `
-                      {data : { source: "${_comeFrom}", target: "${mongoRes['_wordset']}" } }`  
-        if (idx !== array.length - 1) CyScript += ','
-        else if (synonym.length !== 0 || antonym.length !== 0) CyScript += ','
-      })
-      synonym.forEach(function (_synonym, idx, array) {
-        CyScript += `
-                      {data : { source: "${_synonym}", target: "${mongoRes['_wordset']}" } }`  
-        if (idx !== array.length - 1) CyScript += ','
-        else if (antonym.length !== 0) CyScript += ','
-      })
-      antonym.forEach(function (_antonym, idx, array) {
-        CyScript += `
-                      {data : { source: "${_antonym}", target: "${mongoRes['_wordset']}" } }`  
-        if (idx !== array.length - 1) CyScript += ','
-      })
 
+      speech.forEach(function (_speech, idx, array) {
+        CyScript += `
+                      { data : { source: "${mongoRes['_wordset']}", target: "_${_speech}" } }`  
+        if (idx !== array.length - 1) CyScript += ','
+      })
 
       CyScript += `
                     ]
@@ -126,9 +87,9 @@ function HTMLLoader() {
                 style: [
                   {
                       selector: 'node',
-                      style: {
-                          'width':10,
-                          'height':10,
+                      css: {
+                          'width':30,
+                          'height':5,
                           'content': 'data(name)',
                           'text-valign': 'center',
                           'text-outline-width': 0.5,
@@ -136,103 +97,114 @@ function HTMLLoader() {
                           'font-size': 8,
                           'text-outline-color': '#000',
                           'background-color': '#000',
-                          'border-width':0
+                          'border-width':0,
+                          'z-index':3,
+                          'padding':2,
+                          'shape':'round-rectangle'
+                      }
+                  },
+                  {
+                      selector: ':parent',
+                      css: {
+                          'text-valign': 'top',
+                          'text-halign': 'center',
+                          'background-color': '#000',
+                          'border-width':1,
+                          'border-style':'dotted',
+                          'border-color':'#aaa',
+                          'z-index':2,
+                          'padding':2
                       }
                   },
                   {
                       selector: 'edge',
-                      style: {
+                      css: {
                           'width': 1,
                           'curve-style': 'straight',
-                          'line-color': '#888',
-                          'target-arrow-color': '#888',
+                          'line-color': '#FF0',
+                          'target-arrow-color': '#FF0',
                           'target-arrow-shape': 'vee',
                           'target-arrow-fill': 'hollow',
-                          'arrow-scale': 0.5
+                          'arrow-scale': 0.8,
+                          'z-index':0
                       }
                   }
               ],
               layout: {
-                  name: 'cose',
+                  name: 'cose-bilkent',
+                  
+                  // Called on layoutready
+                  ready: function () {
+                  },
+                  // Called on layoutstop
+                  stop: function () {
+                  },
+                  
+                  // 'draft', 'default' or 'proof" 
+                  // - 'draft' fast cooling rate 
+                  // - 'default' moderate cooling rate 
+                  // - "proof" slow cooling rate
+                  quality: 'default',
 
-                  // Called on 'layoutready'
-                  ready: function(){},
+                  // Whether to include labels in node dimensions. Useful for avoiding label overlap
+                  nodeDimensionsIncludeLabels: false,
 
-                  // Called on 'layoutstop'
-                  stop: function(){},
-
-                  // Whether to animate while running the layout
-                  // true : Animate continuously as the layout is running
-                  // false : Just show the end result
-                  // 'end' : Animate with the end result, from the initial positions to the end positions
-                  animate: true,
-
-                  // Easing of the animation for animate:'end'
-                  animationEasing: undefined,
-
-                  // The duration of the animation for animate:'end'
-                  animationDuration: undefined,
-
-                  // A function that determines whether the node should be animated
-                  // All nodes animated by default on animate enabled
-                  // Non-animated nodes are positioned immediately when the layout starts
-                  animateFilter: function ( node, i ){ return true; },
-
-
-                  // The layout animates only after this many milliseconds for animate:true
-                  // (prevents flashing on fast runs)
-                  animationThreshold: 250,
-
-                  // Number of iterations between consecutive screen positions update
-                  refresh: 20,
+                  // number of ticks per frame; higher is faster but more jerky
+                  refresh: 30,
 
                   // Whether to fit the network view after when done
                   fit: true,
 
                   // Padding on fit
-                  padding: 30,
+                  padding: 10,
 
-                  // Constrain layout bounds; { x1, y1, x2, y2 } or { x1, y1, w, h }
-                  boundingBox: undefined,
-
-                  // Excludes the label when calculating node bounding boxes for the layout algorithm
-                  nodeDimensionsIncludeLabels: false,
-
-                  // Randomize the initial positions of the nodes (true) or use existing positions (false)
-                  randomize: false,
-
-                  // Extra spacing between components in non-compound graphs
-                  componentSpacing: 40,
+                  // Whether to enable incremental mode
+                  randomize: true,
 
                   // Node repulsion (non overlapping) multiplier
-                  nodeRepulsion: function( node ){ return 2048; },
+                  nodeRepulsion: 4500,
 
-                  // Node repulsion (overlapping) multiplier
-                  nodeOverlap: 4,
-
-                  // Ideal edge (non nested) length
-                  idealEdgeLength: function( edge ){ return 12; },
-
+                  // Ideal (intra-graph) edge length
+                  idealEdgeLength: 20,
+                  
                   // Divisor to compute edge forces
-                  edgeElasticity: function( edge ){ return 32; },
+                  edgeElasticity: 0.2,
 
-                  // Nesting factor (multiplier) to compute ideal edge length for nested edges
-                  nestingFactor: 1.2,
-
+                  // Nesting factor (multiplier) to compute ideal edge length for inter-graph edges
+                  nestingFactor: 0.1,
+                  
                   // Gravity force (constant)
-                  gravity: 0,
+                  gravity: 0.25,
 
                   // Maximum number of iterations to perform
-                  numIter: 1000,
+                  numIter: 2500,
 
-                  // Initial temperature (maximum node displacement)
-                  initialTemp: 1000,
+                  // Whether to tile disconnected nodes
+                  tile: true,
 
-                  // Cooling factor (how the temperature is reduced between consecutive iterations
-                  coolingFactor: 0.99,
+                  // Type of layout animation. The option set is {'during', 'end', false}
+                  animate: 'end',
 
-                  // Lower temperature threshold (below this point the layout will end)
-                  minTemp: 1.0
+                  // Duration for animate:end
+                  animationDuration: 500,
+
+                  // Amount of vertical space to put between degree zero nodes during tiling (can also be a function)
+                  tilingPaddingVertical: 6,
+
+                  // Amount of horizontal space to put between degree zero nodes during tiling (can also be a function)
+                  tilingPaddingHorizontal: 6,
+
+                  // Gravity range (constant) for compounds
+                  gravityRangeCompound: 1.5,
+
+                  // Gravity force (constant) for compounds
+                  gravityCompound: 1.0,
+
+                  // Gravity range (constant)
+                  gravityRange: 3.8,
+                  
+                  // Initial cooling factor for incremental layout
+                  initialEnergyOnIncremental: 0.5
               }
           })
 
@@ -255,11 +227,11 @@ function HTMLLoader() {
 
           cy.edges().forEach(function(edge){
               if(edge.target().id() === "${mongoRes['_wordset']}") {
-                  edge.style('width', '2.5')
+                  edge.style('width', '2.2')
                   edge.style('line-color', '#fbfb11')
                   edge.style('target-arrow-color', '#fdfd11')
                   edge.style('target-arrow-fill', 'filled')
-                  edge.style('arrow-scale', 1.5)
+                  edge.style('arrow-scale', 1.0)
               }
           })
       </script>`
@@ -381,26 +353,40 @@ function HTMLLoader() {
                         ${CyScript}`
         mongoRes['_data'].forEach(function(_data){
           HTML += `
-                        <h1 class="entry-title">${_data['__represent']}   [${_data['__speech']}]   `
-                        if (_data["__tense"] !== "")
-                          HTML += `
+                        <h1 class="entry-title">${_data['__represent']}   `
+          
+          if (_data['__speech'] !== "")
+            HTML += `
+                        [${_data['__speech']}]   `
+
+          if (_data["__tense"] !== "")
+            HTML += `
                         (${_data["__tense"]})`
+
           HTML += `
                         </h1>
                         
-                        <h5>${_data['__pronounce']}</h5>`
+                        <h3>${_data['__pronounce']}</h3>`
+          
+          idx=0
+          _data['__usage'].forEach(function(__usage){
+            ++idx
+            HTML += `
+                      <h4>${idx}.`
+
             
-            _data['__usage'].forEach(function(__usage){
-              HTML += `
-                        <p>`
-
-              __usage["___extra"].forEach(function(___extra) {
-                HTML += `${___extra}  `
-              })
-
-              HTML += `${__usage["___meaning"]}</p>`
+            __usage["___extra"].forEach(function(___extra) {
+              HTML += `${___extra} `
             })
-            
+
+            HTML += `</h4><span>${__usage["___meaning"]}</span></br>`
+
+            __usage["___image"].forEach(function(___image) {
+              if (___image !== "")
+                HTML += `<img src=${___image} width=80%>`
+            })
+            HTML += `<br><br><br>`
+          })
         })
         HTML += `
                       </div>
