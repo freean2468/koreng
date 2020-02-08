@@ -269,6 +269,7 @@ button,input,textarea{font-family:NanumGothic,sans-serif}
 
 /* body - cols - wrapper - entry_area - article - content - cy */
 #whole_wrapper div#body div#cols div.wrapper div.entry_area article div#content div#cy{min-height:800px;padding:0}
+#whole_wrapper div#body div#cols div.wrapper div.entry_area article div#content div.hidden{ display: none; /* Hidden by default */}
 
 /* body - cols - wrapper - entry_area - result_list */
 #whole_wrapper div#body div#cols div.wrapper div.entry_area div.result_list {min-height:400px;padding:20px 10px;}
@@ -328,6 +329,13 @@ form#diff_dialog div.body div.wrapper a:hover{color:#06f;text-decoration:underli
 /*  */
 /* contents's tag */
 /*  */
+.tippy-tooltip.agjak-theme { border:2px solid #3c9; background-color: #5f7b97; color:#fff;}
+.tippy-tooltip.agjak-theme .tippy-arrow {transform: scale(1.6);}
+.tippy-tooltip.agjak-theme[data-placement^='top'] .tippy-arrow {border-top-color: #3c9;}
+.tippy-tooltip.agjak-theme[data-placement^='bottom'] .tippy-arrow {border-bottom-color: #3c9;}
+.tippy-tooltip.agjak-theme[data-placement^='left'] .tippy-arrow {border-left-color: #3c9;}
+.tippy-tooltip.agjak-theme[data-placement^='right'] .tippy-arrow {border-right-color: #3c9;}
+
 body.cke_editable h2,
 article div#content h2,
 form#diff_dialog div.body div.wrapper h2,

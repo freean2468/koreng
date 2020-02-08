@@ -1,2 +1,17 @@
-#/data/book
-#/data/drama
+# data
+data/book
+data/drama
+
+# db
+koreng_mongo/pw.txt
+koreng_mongo/archive
+koreng_mongo/data
+
+# source data
+public/html_metadata copy
+public/image
+public/reference
+
+# tool
+tool/scrapy_koreng
+

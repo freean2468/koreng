@@ -23,6 +23,9 @@ function HTMLLoader() {
       var HTML=head;
       var speech = []
 
+      // 0 : Parent-Child, 1 : Edge-Tree
+      var viewMethod = 0
+
       /* Generate Cy Data */
       var CyScript= `
       <script text="javascript">
@@ -30,44 +33,72 @@ function HTMLLoader() {
                 container: document.getElementById('cy'),
                 elements: {
                     nodes: [
-                      { data : { id: "${mongoRes['_wordset']}", label : "${mongoRes['_wordset']}", name : "${mongoRes['_wordset']}" } }`
+                      { data : { id: "${mongoRes['_wordset']}", label : "${mongoRes['_wordset']}" }, classes: "wordset" }`
       mongoRes["_data"].forEach(function (_data) {
         __speech = _data["__speech"]
-        if ("" !== __speech){
-          CyScript += `
-                      ,{ data : { id: '_${__speech}', name: '${__speech}' } }`
-          speech.push(__speech)
-        }
+        CyScript += `
+                    ,{ data : { id: "_${__speech}", label: "${__speech}" }, classes: "speech ${__speech}"}`
+        speech.push(__speech)
           
         __usageNumber = 0
         _data["__usage"].forEach(function (__usage) {
           __usageNumber++
-          CyScript += `
-                      ,{ data : { id: "${__speech}_${__usageNumber}", name: "${__usageNumber}.", parent: "_${__speech}"} }`
-          __usage["___comeFrom"].forEach(function(___comeFrom){
-            if ("" !== ___comeFrom)
-              CyScript += `
-                      ,{ data : { id: "${__speech}_${__usageNumber}_${___comeFrom}", name: "${___comeFrom}", parent: "${__speech}_${__usageNumber}"} }`
-          })
-          
-          if (__usage["___synonym"][0] !== "")
-            CyScript += `
-                      ,{ data : { id: "${__speech}_${__usageNumber}_synonym", name: "synonym", parent: "${__speech}_${__usageNumber}"} }`
-          __usage["___synonym"].forEach(function(___synonym){
-            if ("" !== ___synonym) {
-              CyScript += `
-                      ,{ data : { id: "${__speech}_${__usageNumber}_${___synonym}", name: "${___synonym}", parent: "${__speech}_${__usageNumber}_synonym"} }`
-            }
-          })
 
-          if (__usage["___antonym"][0] !== "")
+          if (viewMethod === 0) {
             CyScript += `
-                      ,{ data : { id: "${__speech}_${__usageNumber}_not", name: "not", parent: "${__speech}_${__usageNumber}"} }`
-          __usage["___antonym"].forEach(function(___antonym){
-            if ("" !== ___antonym)
+                        ,{ data : { id: "${__speech}_${__usageNumber}", label: "${__usageNumber}.", parent: "_${__speech}"}, classes: "number" }`
+            __usage["___meaningPiece"].forEach(function(___meaningPiece){
+              if ("" !== ___meaningPiece)
+                CyScript += `
+                        ,{ data : { id: "${__speech}_${__usageNumber}_${___meaningPiece}", label: "${___meaningPiece}", parent: "${__speech}_${__usageNumber}"}, classes: "meaning" }`
+            })
+            
+            if (__usage["___synonym"][0] !== "")
               CyScript += `
-                      ,{ data : { id: "${__speech}_${__usageNumber}_${___antonym}", name: "${___antonym}", parent: "${__speech}_${__usageNumber}_not"} }`
-          })
+                        ,{ data : { id: "${__speech}_${__usageNumber}_synonym", label: "synonym", parent: "${__speech}_${__usageNumber}"}, classes: "synonym" }`
+            __usage["___synonym"].forEach(function(___synonym){
+              if ("" !== ___synonym) {
+                CyScript += `
+                        ,{ data : { id: "${__speech}_${__usageNumber}_${___synonym}", label: "${___synonym}", parent: "${__speech}_${__usageNumber}_synonym"}, classes: "synonyms" }`
+              }
+            })
+
+            if (__usage["___not"][0] !== "")
+              CyScript += `
+                        ,{ data : { id: "${__speech}_${__usageNumber}_not", label: "not", parent: "${__speech}_${__usageNumber}"}, classes: "not" }`
+            __usage["___not"].forEach(function(___not){
+              if ("" !== ___not)
+                CyScript += `
+                        ,{ data : { id: "${__speech}_${__usageNumber}_${___not}", label: "${___not}", parent: "${__speech}_${__usageNumber}_not"}, classes: "nots" }`
+            })
+          } else if (viewMethod === 1) {
+            CyScript += `
+                        ,{ data : { id: "${__speech}_${__usageNumber}", label: "${__usageNumber}."} }`
+            __usage["___meaningPiece"].forEach(function(___meaningPiece){
+              if ("" !== ___meaningPiece)
+                CyScript += `
+                        ,{ data : { id: "${__speech}_${__usageNumber}_${___meaningPiece}", label: "${___meaningPiece}"} }`
+            })
+
+            if (__usage["___synonym"][0] !== "")
+              CyScript += `
+                        ,{ data : { id: "${__speech}_${__usageNumber}_synonym", label: "synonym"} }`
+            __usage["___synonym"].forEach(function(___synonym){
+              if ("" !== ___synonym) {
+                CyScript += `
+                        ,{ data : { id: "${__speech}_${__usageNumber}_${___synonym}", label: "${___synonym}"} }`
+              }
+            })
+
+            if (__usage["___not"][0] !== "")
+              CyScript += `
+                        ,{ data : { id: "${__speech}_${__usageNumber}_not", label: "not" } }`
+            __usage["___not"].forEach(function(___not){
+              if ("" !== ___not)
+                CyScript += `
+                        ,{ data : { id: "${__speech}_${__usageNumber}_${___not}", label: "${___not}"} }`
+            })
+          }
         })
       })
           
@@ -81,18 +112,53 @@ function HTMLLoader() {
         if (idx !== array.length - 1) CyScript += ','
       })
 
+      if (viewMethod === 1) {
+        mongoRes["_data"].forEach(function (_data) { 
+          __speech = _data["__speech"] 
+          __usageNumber = 0
+          _data["__usage"].forEach(function (__usage) {
+            __usageNumber++
+  
+            CyScript += `
+                      ,{ data : { source: "_${__speech}", target: "${__speech}_${__usageNumber}"} }`
+            __usage["___meaningPiece"].forEach(function(___meaningPiece){
+              if ("" !== ___meaningPiece)
+                CyScript += `
+                      ,{ data : { source: "${__speech}_${__usageNumber}", target: "${__speech}_${__usageNumber}_${___meaningPiece}"} }`
+            })
+
+            if (__usage["___synonym"][0] !== "")
+              CyScript += `
+                      ,{ data : { source: "${__speech}_${__usageNumber}", target: "${__speech}_${__usageNumber}_synonym"} }`
+            __usage["___synonym"].forEach(function(___synonym){
+              if ("" !== ___synonym) {
+                CyScript += `
+                      ,{ data : { source: "${__speech}_${__usageNumber}_synonym", target: "${__speech}_${__usageNumber}_${___synonym}"} }`
+              }
+            })
+
+            if (__usage["___not"][0] !== "")
+              CyScript += `
+                      ,{ data : { source: "${__speech}_${__usageNumber}", target: "${__speech}_${__usageNumber}_not" } }`
+            __usage["___not"].forEach(function(___not){
+              if ("" !== ___not)
+                CyScript += `
+                      ,{ data : { source: "${__speech}_${__usageNumber}_not", target: "${__speech}_${__usageNumber}_${___not}"} }`
+            })
+          })
+        })
+      }
+
       CyScript += `
                     ]
                 },
                 style: [
                   {
                       selector: 'node',
-                      css: {
-                          'width':30,
-                          'height':5,
-                          'content': 'data(name)',
+                      style: {
+                          'content': 'data(label)',
                           'text-valign': 'center',
-                          'text-outline-width': 0.5,
+                          'text-outline-width': 0.8,
                           'color': 'white',
                           'font-size': 8,
                           'text-outline-color': '#000',
@@ -100,12 +166,16 @@ function HTMLLoader() {
                           'border-width':0,
                           'z-index':3,
                           'padding':2,
-                          'shape':'round-rectangle'
+                          'shape':'round-rectangle',
+                          'text-wrap':'none',
+                          'text-max-width':100,
+                          'height':'label',
+                          'width':'label'
                       }
                   },
                   {
                       selector: ':parent',
-                      css: {
+                      style: {
                           'text-valign': 'top',
                           'text-halign': 'center',
                           'background-color': '#000',
@@ -118,15 +188,66 @@ function HTMLLoader() {
                   },
                   {
                       selector: 'edge',
-                      css: {
+                      style: {
                           'width': 1,
-                          'curve-style': 'straight',
+                          'curve-style': 'unbundled-bezier',
                           'line-color': '#FF0',
                           'target-arrow-color': '#FF0',
                           'target-arrow-shape': 'vee',
                           'target-arrow-fill': 'hollow',
                           'arrow-scale': 0.8,
                           'z-index':0
+                      }
+                  },
+                  {
+                      selector: '.number',
+                      style: {
+                          'padding' : 10
+                      }
+                  },
+                  {
+                      selector: '.wordset',
+                      style: {
+                          'border-color' : '#fbfb11',
+                          'border-width' : 3,
+                          'font-size': 16
+                      }
+                  },
+                  {
+                      selector: '.speech',
+                      style: {
+                          'background-color': '#222',
+                          'font-size': 12,
+                          'border-color':'#fff',
+                          'border-width':1,
+                          'border-opacity':0.9,
+                          'border-style':'solid',
+                          'padding' : 5
+                      }
+                  },
+                  {
+                      selector: '.not',
+                      style: {
+                        'font-size' : 11,
+                        'color':'#DC143C'
+                      }
+                  },
+                  {
+                      selector: '.synonym',
+                      style: {
+                        'font-size' : 11,
+                        'color':'#00ff7f'
+                      }
+                  },
+                  {
+                      selector: '.verb',
+                      style: {
+                      }
+                  },
+                  {
+                      selector: '.meaning, .synonyms, .nots',
+                      style: {
+                          'font-size': 10
                       }
                   }
               ],
@@ -147,7 +268,7 @@ function HTMLLoader() {
                   quality: 'default',
 
                   // Whether to include labels in node dimensions. Useful for avoiding label overlap
-                  nodeDimensionsIncludeLabels: false,
+                  nodeDimensionsIncludeLabels: true,
 
                   // number of ticks per frame; higher is faster but more jerky
                   refresh: 30,
@@ -205,8 +326,74 @@ function HTMLLoader() {
                   
                   // Initial cooling factor for incremental layout
                   initialEnergyOnIncremental: 0.5
-              }
+              },
+              // initial viewport state:
+              zoom: 1,
+              pan: { x: 0, y: 0 },
+
+              // interaction options:
+              minZoom: 0.8,
+              maxZoom: 2.37,
+              zoomingEnabled: true,
+              userZoomingEnabled: true,
+              panningEnabled: true,
+              userPanningEnabled: true,
+              boxSelectionEnabled: true,
+              selectionType: 'single',
+              touchTapThreshold: 8,
+              desktopTapThreshold: 4,
+              autolock: false,
+              autoungrabify: false,
+              autounselectify: false,
+
+              // rendering options:
+              headless: false,
+              styleEnabled: true,
+              hideEdgesOnViewport: false,
+              textureOnViewport: false,
+              motionBlur: false,
+              motionBlurOpacity: 0.2,
+              wheelSensitivity: 0.1,
+              pixelRatio: 'auto'
           })
+
+          function makePopper(node) {
+            let ref = node.popperRef(); // used only for positioning
+
+            // unfortunately, a dummy element must be passed as tippy only accepts a dom element as the target
+            // https://github.com/atomiks/tippyjs/issues/661
+            let dummyDomEle = document.createElement('div');
+
+            let tip = new tippy(dummyDomEle, { // tippy options:
+              // mandatory:
+              trigger: 'manual', // call show() and hide() yourself
+              lazy: false, // needed for onCreate()
+              onCreate: instance => { instance.popperInstance.reference = ref; }, // needed for ref positioning
+
+              content: () => {
+                let content = document.getElementById(node.data('id'));
+                let dummyDomEle = document.createElement('div');
+
+                dummyDomEle.innerHTML = content.innerHTML
+                dummyDomEle.innerHTML += '<br>'
+
+                return dummyDomEle;
+              },
+              // your own preferences:
+              appendTo: document.body,
+              arrow: true,
+              allowHTML: true,
+              interactive: true,
+              placement: 'auto',
+              hideOnClick: false,
+              multiple: true,
+              sticky: true,
+              theme: 'agjak'
+            });
+
+            tip.show()
+            node.tip = tip
+          }
 
           cy.on('tap', 'node', function(){
               try { // your browser may block popups
@@ -217,12 +404,65 @@ function HTMLLoader() {
               }
           })
 
-          cy.nodes().forEach(function(node){
-            if(node.id() === "${mongoRes['_wordset']}"){
-                node.style('background-color', '#fbfb11')
-                node.style('width', 20)
-                node.style('height', 20)
-            }
+          cy.on('mouseover', '.speech', function(){
+              this.style('border-width', 2)
+              makePopper(this)
+          })
+
+          cy.on('mouseout', '.speech', function(){
+              this.style('border-width', 1)
+              this.tip.destroy()
+          })
+
+          cy.on('mouseover', '.number', function(){
+              this.style('border-width', 2)
+              this.style('border-color', '#fff')
+              this.style('border-style', 'solid')
+              this.style('font-size', '12')
+              makePopper(this)
+          })
+
+          cy.on('mouseout', '.number', function(){
+              this.style('border-width', 1)
+              this.style('border-color', '#aaa')
+              this.style('border-style', 'dotted')
+              this.style('font-size', '8')
+              this.tip.destroy()
+          })
+
+          cy.on('mouseover', '.meaning', function(){
+              this.style('border-width', 1)
+              this.style('border-color', '#fbfb11')
+              $('html,body').css('cursor', 'pointer');
+              makePopper(this.parent())
+          })
+
+          cy.on('mouseout', '.meaning', function(){
+              this.style('border-width', 0)
+              $('html,body').css('cursor', 'default');
+              this.parent().tip.destroy()
+          })
+
+          cy.on('mouseover', '.synonyms', function(){
+            this.style('border-width', 1)
+            this.style('border-color', '#00ff7f')
+            $('html,body').css('cursor', 'pointer');
+          })
+
+          cy.on('mouseout', '.synonyms', function(){
+              this.style('border-width', 0)
+              $('html,body').css('cursor', 'default');
+          })
+
+          cy.on('mouseover', '.nots', function(){
+            this.style('border-width', 1)
+            this.style('border-color', '#DC143C')
+            $('html,body').css('cursor', 'pointer');
+          })
+
+          cy.on('mouseout', '.nots', function(){
+              this.style('border-width', 0)
+              $('html,body').css('cursor', 'default');
           })
 
           cy.edges().forEach(function(edge){
@@ -353,7 +593,8 @@ function HTMLLoader() {
                         ${CyScript}`
         mongoRes['_data'].forEach(function(_data){
           HTML += `
-                        <h1 class="entry-title">${_data['__represent']}   `
+                        <div id="_${_data['__speech']}" class="hidden">
+                        <h1 style="border-top:1px solid yellow;font-size:2em;font-weight:bold;color:#fff" class="entry-title">${_data['__represent']}   `
           
           if (_data['__speech'] !== "")
             HTML += `
@@ -366,26 +607,28 @@ function HTMLLoader() {
           HTML += `
                         </h1>
                         
-                        <h3>${_data['__pronounce']}</h3>`
+                        <h3 style="font-size:1.2em;font-weight:bold;color:#fff;border-bottom:1px dotted #fff;padding-bottom:.2em">${_data['__pronounce']}</h3>
+                        </div>`
           
           idx=0
           _data['__usage'].forEach(function(__usage){
             ++idx
             HTML += `
-                      <h4>${idx}.`
+                      <div id="${_data['__speech']}_${idx}" class="hidden">
+                      <h4 style="font-size:1.4em;font-weight:500;color:#cfc;font-style: italic">${idx}. `
 
             
             __usage["___extra"].forEach(function(___extra) {
               HTML += `${___extra} `
             })
 
-            HTML += `</h4><span>${__usage["___meaning"]}</span></br>`
+            HTML += `</h4><span style="font-size:1.2em">${__usage["___meaning"]}</span></br>`
 
             __usage["___image"].forEach(function(___image) {
               if (___image !== "")
                 HTML += `<img src=${___image} width=80%>`
             })
-            HTML += `<br><br><br>`
+            HTML += `</div>`
           })
         })
         HTML += `
