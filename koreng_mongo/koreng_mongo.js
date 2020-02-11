@@ -2,34 +2,62 @@ const {MongoClient} = require('mongodb');
 const fs = require('fs')
 const path = require('path')
 
+last_index = 0
 indexTable = {}
 motherJson = []
 METADATA_PATH = "data"
 TABLE_PATH = './'
 PASSWORD = fs.readFileSync("./pw.txt", "utf8")
 
+REDIRECTION_TABLE_FILE = "redirectionTable.json"
+DB_INDEX_TABLE_FILE = 'wordsetIndexTable.json'
+
 // 1 : find
 // 0 : register
 FLAG = 0
 
+function registerRedirectionTable(json){
+    table = fs.readFileSync(path.join(__dirname, REDIRECTION_TABLE_FILE), "utf-8")
+    redirectionTableJson = JSON.parse(table)
+
+    wordset = json['_wordset']
+    redirection = json['_redirection']
+
+    if(redirection !== "") {
+        if(redirectionTableJson[wordset] === undefined) {
+            redirectionTableJson[wordset] = redirection
+            fs.writeFileSync(path.join(__dirname, REDIRECTION_TABLE_FILE), JSON.stringify(redirectionTableJson), "utf-8")
+            console.log(`${wordset} registered as ${redirection}`)
+        } 
+        return true
+    }
+    return false
+}
+
 function setId(json){
-    table = fs.readFileSync(path.join(__dirname, 'wordsetIndexTable.json'), "utf-8")
+    table = fs.readFileSync(path.join(__dirname, DB_INDEX_TABLE_FILE), "utf-8")
 
     // console.log('tableData : ', table)
-    indexTable = JSON.parse(table)
+    wordsetTableJson = JSON.parse(table)
     // console.log('json form : \n',indexTable)
-    
-    if(indexTable[json['_wordset']] === undefined){
-        _id = Object.keys(indexTable).length
-        // console.log(Object.keys(indexTable).length)
-        indexTable[json['_wordset']]=_id
-        json['_id'] = _id
+    redirectionResult = registerRedirectionTable(json)
+    wordset = json["_wordset"]
 
-        fs.writeFileSync(path.join(__dirname, 'wordsetIndexTable.json'), JSON.stringify(indexTable), "utf-8")
-    } else {
-        json['_id'] = indexTable[json['_wordset']]
+    if(redirectionResult === false) {
+        if(wordsetTableJson[wordset] === undefined){
+            _id = Object.keys(wordsetTableJson).length
+            // console.log(Object.keys(wordsetTableJson).length)
+            wordsetTableJson[wordset]=_id
+            json['_id'] = _id
+
+            fs.writeFileSync(path.join(__dirname, DB_INDEX_TABLE_FILE), JSON.stringify(wordsetTableJson), "utf-8")
+        } else {
+            json['_id'] = wordsetTableJson[wordset]
+        }
+        console.log(`json['_id'] : ${json['_id']}, wordset : ${wordset}`)
+
+        motherJson.push(json)
     }
-    console.log(`json['_id'] : ${json['_id']}, wordset : ${json['_wordset']}`)
 }
 
 function readMetadataAndRegister(folder){
@@ -43,8 +71,6 @@ function readMetadataAndRegister(folder){
             json = JSON.parse(fileData)
             // console.log('json form : \n',json)
             setId(json)
-
-            motherJson.push(json)
     
             fs.rename(path.join(__dirname, folder, filename), path.join(__dirname, 'archive', filename), (err)=>{
                 if(err) throw err
@@ -80,7 +106,7 @@ async function findListingBy(client) {
     col.find({
         "_data.0.__usage":{
             $elemMatch:{
-                ___meaningPeace:{$exists:true}
+                ___videos:{$exists:true}
             }
         }
     }).toArray(function(err, doc) {
@@ -227,11 +253,6 @@ async function main(){
     } finally {
         if (FLAG === 0) {
             await client.close()
-            
-            fs.copyFile(path.join(__dirname, 'wordsetIndexTable.json'), path.join(__dirname, '..', 'wordsetIndexTable.json'), (err)=>{
-                if(err) throw err
-                console.log('table copied to ', path.join(__dirname, '..', 'koreng', 'wordsetIndexTable.json'))
-            });
         }
     }
 }

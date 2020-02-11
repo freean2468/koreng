@@ -4,8 +4,9 @@ import json
 import os
 from collections import OrderedDict
 from shutil import copyfile
+import copy
 
-BASE_DIR = os.getcwd() + '/data'
+BASE_DIR = os.getcwd() + "/data"
 ARCHIVE_PATH = os.getcwd() + "/../../"+"koreng_mongo/archive"
 DB_DIR = os.getcwd() + "/../../"+"koreng_mongo/data"
 DB_TABLE_PATH = os.getcwd() + "/../../"+"koreng_mongo//wordsetIndexTable.json"
@@ -14,14 +15,14 @@ start_urls = [
 
 ]
 
-with open('en_list.txt', 'r') as f:
+with open("en_list.txt", "r") as f:
     idx = 0
     en_list = f.read()
     en_list = en_list.splitlines()
 
     for en in en_list:
         idx = idx+1
-        en = en.replace(' ', '-')
+        en = en.replace(" ", "-")
         start_urls.append("https://dictionary.cambridge.org/dictionary/english/"+en)
         # if(idx > 20):
         #     break
@@ -31,7 +32,7 @@ with open('en_list.txt', 'r') as f:
 for url in start_urls:
     req = requests.get(url)
     html = req.text
-    soup = BeautifulSoup(html, 'html.parser')
+    soup = BeautifulSoup(html, "html.parser")
 
     # cald4 = UK Dic
     di_body = soup.find("div", attrs={"data-id": "cald4"})
@@ -41,12 +42,12 @@ for url in start_urls:
         continue
 
     di_body = di_body.select(
-        'div.link > div > div.di-body'
+        "div.link > div > div.di-body"
     )
 
     phraseBlocks = di_body[0].find_all("div", attrs={"class":"phrase-block"})
 
-    origin = url.split('/')[-1].lower().replace("-", " ")
+    origin = url.split("/")[-1].lower().replace("-", " ")
 
     idx = 0
     for phraseBlock in phraseBlocks:    
@@ -54,6 +55,7 @@ for url in start_urls:
         print(idx)
         newContents = OrderedDict()
         newContents["_wordset"] = ""
+        newContents["_redirection"] = ""
         newContents["_data"] = []
         newContents["_krSearch"] = [""]
         meaningBlocks = phraseBlock.find_all("div", attrs={"class":"def ddef_d db"})
@@ -69,7 +71,7 @@ for url in start_urls:
 
         dhw = phraseBlock.find("span", attrs={"class":"phrase-title"})
         if dhw is not None:
-            dhw = dhw.text.split('/')[0]
+            dhw = dhw.text.split("/")[0]
             print("phraseBlock : " + dhw)
             data["__represent"] = dhw
             newContents["_wordset"] = dhw
@@ -78,8 +80,8 @@ for url in start_urls:
                 json_data = json.load(json_file)
                 # print(wordset)
                 if dhw in json_data:
-                    copyfile(ARCHIVE_PATH+'/'+dhw+'.json',DB_DIR+'/'+dhw+'.json')
-                    print("========hey! \n phrase : '"+ dhw +"' exist already! file : "+dhw+'.json copied')
+                    copyfile(ARCHIVE_PATH+"/"+dhw+".json",DB_DIR+"/"+dhw+".json")
+                    print("========hey! \n phrase : '"+ dhw +"' exist already! file : "+dhw+".json copied")
                     continue
 
         dpos = phraseBlock.find("span", attrs={"class":"pos dpos"})
@@ -87,12 +89,11 @@ for url in start_urls:
             # print(dpos.text)
             data["__speech"] = dpos.text
 
-        dgram = phraseBlock.find("span", attrs={"class":"gram dgram"})
-        if dgram is not None:
-            # print(dgram.text)
-            dgram = dgram.text.replace(" T,", " Transitive,").replace(" T ", " Transitive ").replace(" I ", " Intransitive ").replace(" U ", " Uncountable ").replace(" C ", " Countable ").replace(" S ", " Singular ").replace(" L ", " Linking ")
-
-            extra.append(dgram)
+        # dgram = phraseBlock.find("span", attrs={"class":"gram dgram"})
+        # if dgram is not None:
+        #     print(dgram.text)
+        #     dgram = dgram.text.replace(" T,", " Transitive,").replace(" T ", " Transitive ").replace(" I ", " Intransitive ").replace(" U ", " Uncountable ").replace(" C ", " Countable ").replace(" S ", " Singular ").replace(" L ", " Linking ")
+        #     extra.append(dgram)
 
         ddomain = phraseBlock.find("span", attrs={"class":"domin ddomain"})
         if ddomain is not None:
@@ -113,38 +114,57 @@ for url in start_urls:
             usage = OrderedDict()
             usage["___extra"] = []
             usage["___origin"] = [origin]
+            usage["___meaning"] = meaningBlock.text.replace(": ", "").replace("→ \n", "").replace("\n", "")
             usage["___meaningPiece"] = [""]
+            usage["___compare"] = []
             usage["___synonym"] = []
             usage["___not"] = []
-            usage["___image"] = [""]
-            usage["___meaning"] = meaningBlock.text.replace(": ", "").replace("→ \n", "").replace("\n", "")
+            usage["___image"] = [{"____source":"","____link":""}]
+            usage["___video"] = [{"____source":"","____link":""}]
 
             h = phraseBlock.find("div", attrs={"class":"phrase-head dphrase_h"})
             if h is not None:
                 info = h.find("span", attrs={"class":"phrase-info dphrase-info"})
                 if info is not None:
-                    extra.append(info.text + ' ')
+                    # print("info : " + info.text + " in phrase block")
+                    extra.append(info.text.replace(" T,", " Transitive,").replace(" T ", " Transitive ").replace(" I ", " Intransitive ").replace(" U ", " Uncountable ").replace(" C ", " Countable ").replace(" S ", " Singular ").replace(" L ", " Linking ").replace("A1","").replace("A2","").replace("B1","").replace("B2","").replace("C1","").replace("C2","") + " ")
 
             dvar = meaningBlock.find_all("span", attrs={"class":"var dvar"})
             for _dvar in dvar:
-                extra.append(_dvar.text + ' ')
+                # print("_dvar : " + _dvar.text + " in phrase block")
+                extra.append(_dvar.text + " ")
 
             h = meaningBlock.find_parent("div", attrs={"class":"ddef_h"})
             if h is not None:
                 dinfo = h.find("span", attrs={"class":"def-info ddef-info"})
                 if dinfo is not None:
-                    _filter = dinfo.text.replace("B1","").replace("B2","").replace("C1","").replace("C2","")
+                    # print("_filter : " + dinfo.text + " in phrase block")
+                    _filter = dinfo.text.replace("A1","").replace("A2","").replace("B1","").replace("B2","").replace("C1","").replace("C2","")
                     test = _filter.replace(" ", "")
                     if test != "":
-                        extra.append(_filter + ' ')
+                        extra.append(_filter + " ")
 
             h = meaningBlock.find_parent("div", attrs={"class":"ddef_h"})
-            s = h.find_next_sibling("div").find("div", attrs={"class":"synonyms"})
-            o = h.find_next_sibling("div").find("div", attrs={"class":"opposite"})
+            n = h.find_next_sibling("div")
+            s = n.find("div", attrs={"class":"synonyms"})
+            o = n.find("div", attrs={"class":"opposite"})
+            c = n.find("div", attrs={"class":"compare"})
+
+            if c is not None:
+                compares = c.find_all("span", attrs={"class":"x-h dx-h"})
+                for compare in compares:
+                    usage["___compare"].append(compare.text)
+
+                compares = c.find_all("span", attrs={"class":"x-p dx-p"})
+                for compare in compares:
+                    usage["___compare"].append(compare.text)
 
             if s is not None:
                 synonyms = s.find_all("span", attrs={"class":"x-h dx-h"})
-
+                for synonym in synonyms:
+                    usage["___synonym"].append(synonym.text)
+                
+                synonyms = s.find_all("span", attrs={"class":"x-p dx-p"})
                 for synonym in synonyms:
                     usage["___synonym"].append(synonym.text)
 
@@ -152,6 +172,35 @@ for url in start_urls:
                 opposite = o.find_all("span", attrs={"class":"x-h dx-h"})
                 for _opposite in opposite:
                     usage["___not"].append(_opposite.text)
+                
+                opposite = o.find_all("span", attrs={"class":"x-p dx-p"})
+                for _opposite in opposite:
+                    usage["___not"].append(_opposite.text)
+
+            s = n.find("div", attrs={"class":"synonym"})
+
+            if s is not None:
+                synonyms = s.find_all("span", attrs={"class":"x-h dx-h"})
+                for synonym in synonyms:
+                    usage["___synonym"].append(synonym.text)
+
+                synonyms = s.find_all("span", attrs={"class":"x-p dx-p"})
+                for synonym in synonyms:
+                    usage["___synonym"].append(synonym.text)
+
+            o = n.find("div", attrs={"class":"opposites"})
+
+            if o is not None:
+                opposite = o.find_all("span", attrs={"class":"x-h dx-h"})
+                for _opposite in opposite:
+                    usage["___not"].append(_opposite.text)
+
+                opposite = o.find_all("span", attrs={"class":"x-p dx-p"})
+                for _opposite in opposite:
+                    usage["___not"].append(_opposite.text)
+
+            if len(usage["___compare"]) == 0:
+                usage["___compare"].append("")        
             
             if len(usage["___synonym"]) == 0:
                 usage["___synonym"].append("")
@@ -167,31 +216,37 @@ for url in start_urls:
             data["__usage"].append(usage)
             newContents["_data"].append(data)
 
-        with open(os.path.join(DB_DIR, data["__represent"] + '.json'), 'w+') as json_file:
+        with open(os.path.join(DB_DIR, data["__represent"] + ".json"), "w+") as json_file:
             json.dump(newContents, json_file, ensure_ascii=False, indent=4)
 
 # check DB for common process
 with open(DB_TABLE_PATH) as json_file:
     json_data = json.load(json_file)
     for url in reversed(start_urls):
-        wordset = url.replace('-', ' ').split('/')[-1].lower()
+        wordset = url.replace("-", " ").split("/")[-1].lower()
         # print(wordset)
         if wordset in json_data:
             start_urls.remove(url)
-            copyfile(ARCHIVE_PATH+'/'+wordset+'.json',DB_DIR+'/'+wordset+'.json')
-            print("========hey!\n '"+ wordset +"' exist already! file : "+ARCHIVE_PATH+'/'+wordset+'.json copied to ' + DB_DIR+'/'+wordset+'.json')
+            pre = ARCHIVE_PATH+"/"+wordset+".json"
+            after = DB_DIR+"/"+wordset+".json"
+            # pre = pre.replace("'", "\'")
+            # after = pre.replace("'", "\'")
+            # print("pre : " + pre + " after : " + after)
+            copyfile(pre,after)
+            print("========hey!\n '"+ wordset +"' exist already! file : "+ARCHIVE_PATH+"/"+wordset+".json copied to " + DB_DIR+"/"+wordset+".json")
 
 # common process
 for url in start_urls:
     req = requests.get(url)
     html = req.text
-    soup = BeautifulSoup(html, 'html.parser')
+    soup = BeautifulSoup(html, "html.parser")
 
     newContents = OrderedDict()
 
-    print('----------- ' + url.split('/')[-1].lower().replace("-", " ") + ' -------------')
+    print("----------- " + url.split("/")[-1].lower().replace("-", " ") + " -------------")
 
-    newContents["_wordset"] = url.split('/')[-1].lower().replace("-", " ")
+    newContents["_wordset"] = url.split("/")[-1].lower().replace("-", " ")
+    newContents["_redirection"] = ""
     newContents["_data"] = []
     newContents["_krSearch"] = [""]
 
@@ -199,13 +254,13 @@ for url in start_urls:
     di_body = soup.find("div", attrs={"data-id": "cald4"})
     
     if di_body is None:
-        with open(os.path.join(DB_DIR, url.split('/')[-1].lower().replace('-', '_no_results') + '.json'), 'w+') as json_file:
+        with open(os.path.join(DB_DIR, url.split("/")[-1].lower().replace("-", "_no_results") + ".json"), "w+") as json_file:
             json.dump(newContents, json_file, ensure_ascii=False, indent=4)
         print("no results!!")
         continue
 
     di_body = di_body.select(
-        'div.link > div > div.di-body'
+        "div.link > div > div.di-body"
     )
 
     representBlocks = di_body[0].find_all("div", attrs={"class":"pos-header dpos-h"})
@@ -235,7 +290,7 @@ for url in start_urls:
 
         dgram = representBlock.find("span", attrs={"class":"gram dgram"})
         if dgram is not None:
-            # print(dgram.text)
+            # print("dgram : " + dgram.text + " in common process")
             dgram = dgram.text.replace(" T,", " Transitive,").replace(" T ", " Transitive ").replace(" I ", " Intransitive ").replace(" U ", " Uncountable ").replace(" C ", " Countable ").replace(" S ", " Singular ").replace(" L ", " Linking ")
 
             data["__common"].append(dgram)
@@ -245,10 +300,10 @@ for url in start_urls:
             # print(ddomain.text)
             data["__common"].append(ddomain.text)
         
-        dlab = representBlock.find("span", attrs={"class":"lab dlab"})
-        if dlab is not None:
-            # print(dlab.text)
-            data["__common"].append(dlab.text)
+        dusage = representBlock.find_all("span", attrs={"class":"usage dusage"})
+        for _dusage in dusage:
+            print("_dusage : " + _dusage.text + " in common process")
+            data["__common"].append(_dusage.text)
 
         dspellvar = representBlock.find("span", attrs={"class":"spellvar dspellvar"})
         if dspellvar is not None:
@@ -257,22 +312,13 @@ for url in start_urls:
 
         dvar = representBlock.find_all("span", attrs={"class":"var dvar"})
         for _dvar in dvar:
-            print(_dvar)
-            data["__common"].append(_dvar.text + ' ')
-
-        # dv = representBlock.find("span", attrs={"class":"v dv lmr-0"})
-        # if dv is not None:
-        #     # print(dlab.text)
-        #     _dlab = dv.find_previous_sibling("span")
-        #     if _dlab is not None:
-        #         data["__common"].append(_dlab.text + ' ' + dv.text)
-        #     else:
-        #         data["__common"].append(dv.text)
+            # print("_dvar : " + _dvar.text + " in common process")
+            data["__common"].append(_dvar.text + " ")
         
         dinfls = representBlock.find("span", attrs={"class":"irreg-infls dinfls"})
         if dinfls is not None:
-            # print(dinfls.text)
-            data["__tense"] += dinfls.text + ' '
+            # print("dinfls : " + dinfls.text + " in common process")
+            data["__tense"] += dinfls.text + " "
         
         uk = representBlock.find("span", attrs={"class":"uk dpron-i"})
         if uk is not None:
@@ -284,7 +330,7 @@ for url in start_urls:
                 dpron = ""
             else:
                 dpron = dpron.text
-            data["__pronounce"] = dreg.text.upper() + '  ' + dpron
+            data["__pronounce"] = dreg.text.upper() + "  " + dpron
 
         us = representBlock.find("span", attrs={"class":"us dpron-i"})
         if us is not None:
@@ -296,7 +342,7 @@ for url in start_urls:
                 dpron = ""
             else:
                 dpron = dpron.text
-            data["__pronounce"] = data["__pronounce"] + ' ' + dreg.text.upper() + '  ' + dpron
+            data["__pronounce"] = data["__pronounce"] + " " + dreg.text.upper() + "  " + dpron
 
         newDataList.append(data)
 
@@ -304,27 +350,29 @@ for url in start_urls:
         usage = OrderedDict()
         usage["___extra"] = []
         usage["___origin"] = [""]
+        usage["___meaning"] = ""
         usage["___meaningPiece"] = [""]
+        usage["___compare"] = []
         usage["___synonym"] = []
         usage["___not"] = []
-        usage["___image"] = [""]
-        usage["___meaning"] = ""
+        usage["___image"] = [{"____source":"","____link":""}]
+        usage["___video"] = [{"____source":"","____link":""}]
 
         extra = []
         thisExtra = []
 
         dinfo = meaningBlock.find("span", attrs={"class":"def-info ddef-info"})
         if dinfo is not None:
-            _filter = dinfo.text.replace("B1","").replace("B2","").replace("C1","").replace("C2","")
+            _filter = dinfo.text.replace("A1","").replace("A2","").replace("B1","").replace("B2","").replace("C1","").replace("C2","")
             test = _filter.replace(" ", "")
             if test != "":
-                _filter = _filter.replace(" T,", " Transitive,").replace(" T ", " Transitive ").replace(" I ", " Intransitive ").replace(" U ", " Uncountable ").replace(" C ", " Countable ").replace(" S ", " Singular ").replace(" L ", " Linking ").replace('\n', "")
-                thisExtra.append(_filter + ' ')
+                _filter = _filter.replace(" T,", " Transitive,").replace(" T ", " Transitive ").replace(" I ", " Intransitive ").replace(" U ", " Uncountable ").replace(" C ", " Countable ").replace(" S ", " Singular ").replace(" L ", " Linking ").replace("\n", "")
+                thisExtra.append(_filter + " ")
 
         # dvar = meaningBlock.find_all("span", attrs={"class":"var dvar"})
         # for _dvar in dvar:
         #     print(_dvar)
-        #     thisExtra.append(_dvar.text + ' ')
+        #     thisExtra.append(_dvar.text + " ")
 
         ddef_d = meaningBlock.find("div", attrs={"class":"def ddef_d db"})
         if ddef_d is not None:
@@ -335,6 +383,16 @@ for url in start_urls:
             if h is not None:
                 s = h.find("div", attrs={"class":"synonyms"})
                 o = h.find("div", attrs={"class":"opposite"})
+                c = h.find("div", attrs={"class":"compare"})
+
+                if c is not None:
+                    compares = c.find_all("span", attrs={"class":"x-h dx-h"})
+                    for compare in compares:
+                        usage["___compare"].append(compare.text)
+
+                    compares = c.find_all("span", attrs={"class":"x-p dx-p"})
+                    for compare in compares:
+                        usage["___compare"].append(compare.text)
 
                 if s is not None:
                     synonyms = s.find_all("span", attrs={"class":"x-h dx-h"})
@@ -375,7 +433,10 @@ for url in start_urls:
                     opposite = o.find_all("span", attrs={"class":"x-p dx-p"})
                     for _opposite in opposite:
                         usage["___not"].append(_opposite.text)
-                
+            
+            if len(usage["___compare"]) == 0:
+                usage["___compare"].append("")
+
             if len(usage["___synonym"]) == 0:
                 usage["___synonym"].append("")
 
@@ -420,6 +481,7 @@ for url in start_urls:
 
                     break
     
+    # phrasal verb process
     relativeBlocks = di_body[0].find_all("div", attrs={"class":"pr relativDiv"})
 
     for relativeBlock in relativeBlocks:
@@ -433,14 +495,15 @@ for url in start_urls:
         usage = OrderedDict()
         usage["___extra"] = []
         usage["___origin"] = [""]
+        usage["___meaning"] = ""
         usage["___meaningPiece"] = [""]
+        usage["___compare"] = [""]
         usage["___synonym"] = [""]
         usage["___not"] = [""]
-        usage["___image"] = [""]
-        usage["___meaning"] = ""
+        usage["___image"] = [{"____source":"","____link":""}]
+        usage["___video"] = [{"____source":"","____link":""}]
 
         extra = []
-        thisExtra = []
 
         di_title = relativeBlock.find("div", attrs={"class":"di-title"})
         if di_title is not None:
@@ -451,13 +514,26 @@ for url in start_urls:
             data["__speech"] = danc_info.text[2:]
             # print(data["__speech"])
 
-        dlab = relativeBlock.find("span", attrs={"class":"lab dlab"})
+        dpos = relativeBlock.find("span", attrs={"class":"pos dpos"})
+        if dpos is not None:
+            # print(dpos.text)
+            data["__speech"] += dpos.text
+        
+        dgram = relativeBlock.find("div", attrs={"class":"pos-header dpos-h"}).find("span", attrs={"class":"gram dgram"})
+        if dgram is not None:
+            print("dgram : " + dgram.text + " in phrasal verb process")
+            dgram = dgram.text.replace(" T,", " Transitive,").replace(" T ", " Transitive ").replace(" I ", " Intransitive ").replace(" U ", " Uncountable ").replace(" C ", " Countable ").replace(" S ", " Singular ").replace(" L ", " Linking ")
+            extra.append(dgram)
+
+        dlab = relativeBlock.find("span", attrs={"class":"di-info"}).find("span", attrs={"class":"lab dlab"})
         if dlab is not None:
-            _filter = dlab.text.replace("B1","").replace("B2","").replace("C1","").replace("C2","")
+            _filter = dlab.text.replace("A1","").replace("A2","").replace("B1","").replace("B2","").replace("C1","").replace("C2","")
+            _filter = _filter.replace("present participle", "")
             test = _filter.replace(" ", "")
             if test != "":
-                _filter = _filter.replace(" T,", " Transitive,").replace(" T ", " Transitive ").replace(" I ", " Intransitive ").replace(" U ", " Uncountable ").replace(" C ", " Countable ").replace(" S ", " Singular ").replace(" L ", " Linking ").replace('\n', "")
-                thisExtra.append(_filter + ' ')
+                _filter = _filter.replace(" T,", " Transitive,").replace(" T ", " Transitive ").replace(" I ", " Intransitive ").replace(" U ", " Uncountable ").replace(" C ", " Countable ").replace(" S ", " Singular ").replace(" L ", " Linking ").replace("\n", "")
+                print("lab dlab : " + _filter + " in phrasal verb process")
+                extra.append(_filter + " ")
 
         uk = relativeBlock.find("span", attrs={"class":"uk dpron-i"})
         if uk is not None:
@@ -469,7 +545,7 @@ for url in start_urls:
                 dpron = ""
             else:
                 dpron = dpron.text
-            data["__pronounce"] = dreg.text.upper() + '  ' + dpron
+            data["__pronounce"] = dreg.text.upper() + "  " + dpron
 
         us = relativeBlock.find("span", attrs={"class":"us dpron-i"})
         if us is not None:
@@ -481,30 +557,38 @@ for url in start_urls:
                 dpron = ""
             else:
                 dpron = dpron.text
-            data["__pronounce"] = data["__pronounce"] + ' ' + dreg.text.upper() + '  ' + dpron
+            data["__pronounce"] = data["__pronounce"] + " " + dreg.text.upper() + "  " + dpron
 
-        ddef_d = meaningBlock.find("div", attrs={"class":"def ddef_d db"})
-        if ddef_d is not None:
-            # print(ddef_d.text)
+        ddef_block = relativeBlock.find_all("div", attrs={"class":"def-block ddef_block"})
+        for block in ddef_block:
+            ddef_d = block.find("div", attrs={"class":"def ddef_d db"})
+            def_info = block.find_all("span", attrs={"class":"usage dusage"})
+            
+            for _info in def_info:
+                print("_info : " + _info.text)
+                if extra[0] == "":
+                    extra[0] = _info.text
+                else:
+                    extra.append(_info.text)
+                
             usage["___meaning"] = ddef_d.text.replace(": ", "").replace("→ \n", "").replace("\n", "")
-
-            for item in thisExtra:
-                extra.append(item)
 
             usage["___extra"] = extra
 
             if len(usage["___extra"]) == 0:
                 usage["___extra"].append("")
 
-            data["__usage"].append(usage)
-            newDataList[0] = data
+            data["__usage"].append(copy.deepcopy(usage))
+            
+        newDataList[0] = data
 
     newContents["_data"] = newDataList
 
     for _data in newContents["_data"]:
-        del _data["__common"]
+        if "__common" in _data:
+            del _data["__common"]
 
-    with open(os.path.join(DB_DIR, url.split('/')[-1].lower().replace('-', ' ') + '.json'), 'w+') as json_file:
+    with open(os.path.join(DB_DIR, url.split("/")[-1].lower().replace("-", " ") + ".json"), "w+") as json_file:
         json.dump(newContents, json_file, ensure_ascii=False, indent=4)
 
 

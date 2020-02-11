@@ -23,9 +23,6 @@ function HTMLLoader() {
       var HTML=head;
       var speech = []
 
-      // 0 : Parent-Child, 1 : Edge-Tree
-      var viewMethod = 0
-
       /* Generate Cy Data */
       var CyScript= `
       <script text="javascript">
@@ -37,68 +34,40 @@ function HTMLLoader() {
       mongoRes["_data"].forEach(function (_data) {
         __speech = _data["__speech"]
         CyScript += `
-                    ,{ data : { id: "_${__speech}", label: "${__speech}" }, classes: "speech ${__speech}"}`
+                        ,{ data : { id: "_${__speech}_border", label: "" }, classes: "speech_border"}
+                        ,{ data : { id: "_${__speech}", label: "${__speech}", parent: "_${__speech}_border"}, classes: "speech ${__speech}"}`
         speech.push(__speech)
           
         __usageNumber = 0
         _data["__usage"].forEach(function (__usage) {
           __usageNumber++
 
-          if (viewMethod === 0) {
+          CyScript += `
+                      ,{ data : { id: "${__speech}_${__usageNumber}", label: "${__usageNumber}.", parent: "_${__speech}_border"}, classes: "number" }`
+          __usage["___meaningPiece"].forEach(function(___meaningPiece){
+            if ("" !== ___meaningPiece)
+              CyScript += `
+                      ,{ data : { id: "${__speech}_${__usageNumber}_${___meaningPiece}", label: "${___meaningPiece}", parent: "${__speech}_${__usageNumber}"}, classes: "meaning"  }`
+          })
+
+          if (__usage["___synonym"][0] !== "")
             CyScript += `
-                        ,{ data : { id: "${__speech}_${__usageNumber}", label: "${__usageNumber}.", parent: "_${__speech}"}, classes: "number" }`
-            __usage["___meaningPiece"].forEach(function(___meaningPiece){
-              if ("" !== ___meaningPiece)
-                CyScript += `
-                        ,{ data : { id: "${__speech}_${__usageNumber}_${___meaningPiece}", label: "${___meaningPiece}", parent: "${__speech}_${__usageNumber}"}, classes: "meaning" }`
-            })
-            
-            if (__usage["___synonym"][0] !== "")
+                      ,{ data : { id: "${__speech}_${__usageNumber}_synonym", label: "synonym"} }`
+          __usage["___synonym"].forEach(function(___synonym){
+            if ("" !== ___synonym) {
               CyScript += `
-                        ,{ data : { id: "${__speech}_${__usageNumber}_synonym", label: "synonym", parent: "${__speech}_${__usageNumber}"}, classes: "synonym" }`
-            __usage["___synonym"].forEach(function(___synonym){
-              if ("" !== ___synonym) {
-                CyScript += `
-                        ,{ data : { id: "${__speech}_${__usageNumber}_${___synonym}", label: "${___synonym}", parent: "${__speech}_${__usageNumber}_synonym"}, classes: "synonyms" }`
-              }
-            })
+                      ,{ data : { id: "${__speech}_${__usageNumber}_${___synonym}", label: "${___synonym}", parent: "${__speech}_${__usageNumber}_synonym"}, classes: "synonyms" }`
+            }
+          })
 
-            if (__usage["___not"][0] !== "")
-              CyScript += `
-                        ,{ data : { id: "${__speech}_${__usageNumber}_not", label: "not", parent: "${__speech}_${__usageNumber}"}, classes: "not" }`
-            __usage["___not"].forEach(function(___not){
-              if ("" !== ___not)
-                CyScript += `
-                        ,{ data : { id: "${__speech}_${__usageNumber}_${___not}", label: "${___not}", parent: "${__speech}_${__usageNumber}_not"}, classes: "nots" }`
-            })
-          } else if (viewMethod === 1) {
+          if (__usage["___not"][0] !== "")
             CyScript += `
-                        ,{ data : { id: "${__speech}_${__usageNumber}", label: "${__usageNumber}."} }`
-            __usage["___meaningPiece"].forEach(function(___meaningPiece){
-              if ("" !== ___meaningPiece)
-                CyScript += `
-                        ,{ data : { id: "${__speech}_${__usageNumber}_${___meaningPiece}", label: "${___meaningPiece}"} }`
-            })
-
-            if (__usage["___synonym"][0] !== "")
+                      ,{ data : { id: "${__speech}_${__usageNumber}_not", label: "not" } }`
+          __usage["___not"].forEach(function(___not){
+            if ("" !== ___not)
               CyScript += `
-                        ,{ data : { id: "${__speech}_${__usageNumber}_synonym", label: "synonym"} }`
-            __usage["___synonym"].forEach(function(___synonym){
-              if ("" !== ___synonym) {
-                CyScript += `
-                        ,{ data : { id: "${__speech}_${__usageNumber}_${___synonym}", label: "${___synonym}"} }`
-              }
-            })
-
-            if (__usage["___not"][0] !== "")
-              CyScript += `
-                        ,{ data : { id: "${__speech}_${__usageNumber}_not", label: "not" } }`
-            __usage["___not"].forEach(function(___not){
-              if ("" !== ___not)
-                CyScript += `
-                        ,{ data : { id: "${__speech}_${__usageNumber}_${___not}", label: "${___not}"} }`
-            })
-          }
+                      ,{ data : { id: "${__speech}_${__usageNumber}_${___not}", label: "${___not}"}, parent: "${__speech}_${__usageNumber}_not"}, classes: "nots" }`
+          })
         })
       })
           
@@ -112,42 +81,40 @@ function HTMLLoader() {
         if (idx !== array.length - 1) CyScript += ','
       })
 
-      if (viewMethod === 1) {
-        mongoRes["_data"].forEach(function (_data) { 
-          __speech = _data["__speech"] 
-          __usageNumber = 0
-          _data["__usage"].forEach(function (__usage) {
-            __usageNumber++
-  
+      mongoRes["_data"].forEach(function (_data) { 
+        __speech = _data["__speech"] 
+        __usageNumber = 0
+        _data["__usage"].forEach(function (__usage) {
+          __usageNumber++
+
+          CyScript += `
+                    ,{ data : { source: "_${__speech}", target: "${__speech}_${__usageNumber}"}, classes: "edge edge_${__speech}" }`
+          __usage["___meaningPiece"].forEach(function(___meaningPiece){
+            if ("" !== ___meaningPiece)
+              CyScript += `
+                    // ,{ data : { source: "${__speech}_${__usageNumber}", target: "${__speech}_${__usageNumber}_${___meaningPiece}"} }`
+          })
+
+          if (__usage["___synonym"][0] !== "")
             CyScript += `
-                      ,{ data : { source: "_${__speech}", target: "${__speech}_${__usageNumber}"} }`
-            __usage["___meaningPiece"].forEach(function(___meaningPiece){
-              if ("" !== ___meaningPiece)
-                CyScript += `
-                      ,{ data : { source: "${__speech}_${__usageNumber}", target: "${__speech}_${__usageNumber}_${___meaningPiece}"} }`
-            })
-
-            if (__usage["___synonym"][0] !== "")
+                    // ,{ data : { source: "${__speech}_${__usageNumber}", target: "${__speech}_${__usageNumber}_synonym"} }`
+          __usage["___synonym"].forEach(function(___synonym){
+            if ("" !== ___synonym) {
               CyScript += `
-                      ,{ data : { source: "${__speech}_${__usageNumber}", target: "${__speech}_${__usageNumber}_synonym"} }`
-            __usage["___synonym"].forEach(function(___synonym){
-              if ("" !== ___synonym) {
-                CyScript += `
-                      ,{ data : { source: "${__speech}_${__usageNumber}_synonym", target: "${__speech}_${__usageNumber}_${___synonym}"} }`
-              }
-            })
+                    // ,{ data : { source: "${__speech}_${__usageNumber}_synonym", target: "${__speech}_${__usageNumber}_${___synonym}"} }`
+            }
+          })
 
-            if (__usage["___not"][0] !== "")
+          if (__usage["___not"][0] !== "")
+            CyScript += `
+                    // ,{ data : { source: "${__speech}_${__usageNumber}", target: "${__speech}_${__usageNumber}_not" } }`
+          __usage["___not"].forEach(function(___not){
+            if ("" !== ___not)
               CyScript += `
-                      ,{ data : { source: "${__speech}_${__usageNumber}", target: "${__speech}_${__usageNumber}_not" } }`
-            __usage["___not"].forEach(function(___not){
-              if ("" !== ___not)
-                CyScript += `
-                      ,{ data : { source: "${__speech}_${__usageNumber}_not", target: "${__speech}_${__usageNumber}_${___not}"} }`
-            })
+                    // ,{ data : { source: "${__speech}_${__usageNumber}_not", target: "${__speech}_${__usageNumber}_${___not}"} }`
           })
         })
-      }
+      })
 
       CyScript += `
                     ]
@@ -196,7 +163,19 @@ function HTMLLoader() {
                           'target-arrow-shape': 'vee',
                           'target-arrow-fill': 'hollow',
                           'arrow-scale': 0.8,
-                          'z-index':0
+                          'z-index':0,
+                          'opacity':0.8
+                      }
+                  },
+                  {
+                      selector: '.speech_border',
+                      style: {
+                        'background-color': '#fff',
+                        'border-width':1,
+                        'border-style':'dotted',
+                        'border-color':'#ccc',
+                        'padding':0,
+                        'background-opacity':0.1
                       }
                   },
                   {
@@ -240,14 +219,44 @@ function HTMLLoader() {
                       }
                   },
                   {
-                      selector: '.verb',
-                      style: {
-                      }
-                  },
-                  {
                       selector: '.meaning, .synonyms, .nots',
                       style: {
                           'font-size': 10
+                      }
+                  },
+                  {
+                      selector: '.edge',
+                      style: {
+                          'line-color': 'AntiqueWhite',
+                          'target-arrow-color': 'AntiqueWhite'
+                      }
+                  },
+                  {
+                      selector: '.edge_verb',
+                      style: {
+                          'line-color': 'Tomato',
+                          'target-arrow-color': 'Tomato'
+                      }
+                  },
+                  {
+                      selector: '.edge_noun',
+                      style: {
+                          'line-color': 'SpringGreen',
+                          'target-arrow-color': 'SpringGreen'
+                      }
+                  },
+                  {
+                      selector: '.edge_adjective',
+                      style: {
+                          'line-color': 'Turquoise',
+                          'target-arrow-color': 'Turquoise'
+                      }
+                  },
+                  {
+                      selector: '.edge_adverb',
+                      style: {
+                          'line-color': 'DeepPink',
+                          'target-arrow-color': 'DeepPink'
                       }
                   }
               ],
@@ -286,10 +295,10 @@ function HTMLLoader() {
                   nodeRepulsion: 4500,
 
                   // Ideal (intra-graph) edge length
-                  idealEdgeLength: 20,
+                  idealEdgeLength: 3,
                   
                   // Divisor to compute edge forces
-                  edgeElasticity: 0.2,
+                  edgeElasticity: 0.1,
 
                   // Nesting factor (multiplier) to compute ideal edge length for inter-graph edges
                   nestingFactor: 0.1,
@@ -307,7 +316,7 @@ function HTMLLoader() {
                   animate: 'end',
 
                   // Duration for animate:end
-                  animationDuration: 500,
+                  animationDuration: 1000,
 
                   // Amount of vertical space to put between degree zero nodes during tiling (can also be a function)
                   tilingPaddingVertical: 6,
@@ -388,7 +397,8 @@ function HTMLLoader() {
               hideOnClick: false,
               multiple: true,
               sticky: true,
-              theme: 'agjak'
+              theme: 'agjak',
+              maxWidth: 700
             });
 
             tip.show()
@@ -622,11 +632,26 @@ function HTMLLoader() {
               HTML += `${___extra} `
             })
 
-            HTML += `</h4><span style="font-size:1.2em">${__usage["___meaning"]}</span></br>`
+            HTML += `
+                      </h4><span style="font-size:1.2em">${__usage["___meaning"]}</span></br>`
 
             __usage["___image"].forEach(function(___image) {
-              if (___image !== "")
-                HTML += `<img src=${___image} width=80%>`
+              if (___image["____link"] !== "") {
+                HTML += `
+                      <div class="image" style="text-align:center; color:#ffa07a;font-size:1.2em">
+                        <img src="${___image["____link"]}" width=100% alt="${___image["____source"]} : ${_data["__represent"]}" title="${___image["____source"]} : ${_data["__represent"]}">
+                        <div class="caption">&lt;${___image["____source"]} : ${_data["__represent"]}&gt;</div>
+                      </div>`
+              }
+            })
+            __usage["___video"].forEach(function(___video) {
+              if (___video["____link"] !== "") {
+                HTML += `
+                      <div class="video" style="text-align:center; color:#ffa07a;font-size:1.2em">
+                        <iframe width=320px height=180px src=https://www.youtube.com/embed/${___video["____link"]}></iframe>
+                        <div class="caption">&lt;${___video["____source"]} : ${_data["__represent"]}&gt;</div>
+                      </div>`
+              }
             })
             HTML += `</div>`
           })

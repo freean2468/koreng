@@ -9,8 +9,8 @@ import json
 from collections import OrderedDict
 import sys
 
-targetPath= "/Users/hoon-ilsong/project/koreng_mongo/archive"
-savePath= "/Users/hoon-ilsong/project/koreng_mongo/archive_copy"
+targetPath= os.getcwd() + "/archive"
+savePath= os.getcwd() + "/archive_copy"
 target = 'json'
 exception = []
 
@@ -54,15 +54,16 @@ def amend(path):
                 newContents = OrderedDict()
 
                 newContents["_wordset"] = contents["_wordset"]
+                newContents["_redirection"] = ""
 
                 newContents["_data"] = []
 
                 for _data in contents["_data"]:
                     _temp = OrderedDict()
 
-                    _temp["__represent"] = contents["_wordset"]
+                    _temp["__represent"] = _data["__represent"]
                     _temp["__speech"] = _data["__speech"]
-                    _temp["__tense"] = ""
+                    _temp["__tense"] = _data["__tense"]
                     _temp["__pronounce"] = _data["__pronounce"]
                     _temp["__usage"] = []
 
@@ -77,15 +78,16 @@ def amend(path):
                         for origin in __usage["___origin"]:
                             usage["___origin"].append(origin)
 
-                        usage["___meaningPiece"] = []
-                        if "___meaningPeace" in __usage:
-                            for meaningPeace in __usage["___meaningPeace"]:
-                                usage["___meaningPiece"].append(meaningPeace)
+                        usage["___meaning"] = __usage["___meaning"]
 
+                        usage["___meaningPiece"] = []
                         if "___meaningPiece" in __usage:
-                            print(contents["_wordset"])
                             for meaningPiece in __usage["___meaningPiece"]:
                                 usage["___meaningPiece"].append(meaningPiece)
+
+                        usage["___compare"] = []
+                        for compare in __usage["___compare"]:
+                            usage["___compare"].append(compare)
 
                         usage["___synonym"] = []
                         for synonym in __usage["___synonym"]:
@@ -99,7 +101,10 @@ def amend(path):
                         for image in __usage["___image"]:
                             usage["___image"].append(image)
 
-                        usage["___meaning"] = __usage["___meaning"]
+                        usage["___video"] = [{
+                            "____source": "",
+                            "____link": ""
+                        }]
 
                         _temp["__usage"].append(usage)
 

@@ -1,5 +1,6 @@
 {
     "_wordset": "",
+    "_redirection":"",
     "_data": [
         {
             "__represent": "",
@@ -14,7 +15,11 @@
                     "___origin": [
                         ""
                     ],
+                    "___meaning": "",
                     "___meaningPiece": [
+                        ""
+                    ],
+                    "___compare": [
                         ""
                     ],
                     "___synonym": [
@@ -24,9 +29,17 @@
                         ""
                     ],
                     "___image": [
-                        ""
+                        {
+                            "____source": "",
+                            "____link": ""
+                        }
                     ],
-                    "___meaning": ""
+                    "___video": [
+                        {
+                            "____source": "",
+                            "____link": ""
+                        }
+                    ]
                 }
             ]
         }
