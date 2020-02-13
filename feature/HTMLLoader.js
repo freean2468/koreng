@@ -23,6 +23,10 @@ function HTMLLoader() {
       var HTML=head;
       var speech = []
 
+      // mongoRes["_data"].forEach(function (_data) {
+      //   _data["__speech"] = _data["__speech"].replace(/\s/g,"_")
+      // })
+
       /* Generate Cy Data */
       var CyScript= `
       <script text="javascript">
@@ -31,11 +35,15 @@ function HTMLLoader() {
                 elements: {
                     nodes: [
                       { data : { id: "${mongoRes['_wordset']}", label : "${mongoRes['_wordset']}" }, classes: "wordset" }`
+      idx = 0
       mongoRes["_data"].forEach(function (_data) {
         __speech = _data["__speech"]
+        idx++
+        if (__speech === "")
+          __speech = "usage"
+        
         CyScript += `
-                        ,{ data : { id: "_${__speech}_border", label: "" }, classes: "speech_border"}
-                        ,{ data : { id: "_${__speech}", label: "${__speech}", parent: "_${__speech}_border"}, classes: "speech ${__speech}"}`
+                      ,{ data : { id: "_${__speech}_${idx}", label: "${__speech}"}, classes: "speech speech_node_${__speech}"}`
         speech.push(__speech)
           
         __usageNumber = 0
@@ -43,30 +51,30 @@ function HTMLLoader() {
           __usageNumber++
 
           CyScript += `
-                      ,{ data : { id: "${__speech}_${__usageNumber}", label: "${__usageNumber}.", parent: "_${__speech}_border"}, classes: "number" }`
+                      ,{ data : { id: "${__speech}_${idx}_${__usageNumber}", label: "${__usageNumber}."}, classes: "number number_node_${__speech}" }`
           __usage["___meaningPiece"].forEach(function(___meaningPiece){
             if ("" !== ___meaningPiece)
               CyScript += `
-                      ,{ data : { id: "${__speech}_${__usageNumber}_${___meaningPiece}", label: "${___meaningPiece}", parent: "${__speech}_${__usageNumber}"}, classes: "meaning"  }`
+                      ,{ data : { id: "${__speech}_${idx}_${__usageNumber}_${___meaningPiece}", label: "${___meaningPiece}", parent: "${__speech}_${idx}_${__usageNumber}"}, classes: "meaning"  }`
           })
 
           if (__usage["___synonym"][0] !== "")
             CyScript += `
-                      ,{ data : { id: "${__speech}_${__usageNumber}_synonym", label: "synonym"} }`
+                      ,{ data : { id: "${__speech}_${idx}_${__usageNumber}_synonym", label: "synonym", parent: "${__speech}_${idx}_${__usageNumber}"}, classes: "synonym" }`
           __usage["___synonym"].forEach(function(___synonym){
             if ("" !== ___synonym) {
               CyScript += `
-                      ,{ data : { id: "${__speech}_${__usageNumber}_${___synonym}", label: "${___synonym}", parent: "${__speech}_${__usageNumber}_synonym"}, classes: "synonyms" }`
+                      ,{ data : { id: "${__speech}_${idx}_${__usageNumber}_${___synonym}", label: "${___synonym}", parent: "${__speech}_${idx}_${__usageNumber}_synonym"}, classes: "synonyms" }`
             }
           })
 
           if (__usage["___not"][0] !== "")
             CyScript += `
-                      ,{ data : { id: "${__speech}_${__usageNumber}_not", label: "not" } }`
+                      ,{ data : { id: "${__speech}_${idx}_${__usageNumber}_not", label: "not" }, parent: "${__speech}_${idx}_${__usageNumber}"}, classes: "not" }`
           __usage["___not"].forEach(function(___not){
             if ("" !== ___not)
               CyScript += `
-                      ,{ data : { id: "${__speech}_${__usageNumber}_${___not}", label: "${___not}"}, parent: "${__speech}_${__usageNumber}_not"}, classes: "nots" }`
+                      ,{ data : { id: "${__speech}_${idx}_${__usageNumber}_${___not}", label: "${___not}"}, parent: "${__speech}_${idx}_${__usageNumber}_not"}, classes: "nots" }`
           })
         })
       })
@@ -75,44 +83,27 @@ function HTMLLoader() {
                     ],
                     edges: [`
 
+      index=0
       speech.forEach(function (_speech, idx, array) {
+        index++
         CyScript += `
-                      { data : { source: "${mongoRes['_wordset']}", target: "_${_speech}" } }`  
+                      { data : { source: "${mongoRes['_wordset']}", target: "_${_speech}_${index}" }, classes: "edge_wordset" }`  
         if (idx !== array.length - 1) CyScript += ','
       })
 
+      idx = 0
       mongoRes["_data"].forEach(function (_data) { 
         __speech = _data["__speech"] 
+        if (__speech === "")
+          __speech = "usage"
+
         __usageNumber = 0
+        idx++
         _data["__usage"].forEach(function (__usage) {
           __usageNumber++
 
           CyScript += `
-                    ,{ data : { source: "_${__speech}", target: "${__speech}_${__usageNumber}"}, classes: "edge edge_${__speech}" }`
-          __usage["___meaningPiece"].forEach(function(___meaningPiece){
-            if ("" !== ___meaningPiece)
-              CyScript += `
-                    // ,{ data : { source: "${__speech}_${__usageNumber}", target: "${__speech}_${__usageNumber}_${___meaningPiece}"} }`
-          })
-
-          if (__usage["___synonym"][0] !== "")
-            CyScript += `
-                    // ,{ data : { source: "${__speech}_${__usageNumber}", target: "${__speech}_${__usageNumber}_synonym"} }`
-          __usage["___synonym"].forEach(function(___synonym){
-            if ("" !== ___synonym) {
-              CyScript += `
-                    // ,{ data : { source: "${__speech}_${__usageNumber}_synonym", target: "${__speech}_${__usageNumber}_${___synonym}"} }`
-            }
-          })
-
-          if (__usage["___not"][0] !== "")
-            CyScript += `
-                    // ,{ data : { source: "${__speech}_${__usageNumber}", target: "${__speech}_${__usageNumber}_not" } }`
-          __usage["___not"].forEach(function(___not){
-            if ("" !== ___not)
-              CyScript += `
-                    // ,{ data : { source: "${__speech}_${__usageNumber}_not", target: "${__speech}_${__usageNumber}_${___not}"} }`
-          })
+                    ,{ data : { source: "_${__speech}_${idx}", target: "${__speech}_${idx}_${__usageNumber}"}, classes: "edge edge_${__speech}" }`
         })
       })
 
@@ -120,220 +111,108 @@ function HTMLLoader() {
                     ]
                 },
                 style: [
+                  //// initial style
                   {
                       selector: 'node',
                       style: {
-                          'content': 'data(label)',
-                          'text-valign': 'center',
-                          'text-outline-width': 0.8,
-                          'color': 'white',
-                          'font-size': 8,
-                          'text-outline-color': '#000',
-                          'background-color': '#000',
-                          'border-width':0,
-                          'z-index':3,
-                          'padding':2,
-                          'shape':'round-rectangle',
-                          'text-wrap':'none',
-                          'text-max-width':100,
-                          'height':'label',
-                          'width':'label'
+                          'content': 'data(label)','height':'label','width':'label',
+                          'text-valign': 'center','text-outline-width': 0.8,'font-size': 8,'text-outline-color': '#000','text-wrap':'none','text-max-width':100,
+                          'color': 'white','background-color': '#000',
+                          'border-width':0,'padding':2,'shape':'round-rectangle','z-compound-depth':'top'
                       }
                   },
                   {
                       selector: ':parent',
                       style: {
-                          'text-valign': 'top',
-                          'text-halign': 'center',
-                          'background-color': '#000',
-                          'border-width':1,
-                          'border-style':'dotted',
-                          'border-color':'#aaa',
-                          'z-index':2,
-                          'padding':2
+                          'text-valign': 'top','text-halign': 'center',
+                          'background-color': '#000','border-color':'#aaa',
+                          'border-width':1,'border-style':'dotted','padding':2
                       }
                   },
                   {
                       selector: 'edge',
                       style: {
-                          'width': 1,
-                          'curve-style': 'unbundled-bezier',
-                          'line-color': '#FF0',
-                          'target-arrow-color': '#FF0',
-                          'target-arrow-shape': 'vee',
-                          'target-arrow-fill': 'hollow',
-                          'arrow-scale': 0.8,
-                          'z-index':0,
-                          'opacity':0.8
+                          'width': 3,'line-color': '#FF0','curve-style': 'unbundled-bezier','arrow-scale': 1.6,'z-index':0,
+                          'target-arrow-color': '#FF0','target-arrow-shape': 'vee','target-arrow-fill': 'hollow','target-endpoint':'outside-to-node-or-label',
+                          'overlay-opacity': 0
                       }
                   },
-                  {
-                      selector: '.speech_border',
-                      style: {
-                        'background-color': '#fff',
-                        'border-width':1,
-                        'border-style':'dotted',
-                        'border-color':'#ccc',
-                        'padding':0,
-                        'background-opacity':0.1
-                      }
-                  },
-                  {
-                      selector: '.number',
-                      style: {
-                          'padding' : 10
-                      }
-                  },
-                  {
-                      selector: '.wordset',
-                      style: {
-                          'border-color' : '#fbfb11',
-                          'border-width' : 3,
-                          'font-size': 16
-                      }
-                  },
-                  {
-                      selector: '.speech',
-                      style: {
-                          'background-color': '#222',
-                          'font-size': 12,
-                          'border-color':'#fff',
-                          'border-width':1,
-                          'border-opacity':0.9,
-                          'border-style':'solid',
-                          'padding' : 5
-                      }
-                  },
-                  {
-                      selector: '.not',
-                      style: {
-                        'font-size' : 11,
-                        'color':'#DC143C'
-                      }
-                  },
-                  {
-                      selector: '.synonym',
-                      style: {
-                        'font-size' : 11,
-                        'color':'#00ff7f'
-                      }
-                  },
-                  {
-                      selector: '.meaning, .synonyms, .nots',
-                      style: {
-                          'font-size': 10
-                      }
-                  },
-                  {
-                      selector: '.edge',
-                      style: {
-                          'line-color': 'AntiqueWhite',
-                          'target-arrow-color': 'AntiqueWhite'
-                      }
-                  },
-                  {
-                      selector: '.edge_verb',
-                      style: {
-                          'line-color': 'Tomato',
-                          'target-arrow-color': 'Tomato'
-                      }
-                  },
-                  {
-                      selector: '.edge_noun',
-                      style: {
-                          'line-color': 'SpringGreen',
-                          'target-arrow-color': 'SpringGreen'
-                      }
-                  },
-                  {
-                      selector: '.edge_adjective',
-                      style: {
-                          'line-color': 'Turquoise',
-                          'target-arrow-color': 'Turquoise'
-                      }
-                  },
-                  {
-                      selector: '.edge_adverb',
-                      style: {
-                          'line-color': 'DeepPink',
-                          'target-arrow-color': 'DeepPink'
-                      }
-                  }
+
+                  // general style
+                  {selector: '.wordset',style: {'border-color' : '#fbfb11','border-width' : 3,'font-size': 16}},
+                  {selector: '.speech',style: {'background-color': '#222','font-size': 12,'border-color':'#fff','border-width':1,'border-opacity':0.9,'border-style':'solid','padding' : 5}},
+                  {selector: '.not',style: {'font-size' : 11,'color':'#DC143C'}},
+                  {selector: '.synonym',style: {'font-size' : 11,'color':'#00ff7f'}},
+                  {selector: '.meaning, .synonyms, .nots',style: {'font-size': 10}},
+
+                  // edge style
+                  {selector: '.edge',style: {'width':0.8, 'opacity':0.6, 'arrow-scale': 1.0, 'line-color': 'DarkViolet','target-arrow-color': 'DarkViolet'}},
+                  {selector: '.edge_wordset',style: {'width': '2.2', 'line-color': '#fbfb11', 'target-arrow-color': '#fdfd11', 'target-arrow-fill':'filled', 'arrow-scale':1.0}},
+                  {selector: '.edge_verb', style: {'line-color': 'Tomato', 'target-arrow-color': 'Tomato'}},
+                  {selector: '.edge_noun', style: {'line-color': 'SpringGreen','target-arrow-color': 'SpringGreen'}},
+                  {selector: '.edge_adjective', style: {'line-color': 'Turquoise','target-arrow-color': 'Turquoise'}},
+                  {selector: '.edge_adverb',style: {'line-color': 'DeepPink','target-arrow-color': 'DeepPink'}},
+                  {selector: '.edge_preposition', style: {'line-color': 'Pink','target-arrow-color': 'Pink'}},
+                  {selector: '.edge_conjunction',style: {'line-color': 'SlateBlue','target-arrow-color': 'SlateBlue'}},
+                  
+                  // speech_node style
+                  {selector: '.speech',style: {'color': 'DarkViolet'}},
+                  {selector: '.speech_node_verb', style: {'color': 'Tomato'}},
+                  {selector: '.speech_node_noun', style: {'color': 'SpringGreen'}},
+                  {selector: '.speech_node_adjective', style: {'color': 'Turquoise'}},
+                  {selector: '.speech_node_adverb',style: {'color': 'DeepPink'}},
+                  {selector: '.speech_node_preposition',style: {'color': 'Pink'}},
+                  {selector: '.speech_node_conjunction',style: {'color': 'SlateBlue'}},
+
+                  // number_node style
+                  {selector: '.number',style: {'border-color': 'DarkViolet','padding' : 10,'border-width':2, 'background-opacity':0.5}},
+                  {selector: '.number_node_verb', style: {'border-color': 'Tomato'}},
+                  {selector: '.number_node_noun', style: {'border-color': 'SpringGreen'}},
+                  {selector: '.number_node_adjective', style: {'border-color': 'Turquoise'}},
+                  {selector: '.number_node_adverb',style: {'border-color': 'DeepPink'}},
+                  {selector: '.number_node_preposition',style: {'border-color': 'Pink'}},
+                  {selector: '.number_node_conjunction',style: {'border-color': 'SlateBlue'}},
+
+                  // synonym & not style
+                  {selector: '.synonym',style: {'color' : 'Chartreuse', 'border-color': 'Chartreuse', 'background-opacity':0.5}},
+                  {selector: '.not',style: {'color' : 'Red', 'border-color': 'Red', 'background-opacity':0.5}}
               ],
               layout: {
                   name: 'cose-bilkent',
                   
-                  // Called on layoutready
-                  ready: function () {
+                  ready: function (e) {
+                      var cy = e.cy;
+                      cy.nodes().forEach(function(node){
+                          if (node.classes()[0] === "number" || node.classes()[0] === "speech") makePopper(node)
+                          node._styleOrigin = node.style()
+                      })
                   },
-                  // Called on layoutstop
-                  stop: function () {
+                  stop: function (e) {
+                      var cy = e.cy;
+                      cy._zoomOrigin = cy.zoom()
+                      cy._panOrigin = { 'x':cy.pan()['x'], 'y':cy.pan()['y'] }
                   },
-                  
-                  // 'draft', 'default' or 'proof" 
-                  // - 'draft' fast cooling rate 
-                  // - 'default' moderate cooling rate 
-                  // - "proof" slow cooling rate
+
                   quality: 'default',
-
-                  // Whether to include labels in node dimensions. Useful for avoiding label overlap
                   nodeDimensionsIncludeLabels: true,
-
-                  // number of ticks per frame; higher is faster but more jerky
                   refresh: 30,
-
-                  // Whether to fit the network view after when done
                   fit: true,
-
-                  // Padding on fit
                   padding: 10,
-
-                  // Whether to enable incremental mode
                   randomize: true,
-
-                  // Node repulsion (non overlapping) multiplier
                   nodeRepulsion: 4500,
-
-                  // Ideal (intra-graph) edge length
                   idealEdgeLength: 3,
-                  
-                  // Divisor to compute edge forces
                   edgeElasticity: 0.1,
-
-                  // Nesting factor (multiplier) to compute ideal edge length for inter-graph edges
                   nestingFactor: 0.1,
-                  
-                  // Gravity force (constant)
                   gravity: 0.25,
-
-                  // Maximum number of iterations to perform
                   numIter: 2500,
-
-                  // Whether to tile disconnected nodes
                   tile: true,
-
-                  // Type of layout animation. The option set is {'during', 'end', false}
                   animate: 'end',
-
-                  // Duration for animate:end
                   animationDuration: 1000,
-
-                  // Amount of vertical space to put between degree zero nodes during tiling (can also be a function)
                   tilingPaddingVertical: 6,
-
-                  // Amount of horizontal space to put between degree zero nodes during tiling (can also be a function)
                   tilingPaddingHorizontal: 6,
-
-                  // Gravity range (constant) for compounds
                   gravityRangeCompound: 1.5,
-
-                  // Gravity force (constant) for compounds
                   gravityCompound: 1.0,
-
-                  // Gravity range (constant)
                   gravityRange: 3.8,
-                  
-                  // Initial cooling factor for incremental layout
                   initialEnergyOnIncremental: 0.5
               },
               // initial viewport state:
@@ -344,7 +223,7 @@ function HTMLLoader() {
               minZoom: 0.8,
               maxZoom: 2.37,
               zoomingEnabled: true,
-              userZoomingEnabled: true,
+              userZoomingEnabled: false,
               panningEnabled: true,
               userPanningEnabled: true,
               boxSelectionEnabled: true,
@@ -383,8 +262,7 @@ function HTMLLoader() {
                 let content = document.getElementById(node.data('id'));
                 let dummyDomEle = document.createElement('div');
 
-                dummyDomEle.innerHTML = content.innerHTML
-                dummyDomEle.innerHTML += '<br>'
+                dummyDomEle.innerHTML = content.innerHTML + '<br>'
 
                 return dummyDomEle;
               },
@@ -395,94 +273,140 @@ function HTMLLoader() {
               interactive: true,
               placement: 'auto',
               hideOnClick: false,
-              multiple: true,
+              multiple: false,
               sticky: true,
               theme: 'agjak',
-              maxWidth: 700
+              maxWidth: 700,
+              distance: 60
             });
 
-            tip.show()
+            node._trigger = false
             node.tip = tip
           }
 
-          cy.on('tap', 'node', function(){
-              try { // your browser may block popups
-                  // window.open( this.data('href') );
-                  console.log(this.data('id') + ' node tapped!')
-              } catch(e){ // fall back on url change
-                  // window.location.href = this.data('href');
+          // cy.on('tap', 'node', function(){
+          //     try { // your browser may block popups
+          //         // window.open( this.data('href') );
+          //         console.log(this.data('id') + ' node tapped!')
+          //     } catch(e){ // fall back on url change
+          //         // window.location.href = this.data('href');
+          //     }
+          // })
+
+          function flipTrigger(node) {
+              if (node._trigger) {
+                  node._trigger = false
+                  node.tip.hide()
+                  cy.stop()
+                  cy.animate({
+                    pan: { x: cy._panOrigin['x'], y: cy._panOrigin['y'] },
+                    zoom: cy._zoomOrigin
+                  }, {
+                    duration: 1000
+                  });
+                  node.style(node._styleOrigin)
+              } else {
+                  node._trigger = true
+                  node.tip.show()
+                  cy.stop()
+                  cy.animate({
+                    fit: {
+                      eles: node,
+                      padding: 20
+                    }
+                  }, {
+                    duration: 1000
+                  });
               }
+          }
+
+          cy.on('tap', function(){
+            cy.on('tap', function(event){
+              var evtTarget = event.target;
+            
+              if( evtTarget === cy )
+                cy.nodes().forEach(function (node){
+                  if (node._trigger === true) 
+                    flipTrigger(node)
+                })
+            });
           })
 
-          cy.on('mouseover', '.speech', function(){
-              this.style('border-width', 2)
-              makePopper(this)
+          cy.on('tap', '.number', function() {
+            origin = this
+            cy.nodes().forEach(function (node){
+              if (node._trigger === true && node !== origin) flipTrigger(node)
+            })
+            flipTrigger(this) 
           })
 
-          cy.on('mouseout', '.speech', function(){
-              this.style('border-width', 1)
-              this.tip.destroy()
+          cy.on('tap', '.meaning', function() {
+            origin = this.parent()
+            cy.nodes().forEach(function (node){
+              if (node._trigger === true && node !== origin) flipTrigger(node)
+            })
+            flipTrigger(this.parent()) 
+          })
+
+          cy.on('tap', '.speech', function() {
+            origin = this
+            cy.nodes().forEach(function (node){
+              if (node._trigger === true && node !== origin) flipTrigger(node)
+            })
+            flipTrigger(this) 
+          })
+
+          cy.on('mouseover', '.speech', function() {
+            this.style('border-width', 2) 
+            $('html,body').css('cursor', 'pointer')
+          })
+
+          cy.on('mouseout', '.speech', function() {
+            this.style('border-width', 1)
+            $('html,body').css('cursor', 'default')
           })
 
           cy.on('mouseover', '.number', function(){
-              this.style('border-width', 2)
-              this.style('border-color', '#fff')
               this.style('border-style', 'solid')
               this.style('font-size', '12')
-              makePopper(this)
+              $('html,body').css('cursor', 'pointer');
           })
 
           cy.on('mouseout', '.number', function(){
-              this.style('border-width', 1)
-              this.style('border-color', '#aaa')
+            if (this._trigger === false) {
               this.style('border-style', 'dotted')
               this.style('font-size', '8')
-              this.tip.destroy()
+            }
+            $('html,body').css('cursor', 'default')
           })
 
           cy.on('mouseover', '.meaning', function(){
               this.style('border-width', 1)
               this.style('border-color', '#fbfb11')
               $('html,body').css('cursor', 'pointer');
-              makePopper(this.parent())
           })
 
           cy.on('mouseout', '.meaning', function(){
               this.style('border-width', 0)
               $('html,body').css('cursor', 'default');
-              this.parent().tip.destroy()
           })
 
           cy.on('mouseover', '.synonyms', function(){
             this.style('border-width', 1)
             this.style('border-color', '#00ff7f')
-            $('html,body').css('cursor', 'pointer');
           })
 
           cy.on('mouseout', '.synonyms', function(){
               this.style('border-width', 0)
-              $('html,body').css('cursor', 'default');
           })
 
           cy.on('mouseover', '.nots', function(){
             this.style('border-width', 1)
             this.style('border-color', '#DC143C')
-            $('html,body').css('cursor', 'pointer');
           })
 
           cy.on('mouseout', '.nots', function(){
               this.style('border-width', 0)
-              $('html,body').css('cursor', 'default');
-          })
-
-          cy.edges().forEach(function(edge){
-              if(edge.target().id() === "${mongoRes['_wordset']}") {
-                  edge.style('width', '2.2')
-                  edge.style('line-color', '#fbfb11')
-                  edge.style('target-arrow-color', '#fdfd11')
-                  edge.style('target-arrow-fill', 'filled')
-                  edge.style('arrow-scale', 1.0)
-              }
           })
       </script>`
 
@@ -599,16 +523,21 @@ function HTMLLoader() {
 
                         <!--<h1 class="entry-title">${mongoRes['_wordset']}</h1>-->
                         <div id="cy"></div>
-                        
-                        ${CyScript}`
+                        `
+        speechIndex = 0
         mongoRes['_data'].forEach(function(_data){
+          speechIndex++
+          speech = _data['__speech']
+          if (speech === "") {
+            speech = "usage"
+          }
           HTML += `
-                        <div id="_${_data['__speech']}" class="hidden">
+                        <div id="_${speech}_${speechIndex}" class="hidden">
                         <h1 style="border-top:1px solid yellow;font-size:2em;font-weight:bold;color:#fff" class="entry-title">${_data['__represent']}   `
           
           if (_data['__speech'] !== "")
             HTML += `
-                        [${_data['__speech']}]   `
+                        [${speech}]   `
 
           if (_data["__tense"] !== "")
             HTML += `
@@ -624,7 +553,7 @@ function HTMLLoader() {
           _data['__usage'].forEach(function(__usage){
             ++idx
             HTML += `
-                      <div id="${_data['__speech']}_${idx}" class="hidden">
+                      <div id="${speech}_${speechIndex}_${idx}" class="hidden">
                       <h4 style="font-size:1.4em;font-weight:500;color:#cfc;font-style: italic">${idx}. `
 
             
@@ -668,6 +597,7 @@ function HTMLLoader() {
           </div>
   
       </div> <!-- body -->
+      ${CyScript}
   
   
   </div> <!-- whole_wrapper -->

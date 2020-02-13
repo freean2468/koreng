@@ -94,7 +94,7 @@ button,input,textarea{font-family:NanumGothic,sans-serif}
 #whole_wrapper div#body #breadcrumb .wrapper #study_count a.checked{background-image:url("../../img/desktop/study_check_on.png");color:#333} */
 
 /* body - cols - wrapper */
-#whole_wrapper div#body div#cols div.wrapper{width:1280px;margin:0 auto;position:relative;border-left:1px solid #fff;border-right:1px solid #fff}
+#whole_wrapper div#body div#cols div.wrapper{max-width:100%;margin:0 auto;position:relative;border-left:1px solid #333;border-right:1px solid #333;overflow:hidden}
 
 /* #whole_wrapper div#body div#cols div.controllers{height:35px}
 #whole_wrapper div#body div#cols div.controllers .wrapper{height:35px;margin:0 auto;position:relative;vertical-align:middle}
@@ -132,7 +132,7 @@ button,input,textarea{font-family:NanumGothic,sans-serif}
 #whole_wrapper div#body div#cols div.revision-control div.wrapper div.btns{margin:10px 7px} */
 
 /* body - cols - wrapper - aside */
-#whole_wrapper div#body div#cols div.wrapper aside{width:250px;float:left}
+#whole_wrapper div#body div#cols div.wrapper aside{width:250px;z-index:1;position: fixed;overflow-x: hidden;}
 
 /* #whole_wrapper div#body div#cols div.wrapper aside div.controllers.authors{height:auto}
 #whole_wrapper div#body div#cols div.wrapper aside div.controllers.authors .wrapper{height:auto;line-height:1em}
@@ -228,7 +228,7 @@ button,input,textarea{font-family:NanumGothic,sans-serif}
 #whole_wrapper div#body div#cols div.wrapper aside div.index#list_index div.filter_list div.filter_item_wrapper div.filterTriggerButton {position: relative;width: auto;padding: 4px;margin: 0 auto;cursor: pointer;background-color: #222;border: 1px solid #000;}
 
 /* body - cols - wrapper - entry_area */
-#whole_wrapper div#body div#cols div.wrapper div.entry_area{background-color:#000;width:1030px;float:left}
+#whole_wrapper div#body div#cols div.wrapper div.entry_area{background-color:#000;max-width:100%;float:left;margin-left:250px;width:-webkit-calc(100% - 250px);width:calc(100% - 250px);}
 
 #whole_wrapper div#body div#cols div.entry_area div.controllers .wrapper #right_ctrs,
 #whole_wrapper div#body div#cols div.entry_area div.controllers .wrapper #ctrs{height:35px;line-height:35px;float:right}
@@ -268,7 +268,7 @@ button,input,textarea{font-family:NanumGothic,sans-serif}
 #whole_wrapper div#body div#cols div.entry_area article div.in_category .in_topic table td a:hover{color:#fff;text-decoration:underline}
 
 /* body - cols - wrapper - entry_area - article - content - cy */
-#whole_wrapper div#body div#cols div.wrapper div.entry_area article div#content div#cy{min-height:800px;padding:0}
+#whole_wrapper div#body div#cols div.wrapper div.entry_area article div#content div#cy{min-height:800px;min-width:1080px;padding:0}
 #whole_wrapper div#body div#cols div.wrapper div.entry_area article div#content div.hidden{ display: none; /* Hidden by default */}
 
 /* body - cols - wrapper - entry_area - result_list */

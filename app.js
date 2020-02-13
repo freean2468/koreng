@@ -207,12 +207,10 @@ async function onSearch(req, res) {
     
     if (mongoRes) {
         // searchRes = dataLoaderInst.searchData(searchTarget, '', '');
-        // console.log(searchRes)
         searchRes = {
             resultTotalCount: 0,
             resObjList: []
         }
-        console.log(searchRes)
 
         return HTMLLoaderInst.assembleSearchResultHTML(res, searchTarget, mongoRes, searchRes, dataLoaderInst.metaData);
     } else {
