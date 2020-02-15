@@ -294,6 +294,7 @@ function HTMLLoader() {
           // })
 
           function flipTrigger(node) {
+              ms = 200
               if (node._trigger) {
                   node._trigger = false
                   node.tip.hide()
@@ -302,7 +303,7 @@ function HTMLLoader() {
                     pan: { x: cy._panOrigin['x'], y: cy._panOrigin['y'] },
                     zoom: cy._zoomOrigin
                   }, {
-                    duration: 1000
+                    duration: ms
                   });
                   node.style(node._styleOrigin)
               } else {
@@ -315,7 +316,7 @@ function HTMLLoader() {
                       padding: 20
                     }
                   }, {
-                    duration: 1000
+                    duration: ms
                   });
               }
           }

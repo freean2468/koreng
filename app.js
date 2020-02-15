@@ -202,7 +202,6 @@ async function onSearch(req, res) {
     //             )
     // console.log('mongoRes : ',mongoRes)
 
-    console.log(searchTarget)
     let mongoRes = await mongoClientInst.findOneListingById(searchTarget)
     
     if (mongoRes) {
@@ -213,6 +212,7 @@ async function onSearch(req, res) {
         }
 
         return HTMLLoaderInst.assembleSearchResultHTML(res, searchTarget, mongoRes, searchRes, dataLoaderInst.metaData);
+
     } else {
         return HTMLLoaderInst.assembleHTML(res, 'public/html', 'home');
     }

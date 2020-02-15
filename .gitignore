@@ -5,6 +5,7 @@ data/drama
 # db
 koreng_mongo/pw.txt
 koreng_mongo/archive
+koreng_mongo/archive_cambridge_style
 koreng_mongo/data
 
 # source data
@@ -14,4 +15,4 @@ public/reference
 
 # tool
 tool/scrapy_koreng
-
+tool/crawler/en_list.txt

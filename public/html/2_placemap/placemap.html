@@ -7,20 +7,16 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/js-cookie@beta/dist/js.cookie.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.9.4/cytoscape.min.js"></script>
-        <script src="https://unpkg.com/webcola@3.3.8/WebCola/cola.min.js"></script>
         <script src="https://unpkg.com/layout-base/layout-base.js"></script>
-        <script src="https://unpkg.com/cytoscape-cola@2.3.0/cytoscape-cola.js"></script>
         <script src="https://unpkg.com/cose-base/cose-base.js"></script>
-		<script src="https://unpkg.com/avsdf-base/avsdf-base.js"></script>
-		<script src="https://unpkg.com/cytoscape-graphml/cytoscape-graphml.js"></script>
-        <script src="https://raw.githack.com/iVis-at-Bilkent/cytoscape.js-layvo/unstable/cytoscape-layvo.js"></script>
-        <script src="https://unpkg.com/cytoscape-cise@1.0.0/cytoscape-cise.js"></script>
         <script src="https://unpkg.com/cytoscape-cose-bilkent@4.0.0/cytoscape-cose-bilkent.js"></script>
         <script src="https://unpkg.com/popper.js@1.16.0/dist/umd/popper.js"></script>
         <script src="https://unpkg.com/tippy.js@5.1.3/dist/tippy-bundle.iife.min.js"></script>
         <script src="https://unpkg.com/cytoscape-popper@1.0.6/cytoscape-popper.js"></script>
         <script src="./js/search.js"></script>
         <script src="./js/general.js"></script>
+        <script src="https://unpkg.com/@trevoreyre/autocomplete-js"></script>
+        <link rel="stylesheet" type="text/css" href="./style/autocomplete.css">
     </head>
     <body id="index" class="no_sidebar">
         <div id="whole_wrapper">
@@ -32,11 +28,18 @@
                         <nav id="search_group">
                             <div class="sgroup">
                                 <form class="search" action="/search" style="overflow:visible" data-submitfalse="q" method="GET" role="search">
+                                    <!--
                                     <div class="item_input">
                                         <div class="input_border">
                                             <input class="search_input" name="target" maxlength="2048" type="text" aria-autocomplete="both" aria-haspopup="false" autocapitalize="off" autocomplete="off" autocorrect="off" role="combobox" spellcheck="false" title="검색" value="" placeholder="ex)take" aria-label="검색">
                                         </div>
                                     </div>
+                                    -->
+                                    <div id="autocomplete" class="autocomplete" >
+                                        <input class="autocomplete-input" name="target" maxlength="2048" type="text" aria-autocomplete="both" aria-haspopup="false" autocapitalize="off" autocomplete="off" autocorrect="off" role="combobox" spellcheck="false" title="검색" aria-label="검색"/>
+                                        <ul class="autocomplete-result-list"></ul>
+                                    </div>
+
                                     <div class="item_btn">
                                         <input class="search_btn" value="Agjak 검색" aria-label="Agjak 검색" name="btnK" type="submit">
                                     </div>
@@ -110,7 +113,7 @@
                                     <h1 class="entry-title">표현
                                     </h1>
                                     <div class="props">
-                                        <time datetime="" pubdate="">2020년 2월 8일 6:29:55
+                                        <time datetime="" pubdate="">2020년 2월 14일 3:20:35
                                         </time>
                                     </div>
                                 </hgroup>
@@ -308,5 +311,49 @@ try { // your browser may block popups
                 </div>
             </div> <!-- body -->
         </div> <!-- whole_wrapper -->
+        <script>
+            const wikiUrl = 'https://en.wikipedia.org'
+            const params = 'action=query&list=search&format=json&origin=*'
+
+            new Autocomplete('#autocomplete', {
+            
+                // Search function can return a promise
+                // which resolves with an array of
+                // results. In this case we're using
+                // the Wikipedia search API.
+                search: input => {
+                    const url = `${wikiUrl}/w/api.php?${params}&srsearch=${encodeURI(input)}`
+
+                    return new Promise(resolve => {
+                    if (input.length < 1) {
+                        return resolve([])
+                    }
+
+                    fetch(url)
+                        .then(response => response.json())
+                        .then(data => {
+                            resolve(data.query.search)
+                        })
+                    })
+                },
+                
+                // Wikipedia returns a format like this:
+                //
+                // {
+                //   pageid: 12345,
+                //   title: 'Article title',
+                //   ...
+                // }
+                // 
+                // We want to display the title
+                getResultValue: result => result.title,
+
+                // Open the selected article in
+                // a new window
+                onSubmit: result => {
+                    window.open(`${wikiUrl}/wiki/${encodeURI(result.title)}`)
+                }
+            })
+        </script>
     </body>
 </html>
