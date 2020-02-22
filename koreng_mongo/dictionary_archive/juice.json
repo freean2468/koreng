@@ -1,0 +1,16 @@
+{
+    "root": "juice",
+    "from": [],
+    "redirection":"",
+    "data": [
+        {
+            "_usage": "음료, 마실 것",
+            "_speech": "n",
+            "_chunks": [
+                "liquid",
+                "from fruit"
+            ],
+            "_video": "aExtT-X2ysM"
+        }
+    ]
+}

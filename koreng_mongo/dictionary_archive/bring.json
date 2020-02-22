@@ -1,0 +1,16 @@
+{
+    "root": "bring",
+    "from": [],
+    "redirection":"",
+    "data": [
+        {
+            "_usage": "가지고 가(오)다",
+            "_speech": "v",
+            "_chunks": [
+                "transport",
+                "take"
+            ],
+            "_video": "aExtT-X2ysM"
+        }
+    ]
+}

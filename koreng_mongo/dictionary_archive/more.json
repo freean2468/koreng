@@ -1,0 +1,16 @@
+{
+    "root": "more",
+    "from": [],
+    "redirection":"",
+    "data": [
+        {
+            "_usage": "어느 정도의 양, 수",
+            "_speech": "d, p, n, adv",
+            "_chunks": [
+                "extra",
+                "quantity or number"
+            ],
+            "_video": "aExtT-X2ysM"
+        }
+    ]
+}

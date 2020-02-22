@@ -23,65 +23,8 @@ jsonPathBase= "/Users/hoon-ilsong/project/koreng/public/html_metadata"
 HTMLPathBase= "/Users/hoon-ilsong/project/koreng/public/html"
 appPathBase= "/Users/hoon-ilsong/project/koreng"
 URLSourcePathBase= "public/html"
-imagePathBase= "/Users/hoon-ilsong/project/koreng/public/image"
-
-mainMenus=[]
-subMenus=[]
-sideMenus=[]
-
-images=[]
 
 OVERWRITE =True
-
-def setImage(path):
-    lst = sorted(os.listdir(path))
-    for d in lst:
-        fileExtension=d.split(".")[-1]
-        if fileExtension == "png" or fileExtension == "jpg":
-            print(d)
-            images.append(d)
-
-def setMenu(path):
-    lst = sorted(os.listdir(path))
-    for d in lst:
-        # main menu folders
-        if os.path.isdir(path + "/" + d):
-            mainPath = path + "/" + d
-            for d in os.listdir(mainPath):
-                if os.path.isdir(mainPath + "/" + d):
-                    subPath = mainPath + "/" + d
-                    for d in os.listdir(subPath):
-                        if os.path.isdir(subPath + "/" + d):
-                            sidePath = subPath + "/" + d
-                            for d in os.listdir(sidePath):
-                                fileExtension=d.split(".")[-1]
-                                if fileExtension =="json":
-                                    # side menu json
-                                    jsonFile = sidePath + "/" + d 
-                                    # print('side : '+jsonFile)
-                                    with io.open(jsonFile,"r", encoding="utf-8") as jsonOpen:
-                                        jsonData = json.load(jsonOpen)
-                                        if jsonData['menu_title'] == '':
-                                            jsonData['menu_title'] = d.split(".")[0]
-                                        sideMenus.append(Menu("sub_"+sidePath.split("/")[-2],"side_"+d.split(".")[0], jsonData["menu_title"], jsonFile.split("/")[-4]+'/'+jsonFile.split("/")[-3]+'/'+jsonFile.split("/")[-2], jsonData["category"]))
-                        else:
-                            fileExtension=d.split(".")[-1]
-                            if fileExtension =="json":
-                                # sub menu json
-                                jsonFile = subPath + "/" + d 
-                                # print('sub : '+jsonFile)
-                                with io.open(jsonFile,"r", encoding="utf-8") as jsonOpen:
-                                    jsonData = json.load(jsonOpen)
-                                    subMenus.append(Menu("main_"+subPath.split("/")[-2],"sub_"+d.split(".")[0], jsonData["menu_title"], jsonFile.split("/")[-3]+'/'+jsonFile.split("/")[-2], jsonData["category"]))
-                else:
-                    fileExtension=d.split(".")[-1]
-                    if fileExtension =="json":
-                        # main menu json
-                        jsonFile = mainPath + "/" + d 
-                        # print('main : '+jsonFile)
-                        with io.open(jsonFile,"r", encoding="utf-8") as jsonOpen:
-                            jsonData = json.load(jsonOpen)
-                            mainMenus.append(Menu("","main_"+d.split(".")[0], jsonData["menu_title"],jsonFile.split("/")[-2], jsonData["category"]))
                         
 def mkdirOnPath(path):
     if not os.path.isdir(path):
@@ -102,69 +45,6 @@ def jsonToHTMLHeader(jsonPath, HTMLPath):
                     print("from : "+jsonFile)
                     with io.open(jsonFile,"r", encoding="utf-8") as jsonOpen:
                         jsonData = json.load(jsonOpen)
-
-                        startIndex = 0
-                        endIndex = jsonFile.find('/html_metadata')
-                        root="".join((jsonFile[:startIndex],'',jsonFile[endIndex:]))
-                        # print("".join(("root : ",root)))
-                        
-                        # parent
-                        parent = jsonFile.split('/')[-3]
-                        # print('parent : ' + parent)
-                        # pos
-                        pos = jsonData['pos']
-                        if d.split(".")[0] == 'search' and parent == 'public':
-                            pos = 'search'
-                        elif len(root.split('/')) == 3:
-                            pos = 'home'
-                        elif len(root.split('/')) == 4:
-                            pos = 'main'
-                        elif len(root.split('/')) == 5:
-                            pos = 'sub'
-                        elif len(root.split('/')) == 6:
-                            pos = 'side'
-
-                        # print('pos : ' + pos)
-                        
-                        # parent's sub_title, sub_h2
-                        title = jsonData['title']
-                        sub_title = jsonData['sub_title']
-                        sub_h2 = jsonData['sub_h2']
-                        if pos == 'side':
-                            startIndex = 0
-                            endIndex = jsonFile.rfind('/'+parent+'/')
-                            parentPath = "".join((jsonFile[:endIndex], '/', parent, '/', parent, '.json'))
-
-                            with io.open(parentPath,"r", encoding="utf-8") as parentOpen:
-                                parentData = json.load(parentOpen)
-                                title = parentData["title"]
-                                sub_title = parentData["sub_title"]
-                                sub_h2 = parentData["sub_h2"]
-
-                        # print("".join(("sub_title : ",sub_title,' sub_h2 : ', sub_h2)))
-
-                        # article_title
-                        article_title = jsonData['article_title']
-                        if (pos == 'side' or pos == 'sub'):
-                            _name = d.split(".")[0]
-                            article_title = "".join((_name[0].upper(),_name[1:]))
-
-                        # print("".join(("article_title : ",article_title)))
-
-                        if jsonData['title'] == '':
-                            jsonData['title'] = "".join((d.split(".")[0]," - ",title))
-                        elif pos == 'sub':
-                            jsonData['title'] = "".join((d.split(".")[0]," - ",jsonData['title']))
-                        # if jsonData['menu_title'] == '':
-                        #     jsonData['menu_title'] = d.split(".")[0]
-                        if jsonData['article_title'] == '':
-                            jsonData['article_title'] = article_title
-
-                        jsonData['pos'] = pos
-                        jsonData['parent'] = parent
-                        jsonData['sub_title'] = sub_title
-                        jsonData['sub_h2'] = sub_h2
-
 
                         with io.open(HTMLFile,"w", encoding="utf-8") as textFile:
                             html = '''
@@ -251,6 +131,44 @@ def jsonToHTMLHeader(jsonPath, HTMLPath):
                     </hgroup> <!-- hgroup -->
                 </header>
             </div> <!-- head -->
+            <script>
+                const wikiUrl = 'https://en.wikipedia.org'
+                const params = 'action=query&list=search&format=json&origin=*'
+
+                new Autocomplete('#autocomplete', {
+                    // Search function can return a promise which resolves with an array of
+                    // results. In this case we're using the Wikipedia search API.
+                    search: input => {
+                        const url = `${wikiUrl}/w/api.php?${params}&srsearch=${encodeURI(input)}`
+
+                        return new Promise(resolve => {
+                        if (input.length < 1) {
+                            return resolve([])
+                        }
+
+                        fetch(url)
+                            .then(response => response.json())
+                            .then(data => {
+                                resolve(data.query.search)
+                            })
+                        })
+                    },
+                    
+                    // Wikipedia returns a format like this: 
+                    // {
+                    //   pageid: 12345,
+                    //   title: 'Article title',
+                    //   ...
+                    // } 
+                    // We want to display the title
+                    getResultValue: result => result.title,
+
+                    // Open the selected article in a new window
+                    onSubmit: result => {
+                        window.open(`${wikiUrl}/wiki/${encodeURI(result.title)}`)
+                    }
+                })
+            </script>
 
             <div id="body">
                 <div id="cols">
@@ -332,44 +250,6 @@ def jsonToHTMLHeader(jsonPath, HTMLPath):
                 </div>
             </div> <!-- body -->
         </div> <!-- whole_wrapper -->
-        <script>
-            const wikiUrl = 'https://en.wikipedia.org'
-            const params = 'action=query&list=search&format=json&origin=*'
-
-            new Autocomplete('#autocomplete', {
-                // Search function can return a promise which resolves with an array of
-                // results. In this case we're using the Wikipedia search API.
-                search: input => {
-                    const url = `${wikiUrl}/w/api.php?${params}&srsearch=${encodeURI(input)}`
-
-                    return new Promise(resolve => {
-                    if (input.length < 1) {
-                        return resolve([])
-                    }
-
-                    fetch(url)
-                        .then(response => response.json())
-                        .then(data => {
-                            resolve(data.query.search)
-                        })
-                    })
-                },
-                
-                // Wikipedia returns a format like this: 
-                // {
-                //   pageid: 12345,
-                //   title: 'Article title',
-                //   ...
-                // } 
-                // We want to display the title
-                getResultValue: result => result.title,
-
-                // Open the selected article in a new window
-                onSubmit: result => {
-                    window.open(`${wikiUrl}/wiki/${encodeURI(result.title)}`)
-                }
-            })
-        </script>
     </body>
 </html>'''
 
@@ -383,149 +263,12 @@ def jsonToHTMLHeader(jsonPath, HTMLPath):
 def applyHTMLToApp(dir):
     with io.open(dir + '/app.js',"w", encoding="utf-8") as appOpen:
         data = '''
-// expres
-const express = require('express')
-const app = express()
-
-// third-party
-const compression = require('compression')
-const bodyParser = require('body-parser')
-const helmet = require('helmet')
-
-// built-in
-const fs = require('fs')
-
-// custom
-const HTMLLoader = require('./feature/HTMLLoader.js')
-const HTMLLoaderInst = new HTMLLoader()
-const dataLoader = require('./feature/dataLoader.js')
-const dataLoaderInst = new dataLoader()
-const mongoClient = require('./feature/mongoClient.js')
-const mongoClientInst = new mongoClient()
-
-// heroku
-const PORT = process.env.PORT || 5000
-
-// middlewares
-app.use(express.static('public'))
-app.use(helmet())
-app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
-    extended: true
-}))
-app.use(compression())
-
-// Home
-app.get('/', (req, res) => HTMLLoaderInst.assembleHTML(res, 'public/html','home'))
-
-// Search
-app.get('/search', (req, res) => onSearch(req, res))
 
 // Main'''
 
         for main in mainMenus:
             data += '''
 app.get("/" + encodeURIComponent("'''+main.name+'''"), (req, res) => HTMLLoaderInst.assembleHTML(res, "'''+URLSourcePathBase+'/'+main.path+'", "'+main.name+'"))'
-
-        data +='''
-
-// Sub'''
-
-        for sub in subMenus:
-            data += '''
-app.get("/" + encodeURIComponent("'''+sub.name+'''"), (req, res) => HTMLLoaderInst.assembleHTML(res, "'''+URLSourcePathBase+'/'+sub.path+'", "'+sub.name+'"))'
-
-        data +='''
-
-// Side'''
-
-        for side in sideMenus:
-            data += '''
-app.get("/" + encodeURIComponent("'''+side.name+'''"), (req, res) => HTMLLoaderInst.assembleHTML(res, "'''+URLSourcePathBase+'/'+side.path+'", "'+side.name+'"))'
-
-        data += '''
-
-// image'''
-        for image in images:
-            data += '''
-app.get("/'''+image+'''", (req, res) => res.sendFile("/public/image/'''+image+'''", { root : __dirname}))'''
-
-        data += '''
-
-// app.post('/filter_process', (req, res) => res.send(onSearchWithFilter(req, res)))
-// app.get('/filter', (req, res) => res.send(HTMLLoaderInst.resultHandlingForFilter(dataLoaderInst.metaData)))
-
-app.use(function(req, res, next) {
-    res.status(404)
-    HTMLLoaderInst.assembleHTML(res, 'public/html', 'home')
-    console.log("something wrong! req.url : " + req.url)
-});
-
-app.use(function (err, req, res, next) {
-    console.error(err.stack)
-    res.status(500).send('Something broke!')
-});
-
-try {
-    app.listen(PORT, () => console.log(`agjac on port ${PORT}!`))
-} catch (e) {
-    console.error(e)
-} finally {
-    mongoClientInst.close()
-}
-
-//
-// functions
-//
-async function onSearch(req, res) {
-    function arrayRemove(arr, value) {
-        return arr.filter(function(ele) {
-        return ele != value;
-        });
-    }
-    
-    const searchTarget = req.query.target
-
-    // let [foo, bar] = await Promise.all([getFoor(), getBar()]);
-    // mongoRes = mongoClientInst.findOneListingById(searchTarget)
-    //             .then(function(v){
-    //                     console.log('success!', v)
-    //                 },
-    //                 function(v){
-    //                     console.log('failure', v)
-    //                 }
-    //             )
-    // console.log('mongoRes : ',mongoRes)
-
-    let mongoRes = await mongoClientInst.findOneListingById(searchTarget)
-    
-    if (mongoRes) {
-        // searchRes = dataLoaderInst.searchData(searchTarget, '', '');
-        searchRes = {
-            resultTotalCount: 0,
-            resObjList: []
-        }
-
-        return HTMLLoaderInst.assembleSearchResultHTML(res, searchTarget, mongoRes, searchRes, dataLoaderInst.metaData);
-
-    } else {
-        return HTMLLoaderInst.assembleHTML(res, 'public/html', 'home');
-    }
-    // const filterCategory = arrayRemove(req.query.filterCategory.replace(/';;'/g, ';').split(';'), '')
-    // const filterContents = arrayRemove(req.query.filterContents.replace(/';;'/g, ';').split(';'), '')
-
-    // nothing to search
-    // if (searchTarget === undefined || searchTarget.length === 0 || searchTarget.replace(/\s/g, '') === '') {
-    //     return HTMLLoaderInst.assembleHTML(res, 'public/html', 'home');
-    // // something to search
-    // } else {
-    //     // const result = dataLoaderInst.searchData(searchTarget, filterCategory, filterContents);
-        // result = dataLoaderInst.searchData(searchTarget, '', '');
-
-        // // const resultTotalCount = result.resultTotalCount;
-
-        // return HTMLLoaderInst.assembleSearchResultHTML(res, searchTarget, result, dataLoaderInst.metaData);
-    // }
-}'''
 
         appOpen.write(data)
         print(dir + '/app.js')
@@ -535,11 +278,6 @@ async function onSearch(req, res) {
 # 
 
 mkdirOnPath(HTMLPathBase)
-
-setImage(imagePathBase)
-
-# load json contents onto memory 
-setMenu(jsonPathBase)
 
 jsonToHTMLHeader(jsonPathBase, HTMLPathBase)
 

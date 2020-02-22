@@ -1,0 +1,17 @@
+{
+    "root": "once",
+    "from": [],
+    "redirection":"",
+    "data": [
+        {
+            "_usage": "~하고, ~하면\n(어느 시점 이후)",
+            "_speech": "conjunction",
+            "_chunks": [
+                "as soon as",
+                "when",
+                "after"
+            ],
+            "_video": "aExtT-X2ysM"
+        }
+    ]
+}

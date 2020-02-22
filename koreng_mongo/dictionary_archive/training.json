@@ -1,0 +1,17 @@
+{
+    "root": "training",
+    "from": [
+        "train"
+    ],
+    "redirection":"",
+    "data": [
+        {
+            "_usage": "훈련",
+            "_speech": "n",
+            "_chunks": [
+                "train -ing"
+            ],
+            "_video": "aExtT-X2ysM"
+        }
+    ]
+}

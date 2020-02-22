@@ -1,50 +1,15 @@
 {
-    "_wordset": "",
-    "_redirection":"",
-    "_data": [
+    "root": "",
+    "from":[],
+    "redirection":"",
+    "data": [
         {
-            "__represent": "",
-            "__speech": "",
-            "__tense": "",
-            "__pronounce": "",
-            "__usage": [
-                {
-                    "___extra": [
-                        ""
-                    ],
-                    "___origin": [
-                        ""
-                    ],
-                    "___meaning": "",
-                    "___meaningPiece": [
-                        ""
-                    ],
-                    "___compare": [
-                        ""
-                    ],
-                    "___synonym": [
-                        ""
-                    ],
-                    "___not": [
-                        ""
-                    ],
-                    "___image": [
-                        {
-                            "____source": "",
-                            "____link": ""
-                        }
-                    ],
-                    "___video": [
-                        {
-                            "____source": "",
-                            "____link": ""
-                        }
-                    ]
-                }
-            ]
+            "_usage": "",
+            "_speech": "",
+            "_chunks": [
+                ""
+            ],
+            "_video": ""
         }
-    ],
-    "_krSearch": [
-        ""
     ]
 }

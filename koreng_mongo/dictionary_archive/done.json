@@ -1,0 +1,19 @@
+{
+    "root": "done",
+    "from": [
+        "do"
+    ],
+    "redirection":"",
+    "data": [
+        {
+            "_usage": "다 한 상태, 다 끝낸 상태",
+            "_speech": "v",
+            "_chunks": [
+                "have done with sth",
+                "be done v-ing",
+                "finished"
+            ],
+            "_video": "aExtT-X2ysM"
+        }
+    ]
+}

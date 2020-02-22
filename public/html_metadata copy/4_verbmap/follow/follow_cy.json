@@ -1,9 +1,0 @@
-{
-    "nodes": [
-        { "data": { "id": "follow", "name": "follow", "href": "http://localhost:5000/sub_follow" } },
-        { "data": { "id": "in accordance with", "name": "in accordance with", "href": "http://localhost:5000/in accordance with" } }
-    ],
-    "edges": [
-        { "data": { "source": "follow", "target": "in accordance with" } }
-    ]
-}

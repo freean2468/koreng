@@ -1,0 +1,17 @@
+{
+    "root": "might",
+    "from": [
+        "may"
+    ],
+    "redirection":"",
+    "data": [
+        {
+            "_usage": "'~할 수도 있다' 는 어감을 추가",
+            "_speech": "mv",
+            "_chunks": [
+                "possibility"
+            ],
+            "_video": "aExtT-X2ysM"
+        }
+    ]
+}
