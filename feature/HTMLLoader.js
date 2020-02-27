@@ -3,6 +3,7 @@ module.exports = HTMLLoader
 const PORT = process.env.PORT || 5000
 const URL = process.env.URL || "http://localhost"
 const TARGET = URL + ':' + PORT
+console.log(process.env)
 
 // HTMLLoader manages the ways of loading html files.
 function HTMLLoader() {
