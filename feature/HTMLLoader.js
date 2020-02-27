@@ -19,7 +19,7 @@ function HTMLLoader() {
   this.fs = require('fs')
   this.pt = require('path')
   this.templateJson = JSON.parse(this.fs.readFileSync("metadata/HTMLTemplate.json", 'utf8'))
-  this.autocomplete = this.fs.readFileSync("metadata/script_autocomplete.js", 'utf8').replaceAll('TARGET',TARGET)
+  this.autocomplete = replaceAll(this.fs.readFileSync("metadata/script_autocomplete.js", 'utf8'), 'TARGET',TARGET)
   this.cytoscape = this.fs.readFileSync("metadata/script_cytoscape.js", 'utf8')
 
   this.getTemplate = function (page, html) {
