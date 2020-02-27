@@ -36,15 +36,12 @@
 //     }
 // })
 
-const PORT = process.env.PORT || 5000
-const URL = process.env.URL || "http://localhost"
-const target = URL + ':' + PORT
 const params = 'presearch?target='
 
 new Autocomplete('#autocomplete', {
     search: input => {
-        const url = target+"/"+params+encodeURI(input)
-
+        const url = "TARGET"+"/"+params+encodeURI(input)
+        console.log(url)
         return new Promise(resolve => {
         if (input.length < 1) {
             return resolve([])

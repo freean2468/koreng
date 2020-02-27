@@ -1,11 +1,11 @@
-fetch("${PORT}/cy?target=${searchTarget}").then(response => response.json().then(json => {
+fetch("${TARGET}/cy?target=${searchTarget}").then(response => response.json().then(json => {
     var data = json.data
     var root = json.root
 
     cy.add([{group: 'nodes', data : { id: root, label: root }, classes: "root" } ])
     
     data.forEach(function (item){
-        fetch("${PORT}/video?target="+item["_video"]).then(response => response.json().then(videoJson => {
+        fetch("${TARGET}/video?target="+item["_video"]).then(response => response.json().then(videoJson => {
             let div = document.createElement('div');
             div.setAttribute("class","hidden");
             div.setAttribute("id",item['_usage']);

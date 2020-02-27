@@ -1,13 +1,15 @@
 module.exports = HTMLLoader
 
-const PORT = "http://localhost:5000"
+const PORT = process.env.PORT || 5000
+const URL = process.env.URL || "http://localhost"
+const TARGET = URL + ':' + PORT
 
 // HTMLLoader manages the ways of loading html files.
 function HTMLLoader() {
   this.fs = require('fs')
   this.pt = require('path')
   this.templateJson = JSON.parse(this.fs.readFileSync("metadata/HTMLTemplate.json", 'utf8'))
-  this.autocomplete = this.fs.readFileSync("metadata/script_autocomplete.js", 'utf8')
+  this.autocomplete = this.fs.readFileSync("metadata/script_autocomplete.js", 'utf8').replace('TARGET',TARGET)
   this.cytoscape = this.fs.readFileSync("metadata/script_cytoscape.js", 'utf8')
 
   this.getTemplate = function (page, html) {
@@ -34,7 +36,7 @@ function HTMLLoader() {
       <div class="head">
         <header>
           <hgroup>
-            <p class="title"><a href="${PORT}">SensebeDictionary ver.Beta</a></p>
+            <p class="title"><a href="${TARGET}">SensebeDictionary ver.Beta</a></p>
             <p class="subtitle"><small>감각, 사전이 되다</small></p>
             <nav id="search_group">
               <div class="sgroup">
@@ -56,7 +58,7 @@ function HTMLLoader() {
                   <li>
                     <!--<li class="selected">-->
                     <div class="label public">
-                      <a class="pagelink" href="${PORT}/main_toddler">첫걸음</a>
+                      <a class="pagelink" href="${TARGET}/main_toddler">첫걸음</a>
                     </div>
                     <div class="sub_nav depth_1" style="left: -51px; position: absolute; width: 199px; display: none;" loaded="true">
                       <ul class="sub_nav">
@@ -127,7 +129,7 @@ function HTMLLoader() {
           return str.split(searchStr).join(replaceStr);
         }
         
-        js = replaceAll(js, "${PORT}", PORT)
+        js = replaceAll(js, "${TARGET}", TARGET)
         js = replaceAll(js, "${searchTarget}", searchTarget)
         template = template.replace('<!-- DYNAMIC -->', js+that.cytoscape)
 
