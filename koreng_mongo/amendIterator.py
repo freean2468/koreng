@@ -9,8 +9,8 @@ import json
 from collections import OrderedDict
 import sys
 
-targetPath= os.getcwd() + "/archive"
-savePath= os.getcwd() + "/archive_copy"
+targetPath= os.getcwd() + "/dictionary_archive"
+savePath= os.getcwd() + "/dictionary_archive_copy"
 target = 'json'
 exception = []
 
@@ -33,8 +33,8 @@ def amend(path):
                 contents = json.load(openFile)
 
                 '''
-                for _data in contents["_data"]:
-                    for _idx, __usage in enumerate(_data['__usage']):
+                for data in contents["data"]:
+                    for _idx, __usage in enumerate(data['__usage']):
                         # __usage["___image"]=[]
                         # __usage["___image"].append("")
 
@@ -46,73 +46,39 @@ def amend(path):
                             __usage['___extra'][__idx] = __usage['___extra'][__idx].replace(" S ", " Singular ")
                             __usage['___extra'][__idx] = __usage['___extra'][__idx].replace(" L ", " Linking ")
 
-                            print("wordset : " + contents["_wordset"] + ", ___extra : " + __usage['___extra'][__idx])
+                            print("wordset : " + contents["root"] + ", ___extra : " + __usage['___extra'][__idx])
                             
                 '''
                 # old format -> new format code
                 
                 newContents = OrderedDict()
 
-                newContents["_wordset"] = contents["_wordset"]
-                newContents["_redirection"] = ""
+                newContents["root"] = contents["root"]
+                newContents["redirection"] = contents["redirection"]
+                newContents["from"] = []
+                for elm in newContents["from"]:
+                    newContents["from"].append(elm)
 
-                newContents["_data"] = []
+                newContents["data"] = []
 
-                for _data in contents["_data"]:
+                for data in contents["data"]:
                     _temp = OrderedDict()
 
-                    _temp["__represent"] = _data["__represent"]
-                    _temp["__speech"] = _data["__speech"]
-                    _temp["__tense"] = _data["__tense"]
-                    _temp["__pronounce"] = _data["__pronounce"]
-                    _temp["__usage"] = []
+                    _temp["_usage"] = data["_usage"]
 
-                    for __usage in _data["__usage"]:
-                        usage = OrderedDict()
+                    # print(contents["root"])
+                    _temp["_speech"] = []
+                    for elm in data["_speech"]:
+                        _temp["_speech"].append(elm)
 
-                        usage["___extra"] = []
-                        for extra in __usage["___extra"]:
-                            usage["___extra"].append(extra)
+                    _temp["_video"] = data["_video"]
+                    _temp["_chunks"] = []
+                    for elm in data["_chunks"]:
+                        _temp["_chunks"].append(elm)
 
-                        usage["___origin"] = []
-                        for origin in __usage["___origin"]:
-                            usage["___origin"].append(origin)
+                    _temp["_text"] = []
 
-                        usage["___meaning"] = __usage["___meaning"]
-
-                        usage["___meaningPiece"] = []
-                        if "___meaningPiece" in __usage:
-                            for meaningPiece in __usage["___meaningPiece"]:
-                                usage["___meaningPiece"].append(meaningPiece)
-
-                        usage["___compare"] = []
-                        for compare in __usage["___compare"]:
-                            usage["___compare"].append(compare)
-
-                        usage["___synonym"] = []
-                        for synonym in __usage["___synonym"]:
-                            usage["___synonym"].append(synonym)
-
-                        usage["___not"] = []
-                        for _not in __usage["___not"]:
-                            usage["___not"].append(_not)
-
-                        usage["___image"] = []
-                        for image in __usage["___image"]:
-                            usage["___image"].append(image)
-
-                        usage["___video"] = [{
-                            "____source": "",
-                            "____link": ""
-                        }]
-
-                        _temp["__usage"].append(usage)
-
-                    newContents["_data"].append(_temp)
-
-                newContents["_krSearch"] = []
-                for _krSearch in contents["_krSearch"]:
-                    newContents["_krSearch"].append(_krSearch)
+                    newContents["data"].append(_temp)
 
                 # print(newContents)
                 

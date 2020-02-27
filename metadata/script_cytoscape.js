@@ -9,7 +9,7 @@ var cy = cytoscape({
           selector: 'node',
           style: {
               'content': 'data(label)','height':'label','width':'label',
-              'text-valign': 'center','text-outline-width': 0.8,'font-size': 8,'text-outline-color': '#000','text-wrap':'none','text-max-width':100,
+              'text-valign': 'center','text-outline-width': 0.8,'font-size': 8,'text-outline-color': '#000','text-wrap':'wrap','text-max-width':'1000px',
               'color': 'white','background-color': '#000',
               'border-width':0,'padding':5,'shape':'round-rectangle','z-compound-depth':'top'
           }
@@ -33,17 +33,18 @@ var cy = cytoscape({
 
       // general style
       {selector: '.root',style: {'border-color' : '#fbfb11','border-width' : 3,'font-size': 16}},
-      {selector: '.usage',style: {'background-color': '#222','font-size': 12,'border-color':'#fff','border-width':1,'border-opacity':0.9,'border-style':'solid','padding' : 5}},
-      {selector: '.chunk',style: {'font-size': 10}},
+      {selector: '.usage',style: {'background-color': '#222','font-size': 12,'border-color':'#fff','border-width':1,'border-opacity':0.9,'border-style':'solid','padding' : 5,'background-opacity':0.5}},
+      {selector: '.chunk',style: {'border-color':'#fff','border-width':0.5,'border-opacity':0.8,'border-style':'dotted','padding':3,'background-opacity':0.5}},
 
       // edge style
-      {selector: '.edge',style: {'width':0.8, 'opacity':0.6, 'arrow-scale': 1.0, 'line-color': 'DarkViolet','target-arrow-color': 'DarkViolet'}},
+      {selector: '.edge',style: {'width':0.8, 'opacity':0.8, 'arrow-scale': 1.0, 'line-color': 'DarkViolet','target-arrow-color': 'DarkViolet'}},
       {selector: '.edge_verb', style: {'line-color': 'Tomato', 'target-arrow-color': 'Tomato'}},
       {selector: '.edge_noun', style: {'line-color': 'SpringGreen','target-arrow-color': 'SpringGreen'}},
       {selector: '.edge_adjective', style: {'line-color': 'Turquoise','target-arrow-color': 'Turquoise'}},
       {selector: '.edge_adverb',style: {'line-color': 'DeepPink','target-arrow-color': 'DeepPink'}},
       {selector: '.edge_preposition', style: {'line-color': 'Pink','target-arrow-color': 'Pink'}},
       {selector: '.edge_conjunction',style: {'line-color': 'SlateBlue','target-arrow-color': 'SlateBlue'}},
+      {selector: '.edge_chunk',style: {'line-color': 'White','arrow-scale': 0.8, 'target-arrow-fill': 'filled','target-arrow-shape': 'circle','target-arrow-color': 'White','curve-style': 'straight', 'opacity':0.5}},
       
       // usage_node style
       {selector: '.usage',style: {'color': 'DarkViolet'}},
@@ -99,14 +100,10 @@ function makePopper(node) {
         onCreate: instance => { instance.popperInstance.reference = ref; }, // needed for ref positioning
 
         content: () => {
-            console.log(node.data('id'))
             let content = document.getElementById(node.data('id'));
-            console.log(content)
             let dummyDomEle = document.createElement('div');
 
             dummyDomEle.innerHTML = content.innerHTML + '<br>'
-
-            console.log(dummyDomEle.innerHTML)
 
             return dummyDomEle;
         },
@@ -119,9 +116,9 @@ function makePopper(node) {
         hideOnClick: false,
         multiple: false,
         sticky: true,
-        theme: 'agjak',
+        theme: 'sensebe',
         maxWidth: 1340,
-        distance: 60
+        distance: 30
     });
 
     node._trigger = false
@@ -144,37 +141,61 @@ function flipTrigger(node) {
   } else {
       node._trigger = true
       cy.stop()
+      node.tip.show()
+      const contentY = document.getElementsByClassName('tippy-content')[0].offsetHeight
+      node.tip.hide()
+      let posY = node.position()['y'] * cy.zoom()
+      
+      const divCy = document.getElementById('cy')
+      const cyHeight = divCy.offsetHeight
+      const margin = cyHeight - contentY
+      const offset_y = cyHeight - posY - (margin/2)
+
+    //   console.log("cyHeight : ",cyHeight)
+    //   console.log("posY : ",posY)
+    //   console.log("margin/2 : ",margin/2)
+    //   console.log("offset_y : ",offset_y)
+    //   console.log("contentY", contentY)
+
       cy.animate({
-        fit: {
-          eles: node,
-          padding: 20
-        }
-      }, {
-        duration: 0
-      });
-      offset_x = document.getElementById('content').offsetWidth/2
-      offset_y = document.getElementById('content').offsetHeight/2 - 70
-      cy.animate({
-        pan: { x: cy.pan()['x'], y: cy.pan()['y'] - offset_y },
+        pan: { x: cy._panOrigin['x'], y: offset_y },
         zoom: cy.zoom()
       }, {
-        duration: ms
-      });
-      node.tip.show()
+        duration: ms,
+        complete: () => node.tip.show()
+      })
   }
 }
 
-cy.on('tap', function(){
-    cy.on('tap', function(event){
+cy.on('tap', function(event){
     var evtTarget = event.target;
 
-    if( evtTarget === cy )
+    // tap on background
+    if( evtTarget === cy ) {
         cy.nodes().forEach(function (node){
-        if (node._trigger === true) 
-            flipTrigger(node)
+            if (node._trigger === true) 
+                flipTrigger(node)
         })
-    });
+    }
 })
+
+cy.on('tapend', function(event){
+    var evtTarget = event.target;
+
+    // tap on background
+    if( evtTarget === cy ) {
+        // cy.setOrigin()
+        // console.log(cy.pan())
+        // console.log(cy.zoom())
+    }
+})
+
+document.addEventListener("dragstart", function( event ) {
+    // store a ref. on the dragged elem
+    dragged = event.target;
+    // make it half transparent
+    event.target.style.opacity = .5;
+}, false);
 
 cy.on('tap', '.usage', function() {
     origin = this
@@ -193,3 +214,46 @@ cy.on('mouseout', '.usage', function() {
     this.style('border-width', 1)
     $('html,body').css('cursor', 'default')
 })
+
+// Resizing
+var rtime;
+var timeout = false;
+var delta = 100;
+$(window).resize(function() {
+    rtime = new Date();
+    if (timeout === false) {
+        timeout = true;
+        setTimeout(resizeend, delta);
+    }
+});
+
+function getIframeSize () {
+    cyWidth = document.getElementById('cy').offsetWidth
+    iframeWidth = cyWidth - (cyWidth*1/10)
+    if (iframeWidth >= 1280)
+        iframeWidth = 1280
+    iframeHeight = iframeWidth/2
+
+    return {
+        "width":iframeWidth,
+        "height":iframeHeight
+    }
+}
+
+function resizeend() {
+    if (new Date() - rtime < delta) {
+        setTimeout(resizeend, delta);
+    } else {
+        timeout = false;
+        // cy.resize()
+        cy.fit()
+        cy.setOrigin()
+        videos = document.getElementsByClassName('iframe_video')
+        size = getIframeSize()
+        for (let video of videos) {
+            video.setAttribute('width', size['width'])
+            video.setAttribute('height', size['height'])
+        }
+    }               
+}
+//

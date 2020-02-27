@@ -36,11 +36,19 @@ app.use(compression())
 app.use('/', express.static(__dirname+'/public/image'));
 
 // Home
-app.get('/', (req, res) => HTMLLoaderInst.assembleHTML(res, '','home'))
+app.get('/', (req, res) => HTMLLoaderInst.assembleStaticHTML(res, '','home'))
 
 // Search
 app.get('/preSearch', (req, res) => preSearch(req, res))
-app.get('/search', (req, res) => onSearch(req, res))
+app.get('/search', (req, res) => {
+    let target = req.query.target
+    const redirectionTable = mongoClientInst.redirectionTable
+    
+    // check redirection
+    if (redirectionTable[target] !== undefined)
+        target = redirectionTable[target]
+    HTMLLoaderInst.assembleSearchHTML(res, req.query.target)
+})
 
 // get cy data from mongoDB
 app.get('/cy', (req, res, next) => getCyData(req, res, next))
@@ -48,17 +56,12 @@ app.get('/cy', (req, res, next) => getCyData(req, res, next))
 // get video data from mongoDB
 app.get('/video', (req, res, next) => getVideoData(req, res, next))
 
-//REPLACE_OPEN
 // Main
-app.get("/" + encodeURIComponent("toddler"), (req, res) => HTMLLoaderInst.assembleHTML(res, "toddler", "toddler"))
-//REPLACE_CLOSE
-
-// app.post('/filter_process', (req, res) => res.send(onSearchWithFilter(req, res)))
-// app.get('/filter', (req, res) => res.send(HTMLLoaderInst.resultHandlingForFilter(dataLoaderInst.metaData)))
+app.get("/" + encodeURIComponent("toddler"), (req, res) => HTMLLoaderInst.assembleStaticHTML(res, "toddler", "toddler"))
 
 app.use(function(req, res, next) {
     res.status(404)
-    HTMLLoaderInst.assembleHTML(res, '', 'home')
+    HTMLLoaderInst.assembleStaticHTML(res, '', 'home')
     console.log("something wrong! req.url : " + req.url)
 });
 
@@ -80,6 +83,7 @@ try {
 //
 function preSearch(req, res) {
     const searchTarget = req.query.target
+    redirectionTable = mongoClientInst.redirectionTable
     presearchTable = mongoClientInst.presearchTable
     var responseData = []
     const exp = new RegExp(searchTarget)
@@ -117,49 +121,4 @@ async function getVideoData(req, res, next) {
         console.log("something's wrong!!in getVideoData")
         next()
     }    
-}
-
-function onSearch(req, res) {
-    function arrayRemove(arr, value) {
-        return arr.filter(function(ele) {
-            return ele != value;
-        });
-    }
-    
-    const searchTarget = req.query.target
-
-    // let [foo, bar] = await Promise.all([getFoor(), getBar()]);
-    // mongoRes = mongoClientInst.findOneListingById(searchTarget)
-    //             .then(function(v){
-    //                     console.log('success!', v)
-    //                 },
-    //                 function(v){
-    //                     console.log('failure', v)
-    //                 }
-    //             )
-    // console.log('mongoRes : ',mongoRes)
-
-    searchRes = {
-        resultTotalCount: 0,
-        resObjList: []
-    }
-
-
-    return HTMLLoaderInst.assembleSearchResultHTML(res, searchTarget, searchRes, dataLoaderInst.metaData);
-
-    // const filterCategory = arrayRemove(req.query.filterCategory.replace(/';;'/g, ';').split(';'), '')
-    // const filterContents = arrayRemove(req.query.filterContents.replace(/';;'/g, ';').split(';'), '')
-
-    // nothing to search
-    // if (searchTarget === undefined || searchTarget.length === 0 || searchTarget.replace(/\s/g, '') === '') {
-    //     return HTMLLoaderInst.assembleHTML(res, 'public/html', 'home');
-    // // something to search
-    // } else {
-    //     // const result = dataLoaderInst.searchData(searchTarget, filterCategory, filterContents);
-        // result = dataLoaderInst.searchData(searchTarget, '', '');
-
-        // // const resultTotalCount = result.resultTotalCount;
-
-        // return HTMLLoaderInst.assembleSearchResultHTML(res, searchTarget, result, dataLoaderInst.metaData);
-    // }
 }

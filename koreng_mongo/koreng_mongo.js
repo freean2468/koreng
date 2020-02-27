@@ -12,14 +12,7 @@ const fs = require('fs')
 const {MongoClient} = require('mongodb');
 const path = require('path')
 
-// custom
-// const dataLoader = require('../feature/dataLoader.js')
-// const dataLoaderInst = new dataLoader()
-// const mongoClient = require('../feature/mongoClient.js')
-// const mongoClientInst = new mongoClient()
-
-// heroku
-const PORT = process.env.PORT || 5100
+const PORT = 5100
 
 // middlewares
 app.use(express.static('public'))
@@ -62,6 +55,73 @@ function speechTemplate(idx) {
     <label><input type="checkbox" name="data[${idx}][_speech][]" value="exclamation">exclamation</label>`
 }
 
+function baseTemplate() {
+    const autocomplete = fs.readFileSync("./metadata/script_autocomplete.js", 'utf8')
+    var base = `
+    <!doctype html>
+    <html>
+    <head>
+        <title>Data Management Tool</title>
+        <meta charset="utf-8">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://unpkg.com/@trevoreyre/autocomplete-js"></script>
+        <script src="./js/search.js"></script>
+        <script src="./js/general.js"></script>
+        <script src="./js/serializeObject.js"></script>
+        <link rel="stylesheet" type="text/css" href="./style/autocomplete.css">
+    </head>
+    <body>
+        <div class="container">
+            <header id="search_group">
+                <div class="sgroup">
+                    <form class="search" action="/search" style="overflow:visible;display:inline-flex" data-submitfalse="q" method="GET" role="search">
+                        <div id="autocomplete" class="autocomplete" >
+                            <input class="autocomplete-input" name="target" maxlength="2048" type="text" aria-autocomplete="both" aria-haspopup="false" autocapitalize="off" autocomplete="off" autocorrect="off" role="combobox" spellcheck="false" title="검색" aria-label="검색"/>
+                            <ul class="autocomplete-result-list"></ul>
+                        </div>
+
+                        <div class="item_btn">
+                            <input class="btn" id="search_btn" value="검색" aria-label="검색" name="btnK" type="submit">
+                            <button type="button" class="btn btn_home" onclick="onClickHome()">Home</button>
+                        </div>
+                    </form>
+                </div>
+            </header><!-- search_group -->
+            <section class="content">
+                <nav>
+                    <!-- NAV -->
+                </nav>
+                <main>
+                    <!-- SEARCH -->
+                </main>
+            </section
+        </div>
+    </body>
+    <script>
+        ${autocomplete}
+    </script>
+    </html>
+    `
+
+    base = base.replace('<!-- NAV -->', navTemplate())
+
+    return base
+}
+
+function navTemplate() {
+    const list = fs.readdirSync('dictionary_archive')
+    var nav = `<ul>`
+
+    for(let item in list) {
+        let filename = list[item].split('.')[0]
+        nav += `<li><a href="http://localhost:${PORT}/search?target=${filename}">${filename}</a></li>`
+    }
+    nav += `
+    </ul>
+    `
+    return nav
+}
+
 function preSearch(req, res) {
     const searchTarget = req.query.target
     filelist = fs.readdirSync('./dictionary_archive')
@@ -81,7 +141,6 @@ function preSearch(req, res) {
 
 function search(req, res) {
     const searchTarget = req.query.target
-    const autocomplete = fs.readFileSync("./metadata/script_autocomplete.js", 'utf8')
     const filelist = fs.readdirSync(ARCHIVE_PATH)
     var file, json
     for (let idx = 0; idx < filelist.length; ++idx){
@@ -97,36 +156,9 @@ function search(req, res) {
         json = JSON.parse(file)
     }
 
-    var template = ''
+    var baseTem = baseTemplate()
 
-    template += `
-  <!doctype html>
-  <html>
-    <head>
-      <title>Data Management Tool</title>
-      <meta charset="utf-8">
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-      <script src="https://unpkg.com/@trevoreyre/autocomplete-js"></script>
-      <script src="./js/search.js"></script>
-      <script src="./js/general.js"></script>
-      <script src="./js/serializeObject.js"></script>
-      <link rel="stylesheet" type="text/css" href="./style/autocomplete.css">
-    </head>
-    <body>
-        <nav id="search_group">
-            <div class="sgroup">
-                <form class="search" action="/search" style="overflow:visible;display:inline-flex" data-submitfalse="q" method="GET" role="search">
-                    <div id="autocomplete" class="autocomplete" >
-                        <input class="autocomplete-input" name="target" maxlength="2048" type="text" aria-autocomplete="both" aria-haspopup="false" autocapitalize="off" autocomplete="off" autocorrect="off" role="combobox" spellcheck="false" title="검색" aria-label="검색"/>
-                        <ul class="autocomplete-result-list"></ul>
-                    </div>
-
-                    <div class="item_btn">
-                        <input class="btn search_btn" value="Agjak 검색" aria-label="Agjak 검색" name="btnK" type="submit">
-                    </div>
-                </form>
-            </div>
-        </nav> <!-- search_group -->
+    var template = `
         <div>
             <form class="insert" id="insert" action="/insert" style="overflow:visible;display:block" data-submitfalse="q" method="GET" role="search">
                 <br>
@@ -159,8 +191,8 @@ function search(req, res) {
     }
     template +=`
                 </div>
-                <button type="button" class="btn" id="btn_add_from" onclick="onClickAddFrom()">add from</button>
-                <button type="button" class="btn" id="btn_del_from" onclick="onClickDelFrom()">del from</button>
+                <button type="button" class="btn btn_add_from" onclick="onClickAddFrom()">add from</button>
+                <button type="button" class="btn btn_del_from" onclick="onClickDelFrom()">del from</button>
                 <div id="redirection">`
     if (file) {
         template +=`
@@ -197,11 +229,21 @@ function search(req, res) {
             })
             template += `
                         </div>
-                        <button type="button" class="btn" id="btn_add_chunk" onclick="onClickAddChunk(this)" value="${idx}">add chunk</button>
-                        <button type="button" class="btn" id="btn_del_chunk" onclick="onClickDelChunk(this)" value="${idx}">del chunk</button>
+                        <button type="button" class="btn btn_add_chunk" onclick="onClickAddChunk(this)" value="${idx}">add chunk</button>
+                        <button type="button" class="btn btn_del_chunk" onclick="onClickDelChunk(this)" value="${idx}">del chunk</button>
                         <div>data_${idx}_video : <input name="data[${idx}][_video]" type="text" value="${data["_video"]}"/></div>
-                    </div>
-                </div>`
+
+            <div id=data_${idx}_text>`
+            
+            data["_text"].forEach(function (text, _idx) {
+                template += `
+                            <div id=data_${idx}_text_${_idx}> data_${idx}_text : <input name="data[${idx}][_text][${_idx}]" type="text" value="${text}"/> </div>`
+            })
+            template += `
+                        </div>
+                        <button type="button" class="btn btn_add_text" onclick="onClickAddText(this)" value="${idx}">add text</button>
+                        <button type="button" class="btn btn_del_text" onclick="onClickDelText(this)" value="${idx}">del text</button>
+                    </div>`
         })
     } else {
         template += `
@@ -214,121 +256,151 @@ function search(req, res) {
                         <div id=data_0_chunk>
                             <!--<div id=data_0_chunk_0> data_0_chunk : <input name="data[0][_chunks][0]" type="text"/> </div>-->
                         </div>
-                        <button type="button" class="btn" id="btn_add_chunk" onclick="onClickAddChunk(this)" value="0">add chunk</button>
-                        <button type="button" class="btn" id="btn_del_chunk" onclick="onClickDelChunk(this)" value="0">del chunk</button>
+                        <button type="button" class="btn btn_add_chunk" onclick="onClickAddChunk(this)" value="0">add chunk</button>
+                        <button type="button" class="btn btn_del_chunk" onclick="onClickDelChunk(this)" value="0">del chunk</button>
                         <div>data_0_video : <input name="data[0][_video]" type="text"/></div>
-                    </div>
-                </div>`
+                        <div id=data_0_text>
+                            <div id=data_0_text_0> data_0_text : <input name="data[0][_text][0]" type="text"/> </div>
+                        </div>
+                        <button type="button" class="btn btn_add_text" onclick="onClickAddText(this)" value="0">add text</button>
+                        <button type="button" class="btn btn_del_text" onclick="onClickDelText(this)" value="0">del text</button>
+                    </div>`
     }
 
         template += `
-                <button type="button" class="btn" id="btn_add_data" onclick="onClickAddData()">add data</button>
-                <button type="button" class="btn" id="btn_del_data" onclick="onClickDelData()">del data</button>
+                </div>
+                <button type="button" class="btn btn_add_data" onclick="onClickAddData()">add data</button>
+                <button type="button" class="btn btn_del_data" onclick="onClickDelData()">del data</button>
                 <div class="item_btn">
                     <input class="btn" id="insert_btn" value="insert" type="submit">
-                    <button type="button" class="btn" id="btn_home" onclick="onClickHome()">Home</button>
+                    <button type="button" class="btn btn_home" onclick="onClickHome()">Home</button>
                 </div>
             </form>
         </div>
-    </body>
-    <script>
-        function onClickAddFrom(){
-            from = document.getElementById('from')
-            len = from.children.length
 
-            let div = document.createElement('div')
-            div.setAttribute('id', 'from_'+len)
-            div.innerHTML = 'from : <input name="from[]" type="text"/>'
-            from.appendChild(div);
-        }
+        <script>
+            function onClickAddFrom(){
+                from = document.getElementById('from')
+                len = from.children.length
 
-        function onClickDelFrom(){
-            from = document.getElementById('from')
-            len = from.children.length - 1
-            child = document.getElementById('from_'+len)
-            from.removeChild(child);
-        }
+                let div = document.createElement('div')
+                div.setAttribute('id', 'from_'+len)
+                div.innerHTML = 'from : <input name="from[]" type="text"/>'
+                from.appendChild(div);
+            }
 
-        function onClickAddChunk(elm){
-            idx = elm.getAttribute("value")
-            chunk = document.getElementById('data_'+idx+'_chunk')
-            len = chunk.children.length
+            function onClickDelFrom(){
+                from = document.getElementById('from')
+                len = from.children.length - 1
+                child = document.getElementById('from_'+len)
+                from.removeChild(child);
+            }
 
-            let div = document.createElement('div')
-            div.setAttribute("id", "data_"+idx+"_chunk_"+len)
-            div.innerHTML = 'data_'+idx+'_chunk : <input name="data['+idx+'][_chunks]['+len+']" type="text"/>'
-            chunk.appendChild(div)
-        }
+            function onClickAddChunk(elm){
+                idx = elm.getAttribute("value")
+                chunk = document.getElementById('data_'+idx+'_chunk')
+                len = chunk.children.length
 
-        function onClickDelChunk(elm){
-            idx = elm.getAttribute("value")
-            chunk = document.getElementById('data_'+idx+'_chunk')
-            len = chunk.children.length -1
+                let div = document.createElement('div')
+                div.setAttribute("id", "data_"+idx+"_chunk_"+len)
+                div.innerHTML = 'data_'+idx+'_chunk : <input name="data['+idx+'][_chunks]['+len+']" type="text"/>'
+                chunk.appendChild(div)
+            }
 
-            child = document.getElementById('data_'+idx+'_chunk_'+len)
-            chunk.removeChild(child);
-        }
+            function onClickDelChunk(elm){
+                idx = elm.getAttribute("value")
+                chunk = document.getElementById('data_'+idx+'_chunk')
+                len = chunk.children.length -1
 
-        function onClickAddData(){
-            data = document.getElementById('data')
-            len = $("#data > div").length
-            let div = document.createElement('div')
-            div.setAttribute("id","data_"+len);
-            div.innerHTML += '<div> data_'+len+'_usage : <input name="data['+len+'][_usage]" type="text"/> </div>'
-            div.innerHTML += '<div> data_'+len+'_speech : </div>'
-            div.innerHTML += '<label><input type="checkbox" name="data['+len+'][_speech][]" value="verb">verb</label>'
-            div.innerHTML += '<label><input type="checkbox" name="data['+len+'][_speech][]" value="auxiliary verb">auxiliary verb</label>'
-            div.innerHTML += '<label><input type="checkbox" name="data['+len+'][_speech][]" value="phrasal verb">phrasal verb</label>'
-            div.innerHTML += '<label><input type="checkbox" name="data['+len+'][_speech][]" value="modal verb">modal verb</label>'
-            div.innerHTML += '<label><input type="checkbox" name="data['+len+'][_speech][]" value="adjective">adjective</label>'
-            div.innerHTML += '<label><input type="checkbox" name="data['+len+'][_speech][]" value="adverb">adverb</label>'
-            div.innerHTML += '<label><input type="checkbox" name="data['+len+'][_speech][]" value="conjunction">conjunction</label>'
-            div.innerHTML += '<label><input type="checkbox" name="data['+len+'][_speech][]" value="noun">noun</label>'
-            div.innerHTML += '<label><input type="checkbox" name="data['+len+'][_speech][]" value="pronoun">pronoun</label>'
-            div.innerHTML += '<label><input type="checkbox" name="data['+len+'][_speech][]" value="preposition">preposition</label>'
-            div.innerHTML += '<label><input type="checkbox" name="data['+len+'][_speech][]" value="determiner">determiner</label>'
-            div.innerHTML += '<label><input type="checkbox" name="data['+len+'][_speech][]" value="phrase">phrase</label>'
-            div.innerHTML += '<label><input type="checkbox" name="data['+len+'][_speech][]" value="idiom">idiom</label>'
-            div.innerHTML += '<label><input type="checkbox" name="data['+len+'][_speech][]" value="exclamation">exclamation</label>'
-            div.innerHTML += '</div>'
-            div.innerHTML += '<div id="data_'+len+'_chunk"> </div>'
-            // div.innerHTML += '<div id="data_'+len+'_chunk"> <div id="data_'+len+'_chunk_0"> data_'+len+'_chunk : <input name="data['+len+'][_chunks][]" type="text"/> </div></div>'
-            div.innerHTML += '<button type="button" class="btn" id="btn_add_chunk" onclick="onClickAddChunk(this)">add chunk</button>'
-            div.innerHTML += '<button type="button" class="btn" id="btn_del_chunk" onclick="onClickDelChunk(this)">del chunk</button>'
-            div.innerHTML += '<div>data_'+len+'_video : <input name="data['+len+'][_video]" type="text"/></div>'
-            btn_add_chunk = div.querySelector("#btn_add_chunk")
-            btn_add_chunk.setAttribute("value",len)
-            btn_del_chunk = div.querySelector("#btn_del_chunk")
-            btn_del_chunk.setAttribute("value",len)
-            data.appendChild(div);
-        }
+                child = document.getElementById('data_'+idx+'_chunk_'+len)
+                chunk.removeChild(child);
+            }
 
-        function onClickDelData(){
-            data = document.getElementById('data')
-            len = $("#data > div").length - 1
+            function onClickAddText(elm){
+                idx = elm.getAttribute("value")
+                text = document.getElementById('data_'+idx+'_text')
+                len = text.children.length
 
-            child = document.getElementById('data_'+len)
-            data.removeChild(child);
-        }
+                let div = document.createElement('div')
+                div.setAttribute("id", "data_"+idx+"_text_"+len)
+                div.innerHTML = 'data_'+idx+'_text : <input name="data['+idx+'][_text]['+len+']" type="text"/>'
+                text.appendChild(div)
+            }
 
-        function onClickHome(){
-            location.href = '/'
-        }
+            function onClickDelText(elm){
+                idx = elm.getAttribute("value")
+                text = document.getElementById('data_'+idx+'_text')
+                len = text.children.length -1
 
-        var test = $('form#insert').serializeObject()
-        //=> {user: {email: "jsmith@example.com", pets: ["cat", "dog"]}}
-        ${autocomplete}
-    </script>
-</html>`
+                child = document.getElementById('data_'+idx+'_text_'+len)
+                text.removeChild(child);
+            }
 
-    res.send(template)
+            function onClickAddData(){
+                data = document.getElementById('data')
+                len = $("#data > div").length
+                let div = document.createElement('div')
+                div.setAttribute("id","data_"+len);
+                div.innerHTML += '<div> data_'+len+'_usage : <input name="data['+len+'][_usage]" type="text"/> </div>'
+                div.innerHTML += '<div> data_'+len+'_speech : </div>'
+                div.innerHTML += '<label><input type="checkbox" name="data['+len+'][_speech][]" value="verb">verb</label> '
+                div.innerHTML += '<label><input type="checkbox" name="data['+len+'][_speech][]" value="auxiliary verb">auxiliary verb</label> '
+                div.innerHTML += '<label><input type="checkbox" name="data['+len+'][_speech][]" value="phrasal verb">phrasal verb</label> '
+                div.innerHTML += '<label><input type="checkbox" name="data['+len+'][_speech][]" value="modal verb">modal verb</label> '
+                div.innerHTML += '<label><input type="checkbox" name="data['+len+'][_speech][]" value="adjective">adjective</label> '
+                div.innerHTML += '<label><input type="checkbox" name="data['+len+'][_speech][]" value="adverb">adverb</label> '
+                div.innerHTML += '<label><input type="checkbox" name="data['+len+'][_speech][]" value="conjunction">conjunction</label> '
+                div.innerHTML += '<label><input type="checkbox" name="data['+len+'][_speech][]" value="noun">noun</label> '
+                div.innerHTML += '<label><input type="checkbox" name="data['+len+'][_speech][]" value="pronoun">pronoun</label> '
+                div.innerHTML += '<label><input type="checkbox" name="data['+len+'][_speech][]" value="preposition">preposition</label> '
+                div.innerHTML += '<label><input type="checkbox" name="data['+len+'][_speech][]" value="determiner">determiner</label> '
+                div.innerHTML += '<label><input type="checkbox" name="data['+len+'][_speech][]" value="phrase">phrase</label> '
+                div.innerHTML += '<label><input type="checkbox" name="data['+len+'][_speech][]" value="idiom">idiom</label> '
+                div.innerHTML += '<label><input type="checkbox" name="data['+len+'][_speech][]" value="exclamation">exclamation</label> '
+                div.innerHTML += '</div>'
+                div.innerHTML += '<div id="data_'+len+'_chunk"> </div>'
+                // div.innerHTML += '<div id="data_'+len+'_chunk"> <div id="data_'+len+'_chunk_0"> data_'+len+'_chunk : <input name="data['+len+'][_chunks][]" type="text"/> </div></div>'
+                div.innerHTML += '<button type="button" class="btn btn_add_chunk" onclick="onClickAddChunk(this)">add chunk</button>'
+                div.innerHTML += '<button type="button" class="btn btn_del_chunk" onclick="onClickDelChunk(this)">del chunk</button>'
+                div.innerHTML += '<div>data_'+len+'_video : <input name="data['+len+'][_video]" type="text"/></div>'
+                div.innerHTML += '<div id="data_'+len+'_text"> </div>'
+                // div.innerHTML += '<div id="data_'+len+'_text"> <div id="data_'+len+'_text_0"> data_'+len+'_text : <input name="data['+len+'][_chunks][]" type="text"/> </div></div>'
+                div.innerHTML += '<button type="button" class="btn btn_add_text" onclick="onClickAddText(this)">add text</button>'
+                div.innerHTML += '<button type="button" class="btn btn_del_text" onclick="onClickDelText(this)">del text</button>'
+                btn_add_chunk = div.querySelector(".btn_add_chunk")
+                btn_add_chunk.setAttribute("value",len)
+                btn_del_chunk = div.querySelector(".btn_del_chunk")
+                btn_del_chunk.setAttribute("value",len)
+
+                btn_add_text = div.querySelector(".btn_add_text")
+                btn_add_text.setAttribute("value",len)
+                btn_del_text = div.querySelector(".btn_del_text")
+                btn_del_text.setAttribute("value",len)
+                data.appendChild(div);
+            }
+
+            function onClickDelData(){
+                data = document.getElementById('data')
+                len = $("#data > div").length - 1
+
+                child = document.getElementById('data_'+len)
+                data.removeChild(child);
+            }
+
+            function onClickHome(){
+                location.href = '/'
+            }
+            
+        </script>`
+
+    baseTem = baseTem.replace('<!-- SEARCH -->', template)
+
+    res.send(baseTem)
 }
 
 async function insert(req, res) {
     const uri = `mongodb+srv://sensebe:${PASSWORD}@agjakmdb-j9ghj.azure.mongodb.net/test`
     const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true })
-
-    autocomplete = fs.readFileSync("./metadata/script_autocomplete.js", 'utf8')
     const query = req.query
 
     if (query["from"] === undefined)
@@ -338,6 +410,10 @@ async function insert(req, res) {
     data.forEach(function (_data, idx) {
         if (_data["_chunks"] === undefined)
             query["data"][idx]["_chunks"] = []
+        if (_data["_speech"] === undefined)
+            query["data"][idx]["_speech"] = []
+        if (_data["_text"] === undefined)
+            query["data"][idx]["_text"] = []
     })
 
     try {
@@ -361,46 +437,8 @@ async function insert(req, res) {
         console.error(e)
     } finally {
         await client.close()
-
-        var template = `
-        <!doctype html>
-        <html>
-        <head>
-            <title>Data Management Tool</title>
-            <meta charset="utf-8">
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-            <script src="https://unpkg.com/@trevoreyre/autocomplete-js"></script>
-            <script src="./js/search.js"></script>
-            <script src="./js/general.js"></script>
-            <link rel="stylesheet" type="text/css" href="./style/autocomplete.css">
-        </head>
-        <body>
-            <nav id="search_group">
-                <div class="sgroup">
-                    <form class="search" action="/search" style="overflow:visible;display:inline-flex" data-submitfalse="q" method="GET" role="search">
-                        <div id="autocomplete" class="autocomplete" >
-                            <input class="autocomplete-input" name="target" maxlength="2048" type="text" aria-autocomplete="both" aria-haspopup="false" autocapitalize="off" autocomplete="off" autocorrect="off" role="combobox" spellcheck="false" title="검색" aria-label="검색"/>
-                            <ul class="autocomplete-result-list"></ul>
-                        </div>
     
-                        <div class="item_btn">
-                            <input class="btn" id="search_btn" value="Agjak 검색" aria-label="Agjak 검색" name="btnK" type="submit">
-                            <button type="button" class="btn" id="btn_home" onclick="onClickHome()">Home</button>
-                        </div>
-                    </form>
-                </div>
-            </nav> <!-- search_group -->
-        </body>
-        <script>
-            ${autocomplete}
-        
-            function onClickHome(){
-                location.href = '/'
-            }
-        </script>
-    </html>`
-    
-        res.send(template)
+        res.send(baseTemplate())
     }
 }
 
@@ -411,43 +449,7 @@ app.get('/insert', (req, res) => insert(req, res))
 // Home
 app.get('/', function(req, res) {
     autocomplete = fs.readFileSync("./metadata/script_autocomplete.js", 'utf8')
-    var template = `
-  <!doctype html>
-  <html>
-    <head>
-      <title>Data Management Tool</title>
-      <meta charset="utf-8">
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-      <script src="https://unpkg.com/@trevoreyre/autocomplete-js"></script>
-      <script src="./js/search.js"></script>
-      <script src="./js/general.js"></script>
-      <link rel="stylesheet" type="text/css" href="./style/autocomplete.css">
-    </head>
-    <body>
-        <nav id="search_group">
-            <div class="sgroup">
-                <form class="search" action="/search" style="overflow:visible;display:inline-flex" data-submitfalse="q" method="GET" role="search">
-                    <div id="autocomplete" class="autocomplete" >
-                        <input class="autocomplete-input" name="target" maxlength="2048" type="text" aria-autocomplete="both" aria-haspopup="false" autocapitalize="off" autocomplete="off" autocorrect="off" role="combobox" spellcheck="false" title="검색" aria-label="검색"/>
-                        <ul class="autocomplete-result-list"></ul>
-                    </div>
-
-                    <div class="item_btn">
-                        <input class="btn" id="search_btn" value="Agjak 검색" aria-label="Agjak 검색" name="btnK" type="submit">
-                        <button type="button" class="btn" id="btn_home" onclick="onClickHome()">Home</button>
-                    </div>
-                </form>
-            </div>
-        </nav> <!-- search_group -->
-    </body>
-    <script>
-        ${autocomplete}
-        
-        function onClickHome(){
-            location.href = '/'
-        }
-    </script>
-</html>`
+    var template = baseTemplate()
 
     res.send(template)
 })

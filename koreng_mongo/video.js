@@ -59,6 +59,73 @@ function preSearch(req, res) {
     res.json(responseData);
 }
 
+function baseTemplate() {
+    const autocomplete = fs.readFileSync("./metadata/script_autocomplete.js", 'utf8')
+    var base = `
+    <!doctype html>
+    <html>
+    <head>
+        <title>Data Management Tool</title>
+        <meta charset="utf-8">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://unpkg.com/@trevoreyre/autocomplete-js"></script>
+        <script src="./js/search.js"></script>
+        <script src="./js/general.js"></script>
+        <script src="./js/serializeObject.js"></script>
+        <link rel="stylesheet" type="text/css" href="./style/autocomplete.css">
+    </head>
+    <body>
+        <div class="container">
+            <header id="search_group">
+                <div class="sgroup">
+                    <form class="search" action="/search" style="overflow:visible;display:inline-flex" data-submitfalse="q" method="GET" role="search">
+                        <div id="autocomplete" class="autocomplete" >
+                            <input class="autocomplete-input" name="target" maxlength="2048" type="text" aria-autocomplete="both" aria-haspopup="false" autocapitalize="off" autocomplete="off" autocorrect="off" role="combobox" spellcheck="false" title="검색" aria-label="검색"/>
+                            <ul class="autocomplete-result-list"></ul>
+                        </div>
+
+                        <div class="item_btn">
+                            <input class="btn" id="search_btn" value="검색" aria-label="검색" name="btnK" type="submit">
+                            <button type="button" class="btn" id="btn_home" onclick="onClickHome()">Home</button>
+                        </div>
+                    </form>
+                </div>
+            </header><!-- search_group -->
+            <section class="content">
+                <nav>
+                    <!-- NAV -->
+                </nav>
+                <main>
+                    <!-- SEARCH -->
+                </main>
+            </section
+        </div>
+    </body>
+    <script>
+        ${autocomplete}
+    </script>
+    </html>
+    `
+
+    base = base.replace('<!-- NAV -->', navTemplate())
+
+    return base
+}
+
+function navTemplate() {
+    const list = fs.readdirSync('video_archive')
+    var nav = `<ul>`
+
+    for(let item in list) {
+        let filename = list[item].split('.')[0]
+        nav += `<li><a href="http://localhost:${PORT}/search?target=${filename}">${filename}</a></li>`
+    }
+    nav += `
+    </ul>
+    `
+    return nav
+}
+
 function search(req, res) {
     const searchTarget = req.query.target
     const autocomplete = fs.readFileSync("./metadata/script_vid_autocomplete.js", 'utf8')
@@ -78,43 +145,16 @@ function search(req, res) {
         json["_id"] = searchTarget.split('.')[0]
     }
 
-    var template = ''
+    var baseTem = baseTemplate()
 
-    template += `
-  <!doctype html>
-  <html>
-    <head>
-      <title>Data Management Video Tool</title>
-      <meta charset="utf-8">
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-      <script src="https://unpkg.com/@trevoreyre/autocomplete-js"></script>
-      <script src="./js/search.js"></script>
-      <script src="./js/general.js"></script>
-      <script src="./js/serializeObject.js"></script>
-      <link rel="stylesheet" type="text/css" href="./style/autocomplete.css">
-    </head>
-    <body>
-        <nav id="search_group">
-            <div class="sgroup">
-                <form class="search" action="/search" style="overflow:visible;display:inline-flex" data-submitfalse="q" method="GET" role="search">
-                    <div id="autocomplete" class="autocomplete" >
-                        <input class="autocomplete-input" name="target" maxlength="2048" type="text" aria-autocomplete="both" aria-haspopup="false" autocapitalize="off" autocomplete="off" autocorrect="off" role="combobox" spellcheck="false" title="검색" aria-label="검색"/>
-                        <ul class="autocomplete-result-list"></ul>
-                    </div>
-
-                    <div class="item_btn">
-                        <input class="btn search_btn" value="Agjak 검색" aria-label="Agjak 검색" name="btnK" type="submit">
-                    </div>
-                </form>
-            </div>
-        </nav> <!-- search_group -->
+    var template = `
         <div>
             <form class="insert" id="insert" action="/insert" style="overflow:visible;display:block" data-submitfalse="q" method="GET" role="search">
                 <br>`
     if (file) {
         template += `
-                <div id="_id">
-                    text : <input name="_id" type="text" value="${json["_id"]}"/>
+                <div id="root">
+                    _id : <input name="_id" type="text" value="${json["_id"]}"/>
                 </div>`
     }
     template += `
@@ -192,51 +232,11 @@ function search(req, res) {
             location.href = '/'
         }
 
-        ${autocomplete}
-    </script>
-</html>`
+    </script>`
 
-    res.send(template)
-}
+    baseTem = baseTem.replace('<!-- SEARCH -->', template)
 
-function homeTemplate() {
-    return `
-    <!doctype html>
-    <html>
-    <head>
-        <title>Data Management Video Tool</title>
-        <meta charset="utf-8">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <script src="https://unpkg.com/@trevoreyre/autocomplete-js"></script>
-        <script src="./js/search.js"></script>
-        <script src="./js/general.js"></script>
-        <link rel="stylesheet" type="text/css" href="./style/autocomplete.css">
-    </head>
-    <body>
-        <nav id="search_group">
-            <div class="sgroup">
-                <form class="search" action="/search" style="overflow:visible;display:inline-flex" data-submitfalse="q" method="GET" role="search">
-                    <div id="autocomplete" class="autocomplete" >
-                        <input class="autocomplete-input" name="target" maxlength="2048" type="text" aria-autocomplete="both" aria-haspopup="false" autocapitalize="off" autocomplete="off" autocorrect="off" role="combobox" spellcheck="false" title="검색" aria-label="검색"/>
-                        <ul class="autocomplete-result-list"></ul>
-                    </div>
-
-                    <div class="item_btn">
-                        <input class="btn" id="search_btn" value="Agjak 검색" aria-label="Agjak 검색" name="btnK" type="submit">
-                        <button type="button" class="btn" id="btn_home" onclick="onClickHome()">Home</button>
-                    </div>
-                </form>
-            </div>
-        </nav> <!-- search_group -->
-    </body>
-    <script>
-        ${autocomplete}
-
-        function onClickHome(){
-            location.href = '/'
-        }
-    </script>
-    </html>`
+    res.send(baseTem)
 }
 
 async function insert(req, res) {
@@ -270,7 +270,7 @@ async function insert(req, res) {
     } finally {
         await client.close()
 
-        var template = homeTemplate()
+        var template = baseTemplate()
     
         res.send(template)
     }
@@ -283,7 +283,7 @@ app.get('/insert', (req, res) => insert(req, res))
 // Home
 app.get('/', function(req, res) {
     autocomplete = fs.readFileSync("./metadata/script_vid_autocomplete.js", 'utf8')
-    var template = homeTemplate()
+    var template = baseTemplate()
 
     res.send(template)
 })

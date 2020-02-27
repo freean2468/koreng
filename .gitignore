@@ -3,7 +3,7 @@ data/book
 data/drama
 
 # db
-koreng_mongo/pw.txt
+# koreng_mongo/pw.txt
 koreng_mongo/archive
 koreng_mongo/dictionary_archive
 koreng_mongo/video_archive

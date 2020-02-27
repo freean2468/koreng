@@ -9,11 +9,14 @@ function mongoClient() {
     this.uri = `mongodb+srv://sensebe:${PASSWORD}@agjakmdb-j9ghj.azure.mongodb.net/test`
     this.client = new MongoClient(this.uri, { useNewUrlParser: true, useUnifiedTopology: true })
     this.indexTable = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'koreng_mongo', 'rootIndexTable.json'), "utf-8"))
-    this.presearchTable = []
     this.redirectionTable = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'koreng_mongo', 'redirectionTable.json'), "utf-8"))
+    this.presearchTable = []
 
     this.init = function() {
         for(key in this.indexTable) {
+            this.presearchTable.push(key)
+        }
+        for(key in this.redirectionTable) {
             this.presearchTable.push(key)
         }
     }
