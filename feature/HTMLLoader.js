@@ -5,7 +5,7 @@ const SERVICE = true
 var TARGET
 
 if (SERVICE) {
-  TARGET = "https://sensebedictionary.org"
+  TARGET = "https://www.sensebedictionary.org"
 } else {
   TARGET = "http://localhost:5000"
 }
