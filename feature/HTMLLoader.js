@@ -1,10 +1,14 @@
 module.exports = HTMLLoader
 
-const PORT = process.env.PORT || 5000
-const URL = "https://sensebedictionary.org"
-// const URL = "http://localhost"
-const TARGET = URL + ':' + PORT
-console.log('URL : ',URL)
+const SERVICE = true
+
+var TARGET
+
+if (SERVICE) {
+  TARGET = "https://sensebedictionary.org"
+} else {
+  TARGET = "http://localhost:5000"
+}
 
 // HTMLLoader manages the ways of loading html files.
 function HTMLLoader() {
