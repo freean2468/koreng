@@ -10,12 +10,16 @@ if (SERVICE) {
   TARGET = "http://localhost:5000"
 }
 
+function replaceAll(str, searchStr, replaceStr) {
+  return str.split(searchStr).join(replaceStr);
+}
+
 // HTMLLoader manages the ways of loading html files.
 function HTMLLoader() {
   this.fs = require('fs')
   this.pt = require('path')
   this.templateJson = JSON.parse(this.fs.readFileSync("metadata/HTMLTemplate.json", 'utf8'))
-  this.autocomplete = this.fs.readFileSync("metadata/script_autocomplete.js", 'utf8').replace('TARGET',TARGET)
+  this.autocomplete = this.fs.readFileSync("metadata/script_autocomplete.js", 'utf8').replaceAll('TARGET',TARGET)
   this.cytoscape = this.fs.readFileSync("metadata/script_cytoscape.js", 'utf8')
 
   this.getTemplate = function (page, html) {
@@ -130,10 +134,6 @@ function HTMLLoader() {
     that.fs.readFile('public/html/search.html', 'utf8', function(err, html){
       that.fs.readFile('metadata/script_search.js', 'utf8', function(err, js){
         var template = that.getTemplate("search", html)
-
-        function replaceAll(str, searchStr, replaceStr) {
-          return str.split(searchStr).join(replaceStr);
-        }
         
         js = replaceAll(js, "${TARGET}", TARGET)
         js = replaceAll(js, "${searchTarget}", searchTarget)

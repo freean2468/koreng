@@ -41,7 +41,6 @@ const params = 'presearch?target='
 new Autocomplete('#autocomplete', {
     search: input => {
         const url = "TARGET"+"/"+params+encodeURI(input)
-        console.log(url)
         return new Promise(resolve => {
         if (input.length < 1) {
             return resolve([])
@@ -58,6 +57,6 @@ new Autocomplete('#autocomplete', {
     getResultValue: result => result.search,
 
     onSubmit: result => {
-        location.href=URL+"/search?target="+result.search;
+        location.href="TARGET"+"/search?target="+result.search;
     }
 })
