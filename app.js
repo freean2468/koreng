@@ -23,7 +23,7 @@ const mongoClientInst = new mongoClient()
 const PORT = process.env.PORT || 5000
 
 // middlewares
-app.use(express.static(__dirname+'public'))
+app.use(express.static('public'))
 app.use(helmet())
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
     extended: true
@@ -33,7 +33,7 @@ app.use(compression())
 // app.use('/', express.static(__dirname+'/public/html'));
 
 // images
-app.use('/', express.static(__dirname+'/public/image'));
+app.use('/', express.static('/public/image'));
 
 // Home
 app.get('/', (req, res) => HTMLLoaderInst.assembleStaticHTML(res, '','home'))
