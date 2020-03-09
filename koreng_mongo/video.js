@@ -50,17 +50,30 @@ function preSearch(req, res) {
 
     filelist.forEach(element => {
         fileName = element.split('.')[0]
-        if (fileName.match(exp))
+        if (fileName.match(exp)) {
             responseData.push({
                 "search" : fileName
             })
+        } else {
+            const content = JSON.parse(fs.readFileSync(VIDEO_ARCHIVE_PATH+"/"+element, "utf8"))
+            for (let idx = 0; idx < content["text"].length; ++idx){
+                const sentence = content["text"][idx]
+
+                if (sentence.toLowerCase().match(exp)){
+                    responseData.push({
+                        "search" : fileName
+                    })
+                    continue
+                }
+            }
+        }
     });
 
     res.json(responseData);
 }
 
 function baseTemplate() {
-    const autocomplete = fs.readFileSync("./metadata/script_autocomplete.js", 'utf8')
+    const autocomplete = fs.readFileSync("./metadata/script_vid_autocomplete.js", 'utf8')
     var base = `
     <!doctype html>
     <html>
@@ -98,7 +111,7 @@ function baseTemplate() {
                 <main>
                     <!-- SEARCH -->
                 </main>
-            </section
+            </section>
         </div>
     </body>
     <script>
@@ -114,11 +127,19 @@ function baseTemplate() {
 
 function navTemplate() {
     const list = fs.readdirSync('video_archive')
-    var nav = `<ul>`
+    var nav = `<ul> videos : ${list.length}`
 
     for(let item in list) {
         let filename = list[item].split('.')[0]
-        nav += `<li><a href="http://localhost:${PORT}/search?target=${filename}">${filename}</a></li>`
+        nav += `<li><a id="${filename}" href="http://localhost:${PORT}/search?target=${filename}">${filename}</a></li>
+        <script type="text/javascript">
+            var prevPage = window.location.href
+            var a = document.getElementById("${filename}")
+            if (a.href === prevPage) {
+                a.setAttribute("class", "onActive")
+                a.parentElement.setAttribute("class", "onActive")
+            }
+        </script>`
     }
     nav += `
     </ul>
@@ -179,14 +200,14 @@ function search(req, res) {
         json["text"].forEach(function (elm, idx) {
             template += `
                     <div id="text_${idx}">
-                    text : <input name="text[${idx}]" type="text" value="${elm}"/>
+                    text : <textarea name="text[${idx}]">${elm}</textarea>
                     </div>
             `
         })
     } else {
         template += `
                     <div id="text_0">
-                    text : <input name="text[0]" type="text"/>
+                    text : <textarea name="text[0]"></textarea>
                     </div>`
     }
     template +=`
@@ -217,7 +238,7 @@ function search(req, res) {
 
             let div = document.createElement('div')
             div.setAttribute('id', 'text_'+len)
-            div.innerHTML = 'text : <input name="text[]" type="text"/>'
+            div.innerHTML = 'text : <textarea name="text[]"></textarea>'
             text.appendChild(div);
         }
 

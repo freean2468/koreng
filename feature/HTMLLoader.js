@@ -1,6 +1,6 @@
 module.exports = HTMLLoader
 
-const SERVICE = true
+const SERVICE = false
 
 var TARGET
 
@@ -40,8 +40,9 @@ function HTMLLoader() {
     <link rel="stylesheet" type="text/css" href="${link}">`
           })
       template +=`
+    <link rel="icon" href="image/favicon-152.png" sizes="152x152">
   </head>
-  <body id="index" class="no_sidebar">
+  <body id="index">
     <div id="whole_wrapper">
       <div class="head">
         <header>
@@ -79,6 +80,33 @@ function HTMLLoader() {
               </div>
             </nav>
           </hgroup> <!-- hgroup -->
+          <nav id="left_nav">
+            <ul>
+              <li id="facebook"><a href="https://www.facebook.com/SensebeDictionary-100848441527679/"><img src="image/facebook-icon.png" class="favicon" alt="Facebook link"> facebook</a></li>
+              <li id="instagram"><a href="https://www.instagram.com/sensebecommon/"><img src="image/instagram-icon.png" alt="instagram link" class="favicon"> instagram</a></li>
+              <li id="youtube"><a href="https://www.youtube.com/channel/UCrbT-np-JDqcwe4fZbwTPNg"><img src="image/youtube-icon.png" alt="youtube link" class="favicon"> youtube</a></li>
+            </ul>
+          </nav>
+          <nav id="top_nav">
+            <ul>
+              <li id="volume_nav"></li>
+              <li id="usage_nav"></li>
+              <li id="video_nav"></li>
+            </ul>
+            <script>
+              fetch("${TARGET}/status").then(response => response.json().then(status => {
+                document.getElementById('volume_nav').innerHTML = "volumes : " + status["volumes"]
+                document.getElementById('usage_nav').innerHTML = "usages : " + status["usages"]
+                document.getElementById('video_nav').innerHTML = "videos : " + status["videos"]
+              }))
+            </script>
+          </nav>
+          <nav id="right_nav">
+            <ul>
+              <li><a href="/test"><img src="image/gmail-icon.png" alt="subscribe" class="favicon"> 구독하기</a></li>
+              <li class="hidden">후원하기</li>
+            </ul>
+          </nav>
         </header>
       </div> <!-- head -->
       <div id="body">

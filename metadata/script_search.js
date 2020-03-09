@@ -4,12 +4,12 @@ fetch("${TARGET}/cy?target=${searchTarget}").then(response => response.json().th
 
     cy.add([{group: 'nodes', data : { id: root, label: root }, classes: "root" } ])
     
-    data.forEach(function (item){
+    data.forEach(function (item, idx){
         fetch("${TARGET}/video?target="+item["_video"]).then(response => response.json().then(videoJson => {
+            const usageID = idx+'_'+item['_usage']
             let div = document.createElement('div');
             div.setAttribute("class","hidden");
-            div.setAttribute("id",item['_usage']);
-
+            div.setAttribute("id",usageID);
             size = getIframeSize()
             
             div.innerHTML = '<div class="video" style="text-align:center; color:#ffa07a;font-size:1.2em">'
@@ -27,14 +27,14 @@ fetch("${TARGET}/cy?target=${searchTarget}").then(response => response.json().th
             
             const label = item['_usage'].replace('<br>', '\n')
 
-            cy.add([{group: 'nodes', data : { id: item['_usage'], label : label }, classes: "usage usage_node_"+ item["_speech"] } ])
-            cy.add([{group: 'edges', data : { source: root, target : item['_usage'] }, classes: "edge edge_"+ item["_speech"] } ])
+            cy.add([{group: 'nodes', data : { id: usageID, label : label }, classes: "usage usage_node_"+ item["_speech"] } ])
+            cy.add([{group: 'edges', data : { source: root, target : usageID }, classes: "edge edge_"+ item["_speech"] } ])
             chunks = item["_chunks"]
             if (chunks !== undefined) {
                 chunks.forEach(function (chunk) {
-                    const id = item['_usage']+"_"+chunk
+                    const id = usageID+"_"+chunk
                     cy.add([{group: 'nodes', data : { id: id, label : chunk }, classes: "chunk" } ])
-                    cy.add([{group: 'edges', data : { source: id, target : item['_usage'] }, classes: "edge edge_chunk" } ])
+                    cy.add([{group: 'edges', data : { source: id, target : usageID }, classes: "edge edge_chunk" } ])
                 })
             }
                 

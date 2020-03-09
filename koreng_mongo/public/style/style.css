@@ -1,10 +1,53 @@
 @import url(//fonts.googleapis.com/earlyaccess/nanumgothic.css);
 
 body{font-family:NanumGothic,sans-serif;font-size:.75em;color:#fff;background:#222;margin: 0 auto;}
-a{text-decoration:none;color:#fff}
-a:hover{color:#ca2}.hidden{display:none !important}
 span.cke_skin_kama{border:0}
 button,input,textarea{font-family:NanumGothic,sans-serif}
+li{
+    list-style-position:inside;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;  
+}
+
+a{text-decoration:none;color:#fff}
+a:hover{color:#ca2}.hidden{display:none !important}
+
+li:link, li:visited {
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    text-decoration: none;
+   cursor: pointer;
+}
+
+li:hover, li:active {
+   background-color: #6D0062;
+}
+
+a.onActive {
+    color:yellow;
+}
+
+a.onVisited {
+    color:#02ff89
+}
+
+li.onActive, li.onVisited {
+    background-color: #6D0062;
+}
+
+li.onVisited {
+    background-color: grey;
+}
+
+ul.caution {
+    color:red;
+    font-size:16;
+    font-weight:2;
+}
 
 #whole_wrapper{position:relative}
 
@@ -20,7 +63,7 @@ button,input,textarea{font-family:NanumGothic,sans-serif}
 #data>div{border-top:1px solid yellow;font-size:2em;font-weight:bold;color:#fff;margin-top:30px}
 .btn{border-top:1px solid;font-size:30px;font-weight:bold;width:200px !important}
 
-input[type=text]{border-top:1px solid;font-size:20px;font-weight:bold;width:80%}
+input:not(.autocomplete-input)[type=text]{border-top:1px solid;font-size:20px;font-weight:bold;width:80%}
 
 .container{
     display: flex;
@@ -38,11 +81,18 @@ header{
     border-right:1px solid gray;
 }
 nav{
-    margin:20px;
-    flex-grow:1
+    flex-grow:1;
+    height:100vh;
+    overflow-y:scroll;
+    min-width: min-content;
 }
 main{
     margin:20px;
     padding:10px;
     flex-grow:9
+}
+
+textarea {
+    font-size: 18px;
+    width:100%
 }

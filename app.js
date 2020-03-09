@@ -41,13 +41,22 @@ app.get('/', (req, res) => HTMLLoaderInst.assembleStaticHTML(res, '','home'))
 // Search
 app.get('/preSearch', (req, res) => preSearch(req, res))
 app.get('/search', (req, res) => {
-    let target = req.query.target
+    let target = req.query.target.toLowerCase()
     const redirectionTable = mongoClientInst.redirectionTable
+    const presearchTable = mongoClientInst.presearchTable
+
+    for (let idx = 0; idx < presearchTable.length; ++idx) {
+        if (presearchTable[idx].toLowerCase() === target) {
+            target = presearchTable[idx]
+            break
+        }
+    }
     
     // check redirection
     if (redirectionTable[target] !== undefined)
         target = redirectionTable[target]
-    HTMLLoaderInst.assembleSearchHTML(res, req.query.target)
+
+    HTMLLoaderInst.assembleSearchHTML(res, target)
 })
 
 // get cy data from mongoDB
@@ -55,6 +64,9 @@ app.get('/cy', (req, res, next) => getCyData(req, res, next))
 
 // get video data from mongoDB
 app.get('/video', (req, res, next) => getVideoData(req, res, next))
+
+// get DB status from mongoDB
+app.get('/status', (req, res, next) => { res.json(mongoClientInst.status) })
 
 // Main
 app.get("/" + encodeURIComponent("toddler"), (req, res) => HTMLLoaderInst.assembleStaticHTML(res, "toddler", "toddler"))
@@ -82,18 +94,26 @@ try {
 // functions
 //
 function preSearch(req, res) {
-    const searchTarget = req.query.target
-    redirectionTable = mongoClientInst.redirectionTable
-    presearchTable = mongoClientInst.presearchTable
+    const searchTarget = req.query.target.toLowerCase()
+    const presearchTable = mongoClientInst.presearchTable
     var responseData = []
     const exp = new RegExp(searchTarget)
 
     presearchTable.forEach(element => {
-        if (element.match(exp))
+        if (element.toLowerCase().match(exp))
             responseData.push({
                 "search" : element
             })
     });
+
+    function customSort(a, b) {
+        if(a.search.length == b.search.length){
+             return 0
+        } 
+        return a.search.length > b.search.length ? 1 : -1; 
+    } 
+    
+    responseData = responseData.sort(customSort);
 
     res.json(responseData);
 }
@@ -112,7 +132,6 @@ async function getCyData(req, res, next) {
 
 async function getVideoData(req, res, next) {
     const searchTarget = req.query.target
-    console.log(searchTarget)
     var mongoRes = await mongoClientInst.findVideoListingById(searchTarget)
     
     if (mongoRes) {

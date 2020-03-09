@@ -49,10 +49,12 @@ function speechTemplate(idx) {
     <label><input type="checkbox" name="data[${idx}][_speech][]" value="noun">noun</label>
     <label><input type="checkbox" name="data[${idx}][_speech][]" value="pronoun">pronoun</label>
     <label><input type="checkbox" name="data[${idx}][_speech][]" value="preposition">preposition</label>
+    <label><input type="checkbox" name="data[${idx}][_speech][]" value="predeterminer">predeterminer</label>
     <label><input type="checkbox" name="data[${idx}][_speech][]" value="determiner">determiner</label>
     <label><input type="checkbox" name="data[${idx}][_speech][]" value="phrase">phrase</label>
     <label><input type="checkbox" name="data[${idx}][_speech][]" value="idiom">idiom</label>
-    <label><input type="checkbox" name="data[${idx}][_speech][]" value="exclamation">exclamation</label>`
+    <label><input type="checkbox" name="data[${idx}][_speech][]" value="exclamation">exclamation</label>
+    <label><input type="checkbox" name="data[${idx}][_speech][]" value="number">number</label>`
 }
 
 function baseTemplate() {
@@ -88,16 +90,20 @@ function baseTemplate() {
                 </div>
             </header><!-- search_group -->
             <section class="content">
-                <nav>
+                <nav id="left_nav">
                     <!-- NAV -->
                 </nav>
                 <main>
                     <!-- SEARCH -->
                 </main>
-            </section
+            </section>
         </div>
     </body>
     <script>
+        function onClickHome(){
+            location.href = '/'
+        }
+        
         ${autocomplete}
     </script>
     </html>
@@ -110,11 +116,32 @@ function baseTemplate() {
 
 function navTemplate() {
     const list = fs.readdirSync('dictionary_archive')
-    var nav = `<ul>`
+    var nav = `<ul>volumes : ${list.length}`
 
     for(let item in list) {
         let filename = list[item].split('.')[0]
-        nav += `<li><a href="http://localhost:${PORT}/search?target=${filename}">${filename}</a></li>`
+        nav += `
+        <li><a id="a_${filename}" href="http://localhost:${PORT}/search?target=${filename}">${filename}</a></li>
+        <script type="text/javascript">
+            var prevPage = document.referrer
+            var pp = window.location.href
+            var a = document.getElementById("a_${filename}")
+            if (a.href === pp) {
+                a.setAttribute("class", "onActive")
+                a.parentElement.setAttribute("class", "onActive")
+            }
+            if (a.href === prevPage) {
+                a.setAttribute("class", "onVisited")
+                a.parentElement.setAttribute("class", "onVisited")
+
+                var container = document.getElementById("left_nav")
+
+                // console.log(container.offsetTop)
+                // console.log(container.scrollTop)
+                // console.log(a.offsetTop)
+                $('#left_nav').animate({scrollTop: a.offsetTop - container.offsetTop})
+            }
+        </script>`
     }
     nav += `
     </ul>
@@ -123,28 +150,37 @@ function navTemplate() {
 }
 
 function preSearch(req, res) {
-    const searchTarget = req.query.target
+    const searchTarget = req.query.target.toLowerCase()
     filelist = fs.readdirSync('./dictionary_archive')
     var responseData = []
     const exp = new RegExp(searchTarget)
 
     filelist.forEach(element => {
-        fileName = element.split('.')[0]
+        fileName = element.split('.')[0].toLowerCase()
         if (fileName.match(exp))
             responseData.push({
                 "search" : fileName
             })
     });
 
+    function customSort(a, b) {
+        if(a.search.length == b.search.length){
+             return 0
+        } 
+        return a.search.length > b.search.length ? 1 : -1; 
+    } 
+    
+    responseData = responseData.sort(customSort);
+
     res.json(responseData);
 }
 
 function search(req, res) {
-    const searchTarget = req.query.target
+    const searchTarget = req.query.target.toLowerCase()
     const filelist = fs.readdirSync(ARCHIVE_PATH)
     var file, json
     for (let idx = 0; idx < filelist.length; ++idx){
-        fileName = filelist[idx].split('.')[0]
+        fileName = filelist[idx].split('.')[0].toLowerCase()
         if (fileName === searchTarget) {
             file = fileName
             break
@@ -160,18 +196,66 @@ function search(req, res) {
 
     var template = `
         <div>
+            <ul class="caution">
+                basic
+                <li>idiom의 경우 root를 따로 만들고 from에 원형을 추가</li>
+                <li>축약형의 경우 원형에 redirection 후 원형에 추가</li>
+                <li>Speech는 Usage안 root의 역할에 따라 정한다. (idiom이나 phrase 예외)</li>
+                <li>최대한 기본형(긍정, 동사원형)으로 usage 표시 => 예시가 풍부해지면 그때 예시 모습대로 돌아가자.</li><br>
+                <ul>
+                    "will, would, may, might, can, could, shall, should, have의 mv들은 각각의 root를 가지고 모든 활용에 대해 적자"
+                </ul><br>
+                <ul>
+                    "what, where, why, how 등은 구체적인 활용을 모두 적자"
+                </ul><br>
+                <ul>
+                    "v"
+                    <li>-ed, -ing, p.p 의 경우 특별한 뜻이 있는 경우에만 root를 따로 만든다. 그 외에는 원형으로 redirection 원형에 추가 </li>
+                    <li>아직 원형이 없는 경우에는 예시의 [v]의 형태가 맞지 않더라도 [v]원형을 기반으로 usage 추가</li>
+                </ul><br>
+                <ul>
+                    "adj"
+                    <li>adj + sth 과 같은 활용 구조를 usage에 남긴다</li>
+                </ul><br>
+                <ul>
+                    "n"
+                    <li>간단하게 뜻만 남기자</li>
+                    <li>복수형(plural)의 경우 원형으로 redirection 걸고 원형에 usage를 추가</li>
+                </ul>
+                <ul>
+                    "각 품사별 root에 품사 활용을 모두 남기자"
+                </ul>
+            </ul>
+
             <form class="insert" id="insert" action="/insert" style="overflow:visible;display:block" data-submitfalse="q" method="GET" role="search">
                 <br>
-                <div id="root">`
+                <div id="root">
+                    <div id="caution"></div>`
     if (file) {
         template +=`
-                    root : <input name="root" type="text" value="${json["root"]}"/>`
+                    root : <input id="input_root" name="root" type="text" oninput="caseCheck(this)" value="${json["root"]}"/>`
     } else {
         template +=`
-                    root : <input name="root" type="text"/>`
+                    root : <input id="input_root" name="root" type="text" oninput="caseCheck(this)" value="${searchTarget}"/>`
     }
 
     template += `
+                <script>
+                    function caseCheck(input) {
+                        const value = input.value
+                        let flag = false
+                        let _root = document.getElementById("caution")
+                        for (let idx = 0; idx < value.length; ++idx) {
+                            if (value[idx] === value[idx].toUpperCase()) {
+                                _root.innerHTML = '<font color="red">root has UpperCase!</font>'
+                                flag = true
+                            }
+                        }
+                        if (flag === false) {
+                            _root.innerHTML = ""
+                        }
+                    }
+                </script>
                 </div>
                 <div id="from">`
 
@@ -353,10 +437,12 @@ function search(req, res) {
                 div.innerHTML += '<label><input type="checkbox" name="data['+len+'][_speech][]" value="noun">noun</label> '
                 div.innerHTML += '<label><input type="checkbox" name="data['+len+'][_speech][]" value="pronoun">pronoun</label> '
                 div.innerHTML += '<label><input type="checkbox" name="data['+len+'][_speech][]" value="preposition">preposition</label> '
+                div.innerHTML += '<label><input type="checkbox" name="data['+len+'][_speech][]" value="predeterminer">predeterminer</label> '
                 div.innerHTML += '<label><input type="checkbox" name="data['+len+'][_speech][]" value="determiner">determiner</label> '
                 div.innerHTML += '<label><input type="checkbox" name="data['+len+'][_speech][]" value="phrase">phrase</label> '
                 div.innerHTML += '<label><input type="checkbox" name="data['+len+'][_speech][]" value="idiom">idiom</label> '
                 div.innerHTML += '<label><input type="checkbox" name="data['+len+'][_speech][]" value="exclamation">exclamation</label> '
+                div.innerHTML += '<label><input type="checkbox" name="data['+len+'][_speech][]" value="number">number</label> '
                 div.innerHTML += '</div>'
                 div.innerHTML += '<div id="data_'+len+'_chunk"> </div>'
                 // div.innerHTML += '<div id="data_'+len+'_chunk"> <div id="data_'+len+'_chunk_0"> data_'+len+'_chunk : <input name="data['+len+'][_chunks][]" type="text"/> </div></div>'
@@ -386,10 +472,6 @@ function search(req, res) {
                 child = document.getElementById('data_'+len)
                 data.removeChild(child);
             }
-
-            function onClickHome(){
-                location.href = '/'
-            }
             
         </script>`
 
@@ -407,14 +489,18 @@ async function insert(req, res) {
         query["from"] = []
 
     data = query["data"]
-    data.forEach(function (_data, idx) {
-        if (_data["_chunks"] === undefined)
-            query["data"][idx]["_chunks"] = []
-        if (_data["_speech"] === undefined)
-            query["data"][idx]["_speech"] = []
-        if (_data["_text"] === undefined)
-            query["data"][idx]["_text"] = []
-    })
+    if (data !== undefined) {
+        data.forEach(function (_data, idx) {
+            if (_data["_chunks"] === undefined)
+                query["data"][idx]["_chunks"] = []
+            if (_data["_speech"] === undefined)
+                query["data"][idx]["_speech"] = []
+            if (_data["_text"] === undefined)
+                query["data"][idx]["_text"] = []
+        })
+    } else if (data === undefined) {
+        query["data"] = []
+    }
 
     try {
         // Connect to the MongoDB cluster
@@ -486,12 +572,16 @@ function registerRedirectionTable(json){
     redirection = json['redirection']
 
     if(redirection !== "") {
-        if(redirectionTableJson[root] === undefined) {
-            redirectionTableJson[root] = redirection
-            fs.writeFileSync(path.join(__dirname, REDIRECTION_TABLE_FILE), JSON.stringify(redirectionTableJson), "utf-8")
-            console.log(`${root} registered as ${redirection}`)
-        } 
+        redirectionTableJson[root] = redirection
+        fs.writeFileSync(path.join(__dirname, REDIRECTION_TABLE_FILE), JSON.stringify(redirectionTableJson), "utf-8")
+        console.log(`${root} registered as ${redirection}`)
         return true
+    } else {
+      if (redirectionTableJson[root])  {
+        del(redirectionTableJson[root])
+        fs.writeFileSync(path.join(__dirname, REDIRECTION_TABLE_FILE), JSON.stringify(redirectionTableJson), "utf-8")
+        console.log(`${root} redirection deleted`)
+      }
     }
     return false
 }

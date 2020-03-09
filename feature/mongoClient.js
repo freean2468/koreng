@@ -4,6 +4,9 @@ const fs = require('fs')
 const path = require('path')
 const {MongoClient} = require('mongodb')
 const PASSWORD = fs.readFileSync("./koreng_mongo/pw.txt", "utf8")
+const DATABASE_NAME = "sensebe_dictionary"
+const DICTIONARY_COLLECTION = "eng_dictionary"
+const VIDEO_COLLECTION = "video_collection"
 
 function mongoClient() {
     this.uri = `mongodb+srv://sensebe:${PASSWORD}@agjakmdb-j9ghj.azure.mongodb.net/test`
@@ -11,14 +14,46 @@ function mongoClient() {
     this.indexTable = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'koreng_mongo', 'rootIndexTable.json'), "utf-8"))
     this.redirectionTable = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'koreng_mongo', 'redirectionTable.json'), "utf-8"))
     this.presearchTable = []
+    this.status = {
+        volumes:0,
+        videos:0,
+        usages:0
+    }
 
-    this.init = function() {
+    this.init = async function() {
         for(key in this.indexTable) {
             this.presearchTable.push(key)
         }
         for(key in this.redirectionTable) {
             this.presearchTable.push(key)
         }
+
+        this.status["volumes"] = await this.scanListings(DICTIONARY_COLLECTION)
+        this.status["videos"] = await this.scanListings(VIDEO_COLLECTION)
+        this.status["usages"] = await this.scanUsages()
+    }
+
+    this.scanListings = async function (collection) {
+        return await this.client.db(DATABASE_NAME).collection(collection).count();
+    }
+
+    this.scanUsages = async function () {
+        const col = await this.client.db(DATABASE_NAME).collection(DICTIONARY_COLLECTION);
+        var count = 0;
+
+        const docs = await col.find({
+            "data":{
+                $elemMatch:{
+                    _usage:{$exists:true}
+                }
+            }
+        }).toArray()
+
+        docs.forEach(function (elem){
+            count += elem["data"].length
+        })
+
+        return count
     }
 
     this.findOneListingById = async function(root){
@@ -28,36 +63,38 @@ function mongoClient() {
 
         _id = this.indexTable[root]
 
-        result = await this.client.db("sensebe_dictionary").collection("eng_dictionary").findOne({ _id: _id });
+        result = await this.client.db(DATABASE_NAME).collection(DICTIONARY_COLLECTION).findOne({ _id: _id });
      
         if (result) {
-            console.log(`Found a listing in the collection with the _id '${_id}':${result['root']}`);
+            console.log(`in MongoClient: Found a listing in the collection with the _id '${_id}':${result['root']}`);
             // console.log(result);
         } else {
-            console.log(`No listings found with the _id '${_id}' : ${this.indexTable[root]}`);
+            console.log(`in MongoClient: No listings found with the _id '${_id}' : ${this.indexTable[root]}`);
         }
         return result
     }
     
     this.findVideoListingById = async function(id){
-        result = await this.client.db("sensebe_dictionary").collection("video_collection").findOne({ _id: id });
+        result = await this.client.db("sensebe_dictionary").collection(VIDEO_COLLECTION).findOne({ _id: id });
      
         if (result) {
-            console.log(`Found a video in the collection with the _id '${_id}':${result['text'][0]}`);
+            console.log(`in MongoClient: Found a video in the collection with the _id '${_id}':${result['text'][0]}`);
             // console.log(result);
         } else {
-            console.log(`No video found with the _id '${_id}'`);
+            console.log(`in MongoClient: No video found with the _id '${_id}'`);
         }
         return result
     }
 
     this.connect = async () => { 
+        that = this
         await this.client.connect()
-        console.log('connected to mongoDB successfully!')
+                .then(function (db) {
+                    that.init()
+                })
+        console.log('in MongoClient: connected to mongoDB successfully!')
     }
     this.close = async () => await this.client.close()
 
     this.connect()
-
-    this.init()
 }

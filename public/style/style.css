@@ -9,10 +9,12 @@ body{font-family:NanumGothic,sans-serif;font-size:.75em;color:#fff;background:#2
     display:flex;
     flex-direction: column;
 }
-a{text-decoration:none;color:#666}
-a:hover{color:#000}.hidden{display:none !important}
+a{text-decoration:none;color:#ddd}
+a:hover{color:#fff}
+.hidden{display:none !important}
 span.cke_skin_kama{border:0}
 button,input,textarea{font-family:NanumGothic,sans-serif}
+img.favicon{vertical-align: text-bottom; width:12px; height:12px;}
 
 #whole_wrapper{
     height:100%;
@@ -30,12 +32,52 @@ button,input,textarea{font-family:NanumGothic,sans-serif}
 #whole_wrapper>.head header hgroup p.subtitle{margin-top:.2em;margin-bottom:1.0em;}
 #whole_wrapper>.head header hgroup p.subtitle small{color:#ccc;font-size:1.1em;padding:0 10px}
 
+/* head - header - navs */
+#whole_wrapper>.head header #left_nav{
+    position:absolute;
+    left:0px;
+    top:0px;
+    z-index:1000;
+}
+#whole_wrapper>.head header #left_nav>ul>li{float:left;margin-right:10px;margin-top:3px;list-style:none;}
+#left_nav>ul>li>a,
+#right_nav>ul>li>a{
+    display:block;
+    text-align:center bottom;
+    /* overflow:hidden; */
+}
+
+#whole_wrapper>.head header #right_nav{
+    position:absolute;
+    top:0px;
+    right:10px;
+    z-index:1000;
+}
+#whole_wrapper>.head header #right_nav>ul>li{float:right;margin-right:1.5em;margin-top:3px;list-style:none;}
+
+#whole_wrapper>.head header #top_nav{
+    position:absolute;
+    top:0px;
+    left:50%;
+    transform: translate(-50%, 0);
+    z-index:1000;
+}
+#whole_wrapper>.head header #top_nav>ul>li{float:left;margin-right:1.5em;margin-top:3px;list-style:none;}
+
 /* head - search_group */
 #whole_wrapper>.head nav#search_group{z-index:11}
 #whole_wrapper>.head nav#search_group>div.sgroup{position: relative;margin:0 auto;width:533px;}
 #whole_wrapper>.head nav#search_group>div.sgroup>form{display:inline-flex}
 #whole_wrapper>.head nav#search_group>div.sgroup>form.search{margin-top:1em;text-align:center;}
-#whole_wrapper>.head nav#search_group>div.sgroup>form.search>div.item_btn>input.search_btn{background-image: -webkit-linear-gradient(top,#f5f5f5,#f1f1f1);background-color: #fff;border: 1px solid #fff;border-radius: 24px;color: #000;font-size: 14px;line-height: 27px;height: 36px;min-width: 54px;text-align: center;cursor: pointer;user-select: none;}
+#whole_wrapper>.head nav#search_group>div.sgroup>form.search>div.item_btn{ position: relative; }
+#whole_wrapper>.head nav#search_group>div.sgroup>form.search>div.item_btn>input.search_btn{
+    background-image: -webkit-linear-gradient(top,#f5f5f5,#f1f1f1);background-color: #fff;border: 1px solid #fff;border-radius: 24px;color: #000;font-size: 14px;line-height: 27px;min-width: 54px;text-align: center;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(2%, -50%);
+    cursor: pointer;user-select: none;}
 
 /* head - main_menu */
 #whole_wrapper>.head nav#main_menu{z-index:11}
@@ -147,53 +189,39 @@ button,input,textarea{font-family:NanumGothic,sans-serif}
 #whole_wrapper div#body div#cols div.wrapper div.entry_area div.result_list div.result_block div.res_block_B { border: 3px solid #000000;background-color: #222222;font-family: Rubik;font-size: 14px; color: #FFFFFF; word-wrap: break-word;}
 
 /* contents */
-body.cke_editable h2,
 article div#content h2,
 section div#content h2,
-form#diff_dialog div.body div.wrapper h2,
-body.cke_editable h3,
 article div#content h3,
 section div#content h3,
-form#diff_dialog div.body div.wrapper h3,
-body.cke_editable h4,
 article div#content h4,
 section div#content h4,
-form#diff_dialog div.body div.wrapper h4,
-body.cke_editable h5,
 article div#content h5,
 section div#content h5,
-form#diff_dialog div.body div.wrapper h5,
-body.cke_editable h6,
 article div#content h6,
-section div#content h6,
-form#diff_dialog div.body div.wrapper h6{margin:1em 0 .5em 0}
+section div#content h6{margin:1em 0 .5em 0}
 
+section div#content h1,
 article div#content h1{border-top:1px solid yellow;font-size:2em;font-weight:bold;color:#fff}
-body.cke_editable h2,
+
 article div#content h2,
-section div#content h2,
-form#diff_dialog div.body div.wrapper h2{border-bottom:1px dotted #fff;font-size:1.6em;font-weight:bold;color:#fff;padding-bottom:.2em}
-body.cke_editable h3,
+section div#content h2{border-bottom:1px dotted #fff;font-size:1.6em;font-weight:bold;color:#fff;padding-bottom:.2em}
+
 article div#content h3,
-section div#content h3,
-form#diff_dialog div.body div.wrapper h3{font-size:1.2em;font-weight:bold;color:#fff;border-bottom:1px dotted #fff;padding-bottom:.2em}
-body.cke_editable h4,
+section div#content h3{font-size:1.2em;font-weight:bold;color:#fff;border-bottom:1px dotted #fff;padding-bottom:.2em}
+
 article div#content h4,
-section div#content h4,
-form#diff_dialog div.body div.wrapper h4{font-size:1.0em;font-weight:500;color:#cfc;font-style: italic}
-body.cke_editable h5,
+section div#content h4{font-size:1.0em;font-weight:500;color:#cfc;font-style: italic}
+
 article div#content h5,
-section div#content h5,
-form#diff_dialog div.body div.wrapper h5{font-size:0.9em;color:#fff}
-body.cke_editable h6,
+section div#content h5{font-size:0.9em;color:#fff}
+
 article div#content h6,
-section div#content h6,
-form#diff_dialog div.body div.wrapper h6{font-size:0.9em;font-weight:500;color:#cfc;font-style: italic}
-body.cke_editable p,
+section div#content h6{font-size:0.9em;font-weight:500;color:#cfc;font-style: italic}
+
 article div#content p,
-section div#content p,
-form#diff_dialog div.body div.wrapper p{font-size:1.1em;margin:1em 0}
-article div#content span{margin-left:40px!important}
+section div#content p{font-size:1.1em;margin:1em 0}
+
+article div#content span,
 section div#content span{margin-left:40px!important}
 
 /* tippy theme */
