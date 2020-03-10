@@ -11,7 +11,8 @@
         "https://unpkg.com/cytoscape-popper@1.0.6/cytoscape-popper.js",
         "js/search.js",
         "js/general.js",
-        "https://unpkg.com/@trevoreyre/autocomplete-js"
+        "https://unpkg.com/@trevoreyre/autocomplete-js",
+        "https://www.youtube.com/iframe_api"
     ],
     "link":[
         "style/autocomplete.css"

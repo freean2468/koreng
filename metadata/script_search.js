@@ -7,22 +7,36 @@ fetch("${TARGET}/cy?target=${searchTarget}").then(response => response.json().th
     data.forEach(function (item, idx){
         fetch("${TARGET}/video?target="+item["_video"]).then(response => response.json().then(videoJson => {
             const usageID = idx+'_'+item['_usage']
+            videoList[usageID] = videoJson
             let div = document.createElement('div');
             div.setAttribute("class","hidden");
             div.setAttribute("id",usageID);
-            size = getIframeSize()
-            
-            div.innerHTML = '<div class="video" style="text-align:center; color:#ffa07a;font-size:1.2em">'
-            div.innerHTML += '  <iframe class="iframe_video" width='+size['width']+'px height='+size['height']+'px src=https://www.youtube.com/embed/'+videoJson["link"]+'></iframe>'
-            div.innerHTML += '  <div class="caption"><h3 style="text-align:center;font-size:1.6em;font-weight:bold;color:salmon;border-bottom:1px dotted #fff;padding-bottom:.2em">&lt; '+ videoJson["source"] +' &gt;</h3>'
+
+            usageAndChunkHTML = `
+            <table>
+                <tr style="text-align:center;font-size:1.6em;font-weight:bold;color:salmon;">
+                    <th colspan=100%>&lt; ${item['_usage']} &gt;</th>
+                </tr>`
+
+            chunks = item["_chunks"]
+            if (chunks !== undefined) {
+                usageAndChunkHTML += `<tr>`
+                chunks.forEach(function (chunk) {
+                    usageAndChunkHTML += `<td>${chunk}</td>`
+                })
+                usageAndChunkHTML += `</tr>`
+            }
+            usageAndChunkHTML += `</table>`
+
+            div.innerHTML = usageAndChunkHTML
+
             videoJson["text"].forEach(function(elm) {
                 if (item["_text"] !== undefined)
                     item["_text"].forEach(function (text){
                         elm = elm.replace(text, '<b style="color:red;font-style:italic">'+text+'</b>')
                     })
-                div.innerHTML += '<span style="font-size:1.4em;font-weight:500;color:#cfc;">' + elm + '</span><br>'
+                div.innerHTML += '<span>' + elm + '</span><br>'
             })
-            div.innerHTML += '</div></div>'
             document.getElementById('content').appendChild(div);
             
             const label = item['_usage'].replace('<br>', '\n')
@@ -43,8 +57,10 @@ fetch("${TARGET}/cy?target=${searchTarget}").then(response => response.json().th
                 ready: function (e) {
                     var cy = e.cy;
                     cy.nodes().forEach(function(node){
-                        if (node.classes()[0] === "number" || node.classes()[0] === "usage") makePopper(node)
-                            node._styleOrigin = node.style()
+                        if (node.classes()[0] === "number" || node.classes()[0] === "usage"){
+                            makePopper(node)
+                        }
+                        node._styleOrigin = node.style()
                     })
                 },
                 stop: function (e) {

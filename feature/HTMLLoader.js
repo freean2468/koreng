@@ -82,9 +82,9 @@ function HTMLLoader() {
           </hgroup> <!-- hgroup -->
           <nav id="left_nav">
             <ul>
-              <li id="facebook"><a href="https://www.facebook.com/SensebeDictionary-100848441527679/"><img src="image/facebook-icon.png" class="favicon" alt="Facebook link"> facebook</a></li>
-              <li id="instagram"><a href="https://www.instagram.com/sensebecommon/"><img src="image/instagram-icon.png" alt="instagram link" class="favicon"> instagram</a></li>
-              <li id="youtube"><a href="https://www.youtube.com/channel/UCrbT-np-JDqcwe4fZbwTPNg"><img src="image/youtube-icon.png" alt="youtube link" class="favicon"> youtube</a></li>
+              <li id="facebook"><a href="https://www.facebook.com/SensebeDictionary-100848441527679/" target="_sub"><img src="image/facebook-icon.png" class="favicon" alt="Facebook link"> facebook</a></li>
+              <li id="instagram"><a href="https://www.instagram.com/sensebecommon/" target="_sub"><img src="image/instagram-icon.png" alt="instagram link" class="favicon"> instagram</a></li>
+              <li id="youtube"><a href="https://www.youtube.com/channel/UCrbT-np-JDqcwe4fZbwTPNg" target="_sub"><img src="image/youtube-icon.png" alt="youtube link" class="favicon"> youtube</a></li>
             </ul>
           </nav>
           <nav id="top_nav">

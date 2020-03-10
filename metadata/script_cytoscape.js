@@ -103,13 +103,21 @@ function makePopper(node) {
             let content = document.getElementById(node.data('id'));
             let dummyDomEle = document.createElement('div');
 
-            dummyDomEle.innerHTML = content.innerHTML + '<br>'
+            dummyDomEle.innerHTML = `
+            <div class="tippy_container">
+                <div id="vcon_${node.data('id')}" class="tippy_video_container">
+                    <div id="player_${node.data('id')}" class="iframe_video"></div>
+                </div>
+                <div id="tcon_${node.data('id')}" class="tippy_text_container">
+                    ${content.innerHTML}
+                </div>
+            </div>`
 
             return dummyDomEle;
         },
         // your own preferences:
         appendTo: document.body,
-        arrow: true,
+        arrow: false,
         allowHTML: true,
         interactive: true,
         placement: 'auto',
@@ -117,53 +125,94 @@ function makePopper(node) {
         multiple: false,
         sticky: true,
         theme: 'sensebe',
-        maxWidth: 1340,
-        distance: 30
+        maxWidth: 2000,
+        distance: 30,
+        moveTransition: 'transform 0.2s ease-out'
     });
 
     node._trigger = false
     node.tip = tip
 }
 
+var tp
+var videoList = []
+const IFRAME_WIDTH_MIN = 480
+const IFRAME_HEIGHT_MIN = getIframeHeight(IFRAME_WIDTH_MIN)
+const IFRAME_WIDTH_MAX = 1920
+
+function getIframeHeight(width){
+    return width * 9 / 16
+}
+
+function onYouTubeIframeAPIReady() {
+    console.log('API ready!!')
+}
+
+function onPlayerReady(event) {
+    // event.target.playVideo();
+    console.log('player ready!!')
+}
+
+function onPlayerStateChange(event) {
+    switch (event.data) {
+      case YT.PlayerState.UNSTARTED:
+        console.log('unstarted');
+        break;
+      case YT.PlayerState.ENDED:
+        console.log('ended');
+        break;
+      case YT.PlayerState.PLAYING:
+        console.log('playing');
+        if (event.target._sensebe_state === false) {
+            event.target._sensebe_state = true
+            size = getIframeSize()
+            sizeVideo(event.target.a.id, size['width'], size['height'])
+        }
+        break;
+      case YT.PlayerState.PAUSED:
+        console.log('paused');
+        break;
+      case YT.PlayerState.BUFFERING:
+        console.log('buffering');
+        break;
+      case YT.PlayerState.CUED:
+        console.log('video cued');
+        break;
+    }
+  }
+
+function sizeVideo(id, width, height) {
+    video = document.getElementById(id)
+    video.setAttribute('width', width)
+    video.setAttribute('height', height)
+}
+
 function flipTrigger(node) {
   ms = 200
   if (node._trigger) {
       node._trigger = false
+      sizeVideo(`player_${node.data('id')}`, IFRAME_WIDTH_MIN, IFRAME_HEIGHT_MIN)
+      delete(tp)
       node.tip.hide()
-      cy.stop()
-      cy.animate({
-        pan: { x: cy._panOrigin['x'], y: cy._panOrigin['y'] },
-        zoom: cy._zoomOrigin
-      }, {
-        duration: ms
-      });
-      node.style(node._styleOrigin)
   } else {
       node._trigger = true
-      cy.stop()
       node.tip.show()
-      const contentY = document.getElementsByClassName('tippy-content')[0].offsetHeight
-      node.tip.hide()
-      let posY = node.position()['y'] * cy.zoom()
-      
-      const divCy = document.getElementById('cy')
-      const cyHeight = divCy.offsetHeight
-      const margin = cyHeight - contentY
-      const offset_y = cyHeight - posY - (margin/2)
-
-    //   console.log("cyHeight : ",cyHeight)
-    //   console.log("posY : ",posY)
-    //   console.log("margin/2 : ",margin/2)
-    //   console.log("offset_y : ",offset_y)
-    //   console.log("contentY", contentY)
-
-      cy.animate({
-        pan: { x: cy._panOrigin['x'], y: offset_y },
-        zoom: cy.zoom()
-      }, {
-        duration: ms,
-        complete: () => node.tip.show()
+      const videoJson = videoList[node.data('id')]
+      tp = new YT.Player(`player_${node.data('id')}`, {
+        width: IFRAME_WIDTH_MIN,
+        height: IFRAME_HEIGHT_MIN,
+        videoId: videoJson["link"],
+        events: {
+            'onReady': onPlayerReady,
+            'onStateChange': onPlayerStateChange,
+            'onPlaybackQualityChange': function(){console.log('quality')},
+            'onPlaybackRateChange': function(){console.log('rate')},
+            'onError': function(e){console.log(e)}
+        },
+        host: 'https://www.youtube.com',
+        playerVars: { 'origin':'${TARGET}' }
       })
+      tp._sensebe_state=false
   }
 }
 
@@ -173,8 +222,9 @@ cy.on('tap', function(event){
     // tap on background
     if( evtTarget === cy ) {
         cy.nodes().forEach(function (node){
-            if (node._trigger === true) 
+            if (node._trigger === true)  {
                 flipTrigger(node)
+            }
         })
     }
 })
@@ -200,8 +250,12 @@ document.addEventListener("dragstart", function( event ) {
 cy.on('tap', '.usage', function() {
     origin = this
     cy.nodes().forEach(function (node){
-        if (node._trigger === true && node !== origin) flipTrigger(node)
+        // when an user already triggered one, then the user selected other usage node
+        if (node._trigger === true && node !== origin) {
+          flipTrigger(node)
+        }
     })
+    // juse when usage node tap
     flipTrigger(this) 
 })
 
@@ -230,9 +284,13 @@ $(window).resize(function() {
 function getIframeSize () {
     cyWidth = document.getElementById('cy').offsetWidth
     iframeWidth = cyWidth - (cyWidth*1/10)
-    if (iframeWidth >= 1280)
-        iframeWidth = 1280
-    iframeHeight = iframeWidth/2
+    iframeWidth -= 300
+    if (iframeWidth >= 1920) {
+        iframeWidth = 1920 - 300
+    } else if (iframeWidth <= 480){
+        iframeWidth = 480
+    }
+    iframeHeight = iframeWidth * (9/16)
 
     return {
         "width":iframeWidth,
@@ -250,6 +308,7 @@ function resizeend() {
         cy.setOrigin()
         videos = document.getElementsByClassName('iframe_video')
         size = getIframeSize()
+        console.log('iframesize : ', size)
         for (let video of videos) {
             video.setAttribute('width', size['width'])
             video.setAttribute('height', size['height'])
