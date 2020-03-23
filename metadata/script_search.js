@@ -1,3 +1,9 @@
+//
+// search AJAX fetch codes for a client-side web brower
+// This code will be loaded from HTMLLoader
+//
+
+// TARGEt will be replaced to appropriate URL in the HTMLLoader
 fetch("${TARGET}/cy?target=${searchTarget}").then(response => response.json().then(json => {
     var data = json.data
     var root = json.root
@@ -12,17 +18,24 @@ fetch("${TARGET}/cy?target=${searchTarget}").then(response => response.json().th
             div.setAttribute("class","hidden");
             div.setAttribute("id",usageID);
 
+            //
+            // create a text area in the tippy
+            //
+
+            // this table shows information about the usgae
             usageAndChunkHTML = `
             <table>
-                <tr style="text-align:center;font-size:1.6em;font-weight:bold;color:salmon;">
+                <tr style="text-align:center;font-size:1.4em;font-weight:bold;color:salmon;">
                     <th colspan=100%>&lt; ${item['_usage']} &gt;</th>
-                </tr>`
+                </tr>
+            </table>
+            <table>`
 
             chunks = item["_chunks"]
             if (chunks !== undefined) {
                 usageAndChunkHTML += `<tr>`
                 chunks.forEach(function (chunk) {
-                    usageAndChunkHTML += `<td>${chunk}</td>`
+                    usageAndChunkHTML += `<td width="${100/chunks.length}%">${chunk}</td>`
                 })
                 usageAndChunkHTML += `</tr>`
             }
@@ -30,6 +43,7 @@ fetch("${TARGET}/cy?target=${searchTarget}").then(response => response.json().th
 
             div.innerHTML = usageAndChunkHTML
 
+            // scripts from videoJson
             videoJson["text"].forEach(function(elm) {
                 if (item["_text"] !== undefined)
                     item["_text"].forEach(function (text){
@@ -41,6 +55,7 @@ fetch("${TARGET}/cy?target=${searchTarget}").then(response => response.json().th
             
             const label = item['_usage'].replace('<br>', '\n')
 
+            // add cytoscape elements
             cy.add([{group: 'nodes', data : { id: usageID, label : label }, classes: "usage usage_node_"+ item["_speech"] } ])
             cy.add([{group: 'edges', data : { source: root, target : usageID }, classes: "edge edge_"+ item["_speech"] } ])
             chunks = item["_chunks"]
@@ -52,6 +67,7 @@ fetch("${TARGET}/cy?target=${searchTarget}").then(response => response.json().th
                 })
             }
                 
+            // layout options
             var options = {
                 name: 'cose-bilkent',
                 ready: function (e) {

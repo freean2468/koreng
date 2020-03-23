@@ -1,3 +1,7 @@
+//
+// a tool for a data insertion to the video_collection in MOngoDB
+//
+
 // expres
 const express = require('express')
 const app = express()
@@ -82,9 +86,7 @@ function baseTemplate() {
         <meta charset="utf-8">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://unpkg.com/@trevoreyre/autocomplete-js"></script>
-        <script src="./js/search.js"></script>
         <script src="./js/general.js"></script>
-        <script src="./js/serializeObject.js"></script>
         <link rel="stylesheet" type="text/css" href="./style/autocomplete.css">
     </head>
     <body>

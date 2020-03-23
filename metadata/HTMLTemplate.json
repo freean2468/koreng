@@ -17,27 +17,8 @@
     "link":[
         "style/autocomplete.css"
     ],
-    "home":{
-        "file":"home",
-        "title":"SensebeDictionary"
-    },
     "search":{
         "file":"search",
         "title":"SensebeDictionary Search"
-    },
-    "menu":[
-        {
-            "file":"toddler",
-            "title":"첫걸음",
-            "folder":"toddler",
-            "sub_menu":[
-                {
-                    "title":"second",
-                    "side_menu":[
-                        "third"
-                    ]
-                }
-            ]
-        }
-    ]
+    }
 }

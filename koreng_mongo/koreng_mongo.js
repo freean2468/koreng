@@ -1,3 +1,7 @@
+//
+// a tool for a data insertion to the eng_dictionary collection in MOngoDB
+//
+
 // expres
 const express = require('express')
 const app = express()
@@ -6,12 +10,15 @@ const app = express()
 const compression = require('compression')
 const bodyParser = require('body-parser')
 const helmet = require('helmet')
+const fetch = require("node-fetch")
 
 // built-in
 const fs = require('fs')
 const {MongoClient} = require('mongodb');
 const path = require('path')
 
+const SERVICE_SERVER_URL = "https://www.sensebedictionary.org"
+const LOCAL_SERVER_URL = "http://localhost:5000"
 const PORT = 5100
 
 // middlewares
@@ -67,9 +74,7 @@ function baseTemplate() {
         <meta charset="utf-8">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://unpkg.com/@trevoreyre/autocomplete-js"></script>
-        <script src="./js/search.js"></script>
         <script src="./js/general.js"></script>
-        <script src="./js/serializeObject.js"></script>
         <link rel="stylesheet" type="text/css" href="./style/autocomplete.css">
     </head>
     <body>
@@ -221,9 +226,12 @@ function search(req, res) {
                     "n"
                     <li>간단하게 뜻만 남기자</li>
                     <li>복수형(plural)의 경우 원형으로 redirection 걸고 원형에 usage를 추가</li>
-                </ul>
+                </ul><br>
                 <ul>
                     "각 품사별 root에 품사 활용을 모두 남기자"
+                </ul><br>
+                <ul>
+                    "sb/sth 중 singular인지 plural인지 구분"
                 </ul>
             </ul>
 
@@ -511,13 +519,22 @@ async function insert(req, res) {
 
         result = await client.db(DATABASE_NAME).collection(DICTIONARY_COLLECTION).findOne({ _id: query['_id'] });
     
-        if (result) await replaceListing(client, query, DICTIONARY_COLLECTION)
-        else await createListing(client, query, DICTIONARY_COLLECTION)
+        if (result) {
+            await replaceListing(client, query, DICTIONARY_COLLECTION)
+        } else {
+            await createListing(client, query, DICTIONARY_COLLECTION)
+        }
 
-        // await findListingBy(client, DICTIONARY_COLLECTION)
-
-        // caution!!! Delite All Query
-        // await deleteAll(client)
+        fetch(`${SERVICE_SERVER_URL}/update_DB_status`)
+            .then(response => response.json())
+            .then(status => {
+                console.log(`SERVICE_SERVER Updated result : volumes(${status["volumes"]}), usages(${status["usages"]}), videos(${status["videos"]})`)
+            })
+        fetch(`${LOCAL_SERVER_URL}/update_DB_status`)
+            .then(response => response.json())
+            .then(status => {
+                console.log(`LOCAL_SERVER Updated result : volumes(${status["volumes"]}), usages(${status["usages"]}), videos(${status["videos"]})`)
+            })
 
     } catch (e) {
         console.error(e)
@@ -560,10 +577,6 @@ try {
     // mongoClientInst.close()
 }
 
-// 1 : find
-// 0 : register
-FLAG = 0
-
 function registerRedirectionTable(json){
     table = fs.readFileSync(path.join(__dirname, REDIRECTION_TABLE_FILE), "utf-8")
     redirectionTableJson = JSON.parse(table)
@@ -603,6 +616,17 @@ function setId(json){
             json['_id'] = _id
 
             fs.writeFileSync(path.join(__dirname, DB_INDEX_TABLE_FILE), JSON.stringify(rootTableJson), "utf-8")
+
+            fetch(`${SERVICE_SERVER_URL}/add_IndexTable?id=${_id}&root=${root}`)
+                .then(response => response.json())
+                .then(res => {
+                    console.log(`result : ${res}`)
+                })
+            fetch(`${LOCAL_SERVER_URL}/add_IndexTable?id=${_id}&root=${root}`)
+                .then(response => response.json())
+                .then(res => {
+                    console.log(`result : ${res}`)
+                })
         } else {
             json['_id'] = rootTableJson[root]
         }

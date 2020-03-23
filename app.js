@@ -1,3 +1,6 @@
+//
+// main code
+//
 
 // expres
 const express = require('express')
@@ -19,7 +22,7 @@ const dataLoaderInst = new dataLoader()
 const mongoClient = require('./feature/mongoClient.js')
 const mongoClientInst = new mongoClient()
 
-// heroku
+// for Heroku
 const PORT = process.env.PORT || 5000
 
 // middlewares
@@ -30,13 +33,27 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 }))
 app.use(compression())
 
+// code down below doesn't work at Heroku 
+// do not use '__dirname'
 // app.use('/', express.static(__dirname+'/public/html'));
 
 // images
 app.use('/', express.static('/public/image'));
 
 // Home
-app.get('/', (req, res) => HTMLLoaderInst.assembleStaticHTML(res, '','home'))
+app.get('/', (req, res) => {
+    let target = 'sensebe'
+    const presearchTable = mongoClientInst.presearchTable
+
+    for (let idx = 0; idx < presearchTable.length; ++idx) {
+        if (presearchTable[idx].toLowerCase() === target) {
+            target = presearchTable[idx]
+            break
+        }
+    }
+
+    HTMLLoaderInst.assembleSearchHTML(res, target)
+})
 
 // Search
 app.get('/preSearch', (req, res) => preSearch(req, res))
@@ -59,24 +76,29 @@ app.get('/search', (req, res) => {
     HTMLLoaderInst.assembleSearchHTML(res, target)
 })
 
-// get cy data from mongoDB
+// AJAX - get cy data from mongoDB
 app.get('/cy', (req, res, next) => getCyData(req, res, next))
 
-// get video data from mongoDB
+// AJAX - get video data from mongoDB
 app.get('/video', (req, res, next) => getVideoData(req, res, next))
 
-// get DB status from mongoDB
-app.get('/status', (req, res, next) => { res.json(mongoClientInst.status) })
+// AJAX - get DB status from mongoDB, called from HTMLLoader
+app.get('/DB_status', (req, res, next) => res.json(mongoClientInst.getStatus()))
 
-// Main
-app.get("/" + encodeURIComponent("toddler"), (req, res) => HTMLLoaderInst.assembleStaticHTML(res, "toddler", "toddler"))
+// AJAX - update DB status from mongoDB, called from koreng_mongo when data had been inserted.
+app.get('/update_DB_status', (req, res, next) => updateDBStatus(req, res, next))
 
+// AJAX - update Index Table 
+app.get('/add_IndexTable', (req, res, next) => res.send(mongoClientInst.addIndexTable(req.query.id, req.query.root)))
+
+// when can not find any page
 app.use(function(req, res, next) {
     res.status(404)
-    HTMLLoaderInst.assembleStaticHTML(res, '', 'home')
+    HTMLLoaderInst.assembleSearchHTML(res, 'sensebe')
     console.log("something wrong! req.url : " + req.url)
 });
 
+// the very final exception code
 app.use(function (err, req, res, next) {
     console.error(err.stack)
     res.status(500).send('Something broke!')
@@ -91,7 +113,8 @@ try {
 }
 
 //
-// functions
+// gets string from the req argument in AJAX transaction
+// and gets a presearch table from local file, then check if the string is match with the elements of the presearch table. 
 //
 function preSearch(req, res) {
     const searchTarget = req.query.target.toLowerCase()
@@ -100,10 +123,11 @@ function preSearch(req, res) {
     const exp = new RegExp(searchTarget)
 
     presearchTable.forEach(element => {
-        if (element.toLowerCase().match(exp))
+        if (element.toLowerCase().match(exp)) {
             responseData.push({
                 "search" : element
             })
+        }
     });
 
     function customSort(a, b) {
@@ -113,11 +137,22 @@ function preSearch(req, res) {
         return a.search.length > b.search.length ? 1 : -1; 
     } 
     
-    responseData = responseData.sort(customSort);
+    responseData = responseData.sort(customSort)
 
-    res.json(responseData);
+    res.json(responseData)
 }
 
+//
+// From now, codes below require a transaction with MongoDB
+//
+
+// get data from english dictionary collection in MongoDB
+async function updateDBStatus(req, res, next) {
+    const result = await mongoClientInst.setStatus()
+    res.json(result)
+}
+
+// get data from english dictionary collection in MongoDB
 async function getCyData(req, res, next) {
     const searchTarget = req.query.target
     var mongoRes = await mongoClientInst.findOneListingById(searchTarget)
@@ -130,6 +165,7 @@ async function getCyData(req, res, next) {
     }    
 }
 
+// get data from video collection in MongoDB
 async function getVideoData(req, res, next) {
     const searchTarget = req.query.target
     var mongoRes = await mongoClientInst.findVideoListingById(searchTarget)

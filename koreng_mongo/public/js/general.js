@@ -14,13 +14,3 @@ $(document).on('keypress', function(event) {
         $("#searchForm").submit();
     }
 });
-
-function onSearchWithFilter () {
-    let category = Cookies.get('category'),
-        contents = Cookies.get('contents');
-    Cookies.set('search', document.getElementById("searchText").value);
-    if(!category) category = '';
-    if(!contents) contents = '';
-    document.getElementById("filterCategoryInput").value = category;
-    document.getElementById("filterContentsInput").value = contents;
-}

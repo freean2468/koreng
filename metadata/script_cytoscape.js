@@ -1,3 +1,8 @@
+//
+// cytoscape library customizing for a client-side web brower
+// This code will be loaded from HTMLLoader
+//
+
 var cy = cytoscape({
     container: document.getElementById('cy'),
     elements: {
@@ -103,6 +108,8 @@ function makePopper(node) {
             let content = document.getElementById(node.data('id'));
             let dummyDomEle = document.createElement('div');
 
+            // vcon for a video part (on the left)
+            // tcon for a text part (on the right)
             dummyDomEle.innerHTML = `
             <div class="tippy_container">
                 <div id="vcon_${node.data('id')}" class="tippy_video_container">
@@ -134,12 +141,13 @@ function makePopper(node) {
     node.tip = tip
 }
 
-var tp
-var videoList = []
+var tp // tp will point the poped up video
+var videoList = [] // videoList have videos from searched results
 const IFRAME_WIDTH_MIN = 480
 const IFRAME_HEIGHT_MIN = getIframeHeight(IFRAME_WIDTH_MIN)
 const IFRAME_WIDTH_MAX = 1920
 
+// Using HD Ratio
 function getIframeHeight(width){
     return width * 9 / 16
 }
@@ -163,10 +171,12 @@ function onPlayerStateChange(event) {
         break;
       case YT.PlayerState.PLAYING:
         console.log('playing');
+        // When it starts to play, grow up the size of the video so that it could be seen recognizably
         if (event.target._sensebe_state === false) {
             event.target._sensebe_state = true
             size = getIframeSize()
-            sizeVideo(event.target.a.id, size['width'], size['height'])
+            console.log(event.target)
+            sizeVideo(event.target._sensebe_vid, size['width'], size['height'])
         }
         break;
       case YT.PlayerState.PAUSED:
@@ -179,7 +189,7 @@ function onPlayerStateChange(event) {
         console.log('video cued');
         break;
     }
-  }
+}
 
 function sizeVideo(id, width, height) {
     video = document.getElementById(id)
@@ -191,6 +201,7 @@ function flipTrigger(node) {
   ms = 200
   if (node._trigger) {
       node._trigger = false
+      // when it's off, get back to the minimum size
       sizeVideo(`player_${node.data('id')}`, IFRAME_WIDTH_MIN, IFRAME_HEIGHT_MIN)
       delete(tp)
       node.tip.hide()
@@ -198,6 +209,8 @@ function flipTrigger(node) {
       node._trigger = true
       node.tip.show()
       const videoJson = videoList[node.data('id')]
+
+      // create Youtube player object so that we could control it.
       tp = new YT.Player(`player_${node.data('id')}`, {
         width: IFRAME_WIDTH_MIN,
         height: IFRAME_HEIGHT_MIN,
@@ -212,7 +225,9 @@ function flipTrigger(node) {
         host: 'https://www.youtube.com',
         playerVars: { 'origin':'${TARGET}' }
       })
+      // add availables for my uses
       tp._sensebe_state=false
+      tp._sensebe_vid=`player_${node.data('id')}`
   }
 }
 
@@ -229,24 +244,6 @@ cy.on('tap', function(event){
     }
 })
 
-cy.on('tapend', function(event){
-    var evtTarget = event.target;
-
-    // tap on background
-    if( evtTarget === cy ) {
-        // cy.setOrigin()
-        // console.log(cy.pan())
-        // console.log(cy.zoom())
-    }
-})
-
-document.addEventListener("dragstart", function( event ) {
-    // store a ref. on the dragged elem
-    dragged = event.target;
-    // make it half transparent
-    event.target.style.opacity = .5;
-}, false);
-
 cy.on('tap', '.usage', function() {
     origin = this
     cy.nodes().forEach(function (node){
@@ -255,7 +252,6 @@ cy.on('tap', '.usage', function() {
           flipTrigger(node)
         }
     })
-    // juse when usage node tap
     flipTrigger(this) 
 })
 
@@ -269,7 +265,9 @@ cy.on('mouseout', '.usage', function() {
     $('html,body').css('cursor', 'default')
 })
 
-// Resizing
+//
+// When the user resizes browser window
+//
 var rtime;
 var timeout = false;
 var delta = 100;
@@ -277,13 +275,14 @@ $(window).resize(function() {
     rtime = new Date();
     if (timeout === false) {
         timeout = true;
-        setTimeout(resizeend, delta);
+        setTimeout(resizeEnd, delta);
     }
 });
 
 function getIframeSize () {
     cyWidth = document.getElementById('cy').offsetWidth
     iframeWidth = cyWidth - (cyWidth*1/10)
+    // 300 is the width of a text area
     iframeWidth -= 300
     if (iframeWidth >= 1920) {
         iframeWidth = 1920 - 300
@@ -298,9 +297,9 @@ function getIframeSize () {
     }
 }
 
-function resizeend() {
+function resizeEnd() {
     if (new Date() - rtime < delta) {
-        setTimeout(resizeend, delta);
+        setTimeout(resizeEnd, delta);
     } else {
         timeout = false;
         // cy.resize()
@@ -315,4 +314,3 @@ function resizeend() {
         }
     }               
 }
-//

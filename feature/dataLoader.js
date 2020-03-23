@@ -1,6 +1,9 @@
 module.exports = DataLoader;
 
-// DataLoader holds all of contents(book, drama, music, etc.) which is a datapool to be searched
+//
+// DataLoader holds all of contents(book, drama, music, etc.) which is a datapool for searching
+// now dataLoader is just a legacy code.
+//
 function DataLoader() {
   this.fs = require('fs')
   this.pt = require('path')
@@ -108,7 +111,7 @@ function DataLoader() {
   }
 
   // initializing
-  this.readMetaData('./data');
-  this.readData('./data');
-  console.log('Loading data completed')
+  // this.readMetaData('./data');
+  // this.readData('./data');
+  // console.log('Loading data completed')
 }

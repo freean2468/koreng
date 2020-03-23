@@ -1,5 +1,9 @@
 module.exports = mongoClient
 
+//
+//  connects to MongoDB then performs transactions
+//
+
 const fs = require('fs')
 const path = require('path')
 const {MongoClient} = require('mongodb')
@@ -11,6 +15,10 @@ const VIDEO_COLLECTION = "video_collection"
 function mongoClient() {
     this.uri = `mongodb+srv://sensebe:${PASSWORD}@agjakmdb-j9ghj.azure.mongodb.net/test`
     this.client = new MongoClient(this.uri, { useNewUrlParser: true, useUnifiedTopology: true })
+
+    // indexTable has indexies for speeding up the query time of search request.
+    // this is not yet fully developed. This needs to be updated in real time on the service server
+    // when the lists are added on the local server
     this.indexTable = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'koreng_mongo', 'rootIndexTable.json'), "utf-8"))
     this.redirectionTable = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'koreng_mongo', 'redirectionTable.json'), "utf-8"))
     this.presearchTable = []
@@ -28,9 +36,26 @@ function mongoClient() {
             this.presearchTable.push(key)
         }
 
+        this.setStatus()
+    }
+
+    this.addIndexTable = function (id, root) {
+        this.indexTable[root] = Number(id)
+        this.presearchTable.push(root)
+        fs.writeFileSync(path.join(__dirname, '..', 'koreng_mongo', 'rootIndexTable.json'), JSON.stringify(this.indexTable), "utf-8")
+
+        return '400'
+    }
+
+    this.setStatus = async function () {
         this.status["volumes"] = await this.scanListings(DICTIONARY_COLLECTION)
         this.status["videos"] = await this.scanListings(VIDEO_COLLECTION)
         this.status["usages"] = await this.scanUsages()
+        return this.status
+    }
+
+    this.getStatus = function () {
+        return this.status
     }
 
     this.scanListings = async function (collection) {

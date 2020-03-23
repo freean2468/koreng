@@ -1,3 +1,7 @@
+//
+// deprecated code
+//
+
 // control
 $(function() {
     //

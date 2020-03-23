@@ -1,27 +1,49 @@
 module.exports = HTMLLoader
 
-const SERVICE = false
+//
+// Before committing to github, If that is a service version, you should put 'true' into SERVICE variable
+//
+const SERVICE = true
 
 var TARGET
 
 if (SERVICE) {
+  // for a service environment
   TARGET = "https://www.sensebedictionary.org"
 } else {
+  // for a local development environment
   TARGET = "http://localhost:5000"
 }
 
+// string replaceall function
 function replaceAll(str, searchStr, replaceStr) {
   return str.split(searchStr).join(replaceStr);
 }
 
+//
 // HTMLLoader manages the ways of loading html files.
+//
 function HTMLLoader() {
   this.fs = require('fs')
   this.pt = require('path')
+
+  //
+  // HTMLTemplate.json has a lists of URL which are src links, local js and css files.
+  // This lists will be replaced to the head of the template down below.
+  //
   this.templateJson = JSON.parse(this.fs.readFileSync("metadata/HTMLTemplate.json", 'utf8'))
+
+  //
+  // loads the search autocomplete js code from .js file then, this code will be replaced in the template down below
+  //
   this.autocomplete = replaceAll(this.fs.readFileSync("metadata/script_autocomplete.js", 'utf8'), 'TARGET',TARGET)
+
+  //
+  // loads cytoscape js code then replace it to predetermined place in the templace down below
+  //
   this.cytoscape = this.fs.readFileSync("metadata/script_cytoscape.js", 'utf8')
 
+  // return HTML Template for the client
   this.getTemplate = function (page, html) {
     const metadata = this.templateJson[page]
     var template = `
@@ -47,7 +69,7 @@ function HTMLLoader() {
       <div class="head">
         <header>
           <hgroup>
-            <p class="title"><a href="${TARGET}">SensebeDictionary ver.Beta</a></p>
+            <p class="title"><a href="${TARGET}/search?target=sensebe&btnK=Sense+검색">SensebeDictionary ver.Beta</a></p>
             <p class="subtitle"><small>감각, 사전이 되다</small></p>
             <nav id="search_group">
               <div class="sgroup">
@@ -67,14 +89,6 @@ function HTMLLoader() {
               <div class="wrapper">
                 <ul class="sub_nav">
                   <li>
-                    <!--<li class="selected">-->
-                    <div class="label public">
-                      <a class="pagelink" href="${TARGET}/main_toddler">첫걸음</a>
-                    </div>
-                    <div class="sub_nav depth_1" style="left: -51px; position: absolute; width: 199px; display: none;" loaded="true">
-                      <ul class="sub_nav">
-                      </ul>
-                    </div>
                   </li>
                 </ul>
               </div>
@@ -94,7 +108,7 @@ function HTMLLoader() {
               <li id="video_nav"></li>
             </ul>
             <script>
-              fetch("${TARGET}/status").then(response => response.json().then(status => {
+              fetch("${TARGET}/DB_status").then(response => response.json().then(status => {
                 document.getElementById('volume_nav').innerHTML = "volumes : " + status["volumes"]
                 document.getElementById('usage_nav').innerHTML = "usages : " + status["usages"]
                 document.getElementById('video_nav').innerHTML = "videos : " + status["videos"]
@@ -133,6 +147,7 @@ function HTMLLoader() {
   }
 
   // find a static page and send
+  // now this function is deprecated.
   this.assembleStaticHTML = function(res, dir, page) {
     // console.log('requested page : ' + page)
 

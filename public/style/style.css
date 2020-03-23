@@ -20,14 +20,16 @@ table {
     margin-left:auto;
     margin-right:auto;
     margin-bottom:20px;
+    width: 100%;
+    table-layout:fixed;
 }
 table, th, td {
     /* border: 1px solid white; */
     text-align: center;
 }
 td {
-    padding-left:20px;
-    padding-right:20px;
+    /* padding-left:20px;
+    padding-right:20px; */
 }
 
 .tippy_container {
@@ -124,7 +126,7 @@ td {
 
 /* head - main_menu */
 #whole_wrapper>.head nav#main_menu{z-index:11}
-#whole_wrapper>.head nav#main_menu>div.wrapper>ul{padding:1.2em;margin-top:0em;margin-bottom:0.1em;text-align:center}
+#whole_wrapper>.head nav#main_menu>div.wrapper>ul{margin-top:0em;margin-bottom:0.1em;text-align:center}
 #whole_wrapper>.head nav#main_menu>div.wrapper>ul>li{display:inline-block;padding:10px 0;z-index:12;position:relative}
 #whole_wrapper>.head nav#main_menu>div.wrapper>ul>li:first-child>div.label{border-left:0}
 #whole_wrapper>.head nav#main_menu>div.wrapper>ul>li>div.label{border-left:1px solid #666}
