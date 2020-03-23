@@ -12,7 +12,7 @@ koreng_mongo/data
 
 # source data
 public/html_metadata copy
-public/image
+# public/image
 public/reference
 
 # tool
