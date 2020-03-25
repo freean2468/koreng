@@ -41,25 +41,25 @@ function mongoClient() {
         this.setStatus()
     }
 
-    this.addIndexTable = function (id, root) {
+    this.addIndexTable = function (res, id, root) {
         this.indexTable[root] = Number(id)
         this.presearchTable.push(root)
         fs.writeFile(path.join(__dirname, '..', 'koreng_mongo', DB_INDEX_TABLE_FILE), JSON.stringify(this.indexTable), "utf-8", (e) => {
-            return '400'
+            res.send('400')
         })
     }
     
-    this.addRedirectionTable = function (root, redirection) {
+    this.addRedirectionTable = function (res, root, redirection) {
         this.redirectionTable[root] = redirection
         fs.writeFile(path.join(__dirname, '..', 'koreng_mongo', REDIRECTION_TABLE_FILE), JSON.stringify(this.redirectionTable), "utf-8",  (e) => {
-            return '400'
+            res.send('400')
         })
     }
 
-    this.delRedirectionTable = function (root) {
+    this.delRedirectionTable = function (res, root) {
         delete this.redirectionTable[root]
         fs.writeFile(path.join(__dirname, '..', 'koreng_mongo', REDIRECTION_TABLE_FILE), JSON.stringify(this.redirectionTable), "utf-8",  (e) => {
-            return '400'
+            res.send('400')
         })
     }
 

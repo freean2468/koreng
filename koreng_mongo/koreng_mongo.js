@@ -591,14 +591,15 @@ function registerRedirectionTable(json){
         fetch(`${LOCAL_SERVER_URL}/add_RedirectionTable?root=${root}&redirection=${redirection}`)
             .then(response => response.json())
             .then(res => {
-                console.log(`on local : ${root} registered as ${redirection}`)
+                console.log(`on local del result : ${res}`)
             })
         fetch(`${SERVICE_SERVER_URL}/add_RedirectionTable?root=${root}&redirection=${redirection}`)
             .then(response => response.json())
             .then(res => {
-                console.log(`on service : ${root} registered as ${redirection}`)
+                console.log(`on service del result : ${res}`)
             })
 
+        console.log(`on service : ${root} registered as ${redirection}`)
         return true
     } else {
       if (redirectionTableJson[root])  {
@@ -608,12 +609,12 @@ function registerRedirectionTable(json){
         fetch(`${LOCAL_SERVER_URL}/del_RedirectionTable?root=${root}`)
             .then(response => response.json())
             .then(res => {
-                console.log(`on local : ${root} registered as ${redirection}`)
+                console.log(`on local del result : ${res}`)
             })
         fetch(`${SERVICE_SERVER_URL}/add_RedirectionTable?root=${root}`)
             .then(response => response.json())
             .then(res => {
-                console.log(`on service : ${root} registered as ${redirection}`)
+                console.log(`on service del result : ${res}`)
             })
 
         console.log(`${root} redirection deleted`)
