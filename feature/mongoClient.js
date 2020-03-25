@@ -51,6 +51,7 @@ function mongoClient() {
     
     this.addRedirectionTable = function (res, root, redirection) {
         this.redirectionTable[root] = redirection
+        this.presearchTable.push(root)
         fs.writeFile(path.join(__dirname, '..', 'koreng_mongo', REDIRECTION_TABLE_FILE), JSON.stringify(this.redirectionTable), "utf-8",  (e) => {
             res.send('400')
         })
@@ -58,6 +59,7 @@ function mongoClient() {
 
     this.delRedirectionTable = function (res, root) {
         delete this.redirectionTable[root]
+        delete this.presearchTable[root]
         fs.writeFile(path.join(__dirname, '..', 'koreng_mongo', REDIRECTION_TABLE_FILE), JSON.stringify(this.redirectionTable), "utf-8",  (e) => {
             res.send('400')
         })
