@@ -32,17 +32,17 @@ app.use(compression())
 last_index = 0
 indexTable = {}
 
-METADATA_PATH = "dictionary_data"
-ARCHIVE_PATH = "dictionary_archive"
+const METADATA_PATH = "dictionary_data"
+const ARCHIVE_PATH = "dictionary_archive"
 
-TABLE_PATH = './'
-PASSWORD = fs.readFileSync("./pw.txt", "utf8")
+const TABLE_PATH = './'
+const PASSWORD = fs.readFileSync("./pw.txt", "utf8")
 
-DATABASE_NAME = "sensebe_dictionary"
-DICTIONARY_COLLECTION = "eng_dictionary"
+const DATABASE_NAME = "sensebe_dictionary"
+const DICTIONARY_COLLECTION = "eng_dictionary"
 
-REDIRECTION_TABLE_FILE = "redirectionTable.json"
-DB_INDEX_TABLE_FILE = 'rootIndexTable.json'
+const REDIRECTION_TABLE_FILE = "redirectionTable.json"
+const DB_INDEX_TABLE_FILE = 'rootIndexTable.json'
 
 function speechTemplate(idx) {
     return `
@@ -587,12 +587,35 @@ function registerRedirectionTable(json){
     if(redirection !== "") {
         redirectionTableJson[root] = redirection
         fs.writeFileSync(path.join(__dirname, REDIRECTION_TABLE_FILE), JSON.stringify(redirectionTableJson), "utf-8")
-        console.log(`${root} registered as ${redirection}`)
+
+        fetch(`${LOCAL_SERVER_URL}/add_RedirectionTable?root=${root}&redirection=${redirection}`)
+            .then(response => response.json())
+            .then(res => {
+                console.log(`on local : ${root} registered as ${redirection}`)
+            })
+        fetch(`${SERVICE_SERVER_URL}/add_RedirectionTable?root=${root}&redirection=${redirection}`)
+            .then(response => response.json())
+            .then(res => {
+                console.log(`on service : ${root} registered as ${redirection}`)
+            })
+
         return true
     } else {
       if (redirectionTableJson[root])  {
-        del(redirectionTableJson[root])
+        delete redirectionTableJson[root]
         fs.writeFileSync(path.join(__dirname, REDIRECTION_TABLE_FILE), JSON.stringify(redirectionTableJson), "utf-8")
+
+        fetch(`${LOCAL_SERVER_URL}/del_RedirectionTable?root=${root}`)
+            .then(response => response.json())
+            .then(res => {
+                console.log(`on local : ${root} registered as ${redirection}`)
+            })
+        fetch(`${SERVICE_SERVER_URL}/add_RedirectionTable?root=${root}`)
+            .then(response => response.json())
+            .then(res => {
+                console.log(`on service : ${root} registered as ${redirection}`)
+            })
+
         console.log(`${root} redirection deleted`)
       }
     }

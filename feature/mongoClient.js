@@ -11,6 +11,8 @@ const PASSWORD = fs.readFileSync("./koreng_mongo/pw.txt", "utf8")
 const DATABASE_NAME = "sensebe_dictionary"
 const DICTIONARY_COLLECTION = "eng_dictionary"
 const VIDEO_COLLECTION = "video_collection"
+const REDIRECTION_TABLE_FILE = "redirectionTable.json"
+const DB_INDEX_TABLE_FILE = 'rootIndexTable.json'
 
 function mongoClient() {
     this.uri = `mongodb+srv://sensebe:${PASSWORD}@agjakmdb-j9ghj.azure.mongodb.net/test`
@@ -19,8 +21,8 @@ function mongoClient() {
     // indexTable has indexies for speeding up the query time of search request.
     // this is not yet fully developed. This needs to be updated in real time on the service server
     // when the lists are added on the local server
-    this.indexTable = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'koreng_mongo', 'rootIndexTable.json'), "utf-8"))
-    this.redirectionTable = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'koreng_mongo', 'redirectionTable.json'), "utf-8"))
+    this.indexTable = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'koreng_mongo', DB_INDEX_TABLE_FILE), "utf-8"))
+    this.redirectionTable = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'koreng_mongo', REDIRECTION_TABLE_FILE), "utf-8"))
     this.presearchTable = []
     this.status = {
         volumes:0,
@@ -42,9 +44,23 @@ function mongoClient() {
     this.addIndexTable = function (id, root) {
         this.indexTable[root] = Number(id)
         this.presearchTable.push(root)
-        fs.writeFileSync(path.join(__dirname, '..', 'koreng_mongo', 'rootIndexTable.json'), JSON.stringify(this.indexTable), "utf-8")
+        fs.writeFile(path.join(__dirname, '..', 'koreng_mongo', DB_INDEX_TABLE_FILE), JSON.stringify(this.indexTable), "utf-8", (e) => {
+            return '400'
+        })
+    }
+    
+    this.addRedirectionTable = function (root, redirection) {
+        this.redirectionTable[root] = redirection
+        fs.writeFile(path.join(__dirname, '..', 'koreng_mongo', REDIRECTION_TABLE_FILE), JSON.stringify(redirectionTableJson), "utf-8",  (e) => {
+            return '400'
+        })
+    }
 
-        return '400'
+    this.delRedirectionTable = function (root) {
+        delete this.redirectionTable[root]
+        fs.writeFile(path.join(__dirname, '..', 'koreng_mongo', REDIRECTION_TABLE_FILE), JSON.stringify(redirectionTableJson), "utf-8",  (e) => {
+            return '400'
+        })
     }
 
     this.setStatus = async function () {

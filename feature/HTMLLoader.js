@@ -3,7 +3,7 @@ module.exports = HTMLLoader
 //
 // Before committing to github, If that is a service version, you should put 'true' into SERVICE variable
 //
-const SERVICE = true
+const SERVICE = false
 
 var TARGET
 
@@ -50,6 +50,17 @@ function HTMLLoader() {
 <!doctype html>
 <html>
   <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-161851570-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-161851570-1');
+    </script>
+    <script data-ad-client="ca-pub-9634519241047792" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    
     <title>${metadata["title"]}</title>
     <meta charset="utf-8">`
 

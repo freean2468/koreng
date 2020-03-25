@@ -91,6 +91,12 @@ app.get('/update_DB_status', (req, res, next) => updateDBStatus(req, res, next))
 // AJAX - update Index Table 
 app.get('/add_IndexTable', (req, res, next) => res.send(mongoClientInst.addIndexTable(req.query.id, req.query.root)))
 
+// AJAX - update Redirection Table 
+app.get('/add_RedirectionTable', (req, res, next) => res.send(mongoClientInst.addRedirectionTable(req.query.root, req.query.redirectionTable)))
+
+// AJAX - delete a element from Redirection Table 
+app.get('/del_RedirectionTable', (req, res, next) => res.send(mongoClientInst.delRedirectionTable(req.query.root)))
+
 // when can not find any page
 app.use(function(req, res, next) {
     res.status(404)
