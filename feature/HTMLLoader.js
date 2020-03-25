@@ -3,7 +3,7 @@ module.exports = HTMLLoader
 //
 // Before committing to github, If that is a service version, you should put 'true' into SERVICE variable
 //
-const SERVICE = true
+const SERVICE = false
 
 var TARGET
 
