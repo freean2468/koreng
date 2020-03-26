@@ -622,13 +622,13 @@ async function findByIdType(req, res) {
 
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url><loc>http://www.sensebedictionary.org/</loc></url>
-    <url><loc>http://www.sensebedictionary.org/search?target=sensebe&btnK=Sense+%EA%B2%80%EC%83%89</loc></url>`
+    <url><loc>http://www.sensebedictionary.org/search?target=sensebe&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc></url>`
 
         for(let item in list) {
             let filename = list[item].split('.')[0]
             nav += `
     <url>
-        <loc>http://www.sensebedictionary.org/search?target=${filename}&btnK=Sense+%EA%B2%80%EC%83%89</loc>
+        <loc>http://www.sensebedictionary.org/search?target=${filename}&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
     </url>`
         }
 
