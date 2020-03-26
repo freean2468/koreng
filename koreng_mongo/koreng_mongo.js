@@ -618,23 +618,22 @@ async function findByIdType(req, res) {
 
         // create sitemaps
         const list = fs.readdirSync('dictionary_archive')
-        var nav = `
-        <?xml version="1.0" encoding="UTF-8"?>
+        var nav = `<?xml version="1.0" encoding="UTF-8"?>
 
-        <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-            <url><loc>http://www.sensebedictionary.org/</loc></url>
-            <url><loc>http://www.sensebedictionary.org/search?target=sensebe&btnK=Sense+%EA%B2%80%EC%83%89</loc></url>`
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url><loc>http://www.sensebedictionary.org/</loc></url>
+    <url><loc>http://www.sensebedictionary.org/search?target=sensebe&btnK=Sense+%EA%B2%80%EC%83%89</loc></url>`
 
         for(let item in list) {
             let filename = list[item].split('.')[0]
             nav += `
-            <url>
-                <loc>http://www.sensebedictionary.org/search?target=${filename}&btnK=Sense+%EA%B2%80%EC%83%89</loc>
-            </url>`
+    <url>
+        <loc>http://www.sensebedictionary.org/search?target=${filename}&btnK=Sense+%EA%B2%80%EC%83%89</loc>
+    </url>`
         }
 
         nav += `
-        </urlset>`
+</urlset>`
 
         fs.writeFile('../public/sitemap.xml', nav, (err) => {
             if (err) throw err;
