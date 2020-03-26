@@ -593,15 +593,6 @@ async function findByIdType(req, res) {
         //     $type:7 // ObjectId
         // } }).toArray()
 
-        //  deletes not intended lists
-        // try {
-        //     await client.db(DATABASE_NAME).collection("eng_dictionary").deleteMany( { _id: {
-        //         $type:7 // ObjectId
-        //     }}) 
-        // } catch (e) {
-        //     print (e);
-        // }
-        
         // if (result) {
         //     console.log(`Found a listing in the collection with the _id '${idType}':${result['_id']}`);
         //     console.log(result);
@@ -613,6 +604,42 @@ async function findByIdType(req, res) {
         // } else {
         //     console.log(`No listings found with the _id '${idType}'`);
         // }
+
+        //
+        //  deletes not intended listings
+        //
+        // try {
+        //     await client.db(DATABASE_NAME).collection("eng_dictionary").deleteMany( { _id: {
+        //         $type:7 // ObjectId
+        //     }}) 
+        // } catch (e) {
+        //     print (e);
+        // }
+
+        // create sitemaps
+        const list = fs.readdirSync('dictionary_archive')
+        var nav = `
+        <?xml version="1.0" encoding="UTF-8"?>
+
+        <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+            <url><loc>http://www.sensebedictionary.org/</loc></url>
+            <url><loc>http://www.sensebedictionary.org/search?target=sensebe&btnK=Sense+%EA%B2%80%EC%83%89</loc></url>`
+
+        for(let item in list) {
+            let filename = list[item].split('.')[0]
+            nav += `
+            <url>
+                <loc>http://www.sensebedictionary.org/search?target=${filename}&btnK=Sense+%EA%B2%80%EC%83%89</loc>
+            </url>`
+        }
+
+        nav += `
+        </urlset>`
+
+        fs.writeFile('../public/sitemap.xml', nav, (err) => {
+            if (err) throw err;
+            console.log(`[SITEMAP] sitemap.xml has been created`);
+        });
     } catch (e) {
         console.error(e)
     } finally {
