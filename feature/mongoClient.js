@@ -19,8 +19,6 @@ function mongoClient() {
     this.client = new MongoClient(this.uri, { useNewUrlParser: true, useUnifiedTopology: true })
 
     // indexTable has indexies for speeding up the query time of search request.
-    // this is not yet fully developed. This needs to be updated in real time on the service server
-    // when the lists are added on the local server
     this.indexTable = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'koreng_mongo', DB_INDEX_TABLE_FILE), "utf-8"))
     this.redirectionTable = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'koreng_mongo', REDIRECTION_TABLE_FILE), "utf-8"))
     this.presearchTable = []
@@ -45,6 +43,7 @@ function mongoClient() {
         this.indexTable[root] = Number(id)
         this.presearchTable.push(root)
         fs.writeFile(path.join(__dirname, '..', 'koreng_mongo', DB_INDEX_TABLE_FILE), JSON.stringify(this.indexTable), "utf-8", (e) => {
+            console.log(`[INDEX] ${root} is added to indexTable, as the id(${id})`)
             res.send('400')
         })
     }
@@ -53,6 +52,7 @@ function mongoClient() {
         this.redirectionTable[root] = redirection
         this.presearchTable.push(root)
         fs.writeFile(path.join(__dirname, '..', 'koreng_mongo', REDIRECTION_TABLE_FILE), JSON.stringify(this.redirectionTable), "utf-8",  (e) => {
+            console.log(`[REDIRECTION] ${root} is redirected to ${redirection}`)
             res.send('400')
         })
     }
@@ -61,6 +61,7 @@ function mongoClient() {
         delete this.redirectionTable[root]
         delete this.presearchTable[root]
         fs.writeFile(path.join(__dirname, '..', 'koreng_mongo', REDIRECTION_TABLE_FILE), JSON.stringify(this.redirectionTable), "utf-8",  (e) => {
+            console.log(`[REDIRECTION] ${root} is deleted from the redirection table`)
             res.send('400')
         })
     }

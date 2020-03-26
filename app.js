@@ -92,7 +92,7 @@ app.get('/update_DB_status', (req, res, next) => updateDBStatus(req, res, next))
 app.get('/add_IndexTable', (req, res, next) => mongoClientInst.addIndexTable(res, req.query.id, req.query.root))
 
 // AJAX - update Redirection Table 
-app.get('/add_RedirectionTable', (req, res, next) => mongoClientInst.addRedirectionTable(res, req.query.root, req.query.redirectionTable))
+app.get('/add_RedirectionTable', (req, res, next) => mongoClientInst.addRedirectionTable(res, req.query.root, req.query.redirection))
 
 // AJAX - delete a element from Redirection Table 
 app.get('/del_RedirectionTable', (req, res, next) => mongoClientInst.delRedirectionTable(res, req.query.root))

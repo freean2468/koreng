@@ -15,6 +15,7 @@ const fetch = require("node-fetch")
 // built-in
 const fs = require('fs')
 const {MongoClient} = require('mongodb');
+var ObjectId = require('mongodb').ObjectID;
 const path = require('path')
 
 const SERVICE_SERVER_URL = "https://www.sensebedictionary.org"
@@ -44,6 +45,7 @@ const DICTIONARY_COLLECTION = "eng_dictionary"
 const REDIRECTION_TABLE_FILE = "redirectionTable.json"
 const DB_INDEX_TABLE_FILE = 'rootIndexTable.json'
 
+// called from search()
 function speechTemplate(idx) {
     return `
     <label><input type="checkbox" name="data[${idx}][_speech][]" value="verb">verb</label>
@@ -64,6 +66,7 @@ function speechTemplate(idx) {
     <label><input type="checkbox" name="data[${idx}][_speech][]" value="number">number</label>`
 }
 
+// called from search(), /, insert() 
 function baseTemplate() {
     const autocomplete = fs.readFileSync("./metadata/script_autocomplete.js", 'utf8')
     var base = `
@@ -100,6 +103,7 @@ function baseTemplate() {
                 </nav>
                 <main>
                     <!-- SEARCH -->
+                    <!-- TRANSACTION -->
                 </main>
             </section>
         </div>
@@ -115,10 +119,25 @@ function baseTemplate() {
     `
 
     base = base.replace('<!-- NAV -->', navTemplate())
+    base = base.replace('<!-- TRANSACTION -->', transactionTemplate())
 
     return base
 }
 
+function transactionTemplate() {
+    var template = `
+    <div>
+        <form id="findByIdType" action="/findByIdType" style="overflow:visible;display:block" data-submitfalse="q" method="GET">
+            <br>
+                findByIdType : <input name="findByIdType" type="text"/>
+                <input class="btn" id="find_btn" value="find" type="submit">
+        </form>
+    </div>`
+
+    return template
+}
+
+// called from baseTemplate()
 function navTemplate() {
     const list = fs.readdirSync('dictionary_archive')
     var nav = `<ul>volumes : ${list.length}`
@@ -180,6 +199,7 @@ function preSearch(req, res) {
     res.json(responseData);
 }
 
+// called from app.get()
 function search(req, res) {
     const searchTarget = req.query.target.toLowerCase()
     const filelist = fs.readdirSync(ARCHIVE_PATH)
@@ -488,6 +508,7 @@ function search(req, res) {
     res.send(baseTem)
 }
 
+// DB transaction - insert
 async function insert(req, res) {
     const uri = `mongodb+srv://sensebe:${PASSWORD}@agjakmdb-j9ghj.azure.mongodb.net/test`
     const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -511,31 +532,43 @@ async function insert(req, res) {
     }
 
     try {
-        // Connect to the MongoDB cluster
-        await client.connect()
-
+        //
+        // local processes
+        // START
         fs.writeFileSync(path.join(__dirname, ARCHIVE_PATH, query["root"]+'.json'), JSON.stringify(query, null, "\t"), "utf-8")
-        setId(query)
 
-        result = await client.db(DATABASE_NAME).collection(DICTIONARY_COLLECTION).findOne({ _id: query['_id'] });
-    
-        if (result) {
-            await replaceListing(client, query, DICTIONARY_COLLECTION)
-        } else {
-            await createListing(client, query, DICTIONARY_COLLECTION)
+        const res = setId(query)
+        // END
+        //
+
+        //
+        // DB processes
+        // START
+        if (res) {
+            // Connect to the MongoDB cluster
+            await client.connect()
+
+            result = await client.db(DATABASE_NAME).collection(DICTIONARY_COLLECTION).findOne({ _id: query['_id'] });
+        
+            if (result) {
+                await replaceListing(client, query, DICTIONARY_COLLECTION)
+            } else {
+                await createListing(client, query, DICTIONARY_COLLECTION)
+            }
+
+            fetch(`${SERVICE_SERVER_URL}/update_DB_status`)
+                .then(response => response.json())
+                .then(status => {
+                    console.log(`SERVICE_SERVER Updated result : volumes(${status["volumes"]}), usages(${status["usages"]}), videos(${status["videos"]})`)
+                })
+            fetch(`${LOCAL_SERVER_URL}/update_DB_status`)
+                .then(response => response.json())
+                .then(status => {
+                    console.log(`LOCAL_SERVER Updated result : volumes(${status["volumes"]}), usages(${status["usages"]}), videos(${status["videos"]})`)
+                })
         }
-
-        fetch(`${SERVICE_SERVER_URL}/update_DB_status`)
-            .then(response => response.json())
-            .then(status => {
-                console.log(`SERVICE_SERVER Updated result : volumes(${status["volumes"]}), usages(${status["usages"]}), videos(${status["videos"]})`)
-            })
-        fetch(`${LOCAL_SERVER_URL}/update_DB_status`)
-            .then(response => response.json())
-            .then(status => {
-                console.log(`LOCAL_SERVER Updated result : volumes(${status["volumes"]}), usages(${status["usages"]}), videos(${status["videos"]})`)
-            })
-
+        // END
+        //
     } catch (e) {
         console.error(e)
     } finally {
@@ -545,9 +578,55 @@ async function insert(req, res) {
     }
 }
 
+// DB transaction - findByIdType...... but now just used for hand-writed commands
+async function findByIdType(req, res) {
+    const uri = `mongodb+srv://sensebe:${PASSWORD}@agjakmdb-j9ghj.azure.mongodb.net/test`
+    const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true })
+    const query = req.query
+
+    idType = query["findByIdType"]
+
+    try {
+        await client.connect()
+
+        // result = await client.db(DATABASE_NAME).collection("eng_dictionary").find({ _id: {
+        //     $type:7 // ObjectId
+        // } }).toArray()
+
+        //  deletes not intended lists
+        // try {
+        //     await client.db(DATABASE_NAME).collection("eng_dictionary").deleteMany( { _id: {
+        //         $type:7 // ObjectId
+        //     }}) 
+        // } catch (e) {
+        //     print (e);
+        // }
+        
+        // if (result) {
+        //     console.log(`Found a listing in the collection with the _id '${idType}':${result['_id']}`);
+        //     console.log(result);
+
+        //     // for (let i = 0; i < result.length; ++i) {
+        //     //     console.log(result[i]['_id'])
+        //     //     await deleteListingById(client, result[i]['_id'])
+        //     // }
+        // } else {
+        //     console.log(`No listings found with the _id '${idType}'`);
+        // }
+    } catch (e) {
+        console.error(e)
+    } finally {
+        console.log('--------TRANSACTION END!-----')
+        await client.close()
+    
+        res.send(baseTemplate())
+    }
+}
+
 app.get('/preSearch', (req, res) => preSearch(req, res))
 app.get('/search', (req, res) => search(req, res))
 app.get('/insert', (req, res) => insert(req, res)) 
+app.get('/findByIdType', (req, res) => findByIdType(req, res)) 
 
 // Home
 app.get('/', function(req, res) {
@@ -578,15 +657,11 @@ try {
 }
 
 function registerRedirectionTable(json){
-    table = fs.readFileSync(path.join(__dirname, REDIRECTION_TABLE_FILE), "utf-8")
-    redirectionTableJson = JSON.parse(table)
-
     root = json['root']
     redirection = json['redirection']
 
     if(redirection !== "") {
-        redirectionTableJson[root] = redirection
-        fs.writeFileSync(path.join(__dirname, REDIRECTION_TABLE_FILE), JSON.stringify(redirectionTableJson), "utf-8")
+        console.log('fetch a add command to the server')
 
         fetch(`${LOCAL_SERVER_URL}/add_RedirectionTable?root=${root}&redirection=${redirection}`)
             .then(response => response.json())
@@ -598,37 +673,33 @@ function registerRedirectionTable(json){
             .then(res => {
                 console.log(`on service add result : ${res}`)
             })
-
-        console.log(`on service : ${root} registered as ${redirection}`)
         return true
     } else {
-      if (redirectionTableJson[root])  {
-        delete redirectionTableJson[root]
-        fs.writeFileSync(path.join(__dirname, REDIRECTION_TABLE_FILE), JSON.stringify(redirectionTableJson), "utf-8")
+        table = fs.readFileSync(path.join(__dirname, REDIRECTION_TABLE_FILE), "utf-8")
+        redirectionTableJson = JSON.parse(table)
+        if (redirectionTableJson[root])  {
+            console.log('fetch a delete command to the server')
 
-        fetch(`${LOCAL_SERVER_URL}/del_RedirectionTable?root=${root}`)
-            .then(response => response.json())
-            .then(res => {
-                console.log(`on local del result : ${res}`)
-            })
-        fetch(`${SERVICE_SERVER_URL}/del_RedirectionTable?root=${root}`)
-            .then(response => response.json())
-            .then(res => {
-                console.log(`on service del result : ${res}`)
-            })
-
-        console.log(`${root} redirection deleted`)
-      }
+            fetch(`${LOCAL_SERVER_URL}/del_RedirectionTable?root=${root}`)
+                .then(response => response.json())
+                .then(res => {
+                    console.log(`on local del result : ${res}`)
+                })
+            fetch(`${SERVICE_SERVER_URL}/del_RedirectionTable?root=${root}`)
+                .then(response => response.json())
+                .then(res => {
+                    console.log(`on service del result : ${res}`)
+                })
+        }
     }
     return false
 }
 
+// creates a uique ID for the MongoDB
 function setId(json){
     table = fs.readFileSync(path.join(__dirname, DB_INDEX_TABLE_FILE), "utf-8")
 
-    // console.log('tableData : ', table)
     rootTableJson = JSON.parse(table)
-    // console.log('json form : \n',indexTable)
     redirectionResult = registerRedirectionTable(json)
     root = json["root"]
 
@@ -639,7 +710,7 @@ function setId(json){
             rootTableJson[root]=_id
             json['_id'] = _id
 
-            fs.writeFileSync(path.join(__dirname, DB_INDEX_TABLE_FILE), JSON.stringify(rootTableJson), "utf-8")
+            console.log('[INDEX] fetched add commands to the servers')
 
             fetch(`${SERVICE_SERVER_URL}/add_IndexTable?id=${_id}&root=${root}`)
                 .then(response => response.json())
@@ -656,8 +727,12 @@ function setId(json){
         }
         console.log(`json['_id'] : ${json['_id']}, root : ${root}`)
     }
+    return redirectionResult
 }
 
+///
+/// MongoDB Transactions down below
+///
 async function createListing(client, newListing, collection){
     const result = await client.db(DATABASE_NAME).collection(collection).insertOne(newListing);
     console.log(`New listing created with the following id: ${result.insertedId}(${newListing['root']})`);
@@ -680,6 +755,7 @@ async function findOneListingById(client, idOfListing) {
     }
 }
 
+// Use this function when you need to find documents having a expected element
 async function findListingBy(client, collection) {
     const col = await client.db(DATABASE_NAME).collection(collection);
     col.find({
@@ -783,6 +859,12 @@ async function updateAllListingsToHavePropertyType(client) {
 async function deleteAll(client) {
     result = await client.db(DATABASE_NAME).collection("eng_dictionary").deleteMany({})
     console.log(`delete All result : ${result["result"]}`);
+}
+
+async function deleteListingById(client, idOfListing) {
+    result = await client.db(DATABASE_NAME).collection("eng_dictionary")
+         .deleteOne({ _id: idOfListing });
+    console.log(`${result.deletedCount} document(s) was/were deleted.`);
 }
 
 async function deleteListingByName(client, nameOfListing) {

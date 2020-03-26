@@ -3,17 +3,23 @@ module.exports = HTMLLoader
 //
 // Before committing to github, If that is a service version, you should put 'true' into SERVICE variable
 //
-const SERVICE = true
-
 var TARGET
 
-if (SERVICE) {
-  // for a service environment
+if (process.env.PORT) {
   TARGET = "https://www.sensebedictionary.org"
 } else {
-  // for a local development environment
   TARGET = "http://localhost:5000"
 }
+
+console.log('target : ', TARGET)
+
+// if (SERVICE) {
+//   // for a service environment
+  
+// } else {
+//   // for a local development environment
+  
+// }
 
 // string replaceall function
 function replaceAll(str, searchStr, replaceStr) {
