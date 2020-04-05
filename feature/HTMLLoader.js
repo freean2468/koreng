@@ -195,9 +195,9 @@ function HTMLLoader() {
       that.fs.readFile('metadata/script_search.js', 'utf8', function(err, js){
         var template = that.getTemplate("search", html)
         
-        js = replaceAll(js, "${TARGET}", TARGET)
-        js = replaceAll(js, "${searchTarget}", searchTarget)
         template = template.replace('<!-- DYNAMIC -->', js+that.cytoscape)
+        template = replaceAll(template, "${TARGET}", TARGET)
+        template = replaceAll(template, "${searchTarget}", searchTarget)
 
         res.send(template)
       })

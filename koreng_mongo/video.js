@@ -172,7 +172,7 @@ function search(req, res) {
 
     var template = `
         <div>
-            <form class="insert" id="insert" action="/insert" style="overflow:visible;display:block" data-submitfalse="q" method="GET" role="search">
+            <form class="insert" id="insert" action="/insert" style="overflow:visible;display:block" data-submitfalse="q" method="POST" role="search">
                 <br>`
     if (file) {
         template += `
@@ -200,22 +200,63 @@ function search(req, res) {
 
     if (file) {
         json["text"].forEach(function (elm, idx) {
+            let literal = '', pharaphrase = '', start_timestamp = '', end_timestamp = ''
+            if (json["literal"] !== undefined){
+                literal = json["literal"][idx]
+            }
+            if (json["pharaphrase"] !== undefined){
+                pharaphrase = json["pharaphrase"][idx]
+            }
+            if (json["start_timestamp"] !== undefined){
+                start_timestamp = json["start_timestamp"][idx]
+            }
+            if (json["end_timestamp"] !== undefined){
+                end_timestamp = json["end_timestamp"][idx]
+            }
             template += `
-                    <div id="text_${idx}">
-                    text : <textarea name="text[${idx}]">${elm}</textarea>
+                    <div class="context">
+                        <span id="ip_start_timestamp_${idx}">
+                            start_timestamp[${idx}] <input class="ip_time" type="text" name="start_timestamp[${idx}]" value="${start_timestamp}">
+                        </span>
+                        <span id="ip_end_timestamp_${idx}">
+                            end_timestamp[${idx}] <input class="ip_time" type="text" name="end_timestamp[${idx}]" value="${end_timestamp}">
+                        </span>
+                        <div id="text_${idx}">
+                            text[${idx}] : <textarea name="text[${idx}]">${elm}</textarea>
+                        </div>
+                        <div class="ta_literal" id="literal_${idx}">
+                            literal[${idx}] : <textarea name="literal[${idx}]">${literal}</textarea>
+                        </div>
+                        <div class="ta_pharaphrase" id="pharaphrase${idx}">
+                            pharaphrase[${idx}] : <textarea name="pharaphrase[${idx}]">${pharaphrase}</textarea>
+                        </div>
                     </div>
             `
         })
     } else {
         template += `
-                    <div id="text_0">
-                    text : <textarea name="text[0]"></textarea>
+                    <div class="context">
+                        <div id="ip_start_timestamp_0">
+                            start_timestamp[0] <input class="ip_time" type="text" name="start_timestamp[0]">
+                        </div>
+                        <div id="ip_end_timestamp_0">
+                            end_timestamp[0] <input class="ip_time" type="text" name="end_timestamp[0]">
+                        </div>
+                        <div id="text_0">
+                            text[0] : <textarea name="text[0]"></textarea>
+                        </div>
+                        <div class="ta_literal" id="literal_0">
+                            literal[0] : <textarea name="literal[0]"></textarea>
+                        </div>
+                        <div class="ta_pharaphrase" id="pharaphrase_0">
+                            pharaphrase[0] : <textarea name="pharaphrase[0]"></textarea>
+                        </div>
                     </div>`
     }
     template +=`
                 </div>
-                <button type="button" class="btn" id="btn_add_text" onclick="onClickAddtext()">add text</button>
-                <button type="button" class="btn" id="btn_del_text" onclick="onClickDeltext()">del text</button>
+                <button type="button" class="btn" id="btn_add_text" onclick="onClickAddTexts()">add texts</button>
+                <button type="button" class="btn" id="btn_del_text" onclick="onClickDelTexts()">del texts</button>
                 <div id="link">`
     if (file) {
         template +=`
@@ -234,21 +275,35 @@ function search(req, res) {
         </div>
     </body>
     <script>
-        function onClickAddtext(){
+        function onClickAddTexts(){
             text = document.getElementById('text')
             len = text.children.length
 
             let div = document.createElement('div')
-            div.setAttribute('id', 'text_'+len)
-            div.innerHTML = 'text : <textarea name="text[]"></textarea>'
+            div.setAttribute('class', "context")
+            div.innerHTML = '<div id="ip_start_timestamp_' + len + '">start_timestamp : <input class="ip_time" type="text" name="start_timestamp[]"></div>'
+            div.innerHTML += '<div id="ip_end_timestamp_' + len + '">end_timestamp : <input class="ip_time" type="text" name="end_timestamp[]"></div>'
+            div.innerHTML += '<div id="text_' + len + '">text : <textarea name="text[]"></textarea></div>'
+            div.innerHTML += '<div class="ta_literal" id="literal_' + len + '">literal : <textarea name="literal[]"></textarea></div>'
+            div.innerHTML += '<div class="ta_pharaphrase" id="pharaphrase_' + len + '">pharaphrase : <textarea name="pharaphrase[]"></textarea></div>'
             text.appendChild(div);
         }
 
-        function onClickDeltext(){
+        function onClickDelTexts(){
             text = document.getElementById('text')
             len = text.children.length - 1
             child = document.getElementById('text_'+len)
             text.removeChild(child);
+
+            // literal = document.getElementById('literal')
+            // len = literal.children.length - 1
+            // child = document.getElementById('literal_'+len)
+            // literal.removeChild(child);
+            
+            // pharaphrase = document.getElementById('pharaphrase')
+            // len = pharaphrase.children.length - 1
+            // child = document.getElementById('pharaphrase'+len)
+            // pharaphrase.removeChild(child);
         }
 
         function onClickHome(){
@@ -263,10 +318,11 @@ function search(req, res) {
 }
 
 async function insert(req, res) {
+    console.log('[insert!]')
     const uri = `mongodb+srv://sensebe:${PASSWORD}@agjakmdb-j9ghj.azure.mongodb.net/test`
     const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true })
     autocomplete = fs.readFileSync("./metadata/script_vid_autocomplete.js", 'utf8')
-    const query = req.query
+    const query = req.body
 
     try {
         // Connect to the MongoDB cluster
@@ -276,12 +332,12 @@ async function insert(req, res) {
         
         if (query['_id']) 
             result = await client.db(DATABASE_NAME).collection(VIDEO_COLLECTION).findOne({ _id: query['_id'] });
-
-        // console.log(result)
+            
         if (result) {
             await replaceListing(client, query, VIDEO_COLLECTION)
             _id = query["_id"]
             delete query["_id"]
+            console.log('[_ID] ',_id)
             fs.writeFileSync(path.join(__dirname, VIDEO_ARCHIVE_PATH, _id+'.json'), JSON.stringify(query, null, "\t"), "utf-8")
         } else {
             fs.writeFileSync(path.join(__dirname, VIDEO_ARCHIVE_PATH, query["link"]+'.json'), JSON.stringify(query, null, "\t"), "utf-8")
@@ -301,7 +357,7 @@ async function insert(req, res) {
 
 app.get('/preSearch', (req, res) => preSearch(req, res))
 app.get('/search', (req, res) => search(req, res))
-app.get('/insert', (req, res) => insert(req, res)) 
+app.post('/insert', (req, res) => insert(req, res)) 
 
 // Home
 app.get('/', function(req, res) {

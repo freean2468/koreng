@@ -106,6 +106,7 @@ function makePopper(node) {
 
         content: () => {
             let content = document.getElementById(node.data('id'));
+            let transContent = document.getElementById(`trans_${node.data('id')}`);
             let dummyDomEle = document.createElement('div');
 
             // vcon for a video part (on the left)
@@ -113,7 +114,9 @@ function makePopper(node) {
             dummyDomEle.innerHTML = `
             <div class="tippy_container">
                 <div id="vcon_${node.data('id')}" class="tippy_video_container">
-                    <div id="player_${node.data('id')}" class="iframe_video"></div>
+                    <div id="trcon_${node.data('id')}" class="tippy_trans_container">
+                        ${transContent.innerHTML}
+                    </div>
                 </div>
                 <div id="tcon_${node.data('id')}" class="tippy_text_container">
                     ${content.innerHTML}
@@ -142,7 +145,10 @@ function makePopper(node) {
 }
 
 var tp // tp will point the poped up video
-var videoList = [] // videoList have videos from searched results
+var tpTimeout
+var youtubePlayerList = []
+var youtubePlayerTimeoutList = []
+var videoJsonList = [] // videoJsonList have video jsons from searched results
 const IFRAME_WIDTH_MIN = 480
 const IFRAME_HEIGHT_MIN = getIframeHeight(IFRAME_WIDTH_MIN)
 const IFRAME_WIDTH_MAX = 1920
@@ -161,32 +167,130 @@ function onPlayerReady(event) {
     console.log('player ready!!')
 }
 
+function getCurrentTimeOfTp(vid) {
+    let tp = youtubePlayerList[vid]
+    // takes time to prepare functions of Youtube Player
+    // console.log(tp)
+    if (tp.getCurrentTime === undefined) {
+        console.log('takes time to prepare functions of Youtube Player')
+        tpTimeout = setTimeout(getCurrentTimeOfTp.bind(null, vid), 100)
+        return
+    }
+
+    const ct = tp.getCurrentTime()
+    // console.log("current time : ", ct)
+    // console.log(tp)
+
+    const desElems = document.getElementsByClassName(`${tp._sensebe_usage_id}_des`)
+    const literalElems = document.getElementsByClassName(`${tp._sensebe_usage_id}_literal`)
+    const pharaphraseElems = document.getElementsByClassName(`${tp._sensebe_usage_id}_pharaphrase`)
+
+    const desElemList = Array.prototype.filter.call(desElems, function(elem){
+        const id = Number(elem.id.split('_').pop())
+        return id <= ct
+    })
+    const literalElemList = Array.prototype.filter.call(literalElems, function(elem){
+        const id = Number(elem.id.split('_').pop())
+        return id <= ct
+    })
+    const pharaphraseElemList = Array.prototype.filter.call(pharaphraseElems, function(elem){
+        const id = Number(elem.id.split('_').pop())
+        return id <= ct
+    })
+
+    const recentDes = desElemList.pop()
+    const recentLiteral = literalElemList.pop()
+    const recentPharaphrase = pharaphraseElemList.pop()
+
+    if (recentDes !== undefined) {
+        // check end_timestamp
+        literalTransCell = recentLiteral.getElementsByClassName('trans_cell')
+        endT = literalTransCell[0].id.split('_').pop()
+        pharaphraseTransCell = recentPharaphrase.getElementsByClassName('trans_cell')
+        if (endT <= ct) {
+            literalTransCell[0].style.color = 'transparent'
+            pharaphraseTransCell[0].style.color = 'transparent'    
+        }
+
+        // change the size of description of the playing
+        if (tp._sensebe_currentDesId !== recentDes.getAttribute('id')) {
+            tp._sensebe_currentDesId = recentDes.getAttribute('id')
+
+            for (let i = 0; i<desElems.length; ++i) {
+                desElems[i].style.fontSize = null
+                desElems[i].style.color = null
+                literalElems[i].style.display = 'none'
+                pharaphraseElems[i].style.display = 'none'
+            }
+            recentDes.style.fontSize = '1.3em'
+            recentDes.style.fontWeight = 1000
+            recentDes.style.color = '#fc0'
+
+            for(let i = 0; i < literalElems.length; ++i) {
+                let elem = literalElems[i]
+                transCell = elem.getElementsByClassName(`trans_cell`)
+                transCell[0].style.color = null
+
+                elem = pharaphraseElems[i]
+                transCell = elem.getElementsByClassName(`trans_cell`)
+                transCell[0].style.color = null
+            }
+
+            recentLiteral.style.display = 'table'
+            recentPharaphrase.style.display = 'table'
+        }
+    }
+
+    switch (tp.getPlayerState()) {
+        case YT.PlayerState.ENDED:
+            // console.log('ended');
+            for (let i = 0; i<desElems.length; ++i) {
+                // desElems[i].style.fontSize = null
+                desElems[i].style.color = null
+                literalElems[i].style.display = 'none'
+                pharaphraseElems[i].style.display = 'none'
+            }
+            if (recentDes !== undefined) {
+                recentDes.style.color = null
+                recentDes.style.fontWeight = null
+            }
+            break
+        case YT.PlayerState.UNSTARTED:
+        case YT.PlayerState.PLAYING:
+        case YT.PlayerState.PAUSED:
+            tpTimeout = setTimeout(getCurrentTimeOfTp.bind(null, vid), 100)
+            break
+    }
+}
+
 function onPlayerStateChange(event) {
     switch (event.data) {
       case YT.PlayerState.UNSTARTED:
-        console.log('unstarted');
+        console.log('[unstarted]');
         break;
       case YT.PlayerState.ENDED:
-        console.log('ended');
+        console.log('[ended]');
         break;
       case YT.PlayerState.PLAYING:
-        console.log('playing');
+        console.log('[playing]');
         // When it starts to play, grow up the size of the video so that it could be seen recognizably
         if (event.target._sensebe_state === false) {
             event.target._sensebe_state = true
             size = getIframeSize()
-            console.log(event.target)
             sizeVideo(event.target._sensebe_vid, size['width'], size['height'])
+            trcon = document.getElementById(`trcon_${event.target._sensebe_usage_id}`)
+            trcon.style.maxWidth = `${size['width']}px`
         }
+        tpTimeout = setTimeout(getCurrentTimeOfTp.bind(null, event.target._sensebe_vid), 100)
         break;
       case YT.PlayerState.PAUSED:
-        console.log('paused');
+        console.log('[paused]');
         break;
       case YT.PlayerState.BUFFERING:
-        console.log('buffering');
+        console.log('[buffering]');
         break;
       case YT.PlayerState.CUED:
-        console.log('video cued');
+        console.log('[video cued]');
         break;
     }
 }
@@ -198,37 +302,69 @@ function sizeVideo(id, width, height) {
 }
 
 function flipTrigger(node) {
-  ms = 200
-  if (node._trigger) {
-      node._trigger = false
-      // when it's off, get back to the minimum size
-      sizeVideo(`player_${node.data('id')}`, IFRAME_WIDTH_MIN, IFRAME_HEIGHT_MIN)
-      delete(tp)
-      node.tip.hide()
-  } else {
-      node._trigger = true
-      node.tip.show()
-      const videoJson = videoList[node.data('id')]
+    ms = 200
+    if (node._trigger) {
+        clearTimeout(tpTimeout)
+        let tp = youtubePlayerList[node._sensebe_vid]
 
-      // create Youtube player object so that we could control it.
-      tp = new YT.Player(`player_${node.data('id')}`, {
-        width: IFRAME_WIDTH_MIN,
-        height: IFRAME_HEIGHT_MIN,
-        videoId: videoJson["link"],
-        events: {
-            'onReady': onPlayerReady,
-            'onStateChange': onPlayerStateChange,
-            'onPlaybackQualityChange': function(){console.log('quality')},
-            'onPlaybackRateChange': function(){console.log('rate')},
-            'onError': function(e){console.log(e)}
-        },
-        host: 'https://www.youtube.com',
-        playerVars: { 'origin':'${TARGET}' }
-      })
-      // add availables for my uses
-      tp._sensebe_state=false
-      tp._sensebe_vid=`player_${node.data('id')}`
-  }
+        const desElems = document.getElementsByClassName(`${tp._sensebe_usage_id}_des`)
+        const literalElems = document.getElementsByClassName(`${tp._sensebe_usage_id}_literal`)
+        const pharaphraseElems = document.getElementsByClassName(`${tp._sensebe_usage_id}_pharaphrase`)
+
+        for (let i = 0; i<desElems.length; ++i) {
+            desElems[i].style.fontSize = null
+            desElems[i].style.color = null
+            desElems[i].style.fontWeight = null
+            literalElems[i].style.display = 'none'
+            pharaphraseElems[i].style.display = 'none'
+        }
+
+        node._trigger = false
+        // when it's off, get back to the minimum size
+        sizeVideo(`player_${node.data('id')}`, IFRAME_WIDTH_MIN, IFRAME_HEIGHT_MIN)
+        // tp.seekTo(0, false)
+        tp.stopVideo()
+        delete(tp)
+        iframe = document.getElementById(node._sensebe_vid)
+        iframe.parentNode.removeChild(iframe);
+        node.tip.hide()
+    } else {
+        node._trigger = true
+
+        // Youtube Player only can be created after tippy's up
+        node.tip.show()
+        const videoJson = videoJsonList[node.data('id')]
+        node._sensebe_vid = `player_${node.data('id')}`
+
+        document.getElementById(`trcon_${node.data('id')}`).insertAdjacentHTML("beforeBegin", 
+        `<div id="player_${node.data('id')}" class="iframe_video"></div>`)
+
+        // create Youtube player object so that we could control it.
+        let youtubePlayer = new YT.Player(`player_${node.data('id')}`, {
+            width: IFRAME_WIDTH_MIN,
+            height: IFRAME_HEIGHT_MIN,
+            videoId: videoJson["link"],
+            events: {
+                'onReady': onPlayerReady,
+                'onStateChange': onPlayerStateChange,
+                'onPlaybackQualityChange': function(){console.log('quality')},
+                'onPlaybackRateChange': function(){console.log('rate')},
+                'onError': function(e){console.log(e)}
+            },
+            host: 'https://www.youtube.com',
+            playerVars: { 
+                'origin':'${TARGET}' ,
+                'rel':0
+            }
+        })
+        // add availables for my uses
+        youtubePlayer._sensebe_state=false
+        youtubePlayer._sensebe_vid=`player_${node.data('id')}`
+        youtubePlayer._sensebe_usage_id=`${node.data('id')}`
+        youtubePlayer._sensebe_currentDesId=undefined
+
+        youtubePlayerList[`player_${node.data('id')}`] = youtubePlayer
+    }
 }
 
 cy.on('tap', function(event){
@@ -311,6 +447,10 @@ function resizeEnd() {
         for (let video of videos) {
             video.setAttribute('width', size['width'])
             video.setAttribute('height', size['height'])
+        }
+        trcons = document.getElementsByClassName(`tippy_trans_container`)
+        for (let trcon of trcons) {
+            trcon.style.maxWidth = `${size['width']}px`
         }
     }               
 }

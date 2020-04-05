@@ -174,6 +174,7 @@ async function getCyData(req, res, next) {
 // get data from video collection in MongoDB
 async function getVideoData(req, res, next) {
     const searchTarget = req.query.target
+    console.log('[SEARCHTARGET] ', searchTarget)
     var mongoRes = await mongoClientInst.findVideoListingById(searchTarget)
     
     if (mongoRes) {

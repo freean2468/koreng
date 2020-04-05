@@ -130,7 +130,7 @@ function transactionTemplate() {
         <form id="findByIdType" action="/findByIdType" style="overflow:visible;display:block" data-submitfalse="q" method="GET">
             <br>
                 findByIdType : <input name="findByIdType" type="text"/>
-                <input class="btn" id="find_btn" value="find" type="submit">
+                <input class="btn btn_transaction" id="find_btn" value="find" align="right" type="submit">
         </form>
     </div>`
 
@@ -353,9 +353,23 @@ function search(req, res) {
             })
             template += `
                         </div>
-                        <button type="button" class="btn btn_add_text" onclick="onClickAddText(this)" value="${idx}">add text</button>
-                        <button type="button" class="btn btn_del_text" onclick="onClickDelText(this)" value="${idx}">del text</button>
-                    </div>`
+                    <button type="button" class="btn btn_add_text" onclick="onClickAddText(this)" value="${idx}">add text</button>
+                    <button type="button" class="btn btn_del_text" onclick="onClickDelText(this)" value="${idx}">del text</button>
+                    
+            <div id=data_${idx}_tag>`
+            
+            if (data["_tag"] !== undefined) {
+                data["_tag"].forEach(function (tag, _idx) {
+                    template += `
+                <div id=data_${idx}_tag_${_idx}> data_${idx}_tag : <input name="data[${idx}][_tag][${_idx}]" type="text" value="${tag}"/> </div>`
+                })
+            }
+
+            template += `
+                </div>
+                <button type="button" class="btn btn_add_tag" onclick="onClickAddTag(this)" value="${idx}">add tag</button>
+                <button type="button" class="btn btn_del_tag" onclick="onClickDelTag(this)" value="${idx}">del tag</button>
+            </div>`
         })
     } else {
         template += `
@@ -376,6 +390,11 @@ function search(req, res) {
                         </div>
                         <button type="button" class="btn btn_add_text" onclick="onClickAddText(this)" value="0">add text</button>
                         <button type="button" class="btn btn_del_text" onclick="onClickDelText(this)" value="0">del text</button>
+                        <div id=data_0_tag>
+                            <div id=data_0_tag_0> data_0_tag : <input name="data[0][_tag][0]" type="text"/> </div>
+                        </div>
+                        <button type="button" class="btn btn_add_tag" onclick="onClickAddTag(this)" value="0">add tag</button>
+                        <button type="button" class="btn btn_del_tag" onclick="onClickDelTag(this)" value="0">del tag</button>
                     </div>`
     }
 
@@ -448,6 +467,26 @@ function search(req, res) {
                 text.removeChild(child);
             }
 
+            function onClickAddTag(elm){
+                idx = elm.getAttribute("value")
+                tag = document.getElementById('data_'+idx+'_tag')
+                len = tag.children.length
+
+                let div = document.createElement('div')
+                div.setAttribute("id", "data_"+idx+"_tag_"+len)
+                div.innerHTML = 'data_'+idx+'_tag : <input name="data['+idx+'][_tag]['+len+']" type="text"/>'
+                tag.appendChild(div)
+            }
+
+            function onClickDelTag(elm){
+                idx = elm.getAttribute("value")
+                tag = document.getElementById('data_'+idx+'_tag')
+                len = tag.children.length -1
+
+                child = document.getElementById('data_'+idx+'_tag_'+len)
+                tag.removeChild(child);
+            }
+
             function onClickAddData(){
                 data = document.getElementById('data')
                 len = $("#data > div").length
@@ -481,6 +520,12 @@ function search(req, res) {
                 // div.innerHTML += '<div id="data_'+len+'_text"> <div id="data_'+len+'_text_0"> data_'+len+'_text : <input name="data['+len+'][_chunks][]" type="text"/> </div></div>'
                 div.innerHTML += '<button type="button" class="btn btn_add_text" onclick="onClickAddText(this)">add text</button>'
                 div.innerHTML += '<button type="button" class="btn btn_del_text" onclick="onClickDelText(this)">del text</button>'
+
+                div.innerHTML += '<div id="data_'+len+'_tag"> </div>'
+                // div.innerHTML += '<div id="data_'+len+'_tag"> <div id="data_'+len+'_tag_0"> data_'+len+'_tag : <input name="data['+len+'][_chunks][]" type="text"/> </div></div>'
+                div.innerHTML += '<button type="button" class="btn btn_add_tag" onclick="onClickAddTag(this)">add tag</button>'
+                div.innerHTML += '<button type="button" class="btn btn_del_tag" onclick="onClickDelTag(this)">del tag</button>'
+
                 btn_add_chunk = div.querySelector(".btn_add_chunk")
                 btn_add_chunk.setAttribute("value",len)
                 btn_del_chunk = div.querySelector(".btn_del_chunk")
@@ -490,6 +535,11 @@ function search(req, res) {
                 btn_add_text.setAttribute("value",len)
                 btn_del_text = div.querySelector(".btn_del_text")
                 btn_del_text.setAttribute("value",len)
+
+                btn_add_tag = div.querySelector(".btn_add_tag")
+                btn_add_tag.setAttribute("value",len)
+                btn_del_tag = div.querySelector(".btn_del_tag")
+                btn_del_tag.setAttribute("value",len)
                 data.appendChild(div);
             }
 
@@ -526,6 +576,8 @@ async function insert(req, res) {
                 query["data"][idx]["_speech"] = []
             if (_data["_text"] === undefined)
                 query["data"][idx]["_text"] = []
+            if (_data["_tag"] === undefined)
+                query["data"][idx]["_tag"] = []
         })
     } else if (data === undefined) {
         query["data"] = []
@@ -538,6 +590,8 @@ async function insert(req, res) {
         fs.writeFileSync(path.join(__dirname, ARCHIVE_PATH, query["root"]+'.json'), JSON.stringify(query, null, "\t"), "utf-8")
 
         const res = setId(query)
+
+        console.log('[ID_RES] ', res)
         // END
         //
 
@@ -547,12 +601,13 @@ async function insert(req, res) {
         if (res) {
             // Connect to the MongoDB cluster
             await client.connect()
-
-            result = await client.db(DATABASE_NAME).collection(DICTIONARY_COLLECTION).findOne({ _id: query['_id'] });
+            result = await client.db(DATABASE_NAME).collection(DICTIONARY_COLLECTION).findOne({ _id: res });
         
             if (result) {
+                console.log('[QUERY BEFORE REPLACING LISTING]', query)
                 await replaceListing(client, query, DICTIONARY_COLLECTION)
             } else {
+                console.log('[QUERY BEFORE CREATING LISTING]', query)
                 await createListing(client, query, DICTIONARY_COLLECTION)
             }
 
@@ -616,29 +671,65 @@ async function findByIdType(req, res) {
         //     print (e);
         // }
 
+        //
         // create sitemaps
-        const list = fs.readdirSync('dictionary_archive')
-        var nav = `<?xml version="1.0" encoding="UTF-8"?>
+        //
+//         const list = fs.readdirSync('dictionary_archive')
+//         var nav = `<?xml version="1.0" encoding="UTF-8"?>
 
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-    <url><loc>http://www.sensebedictionary.org/</loc></url>
-    <url><loc>http://www.sensebedictionary.org/search?target=sensebe&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc></url>`
+// <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+//     <url><loc>http://www.sensebedictionary.org/</loc></url>
+//     <url><loc>http://www.sensebedictionary.org/search?target=sensebe&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc></url>`
+
+//         for(let item in list) {
+//             let filename = list[item].split('.')[0]
+//             nav += `
+//     <url>
+//         <loc>http://www.sensebedictionary.org/search?target=${filename}&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
+//     </url>`
+//         }
+
+        //
+        //  Video Link Integrity check
+        //
+
+        const list = fs.readdirSync('video_archive')
+        let result = await client.db(DATABASE_NAME).collection("eng_dictionary").find().toArray()
 
         for(let item in list) {
             let filename = list[item].split('.')[0]
-            nav += `
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=${filename}&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>`
+            let json = JSON.parse(fs.readFileSync(`./video_archive/${list[item]}`))
+
+            for (let i = 0; i < result.length; ++i) {
+                for (let j = 0; j < result[i]['data'].length; ++j) {
+                    if (result[i]['data'][j]['_video'] === filename) {
+                        result[i]['data'][j]['_integrity'] = true
+                    }
+                }
+            }
         }
 
-        nav += `
-</urlset>`
+        let count = 0;
 
-        fs.writeFile('../public/sitemap.xml', nav, (err) => {
-            if (err) throw err;
-            console.log(`[SITEMAP] sitemap.xml has been created`);
-        });
+        for (let i = 0; i < result.length; ++i) {
+            for (let j = 0; j < result[i]['data'].length; ++j) {
+                if (result[i]['data'][j]['_integrity'] === undefined) {
+                    count++
+                    console.log(`[VIDEO LINK INTEGRITY UNDEFINED] link : ${result[i]['data'][j]['_video']} of data[${j}] of ${result[i]['_id']}`)
+                } else if (result[i]['data'][j]['_integrity'] === true) {
+                    // console.log(`[VIDEO LINK INTEGRITY TRUE]`)
+                }
+            }
+        }
+        console.log(`[VIDEO LINK INTEGRITY UNDEFINED] detected total : ${count}`)
+        
+//         nav += `
+// </urlset>`
+
+//         fs.writeFile('../public/sitemap.xml', nav, (err) => {
+//             if (err) throw err;
+//             console.log(`[SITEMAP] sitemap.xml has been created`);
+//         });
     } catch (e) {
         console.error(e)
     } finally {
@@ -752,6 +843,7 @@ function setId(json){
             json['_id'] = rootTableJson[root]
         }
         console.log(`json['_id'] : ${json['_id']}, root : ${root}`)
+        return json['_id']
     }
     return redirectionResult
 }

@@ -11,12 +11,17 @@ fetch("${TARGET}/cy?target=${searchTarget}").then(response => response.json().th
     cy.add([{group: 'nodes', data : { id: root, label: root }, classes: "root" } ])
     
     data.forEach(function (item, idx){
+        console.log('[ITEM]', item)
         fetch("${TARGET}/video?target="+item["_video"]).then(response => response.json().then(videoJson => {
             const usageID = idx+'_'+item['_usage']
-            videoList[usageID] = videoJson
-            let div = document.createElement('div');
-            div.setAttribute("class","hidden");
-            div.setAttribute("id",usageID);
+            videoJsonList[usageID] = videoJson
+            let div = document.createElement('div')
+            div.setAttribute("class","hidden")
+            div.setAttribute("id",usageID)
+
+            let transDiv = document.createElement('div')
+            transDiv.setAttribute("class","hidden")
+            transDiv.setAttribute("id",`trans_${usageID}`)
 
             //
             // create a text area in the tippy
@@ -44,14 +49,61 @@ fetch("${TARGET}/cy?target=${searchTarget}").then(response => response.json().th
             div.innerHTML = usageAndChunkHTML
 
             // scripts from videoJson
-            videoJson["text"].forEach(function(elm) {
-                if (item["_text"] !== undefined)
+            videoJson["text"].forEach(function(elm, idx) {
+                // highlight usage
+                if (item["_text"] !== undefined) {
                     item["_text"].forEach(function (text){
-                        elm = elm.replace(text, '<b style="color:red;font-style:italic">'+text+'</b>')
+                        elm = elm.replace(text, '<b style="color:red;font-style:italic !important">'+text+'</b>')
                     })
-                div.innerHTML += '<span>' + elm + '</span><br>'
+                }
+                var start_timestamp = 0
+                if (videoJson["start_timestamp"] !== undefined) {
+                    start_timestamp = videoJson["start_timestamp"][idx]
+                }
+                var end_timestamp = 0
+                if (videoJson["end_timestamp"] !== undefined) {
+                    end_timestamp = videoJson["end_timestamp"][idx]
+                }
+                var literal = ''
+                if (videoJson["literal"] !== undefined) {
+                    literal = videoJson["literal"][idx]
+                }
+                var pharaphrase = ''
+                if (videoJson["pharaphrase"] !== undefined) {
+                    pharaphrase = videoJson["pharaphrase"][idx]
+                }
+
+                div.innerHTML += `
+                <div class="${usageID}_des" id="des_${start_timestamp}">
+                    ${elm}
+                </div><br>
+                <span class="${usageID}_startT" id="startT_${start_timestamp}" style="display:none">${start_timestamp}</span>
+                <span class="${usageID}_endT" id="endT_${start_timestamp}" style="display:none">${end_timestamp}</span>
+                `
+
+                transDiv.innerHTML += `
+                <div class="table ${usageID}_literal" id="literal_${start_timestamp}" style="display:none">
+                    <div class="rowGroup">
+                        <div class="row">
+                            <span class="cell">[직역]</span>
+                            <span class="trans_cell" id="literal_${end_timestamp}">${literal}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="table ${usageID}_pharaphrase" id="pharaphrase_${start_timestamp}" style="display:none">
+                    <div class="rowGroup">
+                        <div class="row">
+                            <span class="cell">[의역]</span>
+                            <span class="trans_cell" id="pharaphrase_${end_timestamp}">${pharaphrase}</span>
+                        </div>
+                    </div>
+                </div>
+                `
             })
+
+            // these divs will be called at the makePopper()
             document.getElementById('content').appendChild(div);
+            document.getElementById('content').appendChild(transDiv);
             
             const label = item['_usage'].replace('<br>', '\n')
 

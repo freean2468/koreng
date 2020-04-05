@@ -49,6 +49,11 @@ ul.caution {
     font-weight:2;
 }
 
+div.context {
+    border: 2px solid tomato;
+    margin-bottom : 20px;
+}
+
 #whole_wrapper{position:relative}
 
 /* head */
@@ -64,6 +69,21 @@ ul.caution {
 .btn{border-top:1px solid;font-size:30px;font-weight:bold;width:200px !important}
 
 input:not(.autocomplete-input)[type=text]{border-top:1px solid;font-size:20px;font-weight:bold;width:80%}
+input.ip_time { width:10% !important}
+input.btn_transaction { 
+    position: relative;
+    float:right;
+}
+#insert_btn {
+    margin-top : 20px;
+    margin-bottom : 20px;
+}
+
+.btn_add_data {
+    margin-top : 20px;
+    margin-bottom : 20px;
+}
+
 
 .container{
     display: flex;
