@@ -193,13 +193,42 @@ function HTMLLoader() {
     that = this
     that.fs.readFile('public/html/search.html', 'utf8', function(err, html){
       that.fs.readFile('metadata/script_search.js', 'utf8', function(err, js){
-        var template = that.getTemplate("search", html)
-        
-        template = template.replace('<!-- DYNAMIC -->', js+that.cytoscape)
-        template = replaceAll(template, "${TARGET}", TARGET)
-        template = replaceAll(template, "${searchTarget}", searchTarget)
+        that.fs.readFile('metadata/script_makeCy.js', 'utf8', function(err, makeCy) {
+          var template = that.getTemplate("search", html)
+          
+          js = js.replace(`<!-- MAKECY -->`, makeCy)
+          template = template.replace('<!-- DYNAMIC -->', js+that.cytoscape)
+          template = replaceAll(template, "${TARGET}", TARGET)
+          template = replaceAll(template, "${searchTarget}", searchTarget)
 
-        res.send(template)
+          res.send(template)
+        })
+      })
+    })
+  }
+  
+  // for tag search
+  this.assembleSearchTagHTML = function(res, tag, searchTarget) {
+    that = this
+    that.fs.readFile('public/html/search.html', 'utf8', function(err, html){
+      that.fs.readFile('metadata/script_tagSearch.js', 'utf8', function(err, js){
+        that.fs.readFile('metadata/script_makeCy.js', 'utf8', function(err, makeCy) {
+          var template = that.getTemplate("search", html)
+          
+          js = js.replace(`<!-- MAKECY -->`, makeCy)
+          template = template.replace('<!-- DYNAMIC -->', js+that.cytoscape)
+          template = replaceAll(template, "${TARGET}", TARGET)
+
+          let json = {
+            "tag" : tag,
+            "target" : searchTarget
+          }
+
+          template = replaceAll(template, "${searchTarget}", JSON.stringify(json))
+
+          console.log('[assembleSearchTagHTML] JSON.stringify(json) : ', JSON.stringify(json))
+          res.send(template)
+        })
       })
     })
   }

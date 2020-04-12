@@ -13,6 +13,7 @@ const DICTIONARY_COLLECTION = "eng_dictionary"
 const VIDEO_COLLECTION = "video_collection"
 const REDIRECTION_TABLE_FILE = "redirectionTable.json"
 const DB_INDEX_TABLE_FILE = 'rootIndexTable.json'
+const TAG_TABLE_FILE = 'tagTable.json'
 
 function mongoClient() {
     this.uri = `mongodb+srv://sensebe:${PASSWORD}@agjakmdb-j9ghj.azure.mongodb.net/test`
@@ -21,6 +22,7 @@ function mongoClient() {
     // indexTable has indexies for speeding up the query time of search request.
     this.indexTable = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'koreng_mongo', DB_INDEX_TABLE_FILE), "utf-8"))
     this.redirectionTable = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'koreng_mongo', REDIRECTION_TABLE_FILE), "utf-8"))
+    this.tagTable = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'koreng_mongo', TAG_TABLE_FILE), "utf-8"))
     this.presearchTable = []
     this.status = {
         volumes:0,
@@ -33,6 +35,9 @@ function mongoClient() {
             this.presearchTable.push(key)
         }
         for(key in this.redirectionTable) {
+            this.presearchTable.push(key)
+        }
+        for(key in this.tagTable) {
             this.presearchTable.push(key)
         }
 
@@ -100,10 +105,69 @@ function mongoClient() {
         return count
     }
 
+    this.getIdFromPre = function (target) {
+        for (let i = 0; i < this.presearchTable.length; ++i) {
+            if (this.presearchTable[i].toLowerCase() === target) {
+                return this.presearchTable[i]
+            }
+        }
+    }
+
+    this.checkRedir = function (target) {
+        var re = this.redirectionTable[target]
+        if (re !== undefined) {
+            return re
+        }
+        return target
+    }
+
+    this.getListFromTag = function (target) {
+        let p = this.tagTable[target]
+        if (p !== undefined) {
+            return p
+        }
+        return target
+    }
+
+    // Never use 'find' embedded fungtion in MongoDB, but 'findOne'
+    this.findListingByTag = async function(json){
+        let tag = json['tag']
+        let result = {
+            "root" : tag,
+            "data" : []
+        }
+        let targets = json['target']
+
+        for (let i = 0; i < targets.length; ++i) {
+            _id = this.indexTable[targets[i]['r']]
+            _idx = targets[i]['i']
+
+            let mongoRes = await this.client.db(DATABASE_NAME).collection(DICTIONARY_COLLECTION)
+            .findOne(
+                { _id: _id}, { "data" : { "_tag" : [tag] } }
+            )
+
+            if (mongoRes) {
+                console.log(`[findListingByTag in mongoClient.js]: Found a listing by the tag 'tag' : `, tag);
+            } else {
+                console.log(`in MongoClient: No listings found by the 'root' ${targets[i]['r']}`);
+            }
+
+            for (let j = 0; j < mongoRes["data"].length; ++j) {
+                result["data"].push(mongoRes["data"][j])
+            }
+        }
+     
+        
+        console.log("[findListingByTag] result : ", result)
+
+        return result
+    }
+
     this.findOneListingById = async function(root){
-        if (this.redirectionTable[root] !== undefined){
-            root = this.redirectionTable[root]
-        } 
+        // if (this.redirectionTable[root] !== undefined){
+        //     root = this.redirectionTable[root]
+        // } 
 
         _id = this.indexTable[root]
 

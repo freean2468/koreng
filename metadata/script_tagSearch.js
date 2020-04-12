@@ -4,6 +4,12 @@
 //
 
 // TARGEt will be replaced to appropriate URL in the HTMLLoader
-fetch("${TARGET}/cy?target=${searchTarget}").then(response => response.json().then(json => {
+fetch("${TARGET}/cy_tag", {
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    method:'POST',
+    body: `${searchTarget}`
+}).then(response => response.json().then(json => {
     <!-- MAKECY -->
 }));

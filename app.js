@@ -13,6 +13,8 @@ const helmet = require('helmet')
 
 // built-in
 const fs = require('fs')
+const url = require('url')
+var queryString = require( "querystring" )
 
 // custom
 const HTMLLoader = require('./feature/HTMLLoader.js')
@@ -31,6 +33,7 @@ app.use(helmet())
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
     extended: true
 }))
+app.use(bodyParser.json());
 app.use(compression())
 
 // code down below doesn't work at Heroku 
@@ -59,25 +62,27 @@ app.get('/', (req, res) => {
 app.get('/preSearch', (req, res) => preSearch(req, res))
 app.get('/search', (req, res) => {
     let target = req.query.target.toLowerCase()
-    const redirectionTable = mongoClientInst.redirectionTable
-    const presearchTable = mongoClientInst.presearchTable
+    // const english = /^[A-Za-z0-9]*$/
+    const korean = /[\u3131-\uD79D]/ugi
 
-    for (let idx = 0; idx < presearchTable.length; ++idx) {
-        if (presearchTable[idx].toLowerCase() === target) {
-            target = presearchTable[idx]
-            break
-        }
+    if (!korean.test(target)) {
+        // a general search logic
+        target = mongoClientInst.getIdFromPre(target)
+        target = mongoClientInst.checkRedir(target)
+        HTMLLoaderInst.assembleSearchHTML(res, target)
+    } else {
+        // a tag search logic
+        let tag = target
+        target = mongoClientInst.getListFromTag(target)
+        HTMLLoaderInst.assembleSearchTagHTML(res, tag, target)
     }
-    
-    // check redirection
-    if (redirectionTable[target] !== undefined)
-        target = redirectionTable[target]
-
-    HTMLLoaderInst.assembleSearchHTML(res, target)
 })
 
 // AJAX - get cy data from mongoDB
 app.get('/cy', (req, res, next) => getCyData(req, res, next))
+
+// AJAX - get cy data from mongoDB
+app.post('/cy_tag', (req, res, next) => getCyTagData(req, res, next))
 
 // AJAX - get video data from mongoDB
 app.get('/video', (req, res, next) => getVideoData(req, res, next))
@@ -162,6 +167,20 @@ async function updateDBStatus(req, res, next) {
 async function getCyData(req, res, next) {
     const searchTarget = req.query.target
     var mongoRes = await mongoClientInst.findOneListingById(searchTarget)
+    
+    if (mongoRes) {
+        res.json(mongoRes);
+    } else {
+        console.log("something's wrong!! in getCyData")
+        next()
+    }    
+}
+
+// get tag data from english dictionary collection in MongoDB
+async function getCyTagData(req, res, next) {
+    console.log("[getCyTagData] req.body : ", req.body)
+
+    var mongoRes = await mongoClientInst.findListingByTag(req.body)
     
     if (mongoRes) {
         res.json(mongoRes);

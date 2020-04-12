@@ -44,6 +44,7 @@ const DICTIONARY_COLLECTION = "eng_dictionary"
 
 const REDIRECTION_TABLE_FILE = "redirectionTable.json"
 const DB_INDEX_TABLE_FILE = 'rootIndexTable.json'
+const TAG_TABLE_FILE = 'tagTable.json'
 
 // called from search()
 function speechTemplate(idx) {
@@ -820,6 +821,50 @@ function setId(json){
     redirectionResult = registerRedirectionTable(json)
     root = json["root"]
 
+
+    //
+    // temporary tagTable codes
+    tagTable = JSON.parse(fs.readFileSync(path.join(__dirname, TAG_TABLE_FILE), "utf-8"))
+    dataList = json["data"]
+
+    for (let i = 0; i < dataList.length; ++i) {
+        let tagList = dataList[i]["_tag"]
+        for (let j = 0; j < tagList.length; ++j) {
+            let tag = tagList[j]
+
+            if (tagTable[tag] === undefined) {
+                tagTable[tag] = [
+                    {
+                        "r" : root
+                    }
+                ]
+                console.log(`[TAG] ${tag} is added to tagTable, as r(${root})`)
+            } else {
+                let list = tagTable[tag]
+                let flag = false
+
+                for (let k = 0; k < list.length; ++k) {
+                    let tagOfTable = list[k]
+                    if (tagOfTable["r"] === root) {
+                        flag = true
+                    }
+                }
+                
+                // the entry has been resistered before but not the root
+                if (flag === false) {
+                    tagTable[tag].push({
+                        "r" : root
+                    })
+                    console.log(`[TAG] ${tag} is added to tagTable, as r(${root})`)
+                }
+            }
+            fs.writeFileSync(path.join(__dirname, TAG_TABLE_FILE), JSON.stringify(this.tagTable), "utf-8")
+        }
+    }
+    //
+    //
+
+
     if(redirectionResult === false) {
         if(rootTableJson[root] === undefined){
             _id = Object.keys(rootTableJson).length
@@ -827,7 +872,7 @@ function setId(json){
             rootTableJson[root]=_id
             json['_id'] = _id
 
-            console.log('[INDEX] fetched add commands to the servers')
+            console.log('[INDEX] fetched adding commands to the servers')
 
             fetch(`${SERVICE_SERVER_URL}/add_IndexTable?id=${_id}&root=${root}`)
                 .then(response => response.json())
