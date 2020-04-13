@@ -154,7 +154,12 @@ function mongoClient() {
             }
 
             for (let j = 0; j < mongoRes["data"].length; ++j) {
-                result["data"].push(mongoRes["data"][j])
+                let elemTag = mongoRes["data"][j]["_tag"]
+                for (let k = 0; k < elemTag.length; ++k) {
+                    if (elemTag[k] === tag) {
+                        result["data"].push(mongoRes["data"][j])
+                    }
+                }
             }
         }
      

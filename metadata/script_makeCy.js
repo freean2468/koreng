@@ -66,7 +66,7 @@ data.forEach(function (item, idx){
             }
 
             div.innerHTML += `
-            <div class="${usageID}_des" id="des_${start_timestamp}">
+            <div class="${usageID}_des des" id="des_${start_timestamp}">
                 ${elm}
             </div><br>
             <span class="${usageID}_startT" id="startT_${start_timestamp}" style="display:none">${start_timestamp}</span>

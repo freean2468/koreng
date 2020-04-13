@@ -364,6 +364,38 @@ function flipTrigger(node) {
         youtubePlayer._sensebe_currentDesId=undefined
 
         youtubePlayerList[`player_${node.data('id')}`] = youtubePlayer
+
+
+        // add event to descriptions on the tippy
+        var descriptions = document.getElementsByClassName("des")
+        for (var J in descriptions) {
+            if (descriptions[J].addEventListener) {                    // For all major browsers, except IE 8 and earlier
+                descriptions[J].addEventListener("click", desOnClick)
+                descriptions[J].addEventListener("mouseover", desMouseover)
+                descriptions[J].addEventListener("mouseout", desMouseout)
+            } else if (descriptions[J].attachEvent) {                  // For IE 8 and earlier versions
+                descriptions[J].attachEvent("click", desOnClick)
+                descriptions[J].addEventListener("mouseover", desMouseover)
+                descriptions[J].addEventListener("mouseout", desMouseout)
+            }
+        }
+
+        // move to the start point of description
+        function desOnClick() {
+            let startT = this.id.split('_')[1]
+            let tp = youtubePlayerList[node._sensebe_vid]
+            tp.seekTo(startT-0.001)
+        }
+
+        function desMouseover() {
+            $('html,body').css('cursor', 'pointer')
+            this.style.backgroundColor = "DarkSlateGray"
+        }
+
+        function desMouseout() {
+            $('html,body').css('cursor', 'default')
+            this.style.backgroundColor = null
+        }
     }
 }
 
