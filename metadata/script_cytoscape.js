@@ -210,6 +210,9 @@ function getCurrentTimeOfTp(vid) {
         if (endT <= ct) {
             literalTransCell[0].style.color = 'transparent'
             pharaphraseTransCell[0].style.color = 'transparent'    
+        } else {
+            literalTransCell[0].style.color = null
+            pharaphraseTransCell[0].style.color = null
         }
 
         // change the size of description of the playing
@@ -235,6 +238,8 @@ function getCurrentTimeOfTp(vid) {
                 transCell = elem.getElementsByClassName(`trans_cell`)
                 transCell[0].style.color = null
             }
+
+            console.log('[getCurrentTImeOfTp] recentLiteral : ', recentLiteral)
 
             recentLiteral.style.display = 'table'
             recentPharaphrase.style.display = 'table'
@@ -384,7 +389,7 @@ function flipTrigger(node) {
         function desOnClick() {
             let startT = this.id.split('_')[1]
             let tp = youtubePlayerList[node._sensebe_vid]
-            tp.seekTo(startT-0.001)
+            tp.seekTo(startT)
         }
 
         function desMouseover() {
