@@ -130,6 +130,15 @@ data.forEach(function (item, idx){
                     cy._panOrigin = { 'x':cy.pan()['x'], 'y':cy.pan()['y'] }
                 }
                 cy.setOrigin()
+
+                // set a initial page
+                if (idx === data.length-1) {
+                    cy.nodes().forEach(function(node){
+                        if (node.data()["id"].split('_')[1] === '${usageCover}' && node.classes()[0] === 'usage') {
+                            node.emit('tap')
+                        }
+                    })
+                }
             },
             quality: 'default',
             nodeDimensionsIncludeLabels: true,

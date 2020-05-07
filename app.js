@@ -10,6 +10,7 @@ const app = express()
 const compression = require('compression')
 const bodyParser = require('body-parser')
 const helmet = require('helmet')
+const cors = require('cors')
 
 // built-in
 const fs = require('fs')
@@ -35,6 +36,7 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 }))
 app.use(bodyParser.json());
 app.use(compression())
+app.use(cors())
 
 // code down below doesn't work at Heroku 
 // do not use '__dirname'
@@ -62,19 +64,28 @@ app.get('/', (req, res) => {
 app.get('/preSearch', (req, res) => preSearch(req, res))
 app.get('/search', (req, res) => {
     let target = req.query.target.toLowerCase()
+    let usage = req.query["amp;usage"]
+
+    console.log('usage : ', usage)
+    // console.log('req.query : ', req.query)
+
+    if (usage === undefined) {
+        usage = ''
+    }
+
     // const english = /^[A-Za-z0-9]*$/
     const korean = /[\u3131-\uD79D]/ugi
 
     if (!korean.test(target)) {
-        // a general search logic
+        // the general search logic
         target = mongoClientInst.getIdFromPre(target)
         target = mongoClientInst.checkRedir(target)
-        HTMLLoaderInst.assembleSearchHTML(res, target)
+        HTMLLoaderInst.assembleSearchHTML(res, target, usage)
     } else {
-        // a tag search logic
+        // the tag search logic
         let tag = target
         target = mongoClientInst.getListFromTag(target)
-        HTMLLoaderInst.assembleSearchTagHTML(res, tag, target)
+        HTMLLoaderInst.assembleSearchTagHTML(res, tag, target, usage)
     }
 })
 
@@ -95,6 +106,12 @@ app.get('/update_DB_status', (req, res, next) => updateDBStatus(req, res, next))
 
 // AJAX - update Index Table 
 app.get('/add_IndexTable', (req, res, next) => mongoClientInst.addIndexTable(res, req.query.id, req.query.root))
+
+// AJAX - update Tag Table 
+app.get('/add_TagTable', (req, res, next) => mongoClientInst.addTagTable(res, req.query.id, req.query.root))
+
+// AJAX - delete a element from the Tag Table 
+app.get('/del_TagTable', cors(), (req, res, next) => mongoClientInst.delTagTable(res, req.query.tag, req.query.root))
 
 // AJAX - update Redirection Table 
 app.get('/add_RedirectionTable', (req, res, next) => mongoClientInst.addRedirectionTable(res, req.query.root, req.query.redirection))

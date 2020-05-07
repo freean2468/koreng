@@ -1,1713 +1,782 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-    <url><loc>http://www.sensebedictionary.org/</loc></url>
-    <url><loc>http://www.sensebedictionary.org/search?target=sensebe&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc></url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target='em&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target='fore&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target='ll&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target='ve had enough&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=-in-one&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=I&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=a few&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=a minute of your time&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=a while&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=a&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=about&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=academy&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=adjective&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=adjust&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=aggressive&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=ago&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=all around&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=all right&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=all&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=alone&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=already&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=among&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=and all&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=and&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=anyone&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=anywhere&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=are&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=area&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=armies&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=army&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=article&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=as ever&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=as&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=assistant professor&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=at all&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=at least&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=at your service&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=at&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=audience&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=aye&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=back&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=bad&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=ballista&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=barb&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=barber&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=barbs&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=battlefield&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=be able to&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=be fraught with sth&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=be of service&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=be on the move&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=be used to sth&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=be&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=beak&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=beast&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=beautiful&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=been&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=before&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=beg your pardon&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=beg&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=begone&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=believe&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=bergere&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=better&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=big&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=bigger&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=black&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=blade&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=blades&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=blame&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=blind&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=blood&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=blunt&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=blunting&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=body&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=bolts&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=boring&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=bring&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=busy&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=but&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=by any chance&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=by the gods&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=can&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=careful&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=catch&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=century&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=chafe&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=charge&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=choose&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=chosen&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=claw&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=clawed&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=close&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=coat&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=code&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=codex&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=color&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=colors&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=come back&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=come in handy&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=come on&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=comeuppance&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=command&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=comparative&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=confused&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=conjunction&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=contemporary history&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=corporal&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=cosmetic&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=could&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=countless&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=courtyard&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=cover&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=covered&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=creep up on sb&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=crept&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=cretin&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=cross sb's path&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=crossbow&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=crowd&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=cut&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=cuts&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=dammit&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=damn&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=damsel&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=dawn&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=day&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=dead&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=deep&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=defecate&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=defective&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=defend&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=delivery&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=demand&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=demanded&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=dense&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=describe&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=detail&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=details&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=did&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=disappear&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=do well&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=do&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=does&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=dog&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=dogs&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=doin'&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=doing&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=done&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=dream&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=dress&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=drink&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=drop&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=drunk&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=dub&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=dubbed&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=due&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=embed&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=embrace&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=end&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=error&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=especially&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=even&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=ever&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=everything&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=exact&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=exactly&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=examine&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=expect&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=explain&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=fact&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=fairytale&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=fast asleep&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=female&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=fifteen&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=find&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=fine&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=first&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=flower&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=flowers&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=folk&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=follow&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=food&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=fool&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=for life&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=for years&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=for&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=forget&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=forgot&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=forgotten&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=found&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=fret&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=from&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=full&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=funny&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=game&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=garish&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=garment&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=garments&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=general&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=get away&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=get to&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=get&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=give&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=glass&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=go on&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=go&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=god&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=going to&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=gonna&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=good&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=goods&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=got&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=gotta&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=grain&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=gray&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=griffin&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=guess&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=guest room&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=guy&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=had&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=hair&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=hairs&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=happen&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=happened&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=has&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=have got time&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=have had enough&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=have one foot in the grave&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=have to&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=have yet to&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=have&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=head&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=headquarters&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=hear&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=hell&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=help&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=here you go&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=here&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=herself&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=hey&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=his&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=honest&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=horsewoman&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=how goes it&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=how&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=hunt sb down&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=hunt&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=hunted&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=hunter&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=hurt&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=hygienic&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=if&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=imagine&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=imagined&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=in the flesh&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=in&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=inch&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=indeed&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=interest&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=involve&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=involved&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=is&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=it&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=juice&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=jumpy&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=just&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=kill&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=kin&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=knew&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=knout&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=know&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=land&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=larva&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=larvae&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=lash&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=lashes&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=late&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=laugh&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=lead&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=learn&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=leave&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=less&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=lesson&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=let's&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=liar&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=lieutenant&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=light&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=like&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=listen&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=long&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=look&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=lose&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=losing&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=lower&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=mad&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=madding&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=make&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=male&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=mangy&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=many&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=master&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=me&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=mean&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=measurement&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=measurements&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=medicine&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=meet with sth&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=meet&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=merchant&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=might&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=military&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=mind&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=mirror&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=misfortune&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=monster&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=more or less&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=more&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=mum&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=murderer&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=must&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=mutt&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=mutts&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=my&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=nag&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=nail&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=nation&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=near&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=need&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=never&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=next&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=night&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=nightmare&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=no offense&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=no&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=not&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=now&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=num&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=number&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=of course&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=off&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=oi&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=old&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=omen&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=on&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=once&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=one by one&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=one&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=only&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=onto&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=or&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=order&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=other&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=others&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=our&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=outfit&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=over&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=paint&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=painted&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=pair off&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=partly&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=pass&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=passed&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=patience&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=peace&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=permit&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=phantom&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=place&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=plan&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=planned&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=please&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=pleasure&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=plural&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=point up sth&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=poor&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=poppycock&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=practice&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=prefer&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=preparation&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=preparations&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=presentable&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=pretty&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=proceed&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=proceeding&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=profession&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=prowl&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=prowlin&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=prowling&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=pure&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=put sb to sth&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=put&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=pyromaniac&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=quick&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=quiet&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=rather&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=real&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=really&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=receive&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=received&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=recruit&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=recruits&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=refuse&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=relax&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=relaxing&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=remember&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=repay&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=report&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=rest&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=return&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=rib&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=ribs&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=ride&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=road&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=rotten&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=round&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=run around&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=run into sb&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=run out&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=rye&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=sadly&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=save&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=saw&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=say&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=scent&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=search&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=seat&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=section&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=see&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=seek&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=seem&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=seemed&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=seen&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=sensebe&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=set out&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=several&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=sh&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=shaft&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=shave&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=shield&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=shit&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=short&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=should&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=show&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=side&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=sideburns&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=silver&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=singular&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=sit&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=slayer&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=sleep&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=slept&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=so as to&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=so far&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=so much for&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=so&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=soldier&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=some&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=somewhere&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=soon&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=sooner&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=sorry&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=spot&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=start&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=started&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=step&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=still&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=stomach&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=stop&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=strong suit&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=suit&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=suits&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=suppose&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=sure&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=tailor&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=take&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=talk&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=tell&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=ten&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=tenure&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=than&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=that is&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=that&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=the same&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=the&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=them&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=then&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=theory&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=there&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=they&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=thick&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=thief&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=thing&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=things&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=this&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=those&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=though&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=three&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=through&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=tilt&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=time&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=tip&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=to&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=told&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=too&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=tourniquet&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=trade&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=training&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=transport&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=treatment&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=treatments&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=true to life&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=tub&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=twelve&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=two&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=undergo&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=unlike&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=until&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=us&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=used&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=vagrant&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=verb&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=village&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=vodka&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=vouch for sth&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=wait on sth&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=wait&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=wake up&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=wallow&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=wanna&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=want&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=warm&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=warmth&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=was&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=way&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=we&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=week&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=were&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=wet&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=what's that (all) about (then)?&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=what&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=when&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=where&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=while&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=whippersnapper&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=who&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=whole&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=why not&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=why&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=wild&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=will&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=win&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=witcher&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=with&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=wolf&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=wolves&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=woman&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=won&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=work&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=worn&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=would&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=wound&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=wounds&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=year&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=years&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=yes&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=you&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=young&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=your&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
-    <url>
-        <loc>http://www.sensebedictionary.org/search?target=yourself&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc>
-    </url>
+<url><loc>http://www.sensebedictionary.org/</loc></url>
+<url><loc>http://www.sensebedictionary.org/search?target=sensebe&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc></url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=-in-one&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[num]-in-one</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=I&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=I'm [doing]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=a few&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=a few of [plural]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=a good|great deal&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=a great deal</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=a minute of your time&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=a minute of [your] time + , please</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=a while&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=take + a while</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=a&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=a [singular]?</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=a&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=a [singular] + with [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=about&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=that about [sb]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=about&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=About?</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=about&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[v] about</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=about&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[be] about [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=about&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[v] about [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=academy&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[pron] Academy</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=adjective&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[be] [adj]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=adjective&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[adj] [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=adjective&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=when [adj]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=adjective&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[adj] and [adj2] [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=adjust&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=will adjust [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=agent&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=out agents</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=aggressive&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[be] aggressive</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=ago&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=several days + ago</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=all around&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=... + all around</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=all right&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[s] all right?</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=all right&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=it [be] all right</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=all right&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[sentence] all right?</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=all&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[s] all</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=all&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=all who [v]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=all&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[be] all [adj]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=all&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=all [s] [v]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=alone&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[v] alone</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=alone&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[sth] alone</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=already&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=already [sentence]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=already&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=have already [p.p]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=ambassador&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=ambassador</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=among&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=among [plural]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=and all&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[sth] and all</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=and&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[sentence], and [sentence]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=and&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=And [sb]?</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=and&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=And [sentence]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=anyone&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=anyone</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=anyone&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=anyone</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=anywhere&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=anywhere</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=area&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=the area</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=armor&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=my armors</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=army&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=armies</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=article&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=article + num</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=as ever&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[sentence] as ever</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=as&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=as [sentence]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=as&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=as [past]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=assistant professor&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=assistant professor</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=at least&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=at least [period]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=at once&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[sentence] at once?</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=at your service&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[sb], at your service</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=at&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=at [sw]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=audience&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=the audience</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=away&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=far away</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=awkward&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=awkward [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=aye&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=Aye,</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=back&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[be] due back</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=back&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[v] back</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=back&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[s] [be] really back?</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=bad&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=so bad</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=ballista&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=ballista</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=barb&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=barbs</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=barber&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=a barber</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=battlefield&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=the battlefield</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=be able to&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=so as to be able to [v]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=be fraught with sth&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[be] fraught with [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=be of service&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[be] of service</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=be on the move&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[be] on the move</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=be used to sth&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[be] used to [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=be&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[be] [adj]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=be&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[sb] [be] [adj], [sb2] ([be]) [adj2]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=be&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[be] [sb] [v-ing]?</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=be&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[be] on [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=be&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[be] [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=be&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[sth] [s] [v] [be] [sentence]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=beak&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=the beak</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=beast&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=beast</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=beautiful&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[be] beautiful</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=been&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[have] never been [sw]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=been&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[have] been [adj]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=been&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=([sb] [have]) been [adj]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=before&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[sentence] 'fore [sentence2]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=beg your pardon&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=beg your pardon for [sb]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=beg&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=beg [sb]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=begone&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=begone</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=believe&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=believe [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=believe&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=Do you believe [sentence]?</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=bergere&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=the bergère</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=better&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[comparative] [sentence] the better</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=big&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=bigger [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=black&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=black [v]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=black&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=black [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=blade&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=blades</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=blame&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[be] to blame</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=blind&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=blind [sb]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=blood&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=blood</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=blunt&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=blunt [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=body&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=his body</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=bolt&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=ballista + bolts</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=boring&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[sth] boring</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=bring&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=bring [sb] [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=bring&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=bring [sb] to [sw]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=bring&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=bring [sb] to [sb2]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=busy&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=busy [sw]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=but&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=but [sentence]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=by any chance&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[sentence], by any chance?</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=by the gods&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=by the gods</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=can&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=can [v]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=can&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=can [s] [v]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=can&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=can [be] [adj]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=careful&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[v] careful</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=catch&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=catch [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=century&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=a century old</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=chafe&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[s] chafe</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=chance&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=no chance</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=changed&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[have] changed</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=changed&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=get changed</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=charge&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=charge [sb] [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=check&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=check [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=choose&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[have] chosen [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=claim&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=so [s] claim</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=claw&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=claw [sb]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=claw&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=claws</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=clock's ticking&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=clock's ticking</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=close&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[be] close</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=coat&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=the coat</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=code&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=code</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=codex&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=military codex</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=color&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[adj] colors</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=come back&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=do not come back</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=come back&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=come back to [sb]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=come in handy&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=might come in handy</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=come on&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=come on</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=comeuppance&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=my comeuppance</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=command&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=command [sth] for [sth2]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=command&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=on command</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=comparative&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[comparative] [sentence] the [comparative2]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=compliment&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[det] [adj] compliments</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=confused&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[be] confused</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=conjunction&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[sentence], [sentence2]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=corporal&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=Corporal</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=cosmetic&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=cosmetic + [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=could&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[sth] [s] [could]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=could&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=could [v]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=could&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[sth] [s] could [v]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=countless&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=countless [plural]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=courtyard&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=the courtyard</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=cover&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[be] covered in [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=creep up on sb&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=crept up on [sb]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=cretin&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=the cretin</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=cross sb's path&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=cross sb's path</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=crossbow&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=a crossbow</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=crowd&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=the crowd</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=cut&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=cuts</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=damn&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=dammit</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=damsel&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=young damsel</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=danger&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=in danger</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=dashing&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=look dashing</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=daughter&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=my daughter [sb]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=dawn&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=dawn</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=day&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=several days</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=day&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=the day</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=dead&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=been dead</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=deep&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=deep [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=defecate&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[s] defecate</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=defective&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=defective [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=defend&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=defend [sb]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=delivery&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=the delivery</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=demand&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=demand [s] [v]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=dense&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=dense [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=describe&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=describe [sb]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=detail&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=details</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=disappear&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[have] disappeared</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=discuss&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=discuss [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=do well&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=do well not to [v]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=do&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[be] doing</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=do&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=([s]) do not [v]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=do&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=do not [v]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=do&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=did not [v]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=do&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=([have]) done [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=do&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=get [sth] done</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=dog&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=dogs</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=done&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[be] done [v-ing]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=drag&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=would drag [sb] [sw]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=dream&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=my dream</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=dress&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=dress in [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=drink&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=drink</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=drop&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=a drop of [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=drop&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=a drop of [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=drop&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=has dropped [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=drunk&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[be] drunk</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=dub&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=dub [sb] [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=due&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[be] due back</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=embed&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=embed [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=embrace&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=embrace [sb]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=emperor&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=an emperor</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=end&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[have] to end</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=error&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=errors</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=especially&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=especially if [sentence]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=even&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=would even [v]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=even&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=even [sb]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=ever&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=do not ever [v]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=everything&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=everything</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=exact&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=exact [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=exactly&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[be] exactly [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=examine&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=examine [sb]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=expect&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[be] not expecting to [v]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=explain&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=explain why [sentence]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=explain&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=explain [sentence]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=fact&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=facts</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=fairytale&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=fairytales</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=far&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=far away</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=fast asleep&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[be] fast asleep</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=female&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=female</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=fifteen&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=fifteen [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=find&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=find [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=find&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=will find [sb]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=find&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=found [sb]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=fine&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=Fine</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=first&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[sentence] first, then [sentence2]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=first&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=but first [sentence]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=flower&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=flowers</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=focus on sb|sth&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=focus on [sb]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=folk&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=folk</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=follow&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=follow [sb]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=food&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=food</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=fool&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=a fool</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=for life&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=for life</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=for years&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=for years</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=for&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=for [sb]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=for&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=for [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=for&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=for [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=forget&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[have] forgotten</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=fret&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=not [fret]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=from&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[sth] from [sw]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=from&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[sb] from [sw]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=full&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=full [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=funny&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=Funny</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=game&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=game</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=garish&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=garish [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=garment&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=the garments</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=general&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=general</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=get away&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=get away</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=get to&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=get to [v]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=get&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=get out of [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=get&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[sth] [s] got</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=get&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=got [t]?</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=get&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=get [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=get&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=get [sth] done</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=get&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=get [p.p]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=get&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=have got time</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=get&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=get [sb] [sw]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=give&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=give [sth] [sth2]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=glass&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=glass</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=go on&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=what [be] going on [sw]?</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=go&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[be] going [sw]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=go&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=let's go [v]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=go&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=how goes it?</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=go&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=go on horseback</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=god&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=gods</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=going to&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=gonna [v]?</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=going to&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=not gonna [v]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=good luck&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=good luck</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=good&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[do] no good</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=good&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[sentence], good</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=good&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[be] good to [v]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=goods&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=goods</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=grain&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=this grain</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=gray&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=gray [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=griffin&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=a griffin</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=grow into sb|sth&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[have] grown into [sb]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=grown up&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[be] grown up</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=grown&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[have] grown</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=guess&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=guess [sentence]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=guest room&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=the guest room</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=guy&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=this guy</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=hair&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=hairs</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=happen&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=what happend?</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=have had enough&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=참을 만큼 참았다</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=have one foot in the grave&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[have] one foot in the grave</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=have to&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[have] to [v]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=have to&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=gotta [v]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=have yet to&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[have] yet to [v]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=have&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[have] [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=have&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=had [p.p]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=have&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=has never been [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=have&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[s] haven't.</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=have&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=have [sth] [sb]'s way</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=have&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=have [sth] [p.p.]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=head&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=your head</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=headquarters&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=headquarters</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=hear&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=hear [sth]?</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=hell&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=why the hell not?</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=hell&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=what the hell [be] [s]?</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=help&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=help</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=help&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=will [s] help?</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=here you go&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=here you go</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=here&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[sth] [be] here</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=here&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=here in [sw]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=here&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[s] [be] here</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=here&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=on here</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=hero&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=a hero</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=herself&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=herself</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=hey&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=hey</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=his&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=his [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=history&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=contemporary history</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=hm&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=hm</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=honest&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=to be honest</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=horsewoman&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=the horsewoman</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=how about that&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=how about that...</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=how&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=how many times</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=how&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=how can [s] [...]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=how&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=this is how [sentence]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=how&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=how can [s] [v]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=how&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=how?</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=how&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=this is not how [sentence]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=how&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=how did [s] [v]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=how&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=how [adj] [s] can be</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=hunt sb down&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=hunted [sb] down</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=hunt&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[be] hunting [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=hunter&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=a hunter</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=hurt&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=hurt to [v]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=hygienic&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=hygienic</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=if&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=if [s] [v]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=if&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=if [s] [be] [...]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=imagine&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=imagined [sentence]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=imagine&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=imagine [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=in one piece&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=in one piece</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=in the flesh&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[sentence] in the flesh</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=in the middle of sth&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=in the middle of [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=in&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=in [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=in&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=in [country]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=inch&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=an inch</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=indeed&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[sentence], indeed</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=indeed&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=it's indeed.</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=insolent&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=how insolent [s] can be</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=interest&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=interest [sb]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=involve&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[get] involved</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=is&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[adj], isn't it?</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=is&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=([is]) [s] [sth]?</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=it&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[sentence], it [v]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=it&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=it [be] [adj]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=juice&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=juice</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=jumpy&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[be] jumpy</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=just&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[s] just [v]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=just&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[s] just [v]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=just&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=just [v]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=kill&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[sb] [sth] killed</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=kill&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[be] killing [sb]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=kin&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=kin</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=knout&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=a knout</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=know&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[s] know</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=know&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=know [sth]?</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=know&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=knew [sb] for years</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=know&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=did not know</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=know&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=know [sentence]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=lady&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=a [adj] lady</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=land&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[sth] landing</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=larva&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=Larvae</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=lash&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[num] lashes</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=late&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=late [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=laugh&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=laugh</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=lead&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=lead [sb] to [sb2]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=lead&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=those leads</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=learn&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=never learn</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=learn&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=wish to learn [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=leave&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=leave [sb] [be]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=left&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[s] left</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=less&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=less [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=lesson&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=lessons</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=let&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=let's [v]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=liar&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=liar</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=lieutenant&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=my lieutenant</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=light&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=Light [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=like&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=like [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=like&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=like [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=like&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=do not like [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=lined&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=have [sth] lined with [sth2]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=listen&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=listen</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=little&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=little [s]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=long&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=long [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=long&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[be] long</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=look like sb|sth&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=look like [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=look&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[be] looking for [sb]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=look&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=look as [sentence]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=look&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=look for [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=look&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=looking for [sb]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=look&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=look</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=look&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=look [adj]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=lose&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=losing [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=lower&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=lower [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=mad&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=don't get mad at [sb]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=madding&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=madding [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=make&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=make [sth] so</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=male&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=a male</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=male&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=male</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=male&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=the male [sentence]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=mangy&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=mangy [sb]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=many&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=many a [sg.]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=master&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=master</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=master&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=master</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=maybe&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=maybe [sentence]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=me&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[v] me</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=mean&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=mean [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=means&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=this means [sentence]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=measurement&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=measurements</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=medicine&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=medicine</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=meet with sth&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=meet with [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=meet&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=would meet</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=merchant&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=a merchant</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=might&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=might [v]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=might&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[s] might</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=might&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=([s]) might [v]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=might&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=might have [p.p]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=military&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=military [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=mind&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=don't mind [v-ing]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=mirror&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=mirros</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=mirror&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=mirror</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=misfortune&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=misfortune</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=missed&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=missed [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=mistaken&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[have] mistaken</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=monster&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=monsters</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=more or less&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[be] more or less [adj]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=more or less&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[be] more or less [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=more&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=some more</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=more&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=more [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=more&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=more [adj]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=more&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=there [be] more</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=mum&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=your mum</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=murderer&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[sb]'s murderer</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=must&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=must be [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=must&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[s] must be [sw]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=mutt&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=mutts</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=my&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=my [sb]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=my&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=my [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=nag&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[be] nagging [sb] about [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=nail&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=do nails</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=nation&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=nation</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=near&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[be] near [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=need&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=no need</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=need&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=need [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=need&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=need not [v]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=need&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=need to [v]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=never&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[s] never [v]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=next&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=next to [sb]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=night&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=a night</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=nightmare&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=have a nightmare</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=no offense&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=no offense, but [sentence]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=no&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=no</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=no&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=no</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=not a bit&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=not a bit</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=not at all&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[be]n't at all [sentence]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=not&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=do not [v]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=not&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=not [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=not&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=([s]) do not [v]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=not&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=not [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=now&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[sentence]. Now.</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=now&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[sentence] now [sentence2]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=now&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[sentence], now.</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=now&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[sentence] now</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=number&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[num] [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=of course&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[sentence], of course.</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=of course&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=of course not</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=of&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[sth] of yours</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=off&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[sth] off</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=oi&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=어이!</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=old&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=old [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=old&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[period] old</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=old&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[num] year(s) old</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=omen&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=an omen</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=on&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=on [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=on&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=on [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=on&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=on [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=on&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=on [sw]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=once&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[sentence1] once [sentence2]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=once&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=once [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=one by one&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=one by one</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=one&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=one [adj]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=one&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=one [sb]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=only&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=only [v]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=onto&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[v] onto [sw]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=or&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[sth] or [sth2]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=order&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[be] an order</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=other&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=other [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=others&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=others</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=our&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=our [s]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=outfit&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=an outfit</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=over there&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[sentence] over there</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=over&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[sth] over [sth2]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=over&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=it [be] over</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=paint&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=painted [sth] on [sth2]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=pair off&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=pair off</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=partly&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[be] partly to [v]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=pass&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=mountain pass</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=pass&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[s] passed</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=patience&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=patience</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=peace&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=some peace</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=permit&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=permits</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=phantom&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=a phantom</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=place&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[adj] place</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=plan&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=as planned?</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=please&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=please [v]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=please&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[sentence], please</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=pleasure&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[have] the pleasure</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=plural&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[sth] of [pl.]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=point up sth&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=point up [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=poor&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=poor [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=poppycock&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[sth] poppycock</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=practice&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=practice</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=practice&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=practice</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=prefer&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=prefer [sth] to [sth2]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=preference&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=not my preference</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=preparation&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=preparations (for [sth])</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=presentable&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[be] presentable</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=pretty&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=pretty [adj]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=proceed&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[sth] proceeding?</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=profession&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=a profession</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=prowl&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[be] prowling</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=pure&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=pure [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=pursue&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=pursue [sb]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=put sb to sth&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=put [sb] to [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=put&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=put [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=pyromaniac&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=pyromaniac</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=quick&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[sentence] quick</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=quiet&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=quiet</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=quite&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=quite [adj]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=rather&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[be] rather [adj]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=real&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=seem real</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=really&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[be] really [adj]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=really&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[be] really [adv]?</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=really&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[s] really [v]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=receive&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=received [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=receive&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=did not receive [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=recruit&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=recruits</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=refuse&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=refuse to [v]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=relax&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[be] relaxing</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=remember&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=remember</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=reminisce&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=reminisce about [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=repay&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=repay [sb]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=report&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=a report</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=rest&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=a rest</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=return&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[have] yet to return</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=return&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[s] [have] returned</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=rib&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=my ribs</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=ride&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=ride [sw]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=road&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=the road</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=roamed&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=roamed [sw]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=rotten&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[be] rotten</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=round&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage='round [sw]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=rumor&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=a rumor</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=run around&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=run around</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=run into sb&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[sb] [s] run into</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=run out&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=run out of [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=rye&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=rye</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=sadly&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=sadly [sentence]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=sadly&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=sadly, [sentence]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=same to you&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=same to you</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=save&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=save [sb]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=say&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=say [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=say&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[sth] [s] say</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=scent&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=the scent</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=search&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=search for [sb]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=seat&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=will be seated</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=section&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=section [num]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=see&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=(have you) seen [sb]?</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=see&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=I see</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=see&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=(did you) see [sth]?</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=see&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=see [sb]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=seek&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=seek [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=seem&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=seem [adj]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=sensebe&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=사이트 이용법</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=set out&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=set out to [v]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=several&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=several [plural]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=sh&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=sh</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=shaft&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[adj] shaft</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=shave&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=shave [sb]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=she&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=she has [p.p]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=shield&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=his shield</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=shit&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=shit</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=short&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[be] short</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=should&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[s] should [v]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=show&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=show [sb]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=side&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=the [adj] side</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=sideburns&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=sideburns</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=silence&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=silence</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=silver&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=silver [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=since&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[sentence] since [sentence2]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=singular&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=many a [sg.]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=sit&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=sit</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=slayer&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[sth] slayer</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=sleep&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=sleep</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=sleep&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=slept</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=so as to&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=so as to ...</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=so far&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[...] so far</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=so much for sth&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=so much for [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=so&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=so [adj]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=so&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=so, [sentence]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=so&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=so [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=so&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[sentence] so</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=so&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[sentence], so [sentence2]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=so&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=so, [sentence]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=soldier&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=soldier</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=soldier&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=a soldier with [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=some&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=some [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=some&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=some [v]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=some&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=some of [pl.]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=somewhere&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[v] somewhere</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=somewhere&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[be] here somewhere</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=soon&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=sooner [sentence] the [comparative]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=soon&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=soon as [sentence]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=sorry&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=sorry</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=split up&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=split up</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=spot&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=spot [sb]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=start&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=started</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=start&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=start [v-ing]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=step&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=step</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=step&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=step onto [sw]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=still&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[v] still</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=stomach&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=a [adj] stomach</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=stop&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=stop</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=strong suit&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[sb]'s strong suit</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=suit&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=suits [sb]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=summon&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=didn't summon [sb]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=suppose&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=suppose [sentence]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=sure&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=sure</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=sure&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[be] [s] sure?</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=tailor&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=our tailor</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=take&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=take forever to [v]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=take&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=take [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=take&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=take [sb] for [sb2]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=take&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=take [sth] [sentence]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=talk&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[sth] [sb] [be] talking about</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=talk&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=talk to [sb]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=teleport&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=teleport [sb] to [sw]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=tell&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[be] told</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=tell&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=tell [sb] [sth] about [sb2]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=tell&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=will tell [sb]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=ten&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=ten</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=tenure&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=tenure</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=than&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=than [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=that is&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=that is, [sentence]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=that&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[sentence] [s] [v] that</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=that&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=([be]) that [sth]?</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=that&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[sentence] that [be] [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=that&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=that [be] [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=that&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=that [be] [sb]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=the same&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[be] the same</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=the same&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[be] the same [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=the&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=for the [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=the&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=the [adj] [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=the&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[comparative] [sentence] the [comparative2]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=the&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=the [sth]!</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=them&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[v] [sth] on 'em</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=them&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[v] them</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=them&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=a few of them</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=then&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[sentence] first, then [sentence2]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=then&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=then [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=theory&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=theory</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=there&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=there [be] [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=these&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=these [adj] [pl.]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=they&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=they</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=thick&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=thick [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=thief&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=thief</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=thing&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[adj] thing</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=things&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=Things used to be [adj]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=think&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=think [sentence]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=think&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=think so?</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=this&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=this [sg.]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=this&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=this [be] [sg.]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=this&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=what the hell is this?</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=those&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=those [pl.]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=though&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[sentence1]. [sentence2], though.</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=though&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[sentence1], though [sentence2]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=three&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=three</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=through&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=pass through</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=tilt&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=tilt [sth] back</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=time&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=Time to [v]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=time&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=time</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=tip&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[sth] tip</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=to&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=to [sb]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=to&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=to be [adj]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=together&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[v] together</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=too&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[sentence], too</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=tourniquet&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=a tourniquet</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=trade&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=your trade</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=trained&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[s] trained</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=training&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=training</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=transport&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=a transport</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=treatment&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[adj] treatment</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=true to life&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=(it is) true to life</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=try&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=try not to be [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=tub&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=the tub</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=twelve&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=twelve</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=two&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=two</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=undergo&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[sth] that [s] undergo</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=understand&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[s] understand</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=unlike&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=unlike [sb]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=until&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[sentence] until [sentence2]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=us&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[v] us</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=vagrant&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=a [adj] vagrant</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=verb&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[sb] [sth] [v]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=verb&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[v] to [v2]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=village&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=the village</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=vodka&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=a drop of vodka</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=vouch for sth&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=vouch for [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=wait on sth&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=wait on [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=wait&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=wait</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=waiting&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[s] shall be waiting</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=wake up&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=wake up</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=wallow in sth&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=wallow in [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=want&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=want to [v]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=want&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=wanna [v]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=war&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=a war</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=warm&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=warm [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=warmth&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=in warmth</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=wartime&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=wartime</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=way&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=some way</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=way&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[adj] way</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=way&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=the way</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=we&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=we [v]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=week&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=a week</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=went&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=went</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=were&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=were [s] not [p.p]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=wet&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=wet [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=what's that (all) about (then)?&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=what's that about?</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=what&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=what do you do?</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=what&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[v] what [sentence]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=what&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=what [v]?</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=what&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=what?</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=what&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=what the hell [be] [s]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=what&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=what [be] [v-ing]?</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=what&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=the what now?</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=what&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=then what?</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=what&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[s] [be] what [sentence]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=when&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[sentence] when ([sb] [be]) [adj]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=where&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=where would [sb] [v]?</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=while&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[sentence] while [sentence2]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=while&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[sentence], while [sentence2]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=whippersnapper&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=the whippersnapper</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=who&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=who [be] [s]?</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=who&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[sb] who [have] [p.p]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=whole&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=whole [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=why not&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=why (the hell) not?</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=wild&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=wild [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=wilderness&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=the wilderness</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=will&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=will get to [v]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=will&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=will not [v]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=will&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=will [s] [v]?</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=will&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage='ll [v]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=win&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=win [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=wish&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=wish to [v]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=witcher&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=witchers</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=with&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=with [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=with&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=with [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=wolf&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=wolves</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=woman&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=a woman</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=work&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=work for [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=world&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=in the world</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=worn&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[be] worn</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=would&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=would not [v]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=would&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage='d even [v]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=would&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage='d [v]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=wound&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=wounds</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=year&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[num] years</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=year&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[have] been years</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=yes&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=yes</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=yes&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=yes?</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=you&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=(are) you [s]?</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=young&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=young [sb]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=young&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=when ([s] [be]) young</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=your&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=your [sth]</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=yours&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=[sth] of yours</loc> </url>
+        <url> <loc>http://www.sensebedictionary.org/search?target=yourself&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=you [...] yourself</loc> </url>
 </urlset>

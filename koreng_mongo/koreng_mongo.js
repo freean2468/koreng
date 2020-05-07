@@ -28,6 +28,7 @@ app.use(helmet())
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
     extended: true
 }))
+app.use(bodyParser.json())
 app.use(compression())
 
 last_index = 0
@@ -96,8 +97,12 @@ function baseTemplate() {
                             <button type="button" class="btn btn_home" onclick="onClickHome()">Home</button>
                         </div>
                     </form>
+
+                    <form id="genSiteMap" action="/genSiteMap" style="overflow:visible;display:block" data-submitfalse="q" method="GET">  
+                        <input class="btn" id="sitemap_btn" value="genSiteMap" type="submit">
+                    </form>
                 </div>
-            </header><!-- search_group -->
+            </header>
             <section class="content">
                 <nav id="left_nav">
                     <!-- NAV -->
@@ -131,7 +136,7 @@ function transactionTemplate() {
         <form id="findByIdType" action="/findByIdType" style="overflow:visible;display:block" data-submitfalse="q" method="GET">
             <br>
                 findByIdType : <input name="findByIdType" type="text"/>
-                <input class="btn btn_transaction" id="find_btn" value="find" align="right" type="submit">
+                // <input class="btn btn_transaction" id="find_btn" value="find" align="right" type="submit">
         </form>
     </div>`
 
@@ -223,34 +228,7 @@ function search(req, res) {
     var template = `
         <div>
             <ul class="caution">
-                basic
                 <li>idiom의 경우 root를 따로 만들고 from에 원형을 추가</li>
-                <li>축약형의 경우 원형에 redirection 후 원형에 추가</li>
-                <li>Speech는 Usage안 root의 역할에 따라 정한다. (idiom이나 phrase 예외)</li>
-                <li>최대한 기본형(긍정, 동사원형)으로 usage 표시 => 예시가 풍부해지면 그때 예시 모습대로 돌아가자.</li><br>
-                <ul>
-                    "will, would, may, might, can, could, shall, should, have의 mv들은 각각의 root를 가지고 모든 활용에 대해 적자"
-                </ul><br>
-                <ul>
-                    "what, where, why, how 등은 구체적인 활용을 모두 적자"
-                </ul><br>
-                <ul>
-                    "v"
-                    <li>-ed, -ing, p.p 의 경우 특별한 뜻이 있는 경우에만 root를 따로 만든다. 그 외에는 원형으로 redirection 원형에 추가 </li>
-                    <li>아직 원형이 없는 경우에는 예시의 [v]의 형태가 맞지 않더라도 [v]원형을 기반으로 usage 추가</li>
-                </ul><br>
-                <ul>
-                    "adj"
-                    <li>adj + sth 과 같은 활용 구조를 usage에 남긴다</li>
-                </ul><br>
-                <ul>
-                    "n"
-                    <li>간단하게 뜻만 남기자</li>
-                    <li>복수형(plural)의 경우 원형으로 redirection 걸고 원형에 usage를 추가</li>
-                </ul><br>
-                <ul>
-                    "각 품사별 root에 품사 활용을 모두 남기자"
-                </ul><br>
                 <ul>
                     "sb/sth 중 singular인지 plural인지 구분"
                 </ul>
@@ -293,19 +271,19 @@ function search(req, res) {
             template += `
                     <div id="from_${idx}">
                         from : <input name="from[${idx}]" type="text" value="${elm}"/>
+                        <button type="button" class="btn btn_del_from" onclick="onClickDelFrom(this)">del from</button><br>
                     </div>
             `
         })
     } else {
-        template += `
-                    <div id="from_0">
-                        <!-- from : <input name="from[0]" type="text"/> -->
-                    </div>`
+        // template += `
+        //             <div id="from_0">
+        //                 <!-- from : <input name="from[0]" type="text"/> -->
+        //             </div>`
     }
     template +=`
                 </div>
                 <button type="button" class="btn btn_add_from" onclick="onClickAddFrom()">add from</button>
-                <button type="button" class="btn btn_del_from" onclick="onClickDelFrom()">del from</button>
                 <div id="redirection">`
     if (file) {
         template +=`
@@ -321,8 +299,11 @@ function search(req, res) {
         json["data"].forEach(function (data, idx) {
             template += `
                     <div id=data_${idx}>
-                        <div> data_${idx}_usage : <input name="data[${idx}][_usage]" type="text" value="${data["_usage"]}"/> </div>
-                        <div> data_${idx}_speech : `
+                        <div> 
+                            ${idx}.usage : <input name="data[${idx}][_usage]" type="text" value="${data["_usage"]}"/> 
+                            <button type="button" class="btn btn_del_data" onclick="onClickDelData(this)">del data</button>
+                        </div>
+                        <div> ${idx}.speech : `
             template += speechTemplate(idx)
             template += `
                             <script>`
@@ -338,71 +319,85 @@ function search(req, res) {
                         <div id=data_${idx}_chunk>`
             data["_chunks"].forEach(function (chunk, _idx) {
                 template += `
-                            <div id=data_${idx}_chunk_${_idx}> data_${idx}_chunk : <input name="data[${idx}][_chunks][${_idx}]" type="text" value="${chunk}"/> </div>`
+                            <div id=data_${idx}_chunk_${_idx}> 
+                                ${idx}.chunk : <input name="data[${idx}][_chunks][]" type="text" value="${chunk}"/> 
+                                <button type="button" class="btn btn_del_chunk" onclick="onClickDelChunk(this)">del chunk</button> 
+                            </div>`
             })
             template += `
                         </div>
                         <button type="button" class="btn btn_add_chunk" onclick="onClickAddChunk(this)" value="${idx}">add chunk</button>
-                        <button type="button" class="btn btn_del_chunk" onclick="onClickDelChunk(this)" value="${idx}">del chunk</button>
-                        <div>data_${idx}_video : <input name="data[${idx}][_video]" type="text" value="${data["_video"]}"/></div>
+                        <div>${idx}.video : <input name="data[${idx}][_video]" type="text" value="${data["_video"]}"/></div>
 
             <div id=data_${idx}_text>`
             
             data["_text"].forEach(function (text, _idx) {
                 template += `
-                            <div id=data_${idx}_text_${_idx}> data_${idx}_text : <input name="data[${idx}][_text][${_idx}]" type="text" value="${text}"/> </div>`
+                            <div id=data_${idx}_text_${_idx}> 
+                                ${idx}.text : <input name="data[${idx}][_text][${_idx}]" type="text" value="${text}"/> 
+                                <button type="button" class="btn btn_del_text" onclick="onClickDelText(this)" value="${idx}">del text</button>
+                            </div>`
             })
             template += `
                         </div>
                     <button type="button" class="btn btn_add_text" onclick="onClickAddText(this)" value="${idx}">add text</button>
-                    <button type="button" class="btn btn_del_text" onclick="onClickDelText(this)" value="${idx}">del text</button>
                     
             <div id=data_${idx}_tag>`
             
             if (data["_tag"] !== undefined) {
                 data["_tag"].forEach(function (tag, _idx) {
                     template += `
-                <div id=data_${idx}_tag_${_idx}> data_${idx}_tag : <input name="data[${idx}][_tag][${_idx}]" type="text" value="${tag}"/> </div>`
+                <div id=data_${idx}_tag_${_idx}> 
+                    ${idx}.tag : <input name="data[${idx}][_tag][]" type="text" value="${tag}"/> 
+                    <button type="button" class="btn btn_del_tag" onclick="onClickDelTag(this)">del tag</button>
+                </div>`
                 })
             }
 
             template += `
                 </div>
                 <button type="button" class="btn btn_add_tag" onclick="onClickAddTag(this)" value="${idx}">add tag</button>
-                <button type="button" class="btn btn_del_tag" onclick="onClickDelTag(this)" value="${idx}">del tag</button>
             </div>`
         })
     } else {
         template += `
                     <div id=data_0>
-                        <div> data_0_usage : <input name="data[0][_usage]" type="text"/> </div>
-                        <div> data_0_speech : `
+                        <div> 
+                            0.usage : <input name="data[0][_usage]" type="text"/> 
+                            <button type="button" class="btn btn_del_data" onclick="onClickDelData(this)">del data</button>
+                        </div>
+                        <div> 0.speech : `
         template += speechTemplate(0)
         template += `
                         </div>
                         <div id=data_0_chunk>
-                            <!--<div id=data_0_chunk_0> data_0_chunk : <input name="data[0][_chunks][0]" type="text"/> </div>-->
+                            <div id=data_0_chunk_0> 
+                                0.chunk : <input name="data[0][_chunks][]" type="text"/> 
+                                <button type="button" class="btn btn_del_chunk" onclick="onClickDelChunk(this)" value="0">del chunk</button>
+                            </div>
                         </div>
                         <button type="button" class="btn btn_add_chunk" onclick="onClickAddChunk(this)" value="0">add chunk</button>
-                        <button type="button" class="btn btn_del_chunk" onclick="onClickDelChunk(this)" value="0">del chunk</button>
-                        <div>data_0_video : <input name="data[0][_video]" type="text"/></div>
+                        <div>0.video : <input name="data[0][_video]" type="text"/></div>
                         <div id=data_0_text>
-                            <div id=data_0_text_0> data_0_text : <input name="data[0][_text][0]" type="text"/> </div>
+                            <div id=data_0_text_0> 
+                                0.text : <input name="data[0][_text][]" type="text"/> 
+                                <button type="button" class="btn btn_del_text" onclick="onClickDelText(this)" value="0">del text</button>
+                            </div>
                         </div>
                         <button type="button" class="btn btn_add_text" onclick="onClickAddText(this)" value="0">add text</button>
-                        <button type="button" class="btn btn_del_text" onclick="onClickDelText(this)" value="0">del text</button>
                         <div id=data_0_tag>
-                            <div id=data_0_tag_0> data_0_tag : <input name="data[0][_tag][0]" type="text"/> </div>
+                            <div id=data_0_tag_0> 
+                                0.tag : <input name="data[0][_tag][]" type="text"/> 
+                                <button type="button" class="btn btn_del_tag" onclick="onClickDelTag(this)" value="0">del tag</button>
+                            </div>
                         </div>
                         <button type="button" class="btn btn_add_tag" onclick="onClickAddTag(this)" value="0">add tag</button>
-                        <button type="button" class="btn btn_del_tag" onclick="onClickDelTag(this)" value="0">del tag</button>
                     </div>`
     }
 
         template += `
                 </div>
                 <button type="button" class="btn btn_add_data" onclick="onClickAddData()">add data</button>
-                <button type="button" class="btn btn_del_data" onclick="onClickDelData()">del data</button>
                 <div class="item_btn">
                     <input class="btn" id="insert_btn" value="insert" type="submit">
                     <button type="button" class="btn btn_home" onclick="onClickHome()">Home</button>
@@ -411,21 +406,27 @@ function search(req, res) {
         </div>
 
         <script>
+            function deleteElmThenAlign(godfather, parent){
+                godfather.removeChild(parent)
+                parents = godfather.children
+
+                for(var i in parents) {
+                    parents[i].id = godfather.id+'_'+i
+                }
+            }
+
             function onClickAddFrom(){
                 from = document.getElementById('from')
                 len = from.children.length
 
                 let div = document.createElement('div')
                 div.setAttribute('id', 'from_'+len)
-                div.innerHTML = 'from : <input name="from[]" type="text"/>'
+                div.innerHTML = 'from : <input name="from[]" type="text"/> <button type="button" class="btn btn_del_from" onclick="onClickDelFrom(this)">del from</button><br>'
                 from.appendChild(div);
             }
 
-            function onClickDelFrom(){
-                from = document.getElementById('from')
-                len = from.children.length - 1
-                child = document.getElementById('from_'+len)
-                from.removeChild(child);
+            function onClickDelFrom(elm){
+                deleteElmThenAlign(elm.parentElement.parentElement, elm.parentElement)
             }
 
             function onClickAddChunk(elm){
@@ -435,17 +436,12 @@ function search(req, res) {
 
                 let div = document.createElement('div')
                 div.setAttribute("id", "data_"+idx+"_chunk_"+len)
-                div.innerHTML = 'data_'+idx+'_chunk : <input name="data['+idx+'][_chunks]['+len+']" type="text"/>'
+                div.innerHTML = idx+'.chunk : <input name="data['+idx+'][_chunks][]" type="text"/> <button type="button" class="btn btn_del_chunk" onclick="onClickDelChunk(this)">del chunk</button>'
                 chunk.appendChild(div)
             }
 
             function onClickDelChunk(elm){
-                idx = elm.getAttribute("value")
-                chunk = document.getElementById('data_'+idx+'_chunk')
-                len = chunk.children.length -1
-
-                child = document.getElementById('data_'+idx+'_chunk_'+len)
-                chunk.removeChild(child);
+                deleteElmThenAlign(elm.parentElement.parentElement, elm.parentElement)
             }
 
             function onClickAddText(elm){
@@ -455,17 +451,12 @@ function search(req, res) {
 
                 let div = document.createElement('div')
                 div.setAttribute("id", "data_"+idx+"_text_"+len)
-                div.innerHTML = 'data_'+idx+'_text : <input name="data['+idx+'][_text]['+len+']" type="text"/>'
+                div.innerHTML = idx+'.text : <input name="data['+idx+'][_text][]" type="text"/> <button type="button" class="btn btn_del_text" onclick="onClickDelText(this)">del text</button>'
                 text.appendChild(div)
             }
 
             function onClickDelText(elm){
-                idx = elm.getAttribute("value")
-                text = document.getElementById('data_'+idx+'_text')
-                len = text.children.length -1
-
-                child = document.getElementById('data_'+idx+'_text_'+len)
-                text.removeChild(child);
+                deleteElmThenAlign(elm.parentElement.parentElement, elm.parentElement)
             }
 
             function onClickAddTag(elm){
@@ -475,17 +466,34 @@ function search(req, res) {
 
                 let div = document.createElement('div')
                 div.setAttribute("id", "data_"+idx+"_tag_"+len)
-                div.innerHTML = 'data_'+idx+'_tag : <input name="data['+idx+'][_tag]['+len+']" type="text"/>'
+                div.innerHTML = idx+'.tag : <input name="data['+idx+'][_tag][]" type="text"/> <button type="button" class="btn btn_del_tag" onclick="onClickDelTag(this)">del tag</button>'
                 tag.appendChild(div)
             }
 
             function onClickDelTag(elm){
-                idx = elm.getAttribute("value")
-                tag = document.getElementById('data_'+idx+'_tag')
-                len = tag.children.length -1
+                root = document.getElementById('root').getElementsByTagName("INPUT")[0].value;
+                tag = elm.previousElementSibling.value
 
-                child = document.getElementById('data_'+idx+'_tag_'+len)
-                tag.removeChild(child);
+                if (tag !== '') {
+                    fetch('${LOCAL_SERVER_URL}/del_TagTable?tag='+tag+'&root='+root)
+                        .then(response => response.json())
+                        .then(res => {
+                    
+                            console.log('[FROM_LOCAL CMD_DEL_TAG] result : ', res)
+                            deleteElmThenAlign(elm.parentElement.parentElement, elm.parentElement)
+                        })
+
+                    fetch('${SERVICE_SERVER_URL}/del_TagTable?tag='+tag+'&root='+root)
+                        .then(response => response.json())
+                        .then(res => {
+                    
+                            console.log('[FROM_SERVICE CMD_DEL_TAG] result : ', res)
+                            deleteElmThenAlign(elm.parentElement.parentElement, elm.parentElement)
+                        })
+                } else {
+                    console.log('[FAIL : CMD_DEL_TAG] none of tag value')
+                    deleteElmThenAlign(elm.parentElement.parentElement, elm.parentElement)
+                }
             }
 
             function onClickAddData(){
@@ -493,8 +501,8 @@ function search(req, res) {
                 len = $("#data > div").length
                 let div = document.createElement('div')
                 div.setAttribute("id","data_"+len);
-                div.innerHTML += '<div> data_'+len+'_usage : <input name="data['+len+'][_usage]" type="text"/> </div>'
-                div.innerHTML += '<div> data_'+len+'_speech : </div>'
+                div.innerHTML += '<div> '+len+'.usage : <input name="data['+len+'][_usage]" type="text"/> <button type="button" class="btn btn_del_data" onclick="onClickDelData(this)">del data</button></div>'
+                div.innerHTML += '<div> '+len+'.speech : </div>'
                 div.innerHTML += '<label><input type="checkbox" name="data['+len+'][_speech][]" value="verb">verb</label> '
                 div.innerHTML += '<label><input type="checkbox" name="data['+len+'][_speech][]" value="auxiliary verb">auxiliary verb</label> '
                 div.innerHTML += '<label><input type="checkbox" name="data['+len+'][_speech][]" value="phrasal verb">phrasal verb</label> '
@@ -512,44 +520,25 @@ function search(req, res) {
                 div.innerHTML += '<label><input type="checkbox" name="data['+len+'][_speech][]" value="exclamation">exclamation</label> '
                 div.innerHTML += '<label><input type="checkbox" name="data['+len+'][_speech][]" value="number">number</label> '
                 div.innerHTML += '</div>'
-                div.innerHTML += '<div id="data_'+len+'_chunk"> </div>'
-                // div.innerHTML += '<div id="data_'+len+'_chunk"> <div id="data_'+len+'_chunk_0"> data_'+len+'_chunk : <input name="data['+len+'][_chunks][]" type="text"/> </div></div>'
+                div.innerHTML += '<div id="data_'+len+'_chunk"> <div id="data_'+len+'_chunk_0"> '+len+'.chunk : <input name="data['+len+'][_chunks][]" type="text"/> <button type="button" class="btn btn_del_chunk" onclick="onClickDelChunk(this)">del chunk</button> </div></div>'
                 div.innerHTML += '<button type="button" class="btn btn_add_chunk" onclick="onClickAddChunk(this)">add chunk</button>'
-                div.innerHTML += '<button type="button" class="btn btn_del_chunk" onclick="onClickDelChunk(this)">del chunk</button>'
-                div.innerHTML += '<div>data_'+len+'_video : <input name="data['+len+'][_video]" type="text"/></div>'
-                div.innerHTML += '<div id="data_'+len+'_text"> </div>'
-                // div.innerHTML += '<div id="data_'+len+'_text"> <div id="data_'+len+'_text_0"> data_'+len+'_text : <input name="data['+len+'][_chunks][]" type="text"/> </div></div>'
+                div.innerHTML += '<div>'+len+'.video : <input name="data['+len+'][_video]" type="text"/></div>'
+                div.innerHTML += '<div id="data_'+len+'_text"> <div id="data_'+len+'_text_0"> '+len+'.text : <input name="data['+len+'][_chunks][]" type="text"/> <button type="button" class="btn btn_del_text" onclick="onClickDelText(this)">del text</button> </div></div>'
                 div.innerHTML += '<button type="button" class="btn btn_add_text" onclick="onClickAddText(this)">add text</button>'
-                div.innerHTML += '<button type="button" class="btn btn_del_text" onclick="onClickDelText(this)">del text</button>'
-
-                div.innerHTML += '<div id="data_'+len+'_tag"> </div>'
-                // div.innerHTML += '<div id="data_'+len+'_tag"> <div id="data_'+len+'_tag_0"> data_'+len+'_tag : <input name="data['+len+'][_chunks][]" type="text"/> </div></div>'
+                div.innerHTML += '<div id="data_'+len+'_tag"> <div id="data_'+len+'_tag_0"> '+len+'.tag : <input name="data['+len+'][_chunks][]" type="text"/> <button type="button" class="btn btn_del_tag" onclick="onClickDelTag(this)">del tag</button> </div></div>'
                 div.innerHTML += '<button type="button" class="btn btn_add_tag" onclick="onClickAddTag(this)">add tag</button>'
-                div.innerHTML += '<button type="button" class="btn btn_del_tag" onclick="onClickDelTag(this)">del tag</button>'
 
                 btn_add_chunk = div.querySelector(".btn_add_chunk")
                 btn_add_chunk.setAttribute("value",len)
-                btn_del_chunk = div.querySelector(".btn_del_chunk")
-                btn_del_chunk.setAttribute("value",len)
-
                 btn_add_text = div.querySelector(".btn_add_text")
                 btn_add_text.setAttribute("value",len)
-                btn_del_text = div.querySelector(".btn_del_text")
-                btn_del_text.setAttribute("value",len)
-
                 btn_add_tag = div.querySelector(".btn_add_tag")
                 btn_add_tag.setAttribute("value",len)
-                btn_del_tag = div.querySelector(".btn_del_tag")
-                btn_del_tag.setAttribute("value",len)
                 data.appendChild(div);
             }
 
-            function onClickDelData(){
-                data = document.getElementById('data')
-                len = $("#data > div").length - 1
-
-                child = document.getElementById('data_'+len)
-                data.removeChild(child);
+            function onClickDelData(elm){
+                deleteElmThenAlign(elm.parentElement.parentElement.parentElement, elm.parentElement.parentElement)
             }
             
         </script>`
@@ -612,6 +601,7 @@ async function insert(req, res) {
                 await createListing(client, query, DICTIONARY_COLLECTION)
             }
 
+            // Update DB status on the servers
             fetch(`${SERVICE_SERVER_URL}/update_DB_status`)
                 .then(response => response.json())
                 .then(status => {
@@ -634,7 +624,43 @@ async function insert(req, res) {
     }
 }
 
-// DB transaction - findByIdType...... but now just used for hand-writed commands
+// genSiteMap
+async function genSiteMap(req, res) {
+    // generate sitemaps
+    
+    const list = fs.readdirSync('dictionary_archive')
+    var nav = `<?xml version="1.0" encoding="UTF-8"?>
+
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<url><loc>http://www.sensebedictionary.org/</loc></url>
+<url><loc>http://www.sensebedictionary.org/search?target=sensebe&amp;btnK=Sense+%EA%B2%80%EC%83%89</loc></url>`
+
+    for(let item in list) {
+        let filename = list[item].split('.')[0]
+        let ext = list[item].split('.')[1]
+
+        if (ext === 'json') {
+            json = JSON.parse(fs.readFileSync(path.join('dictionary_archive', list[item]), "utf-8"))
+
+            for(let idx in json["data"]) {
+                nav += `
+        <url> <loc>http://www.sensebedictionary.org/search?target=${filename}&amp;btnK=Sense+%EA%B2%80%EC%83%89&amp;usage=${json["data"][idx]["_usage"]}</loc> </url>`
+            }
+        }
+    }
+
+    nav += `
+</urlset>`
+
+    fs.writeFile('../public/sitemap.xml', nav, (err) => {
+        if (err) throw err
+        console.log(`[SITEMAP] sitemap.xml has been created`)
+    });
+    
+    res.send(baseTemplate())
+}
+
+// findByIdType
 async function findByIdType(req, res) {
     const uri = `mongodb+srv://sensebe:${PASSWORD}@agjakmdb-j9ghj.azure.mongodb.net/test`
     const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -741,10 +767,14 @@ async function findByIdType(req, res) {
     }
 }
 
+app.get('/products/:id', function (req, res, next) {
+    res.json({msg: 'This is CORS-enabled for all origins!'})
+})
+
 app.get('/preSearch', (req, res) => preSearch(req, res))
 app.get('/search', (req, res) => search(req, res))
 app.get('/insert', (req, res) => insert(req, res)) 
-app.get('/findByIdType', (req, res) => findByIdType(req, res)) 
+app.get('/genSiteMap', (req, res) => genSiteMap(req, res)) 
 
 // Home
 app.get('/', function(req, res) {
@@ -818,12 +848,14 @@ function setId(json){
     table = fs.readFileSync(path.join(__dirname, DB_INDEX_TABLE_FILE), "utf-8")
 
     rootTableJson = JSON.parse(table)
-    redirectionResult = registerRedirectionTable(json)
     root = json["root"]
 
+    //
+    // REDIRECTION
+    redirectionResult = registerRedirectionTable(json)
 
     //
-    // temporary tagTable codes
+    // TEMPORARY tagTable codes
     tagTable = JSON.parse(fs.readFileSync(path.join(__dirname, TAG_TABLE_FILE), "utf-8"))
     dataList = json["data"]
 
@@ -839,6 +871,17 @@ function setId(json){
                     }
                 ]
                 console.log(`[TAG] ${tag} is added to tagTable, as r(${root})`)
+
+                fetch(`${SERVICE_SERVER_URL}/add_TagTable?con=0&tag=${tag}&root=${root}`)
+                    .then(response => response.json())
+                    .then(res => {
+                        console.log(`result : ${res}`)
+                    })
+                fetch(`${LOCAL_SERVER_URL}/add_TagTable?con=0&tag=${tag}&root=${root}`)
+                    .then(response => response.json())
+                    .then(res => {
+                        console.log(`result : ${res}`)
+                    })
             } else {
                 let list = tagTable[tag]
                 let flag = false
@@ -856,6 +899,17 @@ function setId(json){
                         "r" : root
                     })
                     console.log(`[TAG] ${tag} is added to tagTable, as r(${root})`)
+
+                    fetch(`${SERVICE_SERVER_URL}/add_TagTable?con=1&tag=${tag}&root=${root}`)
+                        .then(response => response.json())
+                        .then(res => {
+                            console.log(`result : ${res}`)
+                        })
+                    fetch(`${LOCAL_SERVER_URL}/add_TagTable?con=1&tag=${tag}&root=${root}`)
+                        .then(response => response.json())
+                        .then(res => {
+                            console.log(`result : ${res}`)
+                        })
                 }
             }
             fs.writeFileSync(path.join(__dirname, TAG_TABLE_FILE), JSON.stringify(this.tagTable), "utf-8")
@@ -865,6 +919,8 @@ function setId(json){
     //
 
 
+    //
+    // INDEX
     if(redirectionResult === false) {
         if(rootTableJson[root] === undefined){
             _id = Object.keys(rootTableJson).length

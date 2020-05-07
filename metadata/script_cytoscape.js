@@ -328,13 +328,15 @@ function flipTrigger(node) {
         // when it's off, get back to the minimum size
         sizeVideo(`player_${node.data('id')}`, IFRAME_WIDTH_MIN, IFRAME_HEIGHT_MIN)
         // tp.seekTo(0, false)
-        tp.stopVideo()
+        // tp.stopVideo()
         delete(tp)
         iframe = document.getElementById(node._sensebe_vid)
         iframe.parentNode.removeChild(iframe);
         node.tip.hide()
     } else {
         node._trigger = true
+
+        console.log('[FLIP Trigger] node.tip : ', node.tip)
 
         // Youtube Player only can be created after tippy's up
         node.tip.show()
@@ -371,7 +373,7 @@ function flipTrigger(node) {
         youtubePlayerList[`player_${node.data('id')}`] = youtubePlayer
 
 
-        // add event to descriptions on the tippy
+        // add events to descriptions on the tippy
         var descriptions = document.getElementsByClassName("des")
         for (var J in descriptions) {
             if (descriptions[J].addEventListener) {                    // For all major browsers, except IE 8 and earlier
@@ -420,12 +422,12 @@ cy.on('tap', function(event){
 cy.on('tap', '.usage', function() {
     origin = this
     cy.nodes().forEach(function (node){
-        // when an user already triggered one, then the user selected other usage node
+        // the user selected other usage node as the other node had been triggered before
         if (node._trigger === true && node !== origin) {
           flipTrigger(node)
         }
     })
-    flipTrigger(this) 
+    flipTrigger(this)
 })
 
 cy.on('mouseover', '.usage', function() {

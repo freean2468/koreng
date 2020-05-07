@@ -48,9 +48,36 @@ function mongoClient() {
         this.indexTable[root] = Number(id)
         this.presearchTable.push(root)
         fs.writeFile(path.join(__dirname, '..', 'koreng_mongo', DB_INDEX_TABLE_FILE), JSON.stringify(this.indexTable), "utf-8", (e) => {
-            console.log(`[INDEX] ${root} is added to indexTable, as the id(${id})`)
+            console.log(`[CMD_ADD_IDX] ${root} is added to indexTable, as the id(${id})`)
             res.send('400')
         })
+    }
+
+    this.addTagTable = function (res, id, root) {
+        this.tagTable[root] = Number(id)
+        this.presearchTable.push(root)
+        fs.writeFile(path.join(__dirname, '..', 'koreng_mongo', TAG_TABLE_FILE), JSON.stringify(this.tagTable), "utf-8", (e) => {
+            console.log(`[CMD_ADD_TAG] ${root} is added to indexTable, as the id(${id})`)
+            res.send('400')
+        })
+    }
+
+    this.delTagTable = function (res, tag, root) {
+        const index = this.tagTable[tag].findIndex(x => x === tag);
+
+        if (index !== undefined) {
+            this.tagTable[tag].splice(index, 1);
+            if (this.tagTable[tag].length === 0) {
+                delete this.tagTable[tag]
+            }
+    
+            fs.writeFile(path.join(__dirname, '..', 'koreng_mongo', TAG_TABLE_FILE), JSON.stringify(this.tagTable), "utf-8", (e) => {
+                console.log(`[CMD_DEL_TAG] ${root} is deleted from tagTable where it's value was ${tag}`)
+                res.send('400')
+            })
+        } else {
+            console.log(`[FAIL : CMD_DEL_TAG] tag(${tag}) not found`)
+        }
     }
     
     this.addRedirectionTable = function (res, root, redirection) {

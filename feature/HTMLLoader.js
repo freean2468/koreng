@@ -1,8 +1,5 @@
 module.exports = HTMLLoader
 
-//
-// Before committing to github, If that is a service version, you should put 'true' into SERVICE variable
-//
 var TARGET
 
 if (process.env.PORT) {
@@ -10,16 +7,6 @@ if (process.env.PORT) {
 } else {
   TARGET = "http://localhost:5000"
 }
-
-console.log('target : ', TARGET)
-
-// if (SERVICE) {
-//   // for a service environment
-  
-// } else {
-//   // for a local development environment
-  
-// }
 
 // string replaceall function
 function replaceAll(str, searchStr, replaceStr) {
@@ -189,7 +176,7 @@ function HTMLLoader() {
   }
 
   // for search
-  this.assembleSearchHTML = function(res, searchTarget) {
+  this.assembleSearchHTML = function(res, searchTarget, usageCover) {
     that = this
     that.fs.readFile('public/html/search.html', 'utf8', function(err, html){
       that.fs.readFile('metadata/script_search.js', 'utf8', function(err, js){
@@ -200,6 +187,7 @@ function HTMLLoader() {
           template = template.replace('<!-- DYNAMIC -->', js+that.cytoscape)
           template = replaceAll(template, "${TARGET}", TARGET)
           template = replaceAll(template, "${searchTarget}", searchTarget)
+          template = replaceAll(template, "${usageCover}", usageCover)
 
           res.send(template)
         })
@@ -208,7 +196,7 @@ function HTMLLoader() {
   }
   
   // for tag search
-  this.assembleSearchTagHTML = function(res, tag, searchTarget) {
+  this.assembleSearchTagHTML = function(res, tag, searchTarget, usageCover) {
     that = this
     that.fs.readFile('public/html/search.html', 'utf8', function(err, html){
       that.fs.readFile('metadata/script_tagSearch.js', 'utf8', function(err, js){
@@ -225,6 +213,7 @@ function HTMLLoader() {
           }
 
           template = replaceAll(template, "${searchTarget}", JSON.stringify(json))
+          template = replaceAll(template, "${usageCover}", usageCover)
 
           console.log('[assembleSearchTagHTML] JSON.stringify(json) : ', JSON.stringify(json))
           res.send(template)

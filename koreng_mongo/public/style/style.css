@@ -68,7 +68,7 @@ div.context {
 #data>div{border-top:1px solid yellow;font-size:2em;font-weight:bold;color:#fff;margin-top:30px}
 .btn{border-top:1px solid;font-size:30px;font-weight:bold;width:200px !important}
 
-input:not(.autocomplete-input)[type=text]{border-top:1px solid;font-size:20px;font-weight:bold;width:80%}
+input:not(.autocomplete-input)[type=text]{border-top:1px solid;font-size:20px;font-weight:bold;width:60%}
 input.ip_time { width:10% !important}
 input.btn_transaction { 
     position: relative;
