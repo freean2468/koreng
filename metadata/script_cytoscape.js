@@ -184,6 +184,7 @@ function getCurrentTimeOfTp(vid) {
     const desElems = document.getElementsByClassName(`${tp._sensebe_usage_id}_des`)
     const literalElems = document.getElementsByClassName(`${tp._sensebe_usage_id}_literal`)
     const pharaphraseElems = document.getElementsByClassName(`${tp._sensebe_usage_id}_pharaphrase`)
+    const scriptElems = document.getElementsByClassName(`${tp._sensebe_usage_id}_script`)
 
     const desElemList = Array.prototype.filter.call(desElems, function(elem){
         const id = Number(elem.id.split('_').pop())
@@ -197,22 +198,30 @@ function getCurrentTimeOfTp(vid) {
         const id = Number(elem.id.split('_').pop())
         return id <= ct
     })
+    const scriptElemList = Array.prototype.filter.call(scriptElems, function(elem){
+        const id = Number(elem.id.split('_').pop())
+        return id <= ct
+    })
 
     const recentDes = desElemList.pop()
     const recentLiteral = literalElemList.pop()
     const recentPharaphrase = pharaphraseElemList.pop()
+    const recentScript = scriptElemList.pop()
 
     if (recentDes !== undefined) {
         // check end_timestamp
         literalTransCell = recentLiteral.getElementsByClassName('trans_cell')
         endT = literalTransCell[0].id.split('_').pop()
         pharaphraseTransCell = recentPharaphrase.getElementsByClassName('trans_cell')
+        scriptTransCell = recentScript.getElementsByClassName('trans_cell')
         if (endT <= ct) {
             literalTransCell[0].style.color = 'transparent'
-            pharaphraseTransCell[0].style.color = 'transparent'    
+            pharaphraseTransCell[0].style.color = 'transparent'
+            scriptTransCell[0].style.color = 'transparent'    
         } else {
             literalTransCell[0].style.color = null
             pharaphraseTransCell[0].style.color = null
+            scriptTransCell[0].style.color = null
         }
 
         // change the size of description of the playing
@@ -224,6 +233,7 @@ function getCurrentTimeOfTp(vid) {
                 desElems[i].style.color = null
                 literalElems[i].style.display = 'none'
                 pharaphraseElems[i].style.display = 'none'
+                scriptElems[i].style.display = 'none'
             }
             recentDes.style.fontSize = '1.3em'
             recentDes.style.fontWeight = 1000
@@ -237,12 +247,17 @@ function getCurrentTimeOfTp(vid) {
                 elem = pharaphraseElems[i]
                 transCell = elem.getElementsByClassName(`trans_cell`)
                 transCell[0].style.color = null
+
+                elem = scriptElems[i]
+                transCell = elem.getElementsByClassName(`trans_cell`)
+                transCell[0].style.color = null
             }
 
             console.log('[getCurrentTImeOfTp] recentLiteral : ', recentLiteral)
 
             recentLiteral.style.display = 'table'
             recentPharaphrase.style.display = 'table'
+            recentScript.style.display = 'table'
         }
     }
 
@@ -254,6 +269,7 @@ function getCurrentTimeOfTp(vid) {
                 desElems[i].style.color = null
                 literalElems[i].style.display = 'none'
                 pharaphraseElems[i].style.display = 'none'
+                scriptElems[i].style.display = 'none'
             }
             if (recentDes !== undefined) {
                 recentDes.style.color = null
@@ -315,6 +331,7 @@ function flipTrigger(node) {
         const desElems = document.getElementsByClassName(`${tp._sensebe_usage_id}_des`)
         const literalElems = document.getElementsByClassName(`${tp._sensebe_usage_id}_literal`)
         const pharaphraseElems = document.getElementsByClassName(`${tp._sensebe_usage_id}_pharaphrase`)
+        const scriptElems = document.getElementsByClassName(`${tp._sensebe_usage_id}_script`)
 
         for (let i = 0; i<desElems.length; ++i) {
             desElems[i].style.fontSize = null
@@ -322,6 +339,7 @@ function flipTrigger(node) {
             desElems[i].style.fontWeight = null
             literalElems[i].style.display = 'none'
             pharaphraseElems[i].style.display = 'none'
+            scriptElems[i].style.display = 'none'
         }
 
         node._trigger = false

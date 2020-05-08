@@ -74,6 +74,14 @@ data.forEach(function (item, idx){
             `
 
             transDiv.innerHTML += `
+            <div class="table ${usageID}_script" id="script_${start_timestamp}" style="display:none">
+                <div class="rowGroup">
+                    <div class="row">
+                        <span class="cell">[본문]</span>
+                        <span class="trans_cell" id="script_${end_timestamp}">${elm}</span>
+                    </div>
+                </div>
+            </div>
             <div class="table ${usageID}_literal" id="literal_${start_timestamp}" style="display:none">
                 <div class="rowGroup">
                     <div class="row">
