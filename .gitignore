@@ -9,6 +9,7 @@ koreng_mongo/dictionary_archive
 koreng_mongo/video_archive
 koreng_mongo/archive_cambridge_style
 koreng_mongo/data
+koreng_mongo/collections
 
 # source data
 public/html_metadata copy

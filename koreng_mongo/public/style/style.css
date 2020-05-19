@@ -1,6 +1,6 @@
 @import url(//fonts.googleapis.com/earlyaccess/nanumgothic.css);
 
-body{font-family:NanumGothic,sans-serif;font-size:.75em;color:#fff;background:#222;margin: 0 auto;}
+body{font-family:NanumGothic,sans-serif;font-size:.5em;color:#fff;background:#222;margin: 0 auto;}
 span.cke_skin_kama{border:0}
 button,input,textarea{font-family:NanumGothic,sans-serif}
 li{
@@ -66,10 +66,10 @@ div.context {
 #text{border-top:1px solid yellow;font-size:2em;font-weight:bold;color:#fff;margin-top:20px}
 #link{border-top:1px solid yellow;font-size:2em;font-weight:bold;color:#fff;margin-top:20px}
 #data>div{border-top:1px solid yellow;font-size:2em;font-weight:bold;color:#fff;margin-top:30px}
-.btn{border-top:1px solid;font-size:30px;font-weight:bold;width:200px !important}
+.btn{border-top:1px solid;font-size:17px;font-weight:bold;width:80px !important}
 
 input:not(.autocomplete-input)[type=text]{border-top:1px solid;font-size:20px;font-weight:bold;width:60%}
-input.ip_time { width:10% !important}
+input.st, input.et { width:10% !important}
 input.btn_transaction { 
     position: relative;
     float:right;
@@ -113,6 +113,15 @@ main{
 }
 
 textarea {
-    font-size: 18px;
+    font-size: 15px;
     width:100%
 }
+
+
+/* wstc     */
+div.wstc {  margin-left: 20px;  border : 2px solid red;}
+div.wstc div {border : 2px solid palegreen;}
+
+/* wwd */
+div.wwd, div.wpct {  margin-left: 40px;  border : 2px solid red;}
+div.wwd div input { width : 200px !important}

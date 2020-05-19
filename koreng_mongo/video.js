@@ -11,16 +11,17 @@ const compression = require('compression')
 const bodyParser = require('body-parser')
 const helmet = require('helmet')
 
+const natural = require('natural');
+const wdTokenizer = new natural.WordTokenizer();
+const stcTokenizer = new natural.SentenceTokenizer();
+
+// custom
+const ENUM = require('../metadata/enum')
+
 // built-in
 const fs = require('fs')
 const {MongoClient} = require('mongodb');
 const path = require('path')
-
-// custom
-// const dataLoader = require('../feature/dataLoader.js')
-// const dataLoaderInst = new dataLoader()
-// const mongoClient = require('../feature/mongoClient.js')
-// const mongoClientInst = new mongoClient()
 
 // heroku
 const PORT = process.env.PORT || 5200
@@ -37,14 +38,17 @@ last_index = 0
 indexTable = {}
 videoJson = []
 
-VIDEO_DATA_PATH = "video_data"
-VIDEO_ARCHIVE_PATH = "video_archive"
+VIDEO_ARCHIVE_PATH = "collections/SB_VIDEO"
+COL_INFO_PATH = "public/json"
+WORD_LIST = "word_list.json"
 
-TABLE_PATH = './'
 PASSWORD = fs.readFileSync("./pw.txt", "utf8")
 
 DATABASE_NAME = "sensebe_dictionary"
-VIDEO_COLLECTION = "video_collection"
+VIDEO_COLLECTION = "SB_VIDEO"
+WORD_COLLECTION = "SB_WORD"
+
+LOCALHOST = "http://localhost:5200"
 
 function preSearch(req, res) {
     const searchTarget = req.query.target
@@ -85,6 +89,7 @@ function baseTemplate() {
         <title>Data Management Tool</title>
         <meta charset="utf-8">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="./js/formSerializer.js"></script>
         <script src="https://unpkg.com/@trevoreyre/autocomplete-js"></script>
         <script src="./js/general.js"></script>
         <link rel="stylesheet" type="text/css" href="./style/autocomplete.css">
@@ -115,6 +120,14 @@ function baseTemplate() {
                 </main>
             </section>
         </div>
+
+        <!-- React를 실행. -->
+        <!-- 주의: 사이트를 배포할 때는 "development.js"를 "production.min.js"로 대체하세요. -->
+        <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+        <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+      
+        <!-- 만든 React 컴포넌트를 실행. -->
+        <script src="./js/like_button.js"></script>
     </body>
     <script>
         ${autocomplete}
@@ -149,11 +162,24 @@ function navTemplate() {
     return nav
 }
 
+function stcDataTemplate(idx) {
+    let elm = document.createElement('div')
+
+    elm.innerHTML = '<label>시간대:</label> \
+                        <select name="c['+idx+'][t][stc][ti]"> \
+                            <option value="modern">현대</option> \
+                            <option value="middle-aged">중세</option \
+                            <option value="ancient">고대</option \
+                        </select> '
+
+    return elm
+}
+
 function search(req, res) {
     const searchTarget = req.query.target
-    const autocomplete = fs.readFileSync("./metadata/script_vid_autocomplete.js", 'utf8')
     const filelist = fs.readdirSync(VIDEO_ARCHIVE_PATH)
     var file, json
+
     for (let idx = 0; idx < filelist.length; ++idx){
         fileName = filelist[idx].split('.')[0]
         if (fileName === searchTarget) {
@@ -199,60 +225,121 @@ function search(req, res) {
                 <div id="text">`
 
     if (file) {
-        json["text"].forEach(function (elm, idx) {
-            let literal = '', pharaphrase = '', start_timestamp = '', end_timestamp = ''
-            if (json["literal"] !== undefined){
-                literal = json["literal"][idx]
+        for (let idx in json["c"]){
+            var c = json["c"][idx]
+
+            function integrityCheck(json) {
+                for (let key in json) {
+                    var value = json[key];
+                    if (value === undefined) { 
+                        throw "no value"
+                    } else {
+                        // console.log("[integrityCheck] value : ", value)
+                    }
+                    integrityCheck(value[key])
+                }
             }
-            if (json["pharaphrase"] !== undefined){
-                pharaphrase = json["pharaphrase"][idx]
-            }
-            if (json["start_timestamp"] !== undefined){
-                start_timestamp = json["start_timestamp"][idx]
-            }
-            if (json["end_timestamp"] !== undefined){
-                end_timestamp = json["end_timestamp"][idx]
-            }
+            
+            integrityCheck(c)
+
+            let literal = c["lt"], pharaphrase = c["pp"],
+            start_timestamp = c["st"],end_timestamp = c["et"],
+            script = c["t"]["scrt"],
+            stc = c["t"]["stc"]
+
             template += `
-                    <div class="context">
-                        <span id="ip_start_timestamp_${idx}">
-                            start_timestamp[${idx}] <input class="ip_time" type="text" name="start_timestamp[${idx}]" value="${start_timestamp}">
+                    <div class="ctt">
+                        <span class="wst">
+                            st <input class="st" type="text" value="${start_timestamp}">
                         </span>
-                        <span id="ip_end_timestamp_${idx}">
-                            end_timestamp[${idx}] <input class="ip_time" type="text" name="end_timestamp[${idx}]" value="${end_timestamp}">
+                        <span class="wet">
+                            et <input class="et" type="text" value="${end_timestamp}">
                         </span>
-                        <div id="text_${idx}">
-                            text[${idx}] : <textarea name="text[${idx}]">${elm}</textarea>
+                        <div class="wscrt">
+                            scrt <button type="button" class="btn" id="btn_parse" onclick="onClickParseStc(${idx})">parse</button>
+                            <textarea class="scrt">${script}</textarea>
                         </div>
+                        
+                        <div class="wstc">`
+
+            // sentences data
+            for (let j in stc){
+                let ct = stc[j]['ct'], lt = stc[j]['lt'], pp = stc[j]['pp']
+                console.log(ct)
+
+                template +=`
+                            <div>
+                                ct <textarea class="ct" type="text">${ct}</textarea>
+                                lt <textarea class="lt" type="text">${lt}</textarea>
+                                pp <textarea class="pp" type="text">${pp}</textarea>
+                                <button type="button" class="btn" onclick="onClickGenToken(this)">generate</button>
+                                <button type="button" class="btn" onclick="onClickDelSentence(this)">del sen</button>
+                                <button type="button" class="btn" id="btn_parse" onclick="onClickParseCt(this)">ct parse</button>`
+
+                let wd = stc[j]['wd']
+
+                if (wd) {
+                    template += `
+                                <div class="wwd">`
+
+                    for (let k in wd) {
+                        let ct = wd[k]["ct"], lt = wd[k]["lt"], rt = wd[k]["rt"]
+
+                        if (rt === undefined) {
+                            rt = ct
+                        }
+    
+                        template += `
+                                    <div>
+                                        ct <input class="ct" type="text" value="${ct}">
+                                        rt <input class="rt" type="text" value="${rt}">
+                                        lt <input class="lt" type="text" value="${lt}">
+                                    </div>`
+                    }
+                    template +=`
+                                    <button type="button" class="btn" onclick="onClickDelWord(this)">del wd</button>
+                                </div>`
+                }
+                template +=`
+                                <div class="wpct">
+                                `
+
+                let pct = stc[j]['pct']
+
+                if (pct) {
+                    for (let k in pct) {
+                        let ct = pct[k]["ct"], lt = pct[k]["lt"], pp = pct[k]["pp"]
+
+                        template += `
+                                    <div>
+                                        ct <textarea class="ct" type="text">${ct}</textarea>
+                                        lt <textarea class="lt" type="text">${lt}</textarea>
+                                        pp <textarea class="pp" type="text">${pp}</textarea>
+                                        <button type="button" class="btn" onclick="onClickDelPct(this)">del pct</button>
+                                        <button type="button" class="btn" onclick="onClickGenToken(this)">generate</button>
+                                    </div>`
+                    }
+                }
+
+                template += `   
+                                </div>
+                                <button type="button" class="btn" onclick="onClickAddPct(this)">add pct</button>
+                            </div>`
+            }
+
+            template += `
+                        </div>
+                        <button type="button" class="btn" id="btn_addSen" onclick="onClickAddSentence(this)">add sen</button>
                         <div class="ta_literal" id="literal_${idx}">
-                            literal[${idx}] : <textarea name="literal[${idx}]">${literal}</textarea>
+                            literal[${idx}] : <textarea name="c[${idx}][lt]">${literal}</textarea>
                         </div>
-                        <div class="ta_pharaphrase" id="pharaphrase${idx}">
-                            pharaphrase[${idx}] : <textarea name="pharaphrase[${idx}]">${pharaphrase}</textarea>
-                        </div>
-                    </div>
-            `
-        })
-    } else {
-        template += `
-                    <div class="context">
-                        <div id="ip_start_timestamp_0">
-                            start_timestamp[0] <input class="ip_time" type="text" name="start_timestamp[0]">
-                        </div>
-                        <div id="ip_end_timestamp_0">
-                            end_timestamp[0] <input class="ip_time" type="text" name="end_timestamp[0]">
-                        </div>
-                        <div id="text_0">
-                            text[0] : <textarea name="text[0]"></textarea>
-                        </div>
-                        <div class="ta_literal" id="literal_0">
-                            literal[0] : <textarea name="literal[0]"></textarea>
-                        </div>
-                        <div class="ta_pharaphrase" id="pharaphrase_0">
-                            pharaphrase[0] : <textarea name="pharaphrase[0]"></textarea>
+                        <div class="ta_pharaphrase" id="pharaphrase_${idx}">
+                            pharaphrase[${idx}] : <textarea name="c[${idx}][pp]">${pharaphrase}</textarea>
                         </div>
                     </div>`
-    }
+        }
+    } 
+
     template +=`
                 </div>
                 <button type="button" class="btn" id="btn_add_text" onclick="onClickAddTexts()">add texts</button>
@@ -269,41 +356,294 @@ function search(req, res) {
                 </div>
                 <div class="item_btn">
                     <input class="btn" id="insert_btn" value="insert" type="submit">
-                    <button type="button" class="btn" id="btn_home" onclick="onClickHome()">Home</button>
+                    <input type="button" class="btn" value="debug" onclick="onSubmit(false)"/>
                 </div>
             </form>
+            <div id="like_button_container"></div>
         </div>
     </body>
     <script>
+        $(document).ready(function () {
+            $('form#insert').on('submit', function(e) {
+                e.preventDefault();
+                // let formData = $(this).serializeObject()
+                // console.log('[SUBMIT_BASE_OBJ] ', formData)
+                // console.log('[SUBMIT_STRINGIFIED], ', JSON.stringify(formData))
+                $.ajax({
+                    url : $(this).attr('action') || window.location.pathname,
+                    type: "POST",
+                    data: $(this).serialize(),
+                    // dataType: 'json',
+                    success: function (data) {
+                        // console.log("[SUBMIT_COMPLETE] : ", data)
+                        alert("SUBMIT_COMPLETE")
+                    },
+                    error: function (jXHR, textStatus, errorThrown) {
+                        alert(errorThrown);
+                    }
+                });
+            });
+
+            alignData()
+        });
+
+        function onSubmit( bool ){
+            let formData = $('form#insert').serializeObject()
+
+            if (!bool) {
+                console.log(formData)
+            }
+
+            return false
+        }
+
+        function alignData() {
+            let root = $('#text')
+            // console.log('[ROOT] : ', root)
+
+            root.children('div').each(function (rootIdx) {
+                // console.log('[CONTEXT] : ', this)
+                let context = $(this)
+
+                context.children('.wst').each(function () {
+                    $(this).children('.st').each(function() {
+                        $(this).attr('name', 'c['+rootIdx+']['+$(this).attr('class')+']')
+                    })
+                })
+
+                context.children('.wet').each(function () {
+                    $(this).children('.et').each(function() {
+                        $(this).attr('name', 'c['+rootIdx+']['+$(this).attr('class')+']')
+                    })
+                })
+
+                context.children('.wscrt').each(function () {
+                    $(this).children('.scrt').each(function() {
+                        $(this).attr('name', 'c['+rootIdx+'][t]['+$(this).attr('class')+']')
+                    })
+                })
+
+                context.children('.wstc').each(function () {
+                    // console.log('[wstc] : ', this)
+                    let wstc = $(this)
+
+                    wstc.children('div').each(function (stcIdx) {
+                        // console.log('[SENTENCE] : ', this)
+                        let stc = $(this)
+                        
+                        stc.children('textarea').each(function () {
+                            // console.log('[TEXTAREA] : ', this)
+                            $(this).attr('name', 'c['+rootIdx+'][t][stc]['+stcIdx+']['+$(this).attr('class')+']')
+                        })
+
+                        stc.children('.wwd').each(function () {
+                            // console.log('[WWD] : ', this)
+                            let wwd = $(this)
+
+                            wwd.children('div').each(function (wdIdx) {
+                                let wd = $(this)
+
+                                wd.children('input').each(function () {
+                                    $(this).attr('name', 'c['+rootIdx+'][t][stc]['+stcIdx+'][wd]['+wdIdx+']['+$(this).attr('class')+']')
+                                })
+                            })
+                        })
+
+                        stc.children('.wpct').each(function () {
+                            // console.log('[WWD] : ', this)
+                            let wpct = $(this)
+
+                            wpct.children('div').each(function (pctIdx) {
+                                let div = $(this)
+
+                                div.children('textarea').each(function () {
+                                    $(this).attr('name', 'c['+rootIdx+'][t][stc]['+stcIdx+'][pct]['+pctIdx+']['+$(this).attr('class')+']')
+                                })
+                            })
+                        })
+                    })
+                })
+            })
+        }
+
+        function deleteElmThenAlign(godfather, parent){
+            godfather.removeChild(parent)
+            parents = godfather.children
+        }
+
         function onClickAddTexts(){
             text = document.getElementById('text')
-            len = text.children.length
 
             let div = document.createElement('div')
-            div.setAttribute('class', "context")
-            div.innerHTML = '<div id="ip_start_timestamp_' + len + '">start_timestamp : <input class="ip_time" type="text" name="start_timestamp[]"></div>'
-            div.innerHTML += '<div id="ip_end_timestamp_' + len + '">end_timestamp : <input class="ip_time" type="text" name="end_timestamp[]"></div>'
-            div.innerHTML += '<div id="text_' + len + '">text : <textarea name="text[]"></textarea></div>'
-            div.innerHTML += '<div class="ta_literal" id="literal_' + len + '">literal : <textarea name="literal[]"></textarea></div>'
-            div.innerHTML += '<div class="ta_pharaphrase" id="pharaphrase_' + len + '">pharaphrase : <textarea name="pharaphrase[]"></textarea></div>'
+            div.setAttribute('class', "ctt")
+            div.innerHTML = '<span class="wst">' +
+                                'st : <input class="st" type="text">' +
+                            '</span>' + 
+                            '<span class="wet">' +
+                                'et <input class="et" type="text">' +
+                            '</span>' + 
+                            '<div class="wscrt">' +
+                                'scrt <button type="button" class="btn" id="btn_parse" onclick="onClickParseStc()">parse</button>' +
+                                '<textarea class="scrt"></textarea>' +
+                            '</div>'
             text.appendChild(div);
+
+            alignData()
         }
 
         function onClickDelTexts(){
-            text = document.getElementById('text')
-            len = text.children.length - 1
-            child = document.getElementById('text_'+len)
-            text.removeChild(child);
+            ctt = document.getElementsByClassName('ctt')
+            length = ctt.length
+            ctt[length-1].parentElement.removeChild(ctt[length-1])
 
-            // literal = document.getElementById('literal')
-            // len = literal.children.length - 1
-            // child = document.getElementById('literal_'+len)
-            // literal.removeChild(child);
+            alignData()
+        }
+
+        function onClickGenToken(btn){
+            let parent = $(btn).parent('div')
+            parent.children('.ct').each(function() {
+                fetch('${LOCALHOST}/tokenizeStc?stc='+this.innerHTML)
+                    .then(response => response.json())
+                    .then(res => {
+                        let elm = document.createElement('div')
+                        elm.setAttribute("class", "wwd")
+                        for (let i in res) {
+                            elm.innerHTML += '<div>' + 
+                                                'ct <input class="ct" type="text" value="'+res[i]+'">' +
+                                                'rt <input class="rt" type="text" value="">' +
+                                                'lt<input class="lt" type="text" value="">' +
+                                            '<div>'
+                            // elm.innerHTML += '<button type="button" class="btn" onclick="onClickGenToken(this)">generate</button>'
+                            // elm.innerHTML += '<button type="button" class="btn" onclick="onClickDelSentence(this)">del sen</button>'
+                        }
+                        elm.innerHTML += '<button type="button" class="btn" onclick="onClickDelWord(this)">del wd</button>'
+                        parent[0].insertAdjacentElement('beforeend',elm)
+
+                        alignData()
+                    })
+            })
+
             
-            // pharaphrase = document.getElementById('pharaphrase')
-            // len = pharaphrase.children.length - 1
-            // child = document.getElementById('pharaphrase'+len)
-            // pharaphrase.removeChild(child);
+
+            // elm.innerHTML = '<label>시간대:</label> \
+            //                     <select name="c['+idx+'][t][stc][ti]"> \
+            //                         <option value="modern">현대</option> \
+            //                         <option value="middle-aged">중세</option> \
+            //                         <option value="ancient">고대</option> \
+            //                     </select> '
+
+            // elm.innerHTML += '<label><input type="checkbox" name="c['+idx+'][t][stc][lg]">문어</label> '
+            // elm.innerHTML += '<label><input type="checkbox" name="c['+idx+'][t][stc][lg]">구어</label> '
+
+            // elm.innerHTML += '<label><input type="checkbox" name="c['+idx+'][t][stc][cls]">왕</label> '
+            // elm.innerHTML += '<label><input type="checkbox" name="c['+idx+'][t][stc][cls]">귀족</label> '
+            // elm.innerHTML += '<label><input type="checkbox" name="c['+idx+'][t][stc]">noun</label> '
+            // elm.innerHTML += '<label><input type="checkbox" name="c['+idx+'][t][stc]">pronoun</label> '
+            // elm.innerHTML += '<label><input type="checkbox" name="c['+idx+'][t][stc]">preposition</label> '
+
+            // elm.innerHTML += '<button type="button" class="btn" onclick="onClickGenToken(this)">generate</button>'
+            // elm.innerHTML += '<button type="button" class="btn" onclick="onClickDelSentence(this)">del sen</button>'
+
+            // btn.insertAdjacentElement('beforebegin',elm)
+        }
+
+        function onClickDelSentence(elm){
+            deleteElmThenAlign(elm.parentElement.parentElement, elm.parentElement)
+
+            alignData()
+        }
+
+        function onClickDelWord(elm){
+            deleteElmThenAlign(elm.parentElement.parentElement, elm.parentElement)
+
+            alignData()
+        }
+
+        function onClickDelPct(elm){
+            deleteElmThenAlign(elm.parentElement.parentElement, elm.parentElement)
+
+            alignData()
+        }
+
+        function onClickParseStc(idx){
+            var script = document.getElementById('textarea_'+idx).innerHTML
+            
+            fetch('${LOCALHOST}/parseStc?stc='+script)
+                .then(response => response.json())
+                .then(res => {
+                    anchor = document.getElementById('text_'+idx)
+
+                    for (let i in res) {
+                        let elm = document.createElement('div')
+                        elm.innerHTML = 'ct <textarea class="ct" type="text">'+res[i]+'</textarea>'
+                        elm.innerHTML += 'lt <textarea class="lt" type="text"></textarea>'
+                        elm.innerHTML += 'pp <textarea class="pp" type="text"></textarea>'
+                        elm.innerHTML += '<button type="button" class="btn" onclick="onClickGenToken(this)">generate</button>'
+                        elm.innerHTML += '<button type="button" class="btn" onclick="onClickDelSentence(this)">del sen</button>'
+                        anchor.insertAdjacentElement('beforeend',elm);
+                    }
+
+                    alignData()
+                })
+        }
+
+        function onClickParseCt(btn){
+            let ct = $(btn).parent('div').children('.ct')[0]
+            var script = ct.innerHTML
+
+            fetch('${LOCALHOST}/parseStc?stc='+script)
+                .then(response => response.json())
+                .then(res => {
+                    for (let i in res) {
+                        let elm = document.createElement('div')
+                        console.log(res[i])
+                        elm.innerHTML = 'pct <textarea class="ct" type="text">'+res[i]+'</textarea>' + 
+                                        'lt <textarea class="lt" type="text"></textarea>' +
+                                        'pp <textarea class="pp" type="text"></textarea>' +
+                                        '<button type="button" class="btn" onclick="onClickDelPct(this)">del pct</button>' +
+                                        '<button type="button" class="btn" onclick="onClickGenToken(this)">generate</button>'
+                        $(btn).parent('div').children('.wpct').append(elm)
+
+                        // add pct button
+                        // elm = document.createElement('button')
+                        // elm.setAttribute('type', 'button')
+                        // elm.setAttribute('class', 'btn')
+                        // elm.setAttribute('onclick', 'onClickAddPct(this)')
+                        // elm.innerHTML = 'add pct'
+
+                        // $(btn).parent('div').append(elm)
+                    }
+
+                    alignData()
+                })
+        }
+
+        function onClickAddSentence(that){
+            let stc = that.previousElementSibling
+
+            let elm = document.createElement('div')
+            elm.innerHTML = 'ct <textarea class="ct" type="text"></textarea>'
+            elm.innerHTML += 'lt <textarea class="lt" type="text"></textarea>'
+            elm.innerHTML += 'pp <textarea class="pp" type="text"></textarea>'
+            elm.innerHTML += '<button type="button" class="btn" onclick="onClickGenToken(this)">generate</button>'
+            elm.innerHTML += '<button type="button" class="btn" onclick="onClickDelSentence()">del sen</button>'
+            stc.insertAdjacentElement('beforeend',elm);
+
+            alignData()
+        }
+
+        function onClickAddPct(that){
+            let wpct = $(that).parent('div').children('.wpct')
+
+            let elm = document.createElement('div')
+            elm.innerHTML = 'pct <textarea class="ct" type="text"></textarea>'
+            elm.innerHTML += 'lt <textarea class="lt" type="text"></textarea>'
+            elm.innerHTML += 'pp <textarea class="pp" type="text"></textarea>'
+            elm.innerHTML += '<button type="button" class="btn" onclick="onClickGenToken(this)">generate</button>'
+            elm.innerHTML += '<button type="button" class="btn" onclick="onClickDelPct(this)">del pct</button>'
+            wpct.append(elm)
+
+            alignData()
         }
 
         function onClickHome(){
@@ -318,18 +658,42 @@ function search(req, res) {
 }
 
 async function insert(req, res) {
-    console.log('[insert!]')
+    // console.log('[insert!]')
     const uri = `mongodb+srv://sensebe:${PASSWORD}@agjakmdb-j9ghj.azure.mongodb.net/test`
     const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true })
-    autocomplete = fs.readFileSync("./metadata/script_vid_autocomplete.js", 'utf8')
+
+    // this data doesn't match with my format so has to be reformatted below lines
     const query = req.body
+
+    console.log('[BF_FORMAT] : ', JSON.stringify(query, null, 2)) // spacing level = 2
+
+    // for (let j = 0; j < query['c'].length; ++j) {
+    //     if (query['c'][j]['t']['stc']) {
+    //         var len = query['c'][j]['t']['stc'][0]['ct'].length
+    //         let stc = []
+
+    //         for (let i = 0; i < len; ++i){
+    //             stc.push({
+    //                 "ct":query['c'][j]['t']['stc'][0]['ct'][i],
+    //                 "lt":query['c'][j]['t']['stc'][0]['lt'][i],
+    //                 "pp":query['c'][j]['t']['stc'][0]['pp'][i]
+    //             })
+    //         }
+
+    //         query['c'][j]['t']['stc'] = stc
+    //     }
+    // }
+
+    // console.log('[AF_FORMAT] : ', JSON.stringify(query, null, 2)) // spacing level = 2
 
     try {
         // Connect to the MongoDB cluster
         await client.connect()
 
         let result = undefined
+        let link = query["link"]
         
+        // SB_VIDEO ISNERT
         if (query['_id']) 
             result = await client.db(DATABASE_NAME).collection(VIDEO_COLLECTION).findOne({ _id: query['_id'] });
             
@@ -337,13 +701,88 @@ async function insert(req, res) {
             await replaceListing(client, query, VIDEO_COLLECTION)
             _id = query["_id"]
             delete query["_id"]
-            console.log('[_ID] ',_id)
+            console.log('[VIDEO_REPLACE_LISTING] _id : ',_id)
             fs.writeFileSync(path.join(__dirname, VIDEO_ARCHIVE_PATH, _id+'.json'), JSON.stringify(query, null, "\t"), "utf-8")
         } else {
-            fs.writeFileSync(path.join(__dirname, VIDEO_ARCHIVE_PATH, query["link"]+'.json'), JSON.stringify(query, null, "\t"), "utf-8")
-            query['_id'] = query["link"]
+            fs.writeFileSync(path.join(__dirname, VIDEO_ARCHIVE_PATH, link+'.json'), JSON.stringify(query, null, "\t"), "utf-8")
+            if (query['_id'] === undefined)
+                query['_id'] = link
+
+            console.log('[VIDEO_CREATE_LISTING] _id : ', query['_id'])
             await createListing(client, query, VIDEO_COLLECTION)
         }
+
+        // SB_WORD INSERT
+        let wordList = JSON.parse(fs.readFileSync(path.join(COL_INFO_PATH, WORD_LIST), "utf8"))
+        for (let i = 0; i < query['c'].length; ++i) {
+            let stc = query['c'][i]['t']['stc']
+
+            if (stc) {
+                for (let j = 0; j < stc.length; ++j) {
+                    let wd = stc[j]['wd']
+
+                    if (wd) {
+                        for (let k = 0; k < wd.length; ++k) {
+                            let data = wd[k], ct = data['ct'], lt = data['lt'],
+                                sp = 0
+                                
+                            let rt = undefined
+
+                            if (data['rt']) {
+                                rt = data['rt'].toLowerCase()
+                            } else {
+                                rt = data['ct'].toLowerCase()
+                            }
+                            
+                            let hashId = rt.hashCode(),
+                                listing = { 
+                                    _id: hashId, 
+                                    rt: rt,
+                                    links: [
+                                        {
+                                            ct: ct,
+                                            lt: data['lt'], 
+                                            link: link, 
+                                            pos: {
+                                                stc:j,
+                                                wd:k
+                                            }
+                                        }
+                                    ]
+                                }
+
+                            result = await client.db(DATABASE_NAME).collection(WORD_COLLECTION).findOne(listing)
+
+                            if (!result) {
+                                await createListing(client, listing, WORD_COLLECTION)
+                            } else {
+                                await replaceListing(client, listing, WORD_COLLECTION)
+                            }
+
+                            if (!wordList[ct]) {
+                                wordList[ct] = []
+                                wordList[ct].push(lt)
+                            } else {
+                                let bool = true
+
+                                for (let i in wordList[ct]) {
+                                    if (wordList[ct][i] === lt) {
+                                        bool = false
+                                    }
+                                }
+                                
+                                if (bool) {
+                                    wordList[ct].push(lt)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        fs.writeFileSync(path.join(__dirname, COL_INFO_PATH, WORD_LIST), JSON.stringify(wordList, null, "\t"), "utf-8")
+
     } catch (e) {
         console.error(e)
     } finally {
@@ -354,6 +793,37 @@ async function insert(req, res) {
         res.send(template)
     }
 }
+
+/* NLP */
+
+Object.defineProperty(String.prototype, 'hashCode', {
+    value: function() {
+            var hash = 0, i, chr;
+            for (i = 0; i < this.length; i++) {
+            chr   = this.charCodeAt(i);
+            hash  = ((hash << 5) - hash) + chr;
+            hash |= 0; // Convert to 32bit integer
+        }
+        return hash;
+    }
+});
+
+function parseStc(req, res) {
+    let token = stcTokenizer.tokenize(req.query.stc)
+    console.log(token)
+    res.json(token)
+}
+
+function tokenizeStc(req, res) {
+    let token = wdTokenizer.tokenize(req.query.stc)
+    console.log(token)
+    res.json(token)
+}
+
+app.get('/parseStc', (req, res) => parseStc(req, res))
+app.get('/tokenizeStc', (req, res) => tokenizeStc(req, res))
+
+/*     */
 
 app.get('/preSearch', (req, res) => preSearch(req, res))
 app.get('/search', (req, res) => search(req, res))

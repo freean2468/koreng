@@ -1,0 +1,13 @@
+{
+    "time":[
+        "modern",
+        "middle-aged",
+        "ancient"
+    ],
+    "class":[
+        "king",
+        "noble",
+        "free",
+        "commons"
+    ]
+}
