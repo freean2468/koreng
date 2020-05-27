@@ -127,11 +127,13 @@ function baseTemplate() {
         <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
       
         <!-- 만든 React 컴포넌트를 실행. -->
-        <script src="./js/like_button.js"></script>
+        <script src="./src/Header.js"></script>
+        <script src="./src/Tool.js"></script>
+
+        <script>
+            ${autocomplete}
+        </script>
     </body>
-    <script>
-        ${autocomplete}
-    </script>
     </html>
     `
 
@@ -359,8 +361,8 @@ function search(req, res) {
                     <input type="button" class="btn" value="debug" onclick="onSubmit(false)"/>
                 </div>
             </form>
-            <div id="like_button_container"></div>
         </div>
+        <div id="tool"></div>
     </body>
     <script>
         $(document).ready(function () {
